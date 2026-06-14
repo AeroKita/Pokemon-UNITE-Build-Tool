@@ -83,10 +83,10 @@ function loadMode(): ViewMode {
   try { return localStorage.getItem(MODE_KEY) === "expert" ? "expert" : "beginner"; } catch { return "beginner"; }
 }
 
-export type Theme = "light" | "dark" | "neo";
+export type Theme = "light" | "dark";
 const THEME_KEY = "unite-build-optimizer.theme.v1";
 function loadTheme(): Theme {
-  try { const t = localStorage.getItem(THEME_KEY); return t === "dark" || t === "neo" ? t : "light"; } catch { return "light"; }
+  try { const t = localStorage.getItem(THEME_KEY); return t === "dark" || t === "neo" ? "dark" : "light"; } catch { return "light"; }
 }
 
 interface Store {

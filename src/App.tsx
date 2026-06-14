@@ -60,7 +60,7 @@ function Header({ tab, setTab, page, setPage }: { tab: Tab; setTab: (t: Tab) => 
           </div>
         </div>
         <div className="flex items-center gap-2">
-          <Segmented value={theme} options={["light", "dark", "neo"]} onChange={setTheme} />
+          <Segmented value={theme} options={["light", "dark"]} onChange={setTheme} />
           <button
             onClick={() => setPage(page === "inventory" ? "app" : "inventory")}
             className="rounded-xl bg-white/15 px-3 py-1.5 text-sm font-medium text-white hover:bg-white/25"

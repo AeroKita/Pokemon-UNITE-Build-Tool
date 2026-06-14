@@ -44,42 +44,8 @@
 /* manual class-based dark variant (for any dark: utilities) */
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
+/* Dark — neon graffiti: magenta→cyan, deep purple-black. */
 [data-theme="dark"] {
-  --color-bg: #0c0e14;
-  --color-surface: #161922;
-  --color-raise: #1f2330;
-  --color-line: #2b303d;
-  --color-line-soft: #232732;
-  --color-ink: #e8eaf0;
-  --color-muted: #a3acbd;
-  --color-faint: #6b7385;
-
-  --color-accent: #818cf8;
-  --color-accent-strong: #6366f1;
-  --color-accent-weak: #20253a;
-  --color-accent-ink: #c7cdff;
-
-  --color-pos: #34d399;
-  --color-neg: #fb7185;
-
-  --color-rec-bg: #181d2e;
-  --color-rec-border: #2e3550;
-  --color-rec-ink: #c7cdff;
-  --color-as-bg: #2a2410;
-  --color-as-border: #4d421a;
-  --color-as-ink: #fcd34d;
-  --color-an-bg: #102230;
-  --color-an-border: #1e4258;
-  --color-an-ink: #7dd3fc;
-
-  --color-header-a: #3730a3;
-  --color-header-b: #5b21b6;
-  --color-tip-bg: #2b303d;
-  --color-tip-ink: #e8eaf0;
-}
-
-/* Neo Street Holowear — neon graffiti: magenta→cyan, deep purple-black. */
-[data-theme="neo"] {
   --color-bg: #110d1f;
   --color-surface: #1b1630;
   --color-raise: #251f40;
