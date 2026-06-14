@@ -1,12 +1,13 @@
 name: Refresh game data
 
 # Re-scrapes UNITE-DB and publishes a fresh data bundle + manifest to
-# public/data, which the pages workflow then redeploys. Installed apps (web +
-# desktop) pick up the new `version` on next launch — no app release needed.
+# public/data. The remote-data channel was served via GitHub Pages, which is
+# currently disabled, so this runs on-demand only (Actions tab → Run workflow).
+# Re-enable the weekly `schedule` below once a hosting target is configured.
 
 on:
-  schedule:
-    - cron: "0 9 * * 1" # weekly, Monday 09:00 UTC
+  # schedule:
+  #   - cron: "0 9 * * 1" # weekly, Monday 09:00 UTC
   workflow_dispatch:
 
 permissions:

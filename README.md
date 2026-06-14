@@ -4,6 +4,61 @@ A personal tool that helps Pokémon UNITE players design optimized builds —
 recommending Emblem loadouts and Held Items tailored to a selected Pokémon,
 with real-time stat calculation and level-scaling visualization.
 
+## Install & Run
+
+There are two ways to use the tool. **No prebuilt installer is published yet**
+(see [Get a one-click installer](#get-a-one-click-installer) below to create one).
+
+### A. Run the web app from source (works on macOS / Windows / Linux)
+
+1. Install **[Node.js](https://nodejs.org) 20 or newer** (includes `npm`).
+2. Clone and enter the project:
+
+```bash
+git clone https://github.com/AeroKita/unite-build-optimizer.git
+cd unite-build-optimizer
+```
+
+3. Install dependencies and start the app:
+
+```bash
+npm install
+npm run dev
+```
+
+4. Open the URL it prints (default <http://localhost:5173>) in your browser.
+
+To make an optimized static build instead, run `npm run build` and serve the
+generated `dist/` folder with any static host (or `npm run preview`).
+
+### B. Run the desktop app from source (optional — needs Rust)
+
+```bash
+curl https://sh.rustup.rs -sSf | sh   # one-time: install the Rust toolchain
+npm install
+npm run tauri dev                      # launches the native desktop window
+```
+
+To produce a native installer for **your current OS**, run `npm run tauri build`
+— the `.dmg` / `.msi` / `.AppImage` lands in `src-tauri/target/release/bundle/`.
+
+### Get a one-click installer
+
+Cross-platform installers (Windows `.msi`/`.exe`, macOS `.dmg`, Linux
+`.deb`/`.AppImage`) are built automatically by
+[`release.yml`](.github/workflows/release.yml) when a version tag is pushed:
+
+```bash
+git tag v0.1.0 && git push origin v0.1.0
+```
+
+CI then publishes them to this repo's **Releases** page. Two caveats:
+- The release job needs the `TAURI_SIGNING_PRIVATE_KEY` repo secret set (for
+  signed auto-updates) — see [docs/07-distribution.md](docs/07-distribution.md).
+- This repo is **private**, so only people with repo access can download Release
+  assets. To share with the public, make the repo public or host the web build
+  on a static host.
+
 ## Documentation
 
 - [Project Brief](docs/01-project-brief.md) — what we're building and why
