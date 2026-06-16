@@ -10,11 +10,26 @@ import { APP_NAME, APP_SHORT_NAME, APP_DESCRIPTION } from "./src/ui/brand";
 // src-tauri/tauri.conf.json on each release). Injected via `define` below.
 const { version } = createRequire(import.meta.url)("./package.json") as { version: string };
 
+// Recover from stale PWA caches after deploy: an old service worker can serve
+// index.html that references hashed JS bundles that no longer exist → blank page.
+const SW_RECOVERY = `<script>
+(function(){var k="foxforge-sw-recover";
+window.addEventListener("error",function(e){var t=e.target;
+if(!t||t.tagName!=="SCRIPT"||!t.src||!t.src.includes("/assets/index-"))return;
+if(!("serviceWorker"in navigator)||sessionStorage.getItem(k))return;
+sessionStorage.setItem(k,"1");
+navigator.serviceWorker.getRegistrations().then(function(rs){
+return Promise.all(rs.map(function(r){return r.unregister()}));
+}).then(function(){location.reload()});
+},true);})();
+</script>`;
+
 // Inject the app name into index.html's <title> from the single brand source,
 // so renaming only needs src/ui/brand.ts (no stray name in the HTML).
 const htmlBranding = () => ({
   name: "html-branding",
-  transformIndexHtml: (html: string) => html.replaceAll("__APP_NAME__", APP_NAME),
+  transformIndexHtml: (html: string) =>
+    html.replaceAll("__APP_NAME__", APP_NAME).replace("</head>", `${SW_RECOVERY}</head>`),
 });
 
 // base: relative "./" by default (works in Tauri + any sub-path); the Pages
@@ -43,8 +58,12 @@ export default defineConfig({
         ],
       },
       workbox: {
-        // Precache only the app shell; the ~22 MB of art is runtime-cached on use.
-        globPatterns: ["**/*.{js,css,html}"],
+        // Do not precache index.html — after deploy, a cached shell can point at
+        // removed hashed JS and leave every browser on a blank page until cache clear.
+        globPatterns: ["**/*.{js,css}"],
+        globIgnores: ["**/index.html"],
+        navigateFallback: null,
+        cleanupOutdatedCaches: true,
         maximumFileSizeToCacheInBytes: 4_000_000,
         runtimeCaching: [
           {
