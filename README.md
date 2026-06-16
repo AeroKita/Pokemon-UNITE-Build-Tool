@@ -48,7 +48,7 @@ OS shows a one-time warning on first launch — a normal double-click will be bl
 
 ### 3. Run from source
 
-Requires **[Node.js](https://nodejs.org) 20+**. Clone, install, and start the dev server:
+Requires **[Node.js](https://nodejs.org) 24+** (matches CI). Clone, install, and start the dev server:
 
 ```bash
 git clone https://github.com/AeroKita/FoxForge-GG.git
