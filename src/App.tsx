@@ -63,9 +63,9 @@ function Header({ tab, setTab, page, setPage }: { tab: Tab; setTab: (t: Tab) => 
           ) : (
             <div className="h-12 w-12 rounded-full bg-white/20" />
           )}
-          <div className="flex-1">
-            <h1 className="text-lg font-bold leading-tight">{APP_NAME}</h1>
-            <div className="flex items-center gap-2 text-xs text-indigo-100">
+          <div className="min-w-0 flex-1">
+            <h1 className="truncate text-lg font-bold leading-tight">{APP_NAME}</h1>
+            <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5 text-xs text-indigo-100">
               {p ? (
                 <>
                   <span className="font-medium">{p.displayName}</span>
@@ -77,7 +77,7 @@ function Header({ tab, setTab, page, setPage }: { tab: Tab; setTab: (t: Tab) => 
               )}
             </div>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center justify-end gap-2">
             <button
               onClick={() => setPage(page === "inventory" ? "app" : "inventory")}
               className="rounded-xl bg-white/15 px-3 py-1.5 text-sm font-medium text-white hover:bg-white/25"

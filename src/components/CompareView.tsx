@@ -35,7 +35,8 @@ export function CompareView() {
       {!da.effective || !db.effective ? (
         <p className="text-sm text-faint">Both builds need a Pokémon selected.</p>
       ) : (
-        <table className="w-full text-sm">
+        <div className="-mx-1 overflow-x-auto px-1">
+        <table className="w-full min-w-[20rem] text-sm">
           <thead>
             <tr className="text-left text-xs uppercase text-faint">
               <th className="py-1">Stat</th>
@@ -74,6 +75,7 @@ export function CompareView() {
             )}
           </tbody>
         </table>
+        </div>
       )}
     </CollapsibleCard>
   );
