@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useStore } from "../state/store";
 import { pokemonById } from "../data/gameData";
-import { MAX_SAVED_LOADOUTS } from "../state/loadout";
+import { MAX_SAVED_LOADOUTS, loadoutToFileJSON, parseLoadoutFile, loadoutFileName } from "../state/loadout";
 import { asset } from "../ui/asset";
 import { CollapsibleCard } from "./CollapsibleCard";
 
@@ -9,6 +9,8 @@ export function LoadoutBar() {
   const { loadout, saved, save, remove, loadSaved, saveError, dispatch, shareUrl } = useStore();
   const [name, setName] = useState("");
   const [copied, setCopied] = useState(false);
+  const [importMsg, setImportMsg] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const share = async () => {
     try {
@@ -16,6 +18,34 @@ export function LoadoutBar() {
       setCopied(true);
       setTimeout(() => setCopied(false), 1500);
     } catch { /* clipboard blocked */ }
+  };
+
+  const exportFile = () => {
+    const pokemon = loadout.pokemonId ? pokemonById.get(loadout.pokemonId) : null;
+    const blob = new Blob([loadoutToFileJSON(loadout)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = loadoutFileName(loadout, pokemon?.displayName);
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  };
+
+  const importFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    e.target.value = ""; // allow re-importing the same file
+    if (!file) return;
+    try {
+      const parsed = parseLoadoutFile(await file.text());
+      if (!parsed) { setImportMsg("Not a valid loadout file."); return; }
+      dispatch({ type: "load", loadout: parsed });
+      setImportMsg("Loadout imported ✓");
+      setTimeout(() => setImportMsg(null), 2000);
+    } catch {
+      setImportMsg("Couldn't read that file.");
+    }
   };
 
   const handleSave = () => {
@@ -41,7 +71,7 @@ export function LoadoutBar() {
         </button>
       </div>
       {saveError && <p className="mb-2 text-xs text-neg">{saveError}</p>}
-      <div className="mb-3 flex gap-2">
+      <div className="mb-2 flex flex-wrap gap-2">
         <button
           onClick={share}
           disabled={!loadout.pokemonId}
@@ -56,6 +86,31 @@ export function LoadoutBar() {
           Clear
         </button>
       </div>
+      <div className="mb-3 flex flex-wrap gap-2">
+        <button
+          onClick={exportFile}
+          disabled={!loadout.pokemonId}
+          title="Download this loadout as a .json file to share"
+          className="flex-1 rounded-lg border border-line px-3 py-1.5 text-sm font-medium text-ink hover:bg-raise disabled:opacity-40"
+        >
+          ↓ Export .json
+        </button>
+        <button
+          onClick={() => fileInputRef.current?.click()}
+          title="Load a loadout from a .json file"
+          className="flex-1 rounded-lg border border-line px-3 py-1.5 text-sm font-medium text-ink hover:bg-raise"
+        >
+          ↑ Import .json
+        </button>
+        <input
+          ref={fileInputRef}
+          type="file"
+          accept="application/json,.json"
+          onChange={importFile}
+          className="hidden"
+        />
+      </div>
+      {importMsg && <p className="mb-2 text-xs text-muted">{importMsg}</p>}
       <div className="mb-1 flex items-center justify-between text-xs text-faint">
         <span>Saved loadouts</span>
         <span>{saved.length}/{MAX_SAVED_LOADOUTS}</span>

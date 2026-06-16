@@ -102,7 +102,7 @@ export function RecommendPanel() {
         <p className="mb-3 text-xs text-muted">
           <span className="font-semibold text-ink">{build.emblemName ?? build.name}</span>
           {build.lane ? ` · ${build.lane}` : ""}
-          {build.source === "curated" ? " · UNITE-DB" : " · generated"}
+          {build.source === "curated" ? " · Curated" : " · Generated"}
           {variants.length > 1 ? ` · ${Math.min(idx, variants.length - 1) + 1}/${variants.length}` : ""}
         </p>
       )}
