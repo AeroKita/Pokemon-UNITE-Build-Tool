@@ -1,7 +1,8 @@
 import { useMemo, useState, type ReactNode } from "react";
 import { asset } from "../ui/asset";
+import { EMBLEM_COLOR_HEX, EMBLEM_GRADE_HEX, readableTextColor } from "../ui/colors";
 import { useModalDismiss } from "../ui/useModalDismiss";
-import type { EmblemGrade } from "../types";
+import type { EmblemColor, EmblemGrade } from "../types";
 
 export interface PickItem {
   id: string;
@@ -9,6 +10,7 @@ export interface PickItem {
   icon: string;
   subtitle?: string;
   title?: string; // hover tooltip (e.g. item description)
+  colors?: EmblemColor[];
 }
 
 const GRADES: EmblemGrade[] = ["bronze", "silver", "gold"];
@@ -18,7 +20,7 @@ interface Props {
   items: PickItem[];
   onPick: (id: string, grade?: EmblemGrade) => void;
   onClose: () => void;
-  filters?: { label: string; predicate: (id: string) => boolean }[];
+  filters?: { label: string; predicate: (id: string) => boolean; activeColor?: string }[];
   grades?: boolean; // show a Bronze/Silver/Gold toggle (emblems)
   owned?: Set<string>; // keys are `${id}:${grade}`; enables ownership stars + "Owned only"
   onToggleOwn?: (id: string, grade: EmblemGrade) => void;
@@ -71,8 +73,9 @@ export function PickerModal({ title, items, onPick, onClose, filters, grades, ow
                 <button
                   key={g}
                   onClick={() => setGrade(g)}
+                  style={grade === g ? { background: EMBLEM_GRADE_HEX[g], color: readableTextColor(EMBLEM_GRADE_HEX[g]) } : undefined}
                   className={`rounded-md px-3 py-1 text-xs font-semibold capitalize transition ${
-                    grade === g ? "bg-surface text-accent-ink shadow-sm" : "text-muted hover:text-ink"
+                    grade === g ? "shadow-sm" : "text-muted hover:text-ink"
                   }`}
                 >
                   {g}
@@ -86,7 +89,7 @@ export function PickerModal({ title, items, onPick, onClose, filters, grades, ow
             <FilterChip label="All" active={activeFilter === null && !ownedOnly} onClick={() => { setActiveFilter(null); setOwnedOnly(false); }} />
             {owned && <FilterChip label={`★ Owned (${ownedCount})`} active={ownedOnly} onClick={() => setOwnedOnly((v) => !v)} />}
             {filters?.map((f) => (
-              <FilterChip key={f.label} label={f.label} active={activeFilter === f.label} onClick={() => setActiveFilter(f.label)} />
+              <FilterChip key={f.label} label={f.label} active={activeFilter === f.label} activeColor={f.activeColor} onClick={() => setActiveFilter(f.label)} />
             ))}
           </div>
         )}
@@ -102,6 +105,14 @@ export function PickerModal({ title, items, onPick, onClose, filters, grades, ow
                   ownedHere ? "border-as-border bg-as-bg" : "border-line"
                 }`}
               >
+                {it.colors && it.colors.length > 0 && (
+                  <span className="absolute -left-1 -top-1 flex gap-0.5">
+                    {it.colors.map((c) => (
+                      <span key={c} className="h-2 w-2 rounded-full ring-1 ring-white"
+                        style={{ background: EMBLEM_COLOR_HEX[c] }} />
+                    ))}
+                  </span>
+                )}
                 {onToggleOwn && (
                   <span
                     role="button"
@@ -124,12 +135,17 @@ export function PickerModal({ title, items, onPick, onClose, filters, grades, ow
   );
 }
 
-function FilterChip({ label, active, onClick }: { label: string; active: boolean; onClick: () => void }) {
+function FilterChip({ label, active, onClick, activeColor }:
+  { label: string; active: boolean; onClick: () => void; activeColor?: string }) {
+  const style = active && activeColor
+    ? { background: activeColor, color: readableTextColor(activeColor) } : undefined;
   return (
-    <button
-      onClick={onClick}
-      className={`rounded-full px-3 py-1 text-xs font-medium ${active ? "bg-accent text-white" : "bg-raise text-muted hover:bg-raise"}`}
-    >
+    <button onClick={onClick} style={style}
+      className={`rounded-full border px-3 py-1 text-xs font-medium capitalize ${
+        active
+          ? activeColor ? "border-line" : "border-transparent bg-accent text-white"
+          : "border-transparent bg-raise text-muted hover:bg-raise"
+      }`}>
       {label}
     </button>
   );

@@ -54,7 +54,9 @@ function ChoosableMoveSlot({ label, pokemon, slot }: { label: string; pokemon: P
                   onClick={() => dispatch({ type: "setMove", slot, moveId: u.id })}
                   aria-pressed={isSel}
                   className={`flex w-full items-center gap-2 rounded-lg border px-2 py-1.5 text-left transition ${
-                    isSel ? "border-accent bg-accent-weak ring-1 ring-accent" : "border-line hover:bg-raise"
+                    isSel
+                      ? "border-accent bg-accent-weak ring-1 ring-accent dark:border-transparent dark:bg-[#6d28d9] dark:text-white dark:ring-0"
+                      : "border-line hover:bg-raise dark:border-transparent dark:bg-mon-bg dark:hover:border-mon-hover dark:hover:bg-mon-bg"
                   }`}
                 >
                   <MoveIcon src={u.iconAsset} alt={u.name} size="h-8 w-8" />
@@ -62,7 +64,7 @@ function ChoosableMoveSlot({ label, pokemon, slot }: { label: string; pokemon: P
                   {u.upgradeLevel ? (
                     <span className="shrink-0 rounded bg-raise px-1 text-[10px] text-faint">Lv {u.upgradeLevel}</span>
                   ) : null}
-                  {isSel && <span className="shrink-0 text-xs font-bold text-accent-ink">✓</span>}
+                  {isSel && <span className="shrink-0 text-xs font-bold text-accent-ink dark:text-white">✓</span>}
                 </button>
               </Tooltip>
             );

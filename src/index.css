@@ -46,6 +46,10 @@
   --color-mon-hover: #f97316;
   --color-mon-sel-bg: #c9bcf2;
   --color-mon-sel-ring: #6d28d9;
+
+  /* Held-item grade badge + grade/level slider. Light = current indigo (unchanged). */
+  --color-grade-badge: #4f46e5;
+  --color-grade-slider: #4f46e5;
 }
 
 /* manual class-based dark variant (for any dark: utilities) */
@@ -91,6 +95,11 @@
   --color-mon-hover: #a78bfa;
   --color-mon-sel-bg: #73491a;
   --color-mon-sel-ring: #f59e0b;
+
+  /* Dark: badge uses the tile-background orange (white text stays readable);
+     slider uses the vivid theme orange (visible against the dark surface). */
+  --color-grade-badge: #5a3a15;
+  --color-grade-slider: #f59e0b;
 }
 
 /* ------------------------------------------------------------- base polish --

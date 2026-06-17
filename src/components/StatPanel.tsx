@@ -31,12 +31,12 @@ export function StatPanel() {
       <div className="rounded-2xl border border-line bg-surface p-4 shadow-sm">
         <div className="mb-2 flex items-center justify-between">
           <label className="text-sm font-medium text-ink">Level</label>
-          <span className="rounded-md bg-accent px-2 py-0.5 text-sm font-bold text-white">{loadout.level}</span>
+          <span className="rounded-md bg-grade-badge px-2 py-0.5 text-sm font-bold text-white">{loadout.level}</span>
         </div>
         <input
           type="range" min={1} max={15} value={loadout.level}
           onChange={(e) => dispatch({ type: "setLevel", level: Number(e.target.value) })}
-          className="w-full accent-indigo-600"
+          className="w-full accent-grade-slider"
         />
       </div>
 

@@ -6,6 +6,17 @@ import type { Loadout } from "./loadout";
 
 const STORAGE_KEY = "unite-build-optimizer.heldItemGrades.v1";
 
+export interface GradeInputResult { digits: string; valid: boolean; value: number | null; }
+
+/** Parse a typed grade field: strips non-digits, validates 1–40. */
+export function parseGradeInput(raw: string): GradeInputResult {
+  const digits = raw.replace(/\D/g, "");
+  if (digits === "") return { digits, valid: false, value: null };
+  const n = Number(digits);
+  const valid = n >= 1 && n <= 40;
+  return { digits: valid ? String(n) : digits, valid, value: valid ? n : null };
+}
+
 export function clampHeldGrade(grade: number): number {
   return Math.max(1, Math.min(40, Math.round(grade)));
 }

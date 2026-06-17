@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import { useStore } from "../state/store";
 import { emblems as allEmblems } from "../data/gameData";
 import { asset } from "../ui/asset";
-import { EMBLEM_COLOR_HEX, ALL_EMBLEM_COLORS } from "../ui/colors";
+import { EMBLEM_COLOR_HEX, ALL_EMBLEM_COLORS, EMBLEM_GRADE_HEX } from "../ui/colors";
 import { statLines } from "../ui/format";
 import { emblemsForGrade } from "../ui/emblems";
 import { ownedKey } from "../state/loadout";
@@ -11,7 +11,6 @@ import { EmblemSetGuide } from "./EmblemSetGuide";
 import type { EmblemColor, EmblemGrade } from "../types";
 
 const GRADES: EmblemGrade[] = ["bronze", "silver", "gold"];
-const GRADE_TINT: Record<string, string> = { bronze: "#b45309", silver: "#94a3b8", gold: "#eab308" };
 
 /**
  * Manage which emblems you own, per grade (Bronze/Silver/Gold independent).
@@ -62,7 +61,7 @@ export function InventoryManager() {
           </p>
         </div>
         <div className="text-right text-sm">
-          <span className="font-semibold" style={{ color: GRADE_TINT[grade] }}>{ownedCount}</span>
+          <span className="font-semibold" style={{ color: EMBLEM_GRADE_HEX[grade] }}>{ownedCount}</span>
           <span className="text-faint"> / {gradeEmblems.length} {grade} owned</span>
         </div>
       </div>
@@ -77,7 +76,7 @@ export function InventoryManager() {
               className={`rounded-md px-3 py-1 text-xs font-semibold capitalize transition ${
                 grade === g ? "bg-surface shadow-sm" : "text-muted hover:text-ink"
               }`}
-              style={grade === g ? { color: GRADE_TINT[g] } : undefined}
+              style={grade === g ? { color: EMBLEM_GRADE_HEX[g] } : undefined}
             >
               {g}
             </button>

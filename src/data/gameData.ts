@@ -34,3 +34,8 @@ export const emblemById = new Map(bundle.emblems.map((e) => [e.id, e]));
 /** Item grade we model (UNITE held items: grades 1–40; in-game cap is 40). */
 export const ITEM_GRADE_MAX = 40;
 export const ITEM_GRADE_DEFAULT = 40;
+
+/** Mega Stones & Rusted Sword have no per-grade stats → no grade/level to set. */
+export function isUniqueHeldItem(item: HeldItem): boolean {
+  return Object.keys(item.statsByGrade).length === 0;
+}

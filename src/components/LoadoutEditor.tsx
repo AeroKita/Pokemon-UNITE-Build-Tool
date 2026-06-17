@@ -6,8 +6,7 @@ import { asset } from "../ui/asset";
 import { emblemIconForGrade } from "../ui/emblemIcon";
 import { heldItemStatLines } from "../ui/format";
 import { gradesForEmblem } from "../ui/emblems";
-import { EMBLEM_COLOR_HEX, ALL_EMBLEM_COLORS } from "../ui/colors";
-import type { EmblemGrade } from "../types";
+import { EMBLEM_COLOR_HEX, ALL_EMBLEM_COLORS, EMBLEM_GRADE_HEX } from "../ui/colors";
 import { PickerModal, type PickItem } from "./PickerModal";
 import { EmblemSetSummary } from "./EmblemSetSummary";
 import { CollapsibleCard } from "./CollapsibleCard";
@@ -29,6 +28,7 @@ export function LoadoutEditor() {
   const battlePickItems: PickItem[] = battleItems.map((i) => ({ id: i.id, name: i.displayName, icon: i.iconAsset, title: i.description }));
   const emblemPickItems: PickItem[] = emblems.map((e) => ({
     id: e.id, name: e.pokemonName, icon: e.iconAsset, subtitle: e.colors.join("/"),
+    colors: e.colors,
   }));
 
   return (
@@ -60,7 +60,7 @@ export function LoadoutEditor() {
                   <div className="min-w-[10rem] flex-1">
                     <div className="mb-1 flex items-center justify-between">
                       <label className="text-xs font-medium text-muted">Grade</label>
-                      <span className="rounded-md bg-accent px-2 py-0.5 text-xs font-bold text-white">{grade}</span>
+                      <span className="rounded-md bg-grade-badge px-2 py-0.5 text-xs font-bold text-white">{grade}</span>
                     </div>
                     <input
                       type="range"
@@ -68,7 +68,7 @@ export function LoadoutEditor() {
                       max={40}
                       value={grade}
                       onChange={(e) => setHeldItemGradeForSlot(slot, Number(e.target.value))}
-                      className="w-full accent-indigo-600"
+                      className="w-full accent-grade-slider"
                     />
                     <p className="mt-1 font-mono text-[10px] text-faint">
                       {heldItemStatLines(statsAtGrade(item, grade)).map((l) => `${l.label} ${l.value}`).join(" · ") || "—"}
@@ -118,13 +118,19 @@ export function LoadoutEditor() {
                     </span>
                   </span>
                 </Tooltip>
-                <select
-                  value={pick.grade}
-                  onChange={(e) => dispatch({ type: "setEmblemGrade", index: i, grade: e.target.value as EmblemGrade })}
-                  className="mt-0.5 rounded border border-line text-[9px]"
-                >
-                  {gradesForEmblem(emblem).map((g) => <option key={g} value={g}>{g}</option>)}
-                </select>
+                <div className="mt-0.5 flex gap-1">
+                  {gradesForEmblem(emblem).map((g) => {
+                    const on = pick.grade === g;
+                    return (
+                      <button key={g} type="button" title={g} aria-label={`${g} grade`} aria-pressed={on}
+                        onClick={() => dispatch({ type: "setEmblemGrade", index: i, grade: g })}
+                        className={`h-4 w-4 rounded-full border border-black/20 transition
+                          ${on ? "ring-2 ring-ink ring-offset-1 ring-offset-surface" : "opacity-50 hover:opacity-100"}`}
+                        style={{ background: EMBLEM_GRADE_HEX[g] }}
+                      />
+                    );
+                  })}
+                </div>
                 <button onClick={() => dispatch({ type: "removeEmblem", index: i })} className="text-[9px] text-neg hover:text-neg">remove</button>
               </div>
             );
@@ -160,7 +166,11 @@ export function LoadoutEditor() {
           onToggleOwn={toggleOwned}
           goldOnlyIds={emblemGoldOnlyIds}
           iconForGrade={(id, g) => emblemIconForGrade({ id }, g)}
-          filters={ALL_EMBLEM_COLORS.map((c) => ({ label: c, predicate: (id) => emblemById.get(id)?.colors.includes(c) ?? false }))} />
+          filters={ALL_EMBLEM_COLORS.map((c) => ({
+            label: c,
+            activeColor: EMBLEM_COLOR_HEX[c],
+            predicate: (id) => emblemById.get(id)?.colors.includes(c) ?? false,
+          }))} />
       )}
     </div>
   );
