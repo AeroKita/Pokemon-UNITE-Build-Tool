@@ -3,7 +3,7 @@
 from pathlib import Path
 
 TOOLS_DIR = Path(__file__).resolve().parent
-PROJECT_ROOT = TOOLS_DIR.parent.parent  # Unite-build-optimizer/
+PROJECT_ROOT = TOOLS_DIR.parent.parent  # FoxForge-GG/
 WORK = TOOLS_DIR / "_work"
 
 # The .apkm lives next to the project, in "UNITE APK Data".
