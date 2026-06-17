@@ -29,6 +29,10 @@ Each held item carries:
   not yet wired into the calculation engine.  
 - **`conditionalEffects`** — structured combat toggles consumed by `src/engine/effects.ts`.  
   
+Hand-curated Recommended/Creative builds and title overrides live in  
+`tools/community/curated_builds.json` and are merged by `normalize.py` on top of the  
+UNITE-DB-derived bundle, so they survive data refreshes while raw builds stay the base layer.
+
 After `normalize.py`, run `npm test`, `npx tsx src/data/verifyPatch.ts`, and sync  
 `public/data/` if the runtime fetch path should match.  
   

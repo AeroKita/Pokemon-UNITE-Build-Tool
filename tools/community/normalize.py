@@ -307,6 +307,92 @@ def build_pokemon(pokemon_rows, stats_rows, pokedex_to_id: dict) -> list:
     return out
 
 
+# ---- curated builds overlay ------------------------------------------------
+
+CURATED = HERE / "curated_builds.json"
+VALID_GRADES = {"bronze", "silver", "gold", "platinum"}
+
+
+def _validate_curated_build(b, pid, kind, emblem_ids, held_ids, battle_ids, upgrade_moves):
+    """Hard-fail on bad ids/grades in a curated build; warn on unknown moves."""
+    where = f"{pid} {kind} build {b.get('name', '?')!r}"
+    if not isinstance(b.get("name"), str) or not b["name"]:
+        raise ValueError(f"{where}: missing required 'name'")
+    held = b.get("heldItemIds")
+    if not isinstance(held, list):
+        raise ValueError(f"{where}: 'heldItemIds' must be a list")
+    for hid in held:
+        if hid not in held_ids:
+            raise ValueError(f"{where}: unknown heldItemId {hid!r}")
+    if (v := b.get("heldItemOptional")) is not None and v not in held_ids:
+        raise ValueError(f"{where}: unknown heldItemOptional {v!r}")
+    for key in ("battleItemId", "battleItemOptional"):
+        if (v := b.get(key)) is not None and v not in battle_ids:
+            raise ValueError(f"{where}: unknown {key} {v!r}")
+    for e in b.get("emblems", []):
+        if e.get("emblemId") not in emblem_ids:
+            raise ValueError(f"{where}: unknown emblemId {e.get('emblemId')!r}")
+        if e.get("grade") not in VALID_GRADES:
+            raise ValueError(f"{where}: bad grade {e.get('grade')!r}")
+    for mv in b.get("moves", []):
+        if mv not in upgrade_moves:
+            print(f"  ! {where}: {mv!r} is not an upgrade move for {pid} "
+                  f"(kept, but it won't resolve in the UI)")
+
+
+def apply_curated_builds(pokemon, emblems, held, battle) -> None:
+    """Overlay hand-curated builds/creativeBuilds and title renames from
+    curated_builds.json onto the normalized Pokémon (mutates in place).
+
+    No-op if the file is absent. Per Pokémon id the overlay may set:
+      - "builds": full PokemonBuild list -> REPLACES the Recommended builds.
+      - "creativeBuilds": full list -> SET as the Creative tab.
+      - "recommendedTitles": [str] -> override emblemName by index on the
+        raw-derived Recommended builds (mutually exclusive with "builds").
+    Underscore-prefixed keys (e.g. "_comment") are ignored.
+    """
+    if not CURATED.exists():
+        print("  (no curated_builds.json — skipping curation overlay)")
+        return
+    overlay = json.loads(CURATED.read_text())
+    emblem_ids = {e["id"] for e in emblems}
+    held_ids = {h["id"] for h in held}
+    battle_ids = {b["id"] for b in battle}
+    by_id = {p["id"]: p for p in pokemon}
+    moves_by_id = {p["id"]: {m["name"] for m in p["moves"] if m.get("isUpgrade")}
+                   for p in pokemon}
+    n_rec = n_creative = n_titles = 0
+    for pid, spec in overlay.items():
+        if pid.startswith("_"):
+            continue
+        p = by_id.get(pid)
+        if p is None:
+            raise ValueError(f"curated_builds.json: unknown Pokémon id {pid!r}")
+        if "builds" in spec and "recommendedTitles" in spec:
+            raise ValueError(f"{pid}: use either 'builds' or 'recommendedTitles', not both")
+        if "builds" in spec:
+            for b in spec["builds"]:
+                _validate_curated_build(b, pid, "recommended", emblem_ids, held_ids, battle_ids, moves_by_id[pid])
+            p["builds"] = spec["builds"]
+            n_rec += len(spec["builds"])
+        if "creativeBuilds" in spec:
+            for b in spec["creativeBuilds"]:
+                _validate_curated_build(b, pid, "creative", emblem_ids, held_ids, battle_ids, moves_by_id[pid])
+            p["creativeBuilds"] = spec["creativeBuilds"]
+            n_creative += len(spec["creativeBuilds"])
+        if "recommendedTitles" in spec:
+            titles = spec["recommendedTitles"]
+            existing = p.get("builds", [])
+            if len(titles) != len(existing):
+                print(f"  ! {pid}: {len(titles)} recommendedTitles but {len(existing)} "
+                      f"Recommended builds — applying by index")
+            for b, t in zip(existing, titles):
+                b["emblemName"] = t
+                n_titles += 1
+    print(f"  curated overlay: +{n_rec} recommended, +{n_creative} creative, "
+          f"{n_titles} titles renamed")
+
+
 # ---- held items ------------------------------------------------------------
 
 HELD_ITEM_MAX_GRADE = 40
@@ -467,6 +553,7 @@ def main() -> None:
     held = build_held_items(load("held_items"))
     battle = build_battle_items(load("battle_items"))
     set_bonuses = build_set_bonuses(load("emblem_sets"))
+    apply_curated_builds(pokemon, emblems, held, battle)
 
     bundle = {
         "patchVersion": PATCH_VERSION,

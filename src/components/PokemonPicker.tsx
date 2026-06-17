@@ -35,10 +35,10 @@ export function PokemonPicker() {
         <select
           value={role}
           onChange={(e) => setRole(e.target.value as Role | "All")}
-          className="rounded-lg border border-line px-2 py-1.5 text-sm"
+          className="rounded-lg border border-line bg-surface px-2 py-1.5 text-sm text-ink"
         >
           {ROLES.map((r) => (
-            <option key={r} value={r}>{ROLE_LABEL[r] ?? r}</option>
+            <option key={r} value={r} className="bg-surface text-ink">{ROLE_LABEL[r] ?? r}</option>
           ))}
         </select>
       </div>

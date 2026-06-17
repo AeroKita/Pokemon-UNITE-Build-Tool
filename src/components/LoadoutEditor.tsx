@@ -110,7 +110,7 @@ export function LoadoutEditor() {
               <div key={i} className="flex flex-col items-center rounded-lg border border-line p-1">
                 <Tooltip content={emblemTip(emblem, pick.grade)}>
                   <span className="relative inline-block">
-                    <img src={asset(emblemIconForGrade(emblem, pick.grade))} alt={emblem.pokemonName} className="h-9 w-9 object-contain" />
+                    <img src={asset(emblemIconForGrade(emblem, pick.grade))} alt={emblem.pokemonName} className="h-12 w-12 object-contain" />
                     <span className="absolute -left-1 -top-1 flex gap-0.5">
                       {emblem.colors.map((c) => (
                         <span key={c} className="h-2 w-2 rounded-full ring-1 ring-white" style={{ background: EMBLEM_COLOR_HEX[c] }} />
@@ -138,7 +138,7 @@ export function LoadoutEditor() {
           {loadout.emblems.length < MAX_EMBLEMS && (
             <button
               onClick={() => setPicker({ kind: "emblem" })}
-              className="flex h-[58px] w-12 items-center justify-center rounded-lg border-2 border-dashed border-line text-xl text-faint hover:border-accent hover:bg-accent-weak"
+              className="flex h-[72px] w-12 items-center justify-center rounded-lg border-2 border-dashed border-line text-xl text-faint hover:border-accent hover:bg-accent-weak"
             >+</button>
           )}
         </div>

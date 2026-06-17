@@ -5,7 +5,7 @@
     "provider": "UNITE-DB",
     "url": "https://unite-db.com",
     "note": "Community-sourced (APK bundles encrypted; see tools/extract/ENCRYPTION-FINDINGS.md). Held-item values span grades 1–40 (in-game max 40). Percentages stored as decimals.",
-    "fetched": "2026-06-16"
+    "fetched": "2026-06-17"
   },
   "pokemon": [
     {
@@ -2943,7 +2943,7 @@
         {
           "name": "Frozen Defender",
           "emblemName": "Frozen Defender",
-          "lane": "Path Damage",
+          "lane": "Path Protector",
           "heldItemIds": [
             "vanguard-bell",
             "focus-band",
@@ -4226,7 +4226,7 @@
             }
           ],
           "lane": "Path Damage",
-          "emblemName": "Special Attack Cooldown Reduction - Bulk for Survivability",
+          "emblemName": "Standard Special Attacker",
           "heldItemOptional": "focus-band",
           "battleItemId": "eject-button",
           "moves": [
@@ -4284,7 +4284,7 @@
             }
           ],
           "lane": "Utility Carry",
-          "emblemName": "Special Attack Cooldown Reduction - Bulk for Survivability",
+          "emblemName": "Standard Special Attacker",
           "battleItemId": "eject-button",
           "moves": [
             "Hydro Pump",
@@ -10042,7 +10042,7 @@
             }
           ],
           "lane": "Path Support",
-          "emblemName": "Special Attack Cooldown Reduction - Bulk for Survivability",
+          "emblemName": "Standard Special Attacker",
           "heldItemOptional": "energy-amplifier",
           "battleItemId": "x-speed",
           "moves": [
@@ -10099,7 +10099,7 @@
             }
           ],
           "lane": "Path Support or Tank",
-          "emblemName": "Special Attack Cooldown Reduction - Bulk for Survivability",
+          "emblemName": "Standard Special Attacker",
           "battleItemId": "eject-button",
           "battleItemOptional": "full-heal",
           "moves": [
@@ -11278,7 +11278,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Special Attack Cooldown Reduction - Bulk for Survivability",
+          "emblemName": "Standard Special Attacker",
           "heldItemOptional": "slick-spoon",
           "battleItemId": "eject-button",
           "moves": [
@@ -11336,7 +11336,7 @@
             }
           ],
           "lane": "Path Damage",
-          "emblemName": "Special Attack Cooldown Reduction - Bulk for Survivability",
+          "emblemName": "Standard Special Attacker",
           "heldItemOptional": "slick-spoon",
           "battleItemId": "eject-button",
           "moves": [
@@ -11394,7 +11394,7 @@
             }
           ],
           "lane": "Path Damage",
-          "emblemName": "Special Attack Cooldown Reduction - Bulk for Survivability",
+          "emblemName": "Standard Special Attacker",
           "heldItemOptional": "slick-spoon",
           "battleItemId": "eject-button",
           "moves": [
@@ -12487,7 +12487,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Special Attack Cooldown Reduction - Bulk for Survivability",
+          "emblemName": "Standard Special Attacker",
           "heldItemOptional": "sp--atk-specs",
           "battleItemId": "potion",
           "battleItemOptional": "eject-button",
@@ -12546,7 +12546,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Special Attack Cooldown Reduction - Bulk for Survivability",
+          "emblemName": "Standard Special Attacker",
           "battleItemId": "full-heal",
           "battleItemOptional": "eject-button",
           "moves": [
@@ -12604,7 +12604,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Special Attack Cooldown Reduction - Bulk for Survivability",
+          "emblemName": "Standard Special Attacker",
           "heldItemOptional": "choice-specs",
           "battleItemId": "eject-button",
           "battleItemOptional": "potion",
@@ -12663,7 +12663,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Special Attack Cooldown Reduction - Bulk for Survivability",
+          "emblemName": "Standard Special Attacker",
           "heldItemOptional": "choice-specs",
           "battleItemId": "eject-button",
           "battleItemOptional": "full-heal",
@@ -17321,7 +17321,7 @@
             }
           ],
           "lane": "Path Support",
-          "emblemName": "Special Attack Cooldown Reduction - Bulk for Survivability",
+          "emblemName": "Standard Special Attacker",
           "battleItemId": "x-speed",
           "battleItemOptional": "eject-button",
           "moves": [
@@ -18001,7 +18001,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Special Attack Cooldown Reduction - Bulk for Survivability",
+          "emblemName": "Standard Special Attacker",
           "battleItemId": "full-heal",
           "battleItemOptional": "eject-button",
           "moves": [
@@ -25300,7 +25300,7 @@
             }
           ],
           "lane": "Path Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard All-Rounder",
           "heldItemOptional": "energy-amplifier",
           "battleItemId": "eject-button",
           "battleItemOptional": "potion",
@@ -25358,7 +25358,7 @@
             }
           ],
           "lane": "Path Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard All-Rounder",
           "heldItemOptional": "rocky-helmet",
           "battleItemId": "eject-button",
           "battleItemOptional": "potion",
@@ -25831,7 +25831,7 @@
             }
           ],
           "lane": "Path Protector",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard Defender",
           "battleItemId": "full-heal",
           "battleItemOptional": "x-speed",
           "moves": [
@@ -25889,7 +25889,7 @@
             }
           ],
           "lane": "Path Damage Support",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard Defender",
           "battleItemId": "full-heal",
           "battleItemOptional": "x-speed",
           "moves": [
@@ -25947,7 +25947,7 @@
             }
           ],
           "lane": "Path Support Protector",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard Defender",
           "heldItemOptional": "rocky-helmet",
           "battleItemId": "full-heal",
           "battleItemOptional": "x-speed",
@@ -26006,7 +26006,7 @@
             }
           ],
           "lane": "Path Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard Defender",
           "battleItemId": "full-heal",
           "battleItemOptional": "x-speed",
           "moves": [
@@ -26064,7 +26064,7 @@
             }
           ],
           "lane": "Path Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard Defender",
           "battleItemId": "full-heal",
           "battleItemOptional": "x-speed",
           "moves": [
@@ -27182,7 +27182,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Special Attack Cooldown Reduction - Bulk for Survivability",
+          "emblemName": "Standard Special Attacker",
           "heldItemOptional": "slick-spoon",
           "battleItemId": "eject-button",
           "moves": [
@@ -28388,7 +28388,7 @@
             }
           ],
           "lane": "Path Support",
-          "emblemName": "Special Attack Cooldown Reduction - Bulk for Survivability",
+          "emblemName": "Standard Special Attacker",
           "heldItemOptional": "resonant-guard",
           "battleItemId": "potion",
           "battleItemOptional": "eject-button",
@@ -28447,7 +28447,7 @@
             }
           ],
           "lane": "Path Support",
-          "emblemName": "Special Attack Cooldown Reduction - Bulk for Survivability",
+          "emblemName": "Standard Special Attacker",
           "heldItemOptional": "resonant-guard",
           "battleItemId": "potion",
           "battleItemOptional": "eject-button",
@@ -28506,7 +28506,7 @@
             }
           ],
           "lane": "Path Support",
-          "emblemName": "Special Attack Cooldown Reduction - Bulk for Survivability",
+          "emblemName": "Standard Special Attacker",
           "heldItemOptional": "drive-lens",
           "battleItemId": "potion",
           "battleItemOptional": "eject-button",
@@ -28565,7 +28565,7 @@
             }
           ],
           "lane": "Path Support",
-          "emblemName": "Special Attack Cooldown Reduction - Bulk for Survivability",
+          "emblemName": "Standard Special Attacker",
           "heldItemOptional": "shell-bell",
           "battleItemId": "potion",
           "battleItemOptional": "eject-button",
@@ -28579,7 +28579,7 @@
         {
           "name": "Step on the Gas (Special)",
           "emblemName": "Step on the Gas (Special)",
-          "lane": "Path Damage",
+          "lane": "Path Support",
           "heldItemIds": [
             "drive-lens",
             "curse-incense",
@@ -29100,7 +29100,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Special Attack Cooldown Reduction - Bulk for Survivability",
+          "emblemName": "Standard Special Attacker",
           "battleItemId": "eject-button",
           "moves": [
             "Dragon Pulse",
@@ -29157,7 +29157,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Special Attack Cooldown Reduction - Bulk for Survivability",
+          "emblemName": "Standard Special Attacker",
           "heldItemOptional": "wise-glasses",
           "battleItemId": "eject-button",
           "moves": [
@@ -29215,7 +29215,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Special Attack Cooldown Reduction - Bulk for Survivability",
+          "emblemName": "Standard Special Attacker",
           "heldItemOptional": "wise-glasses",
           "battleItemId": "eject-button",
           "moves": [
@@ -31218,7 +31218,7 @@
             }
           ],
           "lane": "Path Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard All-Rounder",
           "heldItemOptional": "razor-claw",
           "battleItemId": "eject-button",
           "moves": [
@@ -31685,7 +31685,7 @@
             }
           ],
           "lane": "Path Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard All-Rounder",
           "heldItemOptional": "scope-lens",
           "battleItemId": "eject-button",
           "moves": [
@@ -31743,7 +31743,7 @@
             }
           ],
           "lane": "Path Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard All-Rounder",
           "heldItemOptional": "razor-claw",
           "battleItemId": "eject-button",
           "battleItemOptional": "x-attack",
@@ -31802,7 +31802,7 @@
             }
           ],
           "lane": "Path Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard All-Rounder",
           "heldItemOptional": "accel-bracer",
           "battleItemId": "eject-button",
           "moves": [
@@ -32375,7 +32375,7 @@
             }
           ],
           "lane": "Path Tank",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard Defender",
           "heldItemOptional": "vanguard-bell",
           "battleItemId": "eject-button",
           "moves": [
@@ -32433,7 +32433,7 @@
             }
           ],
           "lane": "Path Tank",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard Defender",
           "heldItemOptional": "vanguard-bell",
           "battleItemId": "eject-button",
           "moves": [
@@ -32491,7 +32491,7 @@
             }
           ],
           "lane": "Path Tank",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard Defender",
           "heldItemOptional": "vanguard-bell",
           "battleItemId": "eject-button",
           "moves": [
@@ -32864,7 +32864,7 @@
         {
           "name": "Healing Support",
           "emblemName": "Healing Support",
-          "lane": "Path Damage",
+          "lane": "Path Support",
           "heldItemIds": [
             "rescue-hood",
             "focus-band",
@@ -32921,7 +32921,7 @@
         {
           "name": "Shield Support",
           "emblemName": "Shield Support",
-          "lane": "Path Damage",
+          "lane": "Path Support",
           "heldItemIds": [
             "rescue-hood",
             "resonant-guard",
@@ -33442,7 +33442,7 @@
             }
           ],
           "lane": "Center Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard Speedster",
           "heldItemOptional": "attack-weight",
           "battleItemId": "eject-button",
           "moves": [
@@ -33500,7 +33500,7 @@
             }
           ],
           "lane": "Path Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard Speedster",
           "heldItemOptional": "accel-bracer",
           "battleItemId": "eject-button",
           "moves": [
@@ -33558,7 +33558,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard Speedster",
           "heldItemOptional": "accel-bracer",
           "battleItemId": "eject-button",
           "battleItemOptional": "full-heal",
@@ -33617,7 +33617,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard Speedster",
           "heldItemOptional": "razor-claw",
           "battleItemId": "eject-button",
           "battleItemOptional": "full-heal",
@@ -34128,7 +34128,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard Speedster",
           "heldItemOptional": "muscle-band",
           "battleItemId": "full-heal",
           "battleItemOptional": "eject-button",
@@ -34187,7 +34187,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard Speedster",
           "battleItemId": "full-heal",
           "battleItemOptional": "eject-button",
           "moves": [
@@ -35922,7 +35922,7 @@
             }
           ],
           "lane": "Path Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard All-Rounder",
           "heldItemOptional": "focus-band",
           "battleItemId": "full-heal",
           "battleItemOptional": "potion",
@@ -35981,7 +35981,7 @@
             }
           ],
           "lane": "Path Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard All-Rounder",
           "heldItemOptional": "focus-band",
           "battleItemId": "full-heal",
           "battleItemOptional": "potion",
@@ -36040,7 +36040,7 @@
             }
           ],
           "lane": "Path Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard All-Rounder",
           "heldItemOptional": "focus-band",
           "battleItemId": "potion",
           "battleItemOptional": "eject-button",
@@ -36099,7 +36099,7 @@
             }
           ],
           "lane": "Path Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard All-Rounder",
           "heldItemOptional": "focus-band",
           "battleItemId": "potion",
           "battleItemOptional": "eject-button",
@@ -37050,7 +37050,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard All-Rounder",
           "heldItemOptional": "curse-bangle",
           "battleItemId": "full-heal",
           "battleItemOptional": "eject-button",
@@ -37707,7 +37707,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Special Attack Cooldown Reduction - Bulk for Survivability",
+          "emblemName": "Standard Special Attacker",
           "heldItemOptional": "energy-amplifier",
           "battleItemId": "eject-button",
           "battleItemOptional": "full-heal",
@@ -39259,7 +39259,7 @@
             }
           ],
           "lane": "Path Damage",
-          "emblemName": "Special Attack Cooldown Reduction - Bulk for Survivability",
+          "emblemName": "Standard Special Attacker",
           "heldItemOptional": "choice-specs",
           "battleItemId": "eject-button",
           "moves": [
@@ -39334,7 +39334,7 @@
             }
           ],
           "lane": "Path Damage",
-          "emblemName": "Special Attack Cooldown Reduction - Bulk for Survivability",
+          "emblemName": "Standard Special Attacker",
           "heldItemOptional": "drive-lens",
           "battleItemId": "x-attack",
           "moves": [
@@ -39392,7 +39392,7 @@
             }
           ],
           "lane": "Path Damage",
-          "emblemName": "Special Attack Cooldown Reduction - Bulk for Survivability",
+          "emblemName": "Standard Special Attacker",
           "heldItemOptional": "wise-glasses",
           "battleItemId": "eject-button",
           "battleItemOptional": "x-attack",
@@ -39903,7 +39903,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard All-Rounder",
           "heldItemOptional": "attack-weight",
           "battleItemId": "eject-button",
           "battleItemOptional": "full-heal"
@@ -40361,7 +40361,7 @@
             }
           ],
           "lane": "Path Damage",
-          "emblemName": "Special Attack Cooldown Reduction - Bulk for Survivability",
+          "emblemName": "Standard Special Attacker",
           "heldItemOptional": "choice-specs",
           "battleItemId": "eject-button",
           "battleItemOptional": "x-speed",
@@ -40420,7 +40420,7 @@
             }
           ],
           "lane": "Path Damage",
-          "emblemName": "Special Attack Cooldown Reduction - Bulk for Survivability",
+          "emblemName": "Standard Special Attacker",
           "heldItemOptional": "shell-bell",
           "battleItemId": "eject-button",
           "battleItemOptional": "x-speed",
@@ -40479,7 +40479,7 @@
             }
           ],
           "lane": "Path Damage",
-          "emblemName": "Special Attack Cooldown Reduction - Bulk for Survivability",
+          "emblemName": "Standard Special Attacker",
           "heldItemOptional": "buddy-barrier",
           "battleItemId": "eject-button",
           "battleItemOptional": "x-speed",
@@ -40538,7 +40538,7 @@
             }
           ],
           "lane": "Path Damage",
-          "emblemName": "Special Attack Cooldown Reduction - Bulk for Survivability",
+          "emblemName": "Standard Special Attacker",
           "heldItemOptional": "drive-lens",
           "battleItemId": "eject-button",
           "battleItemOptional": "x-speed",
@@ -41693,7 +41693,7 @@
             }
           ],
           "lane": "Path Damage",
-          "emblemName": "Special Attack Cooldown Reduction - Bulk for Survivability",
+          "emblemName": "Standard Special Attacker",
           "heldItemOptional": "muscle-band",
           "battleItemId": "eject-button",
           "battleItemOptional": "full-heal",
@@ -41752,7 +41752,7 @@
             }
           ],
           "lane": "Path Damage",
-          "emblemName": "Special Attack Cooldown Reduction - Bulk for Survivability",
+          "emblemName": "Standard Special Attacker",
           "heldItemOptional": "shell-bell",
           "battleItemId": "eject-button",
           "battleItemOptional": "full-heal",
@@ -41811,7 +41811,7 @@
             }
           ],
           "lane": "Path Damage",
-          "emblemName": "Special Attack Cooldown Reduction - Bulk for Survivability",
+          "emblemName": "Standard Special Attacker",
           "heldItemOptional": "shell-bell",
           "battleItemId": "eject-button",
           "battleItemOptional": "full-heal",
@@ -42858,7 +42858,7 @@
             }
           ],
           "lane": "Anywhere Support",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard Support",
           "heldItemOptional": "vanguard-bell",
           "battleItemId": "eject-button",
           "moves": [
@@ -42916,7 +42916,7 @@
             }
           ],
           "lane": "Anywhere Support",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard Support",
           "heldItemOptional": "vanguard-bell",
           "battleItemId": "full-heal",
           "battleItemOptional": "eject-button",
@@ -42975,7 +42975,7 @@
             }
           ],
           "lane": "Anywhere Support",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard Support",
           "heldItemOptional": "vanguard-bell",
           "battleItemId": "eject-button",
           "battleItemOptional": "x-speed",
@@ -43034,7 +43034,7 @@
             }
           ],
           "lane": "Anywhere Support",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard Support",
           "heldItemOptional": "vanguard-bell",
           "battleItemId": "full-heal",
           "battleItemOptional": "eject-button",
@@ -43493,7 +43493,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard All-Rounder",
           "battleItemId": "full-heal",
           "battleItemOptional": "eject-button",
           "moves": [
@@ -43551,7 +43551,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard All-Rounder",
           "battleItemId": "full-heal",
           "battleItemOptional": "eject-button",
           "moves": [
@@ -43609,7 +43609,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard All-Rounder",
           "battleItemId": "full-heal",
           "battleItemOptional": "eject-button",
           "moves": [
@@ -43667,7 +43667,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard All-Rounder",
           "battleItemId": "full-heal",
           "battleItemOptional": "eject-button",
           "moves": [
@@ -46387,7 +46387,7 @@
             }
           ],
           "lane": "Path Tank",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard Defender",
           "heldItemOptional": "focus-band",
           "battleItemId": "eject-button",
           "battleItemOptional": "x-speed",
@@ -46446,7 +46446,7 @@
             }
           ],
           "lane": "Path Tank",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard Defender",
           "heldItemOptional": "buddy-barrier",
           "battleItemId": "eject-button",
           "battleItemOptional": "x-speed",
@@ -46505,7 +46505,7 @@
             }
           ],
           "lane": "Path Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard Defender",
           "heldItemOptional": "buddy-barrier",
           "battleItemId": "x-speed",
           "battleItemOptional": "full-heal",
@@ -46564,7 +46564,7 @@
             }
           ],
           "lane": "Path Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard Defender",
           "heldItemOptional": "big-root",
           "battleItemId": "x-speed",
           "battleItemOptional": "full-heal",
@@ -48895,7 +48895,7 @@
             }
           ],
           "lane": "Path Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard All-Rounder",
           "heldItemOptional": "resonant-guard",
           "battleItemId": "eject-button",
           "moves": [
@@ -48953,7 +48953,7 @@
             }
           ],
           "lane": "Path Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard All-Rounder",
           "heldItemOptional": "charging-charm",
           "battleItemId": "eject-button",
           "moves": [
@@ -49011,7 +49011,7 @@
             }
           ],
           "lane": "Path Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard All-Rounder",
           "heldItemOptional": "resonant-guard",
           "battleItemId": "eject-button",
           "moves": [
@@ -49069,7 +49069,7 @@
             }
           ],
           "lane": "Path Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard All-Rounder",
           "heldItemOptional": "resonant-guard",
           "battleItemId": "eject-button",
           "moves": [
@@ -49681,7 +49681,7 @@
             }
           ],
           "lane": "Path Tank",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard Defender",
           "heldItemOptional": "attack-weight",
           "battleItemId": "eject-button",
           "battleItemOptional": "x-speed",
@@ -50226,7 +50226,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard All-Rounder",
           "heldItemOptional": "energy-amplifier",
           "battleItemId": "full-heal",
           "battleItemOptional": "eject-button",
@@ -50284,7 +50284,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard All-Rounder",
           "heldItemOptional": "weakness-policy",
           "battleItemId": "full-heal",
           "battleItemOptional": "eject-button",
@@ -50342,7 +50342,7 @@
             }
           ],
           "lane": "Path Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard All-Rounder",
           "heldItemOptional": "aeos-cookie",
           "battleItemId": "full-heal",
           "battleItemOptional": "eject-button",
@@ -51278,7 +51278,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard All-Rounder",
           "heldItemOptional": "resonant-guard",
           "battleItemId": "eject-button",
           "moves": [
@@ -51336,7 +51336,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard All-Rounder",
           "heldItemOptional": "focus-band",
           "battleItemId": "eject-button",
           "battleItemOptional": "x-speed",
@@ -51395,7 +51395,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard All-Rounder",
           "heldItemOptional": "resonant-guard",
           "battleItemId": "eject-button",
           "moves": [
@@ -51870,7 +51870,7 @@
             }
           ],
           "lane": "Path Disrupter",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard Defender",
           "heldItemOptional": "vanguard-bell",
           "battleItemId": "eject-button",
           "battleItemOptional": "x-speed",
@@ -51929,7 +51929,7 @@
             }
           ],
           "lane": "Path Support",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard Defender",
           "heldItemOptional": "focus-band",
           "battleItemId": "eject-button",
           "battleItemOptional": "x-speed",
@@ -51988,7 +51988,7 @@
             }
           ],
           "lane": "Path Support",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard Defender",
           "heldItemOptional": "focus-band",
           "battleItemId": "eject-button",
           "battleItemOptional": "x-speed",
@@ -52047,7 +52047,7 @@
             }
           ],
           "lane": "Path Disrupter",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard Defender",
           "heldItemOptional": "vanguard-bell",
           "battleItemId": "eject-button",
           "battleItemOptional": "x-speed",
@@ -52608,7 +52608,7 @@
             }
           ],
           "lane": "Center Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard All-Rounder",
           "heldItemOptional": "charging-charm",
           "battleItemId": "full-heal",
           "battleItemOptional": "eject-button",
@@ -52667,7 +52667,7 @@
             }
           ],
           "lane": "Center Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard All-Rounder",
           "heldItemOptional": "charging-charm",
           "battleItemId": "eject-button",
           "moves": [
@@ -53930,7 +53930,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Special Attack Cooldown Reduction - Bulk for Survivability",
+          "emblemName": "Standard Special Attacker",
           "heldItemOptional": "choice-specs",
           "battleItemId": "eject-button",
           "moves": [
@@ -53988,7 +53988,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Special Attack Cooldown Reduction - Bulk for Survivability",
+          "emblemName": "Standard Special Attacker",
           "heldItemOptional": "focus-band",
           "battleItemId": "full-heal",
           "battleItemOptional": "eject-button",
@@ -54047,7 +54047,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Special Attack Cooldown Reduction - Bulk for Survivability",
+          "emblemName": "Standard Special Attacker",
           "heldItemOptional": "choice-specs",
           "battleItemId": "eject-button",
           "moves": [
@@ -55197,7 +55197,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard All-Rounder",
           "heldItemOptional": "charging-charm",
           "battleItemId": "full-heal",
           "battleItemOptional": "eject-button",
@@ -55256,7 +55256,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard All-Rounder",
           "heldItemOptional": "razor-claw",
           "battleItemId": "eject-button",
           "battleItemOptional": "full-heal",
@@ -55315,7 +55315,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard All-Rounder",
           "heldItemOptional": "charging-charm",
           "battleItemId": "full-heal",
           "battleItemOptional": "eject-button",
@@ -55736,7 +55736,7 @@
             }
           ],
           "lane": "Path Damage",
-          "emblemName": "Special Attack Cooldown Reduction - Bulk for Survivability",
+          "emblemName": "Standard Special Attacker",
           "heldItemOptional": "sp--atk-specs",
           "battleItemId": "eject-button",
           "moves": [
