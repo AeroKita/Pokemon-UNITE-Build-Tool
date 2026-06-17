@@ -8,7 +8,7 @@ import { CollapsibleCard } from "./CollapsibleCard";
 
 // Compare two builds on one Pokémon: pick A and B from "current" + saved.
 export function CompareView() {
-  const { loadout, saved } = useStore();
+  const { loadout, saved, heldSlotGrades } = useStore();
   const options = useMemo(
     () => [{ id: "__current__", name: "Current build", loadout }, ...saved.map((s) => ({ id: s.id, name: s.name, loadout: toLoadout(s) }))],
     [loadout, saved],
@@ -18,8 +18,8 @@ export function CompareView() {
 
   const a = options.find((o) => o.id === aId)?.loadout ?? loadout;
   const b = options.find((o) => o.id === bId)?.loadout ?? loadout;
-  const da = useMemo(() => deriveBuild(a), [a]);
-  const db = useMemo(() => deriveBuild(b), [b]);
+  const da = useMemo(() => deriveBuild(a, true, heldSlotGrades), [a, heldSlotGrades]);
+  const db = useMemo(() => deriveBuild(b, true, heldSlotGrades), [b, heldSlotGrades]);
 
   return (
     <CollapsibleCard title="Compare Builds" persistKey="compare">

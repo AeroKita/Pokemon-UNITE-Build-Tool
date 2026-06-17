@@ -12,12 +12,13 @@ import { CompareView } from "./components/CompareView";
 import { LevelGraph } from "./components/LevelGraph";
 import { RecommendPanel } from "./components/RecommendPanel";
 import { InventoryManager } from "./components/InventoryManager";
+import { HeldItemsInventory } from "./components/HeldItemsInventory";
 import { SettingsMenu } from "./components/SettingsMenu";
 import { isTauri, autoUpdateEnabled, checkAppUpdate } from "./ui/runtime";
 import { APP_NAME, APP_TAGLINE, LEGAL_DISCLAIMER, copyrightLine } from "./ui/brand";
 
 type Tab = "build" | "compare";
-type Page = "app" | "inventory";
+type Page = "app" | "emblems" | "heldItems";
 
 function Segmented<T extends string>({
   value, options, onChange, disabled = false, title,
@@ -79,11 +80,25 @@ function Header({ tab, setTab, page, setPage }: { tab: Tab; setTab: (t: Tab) => 
           </div>
           <div className="flex flex-wrap items-center justify-end gap-2">
             <button
-              onClick={() => setPage(page === "inventory" ? "app" : "inventory")}
-              className="rounded-xl bg-white/15 px-3 py-1.5 text-sm font-medium text-white hover:bg-white/25"
+              onClick={() => setPage("emblems")}
+              className={`rounded-xl px-3 py-1.5 text-sm font-medium text-white hover:bg-white/25 ${page === "emblems" ? "bg-white/25" : "bg-white/15"}`}
             >
-              {page === "inventory" ? "← Builder" : "★ Emblems"}
+              ★ Emblems
             </button>
+            <button
+              onClick={() => setPage("heldItems")}
+              className={`rounded-xl px-3 py-1.5 text-sm font-medium text-white hover:bg-white/25 ${page === "heldItems" ? "bg-white/25" : "bg-white/15"}`}
+            >
+              Held Items
+            </button>
+            {page !== "app" && (
+              <button
+                onClick={() => setPage("app")}
+                className="rounded-xl bg-white/15 px-3 py-1.5 text-sm font-medium text-white hover:bg-white/25"
+              >
+                ← Builder
+              </button>
+            )}
             {page === "app" && <Segmented value={mode} options={["beginner", "expert"]} onChange={setMode} />}
             {page === "app" && (
               <Segmented
@@ -134,8 +149,10 @@ function Workspace() {
         </div>
       )}
       <main className="mx-auto flex max-w-6xl flex-col gap-4 p-4 sm:p-6">
-        {page === "inventory" ? (
+        {page === "emblems" ? (
           <InventoryManager />
+        ) : page === "heldItems" ? (
+          <HeldItemsInventory />
         ) : activeTab === "build" ? (
           <>
             <RecommendPanel />

@@ -130,6 +130,10 @@ const heldItem = z.object({
   description: z.string(),
   statsByGrade: z.record(z.string(), partialStatBlock),
   conditionalEffects: z.array(itemEffect),
+  effect: z.object({
+    label: z.string(),
+    tiers: z.tuple([z.string(), z.string(), z.string()]),
+  }).optional(),
 });
 
 const emblemColor = z.enum([

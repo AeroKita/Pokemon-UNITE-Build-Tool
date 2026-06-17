@@ -3,7 +3,6 @@
 // (battle) item, an emblem set, and which active effects are toggled on.
 
 import type { EmblemGrade } from "../types";
-import { ITEM_GRADE_DEFAULT } from "../data/gameData";
 
 export interface EmblemPick {
   emblemId: string;
@@ -14,7 +13,6 @@ export interface Loadout {
   pokemonId: string | null;
   level: number; // 1-15
   heldItemIds: (string | null)[]; // exactly 3 slots
-  heldItemGrades: [number, number, number]; // grade 1–40 per held slot (parallel to heldItemIds)
   battleItemId: string | null; // "Trainer Item"
   move1Id: string | null; // chosen final (upgrade) move for slot 1; null → derived default
   move2Id: string | null; // chosen final (upgrade) move for slot 2; null → derived default
@@ -40,25 +38,12 @@ export function emptyLoadout(pokemonId: string | null = null): Loadout {
     pokemonId,
     level: 15,
     heldItemIds: [null, null, null],
-    heldItemGrades: defaultHeldItemGrades(),
     battleItemId: null,
     move1Id: null,
     move2Id: null,
     emblems: [],
     activeBoostIds: [],
   };
-}
-
-export function defaultHeldItemGrades(): [number, number, number] {
-  return [ITEM_GRADE_DEFAULT, ITEM_GRADE_DEFAULT, ITEM_GRADE_DEFAULT];
-}
-
-/** Safe grades for a partial/stale loadout (e.g. localStorage from before heldItemGrades existed). */
-export function heldItemGradesOf(loadout: Partial<Loadout>): [number, number, number] {
-  const raw = loadout.heldItemGrades;
-  const clamp = (g: unknown) =>
-    typeof g === "number" ? Math.max(1, Math.min(40, Math.round(g))) : ITEM_GRADE_DEFAULT;
-  return [clamp(raw?.[0]), clamp(raw?.[1]), clamp(raw?.[2])];
 }
 
 export function loadSavedLoadouts(): SavedLoadout[] {
@@ -181,8 +166,6 @@ export function sanitizeLoadout(x: unknown): Loadout | null {
     const v = (o.heldItemIds as unknown[])[i];
     return typeof v === "string" ? v : null;
   });
-  const rawGrades = Array.isArray(o.heldItemGrades) ? o.heldItemGrades : [];
-  const heldItemGrades = heldItemGradesFromRaw(rawGrades);
   const emblems: EmblemPick[] = (o.emblems as unknown[])
     .filter((e): e is EmblemPick => {
       const p = e as Record<string, unknown>;
@@ -194,7 +177,6 @@ export function sanitizeLoadout(x: unknown): Loadout | null {
     pokemonId: typeof o.pokemonId === "string" ? o.pokemonId : null,
     level: typeof o.level === "number" ? Math.max(1, Math.min(15, Math.round(o.level))) : 15,
     heldItemIds: held,
-    heldItemGrades,
     battleItemId: typeof o.battleItemId === "string" ? o.battleItemId : null,
     move1Id: typeof o.move1Id === "string" ? o.move1Id : null,
     move2Id: typeof o.move2Id === "string" ? o.move2Id : null,
@@ -203,12 +185,6 @@ export function sanitizeLoadout(x: unknown): Loadout | null {
       ? (o.activeBoostIds as unknown[]).filter((b): b is string => typeof b === "string")
       : [],
   };
-}
-
-function heldItemGradesFromRaw(raw: unknown[]): [number, number, number] {
-  const clamp = (g: unknown) =>
-    typeof g === "number" ? Math.max(1, Math.min(40, Math.round(g))) : ITEM_GRADE_DEFAULT;
-  return [clamp(raw[0]), clamp(raw[1]), clamp(raw[2])];
 }
 
 function sanitizeSavedLoadout(x: unknown): SavedLoadout | null {

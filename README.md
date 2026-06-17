@@ -85,6 +85,7 @@ The signing secret (`TAURI_SIGNING_PRIVATE_KEY`) is already configured in the re
 - [Theme Plan](docs/06-theme-plan.md) — semantic tokens and the light/dark theming approach
 - [Distribution & Updates](docs/07-distribution.md) — Pages web app, desktop installers, auto-update
 - [Branding](docs/08-branding.md) — how to rename the app + regenerate icons
+- [Data Sourcing Research](docs/09-data-sourcing-research.md) — upstream source landscape (UNITE-DB vs uniteapi, APK pipeline)
 
 ## Layout
 
@@ -105,8 +106,8 @@ The signing secret (`TAURI_SIGNING_PRIVATE_KEY`) is already configured in the re
 - `public/assets/` — mirrored art (497 images: portraits, thumbnails, item & emblem icons)
 
 **App (React)**
-- [`src/state/`](src/state) — `loadout.ts` (model + localStorage, 20-loadout cap) + `store.tsx` (reducer/context)
-- [`src/components/`](src/components) — PokemonPicker, LoadoutEditor, StatPanel, LoadoutBar, CompareView, PickerModal
+- [`src/state/`](src/state) — `loadout.ts` (model + localStorage, 20-loadout cap), `heldItemGrades.ts` (global per-item grades), `store.tsx` (reducer/context)
+- [`src/components/`](src/components) — PokemonPicker, LoadoutEditor, StatPanel, LoadoutBar, CompareView, HeldItemsInventory, PickerModal
 
 **Tooling**
 - `tools/community/` — UNITE-DB scraper + normalizers (`fetch.py`, `normalize.py`, `fetch_art.py`,
@@ -179,6 +180,12 @@ and recompute pick it up automatically.
 - [x] **Emblem Inventory Manager** ([`InventoryManager.tsx`](src/components/InventoryManager.tsx)):
   bulk-mark owned emblems per grade (Bronze/Silver/Gold tabs, color filter, search, "Own all shown",
   live counts) — feeds the per-grade owned store.
+- [x] **Held Items inventory** ([`HeldItemsInventory.tsx`](src/components/HeldItemsInventory.tsx)):
+  dedicated page to set each held item's grade (1–40) globally; grades sync with the Builder's
+  held-item sliders and apply everywhere that item is equipped. Detail modal shows flat stats at
+  the current grade plus grade 1/10/20 effect tiers ([`heldItemDetail.tsx`](src/ui/heldItemDetail.tsx)).
+- [x] **Held-item data** — bundle carries full `statsByGrade` tables (grades 1–40) and optional
+  `effect` tiers (label + three values at item levels 1, 10, 20) from UNITE-DB via `normalize.py`.
 - [x] Quality-of-life — combat analytics (physical/special eHP + relative basic-attack output),
   **shareable build links** (`#b=` URL hash), auto-persisted current build, **per-grade owned-emblem
   inventory** (Bronze/Silver/Gold favorited independently via the picker's grade toggle; "owned only"

@@ -20,21 +20,21 @@ const METRICS: Metric[] = [
 const LEVELS = Array.from({ length: 15 }, (_, i) => i + 1);
 
 export function LevelGraph() {
-  const { loadout } = useStore();
+  const { loadout, heldSlotGrades } = useStore();
   const [metricKey, setMetricKey] = useState<Metric["key"]>("attack");
   const metric = METRICS.find((m) => m.key === metricKey)!;
 
   const data = useMemo(() => {
     if (!loadout.pokemonId) return [];
     return LEVELS.map((level) => {
-      const d = deriveAtLevel(loadout, level);
+      const d = deriveAtLevel(loadout, level, true, heldSlotGrades);
       let value: number | null = null;
       if (d.effective) {
         value = metricKey === "aps" ? (d.attackSpeed?.attacksPerSecond ?? null) : d.effective[metricKey];
       }
       return { level, value: value == null ? null : Number(value.toFixed(metricKey === "aps" ? 3 : 0)) };
     });
-  }, [loadout, metricKey]);
+  }, [loadout, metricKey, heldSlotGrades]);
 
   if (!loadout.pokemonId) return null;
 

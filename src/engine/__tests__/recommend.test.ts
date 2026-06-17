@@ -10,7 +10,7 @@ const special =
   pokemonList.find((p) => p.attackType === "special")!;
 
 function combinedStat(ids: string[], stat: keyof StatBlock): number {
-  return ids.reduce((sum, id) => sum + (heldItemById.get(id)?.statsByGrade[30]?.[stat] ?? 0), 0);
+  return ids.reduce((sum, id) => sum + (heldItemById.get(id)?.statsByGrade[40]?.[stat] ?? 0), 0);
 }
 
 describe("recommendation engine", () => {

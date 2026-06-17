@@ -17,6 +17,21 @@ block records this provenance. If the APK keys are recovered later, the
 Verified accurate against in-game targets (Lucario Lv15 = HP 7249 / Atk 429,  
 Float Stone +28/+175, Muscle Band +17.5/+8.75%) by `src/data/verifyPatch.ts`.  
   
+## Held items in the bundle  
+  
+Each held item carries:  
+  
+- **`statsByGrade`** — flat stat contributions for every grade 1–40 (in-game max is 40;  
+  G40 is the build value). `normalize.py` emits the full table from UNITE-DB params  
+  (linear scaling through G30, then half-increment steps for G31–G40).  
+- **`effect`** (optional) — the item's conditional effect at item levels 1, 10, and 20:  
+  `{ label, tiers: [string, string, string] }`. Shown in the Held Items detail UI;  
+  not yet wired into the calculation engine.  
+- **`conditionalEffects`** — structured combat toggles consumed by `src/engine/effects.ts`.  
+  
+After `normalize.py`, run `npm test`, `npx tsx src/data/verifyPatch.ts`, and sync  
+`public/data/` if the runtime fetch path should match.  
+  
 ## Principles  
   
 - **Everything patchable.** Every numeric value lives in a versioned data bundle,  

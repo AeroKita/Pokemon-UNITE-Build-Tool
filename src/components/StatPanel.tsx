@@ -7,8 +7,8 @@ import { STAT_ROWS, formatStat, formatExactDelta } from "../ui/format";
 import { CollapsibleCard } from "./CollapsibleCard";
 
 export function StatPanel() {
-  const { loadout, dispatch, expert } = useStore();
-  const derived = useMemo(() => deriveBuild(loadout), [loadout]);
+  const { loadout, dispatch, expert, heldSlotGrades } = useStore();
+  const derived = useMemo(() => deriveBuild(loadout, true, heldSlotGrades), [loadout, heldSlotGrades]);
   const { pokemon, effective, base, attackSpeed, oocMoveSpeed, availableBoosts, emblemLoadout, buffedStats } = derived;
 
   if (!pokemon || !effective || !base || !attackSpeed) {

@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { useStore } from "../state/store";
 import { heldItems, battleItems, emblems, heldItemById, battleItemById, emblemById } from "../data/gameData";
-import { MAX_EMBLEMS, heldItemGradesOf } from "../state/loadout";
+import { MAX_EMBLEMS } from "../state/loadout";
 import { asset } from "../ui/asset";
 import { emblemIconForGrade } from "../ui/emblemIcon";
 import { heldItemStatLines } from "../ui/format";
@@ -17,7 +17,7 @@ import { itemTip, emblemTip, statsAtGrade } from "./tips";
 type Picker = { kind: "held"; slot: number } | { kind: "battle" } | { kind: "emblem" } | null;
 
 export function LoadoutEditor() {
-  const { loadout, dispatch, owned, toggleOwned, expert } = useStore();
+  const { loadout, dispatch, owned, toggleOwned, expert, heldSlotGrades, setHeldItemGradeForSlot } = useStore();
   const [picker, setPicker] = useState<Picker>(null);
 
   const emblemGoldOnlyIds = useMemo(
@@ -38,7 +38,7 @@ export function LoadoutEditor() {
         <div className="flex flex-col gap-3">
           {loadout.heldItemIds.map((id, slot) => {
             const item = id ? heldItemById.get(id) : null;
-            const grade = heldItemGradesOf(loadout)[slot];
+            const grade = heldSlotGrades[slot];
             return (
               <div key={slot} className="flex flex-wrap items-start gap-3">
                 <Tooltip content={item ? itemTip(item, grade) : "Add a held item"}>
@@ -67,7 +67,7 @@ export function LoadoutEditor() {
                       min={1}
                       max={40}
                       value={grade}
-                      onChange={(e) => dispatch({ type: "setHeldItemGrade", slot, grade: Number(e.target.value) })}
+                      onChange={(e) => setHeldItemGradeForSlot(slot, Number(e.target.value))}
                       className="w-full accent-indigo-600"
                     />
                     <p className="mt-1 font-mono text-[10px] text-faint">

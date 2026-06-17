@@ -161,12 +161,8 @@ export function computeEffectiveStats(
 
   // 4. Held-item flat stats (added AFTER emblem %)
   for (let i = 0; i < items.length; i++) {
-    const item = items[i];
-    const grade = itemGrades[i] ?? 30;
-    const gradeStats =
-      item.statsByGrade[grade as keyof typeof item.statsByGrade]
-      ?? (item.statsByGrade as Record<string, Partial<StatBlock>>)[String(grade)]
-      ?? {};
+    const grade = itemGrades[i] ?? 40; // default to max grade
+    const gradeStats = items[i].statsByGrade[grade] ?? {};
     for (const key of Object.keys(gradeStats) as (keyof StatBlock)[]) {
       stats[key] = (stats[key] ?? 0) + (gradeStats[key] ?? 0);
     }

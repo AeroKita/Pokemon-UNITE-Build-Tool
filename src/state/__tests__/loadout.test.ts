@@ -11,7 +11,6 @@ describe("loadout sharing", () => {
       pokemonId: "lucario",
       level: 13,
       heldItemIds: ["muscle-band", "scope-lens", null],
-      heldItemGrades: [30, 30, 30],
       battleItemId: "x-attack",
       move1Id: "power-up-punch",
       move2Id: "bone-rush",
@@ -32,7 +31,7 @@ describe("loadout sharing", () => {
     expect(decodeLoadout(btoa("{}"))).toBeNull(); // valid JSON, wrong shape
   });
 
-  it("defaults heldItemGrades when missing from shared links", () => {
+  it("accepts a legacy loadout missing the newer fields", () => {
     const legacy = {
       pokemonId: "pikachu",
       level: 15,
@@ -41,7 +40,9 @@ describe("loadout sharing", () => {
       emblems: [],
       activeBoostIds: [],
     };
-    expect(sanitizeLoadout(legacy)?.heldItemGrades).toEqual([40, 40, 40]);
+    const out = sanitizeLoadout(legacy);
+    expect(out?.heldItemIds).toEqual(["muscle-band", null, null]);
+    expect(out?.move1Id).toBeNull();
   });
 });
 
@@ -50,7 +51,6 @@ describe("loadout file export/import", () => {
     pokemonId: "lucario",
     level: 13,
     heldItemIds: ["muscle-band", "scope-lens", null],
-    heldItemGrades: [30, 30, 30],
     battleItemId: "x-attack",
     move1Id: null,
     move2Id: null,

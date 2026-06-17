@@ -2,7 +2,7 @@
 // speed (with active boosts), out-of-combat move speed, active set bonuses, and
 // the list of toggleable boosts. One path, reused by StatPanel and CompareView.
 
-import { type Loadout, heldItemGradesOf } from "../state/loadout";
+import type { Loadout } from "../state/loadout";
 import type { CalcContext, EmblemLoadout, Pokemon, StatBlock } from "../types";
 import {
   pokemonById,
@@ -33,11 +33,16 @@ export interface DerivedBuild {
 }
 
 /** Derive the same build at a specific level (for level-scaling graphs). */
-export function deriveAtLevel(loadout: Loadout, level: number, inCombat = true): DerivedBuild {
-  return deriveBuild({ ...loadout, level }, inCombat);
+export function deriveAtLevel(
+  loadout: Loadout,
+  level: number,
+  inCombat = true,
+  slotGrades?: [number, number, number],
+): DerivedBuild {
+  return deriveBuild({ ...loadout, level }, inCombat, slotGrades);
 }
 
-export function deriveBuild(loadout: Loadout, inCombat = true): DerivedBuild {
+export function deriveBuild(loadout: Loadout, inCombat = true, slotGrades?: [number, number, number]): DerivedBuild {
   const pokemon = loadout.pokemonId ? pokemonById.get(loadout.pokemonId) ?? null : null;
   const heldItems = loadout.heldItemIds.map((id) => (id ? heldItemById.get(id) ?? null : null));
   const battleItem = loadout.battleItemId ? battleItemById.get(loadout.battleItemId) ?? null : null;
@@ -60,7 +65,7 @@ export function deriveBuild(loadout: Loadout, inCombat = true): DerivedBuild {
   const activeIds = new Set(loadout.activeBoostIds);
   const base = pokemon.baseStatsByLevel[loadout.level - 1];
   const equippedHeld = heldItems.filter((i): i is NonNullable<typeof i> => i !== null);
-  const grades = heldItemGradesOf(loadout);
+  const grades = slotGrades ?? [ITEM_GRADE_DEFAULT, ITEM_GRADE_DEFAULT, ITEM_GRADE_DEFAULT];
   const equippedGrades = loadout.heldItemIds.map((id, i) =>
     id ? grades[i] : ITEM_GRADE_DEFAULT,
   ).filter((_, i) => loadout.heldItemIds[i]);

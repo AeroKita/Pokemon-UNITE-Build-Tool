@@ -154,9 +154,11 @@ export interface HeldItem {
   displayName: string;
   iconAsset: string;
   description: string;
-  // Flat stats by grade (e.g. 10/20/30/40)
+  // Flat stats per item grade 1–40 (in-game max is 40; G40 is the build value).
   statsByGrade: Record<number, Partial<StatBlock>>;
   conditionalEffects: ItemEffect[];
+  /** Grade 1 / 10 / 20 scaling of the item's conditional effect (from UNITE-DB). */
+  effect?: { label: string; tiers: [string, string, string] };
 }
 
 // ----- Emblems ---------------------------------------------------------------

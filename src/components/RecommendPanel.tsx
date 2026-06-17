@@ -101,8 +101,12 @@ export function RecommendPanel() {
   const [tab, setTab] = useState<Tab>("recommended");
   const [idxByTab, setIdxByTab] = useState<Record<Tab, number>>({ recommended: 0, creative: 0, yours: 0 });
 
-  // Skip auto-apply once for the Pokémon restored from localStorage on cold load.
-  const skipAutoApplyForPokemonId = useRef(loadout.pokemonId);
+  // The Pokémon we've already auto-applied for. Initialised to the cold-load
+  // restored build's Pokémon so we never overwrite it. Because this ref is only
+  // updated when we actually apply (never reset to null), the guard also survives
+  // React StrictMode's double-invoked mount effect — the old skip-once-then-null
+  // ref did not, and re-applied the build over the restored loadout on reload.
+  const lastAutoAppliedPokemonId = useRef(loadout.pokemonId);
 
   const applyFor = useCallback(
     (b: DisplayBuild | null) => {
@@ -111,13 +115,11 @@ export function RecommendPanel() {
     [pokemon, dispatch],
   );
 
-  // Auto-apply when the user picks a different Pokémon (not on cold load restore).
+  // Auto-apply the top build only when the user switches to a *different* Pokémon
+  // (not on cold-load restore, and not on a StrictMode re-run of this effect).
   useEffect(() => {
-    if (!pokemon) return;
-    if (skipAutoApplyForPokemonId.current === pokemon.id) {
-      skipAutoApplyForPokemonId.current = null;
-      return;
-    }
+    if (!pokemon || lastAutoAppliedPokemonId.current === pokemon.id) return;
+    lastAutoAppliedPokemonId.current = pokemon.id;
     setIdxByTab({ recommended: 0, creative: 0, yours: 0 });
     setTab("recommended");
     applyFor(toDisplayBuilds(pokemon.builds)[0] ?? null);

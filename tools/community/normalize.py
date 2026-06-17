@@ -2,9 +2,11 @@
 
 Maps UNITE-DB's shapes onto schema/types.ts. Conventions applied here:
   - Percentages become decimals (crit 20 -> 0.20, attack_speed 40 -> 0.40).
-  - Held-item flats are taken at MAX item level (30) — the build-relevant value —
-    via the formula recovered from UNITE-DB's params and verified against every
-    item's displayed max:  value = round(increment * 35 / (skip + 1) + initial_diff, float).
+  - Held-item flats are emitted for every grade 1–40 (the in-game cap is 40),
+    via the formula recovered from UNITE-DB's params:
+      value = increment * factor(level) / (skip + 1) + initial_diff,
+    where factor(g) = g for g <= 30 and 30 + (g - 30)/2 for g > 30
+    (so Curse Bangle Attack = 24 at G30, 28 at G40).
   - Emblem grades A/B/C map to gold/silver/bronze (A = best = gold).
   - Art is referenced from UNITE-DB's CloudFront CDN (case-sensitive names).
 
@@ -342,6 +344,17 @@ def icon_name(item: dict) -> str:
     return item["name"].replace(" ", "+")
 
 
+def held_item_effect(h: dict) -> dict | None:
+    """Structured grade 1/10/20 scaling straight from UNITE-DB's own fields
+    (a label + the three breakpoint values), so the UI never parses prose.
+    e.g. Muscle Band -> {label: "Remaining HP", tiers: ["1%", "2%", "3%"]}."""
+    label = (h.get("description3") or "").strip()
+    tiers = [h.get("level1"), h.get("level10"), h.get("level20")]
+    if not label or any(t in (None, "") for t in tiers):
+        return None
+    return {"label": label, "tiers": [str(t).strip() for t in tiers]}
+
+
 def build_held_items(rows) -> list:
     out = []
     for h in rows:
@@ -355,17 +368,21 @@ def build_held_items(rows) -> list:
                 if mapped is None:
                     continue
                 field, decimal_value = mapped
-                flats[field] = flats.get(field, 0) + decimal_value
+                flats[field] = round(flats.get(field, 0) + decimal_value, 6)
             if flats:
                 stats_by_grade[str(level)] = flats
-        out.append({
+        item = {
             "id": slugify(h["name"]),
             "displayName": name,
             "iconAsset": f"{ASSETS}/items/held/{icon_name(h)}.png",
             "description": h.get("description1", "") or "",
             "statsByGrade": stats_by_grade,
             "conditionalEffects": [],
-        })
+        }
+        effect = held_item_effect(h)
+        if effect:
+            item["effect"] = effect
+        out.append(item)
     return out
 
 
@@ -458,7 +475,7 @@ def main() -> None:
             "provider": "UNITE-DB",
             "url": "https://unite-db.com",
             "note": "Community-sourced (APK bundles encrypted; see tools/extract/ENCRYPTION-FINDINGS.md). "
-                    "Held-item values at max level 30. Percentages stored as decimals.",
+                    "Held-item values span grades 1–40 (in-game max 40). Percentages stored as decimals.",
             "fetched": date.today().isoformat(),
         },
         "pokemon": pokemon,

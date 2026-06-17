@@ -1,7 +1,6 @@
 // App state: the in-progress loadout (reducer) + saved loadouts (localStorage).
 import { createContext, useContext, useEffect, useMemo, useReducer, useState, type ReactNode } from "react";
 import type { EmblemGrade } from "../types";
-import { ITEM_GRADE_DEFAULT } from "../data/gameData";
 import {
   type Loadout,
   type SavedLoadout,
@@ -19,15 +18,20 @@ import {
   saveOwnedEmblems,
   ownedKey,
   normalizeLoadout,
-  heldItemGradesOf,
   MAX_EMBLEMS,
 } from "./loadout";
+import {
+  clampHeldGrade,
+  gradeForHeldItem,
+  loadHeldItemGradeMemory,
+  resolveSlotGrades,
+  saveHeldItemGradeMemory,
+} from "./heldItemGrades";
 
 type Action =
   | { type: "setPokemon"; pokemonId: string }
   | { type: "setLevel"; level: number }
   | { type: "setHeldItem"; slot: number; id: string | null }
-  | { type: "setHeldItemGrade"; slot: number; grade: number }
   | { type: "setBattleItem"; id: string | null }
   | { type: "addEmblem"; emblemId: string; grade: EmblemGrade }
   | { type: "removeEmblem"; index: number }
@@ -51,14 +55,7 @@ function reducer(state: Loadout, action: Action): Loadout {
       const heldItemIds = state.heldItemIds.map((cur, i) =>
         i === action.slot ? action.id : cur === action.id ? null : cur,
       );
-      const heldItemGrades = [...heldItemGradesOf(state)] as [number, number, number];
-      if (action.id === null) heldItemGrades[action.slot] = ITEM_GRADE_DEFAULT;
-      return { ...state, heldItemIds, heldItemGrades };
-    }
-    case "setHeldItemGrade": {
-      const heldItemGrades = [...heldItemGradesOf(state)] as [number, number, number];
-      heldItemGrades[action.slot] = Math.max(1, Math.min(40, Math.round(action.grade)));
-      return { ...state, heldItemGrades };
+      return { ...state, heldItemIds };
     }
     case "setBattleItem":
       return { ...state, battleItemId: action.id, activeBoostIds: state.activeBoostIds.filter((b) => b !== "x-attack") };
@@ -125,6 +122,11 @@ interface Store {
   expert: boolean; // convenience: mode === "expert"
   theme: Theme;
   setTheme: (t: Theme) => void;
+  /** Global per-item held grade (default 40). Synced with Builder sliders. */
+  heldItemGrade: (itemId: string) => number;
+  setHeldItemGradeById: (itemId: string, grade: number) => void;
+  heldSlotGrades: [number, number, number];
+  setHeldItemGradeForSlot: (slot: number, grade: number) => void;
 }
 
 const Ctx = createContext<Store | null>(null);
@@ -141,8 +143,29 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   const [saved, setSaved] = useState<SavedLoadout[]>(() => loadSavedLoadouts());
   const [saveError, setSaveError] = useState<string | null>(null);
   const [owned, setOwned] = useState<Set<string>>(() => loadOwnedEmblems());
+  const [heldGradeMemory, setHeldGradeMemory] = useState<Record<string, number>>(() => loadHeldItemGradeMemory());
   const [mode, setModeState] = useState<ViewMode>(() => loadMode());
   const [theme, setThemeState] = useState<Theme>(() => loadTheme());
+
+  const heldSlotGrades = useMemo(
+    () => resolveSlotGrades(loadout, heldGradeMemory),
+    [loadout, heldGradeMemory],
+  );
+
+  const setHeldItemGradeById = (itemId: string, grade: number) => {
+    const g = clampHeldGrade(grade);
+    setHeldGradeMemory((prev) => {
+      const next = { ...prev, [itemId]: g };
+      saveHeldItemGradeMemory(next);
+      return next;
+    });
+  };
+
+  // Set the grade for whatever item occupies a Builder slot (no-op for an empty slot).
+  const setHeldItemGradeForSlot = (slot: number, grade: number) => {
+    const id = loadout.heldItemIds[slot];
+    if (id) setHeldItemGradeById(id, grade);
+  };
 
   // Persist the in-progress build across reloads.
   useEffect(() => { saveCurrent(loadout); }, [loadout]);
@@ -188,7 +211,11 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     setMode: (m) => { setModeState(m); try { localStorage.setItem(MODE_KEY, m); } catch { /* quota */ } },
     theme,
     setTheme: (t) => { setThemeState(t); try { localStorage.setItem(THEME_KEY, t); } catch { /* quota */ } },
-  }), [loadout, saved, saveError, owned, mode, theme]);
+    heldItemGrade: (itemId) => gradeForHeldItem(heldGradeMemory, itemId),
+    setHeldItemGradeById,
+    heldSlotGrades,
+    setHeldItemGradeForSlot,
+  }), [loadout, saved, saveError, owned, mode, theme, heldGradeMemory, heldSlotGrades]);
 
   return <Ctx.Provider value={store}>{children}</Ctx.Provider>;
 }

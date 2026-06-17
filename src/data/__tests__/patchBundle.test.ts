@@ -98,4 +98,11 @@ describe("patch-1.23.1.1 community bundle", () => {
     expect(mb.statsByGrade["40"]?.attack).toBe(17.5);
     expect(mb.statsByGrade["40"]?.attackSpeed).toBeCloseTo(0.0875, 6);
   });
+
+  it("carries structured grade 1/10/20 effect tiers from the source", () => {
+    const mb = bundle.heldItems.find((i) => i.id === "muscle-band")!;
+    expect(mb.effect).toEqual({ label: "Remaining HP", tiers: ["1%", "2%", "3%"] });
+    const dc = bundle.heldItems.find((i) => i.id === "drain-crown")!;
+    expect(dc.effect).toEqual({ label: "Lifesteal", tiers: ["9%", "12%", "15%"] });
+  });
 });
