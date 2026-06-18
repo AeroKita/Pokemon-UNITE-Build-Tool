@@ -77,7 +77,7 @@ export function StatPanel() {
 
       {/* Attack speed (Expert) */}
       {expert && (
-      <CollapsibleCard title="Attack Speed" persistKey="attackspeed" tone="amber">
+      <CollapsibleCard title="Attack Speed" persistKey="attackspeed" tone="amber" defaultOpen={false}>
         <div className="grid grid-cols-3 gap-2 text-center">
           <Metric label="AS Stat" value={`${attackSpeed.asPoints.toFixed(1)}%`} />
           <Metric label="Frames / atk" value={String(attackSpeed.frames)} />

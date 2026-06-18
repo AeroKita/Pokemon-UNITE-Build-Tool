@@ -93,7 +93,7 @@ export function HeldItemsInventory() {
     <div className="rounded-2xl border border-line bg-surface p-3 shadow-sm">
       <div className="mb-3">
         <p className="text-xs text-muted">
-          Set each item&apos;s grade (1–{ITEM_GRADE_MAX}). Grades apply everywhere that item appears in your builds.
+          Set each item&apos;s grade (1–{ITEM_GRADE_MAX}). Grades apply everywhere that item appears in your builds. Tap on a Held Item for more info!
         </p>
       </div>
 

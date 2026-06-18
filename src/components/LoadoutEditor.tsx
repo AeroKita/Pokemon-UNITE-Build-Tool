@@ -186,7 +186,7 @@ export function LoadoutEditor() {
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <CollapsibleCard title={title} persistKey={`editor-${title.split(" ")[0].toLowerCase()}`}>
+    <CollapsibleCard title={title} persistKey={`editor-${title.split(" ")[0].toLowerCase()}`} defaultOpen={false}>
       {children}
     </CollapsibleCard>
   );

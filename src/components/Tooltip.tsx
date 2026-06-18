@@ -89,15 +89,6 @@ export function Tooltip({
             role="dialog"
             aria-modal="true"
           >
-            <div className="mb-2 flex justify-end">
-              <button
-                onClick={() => setPinned(false)}
-                aria-label="Close"
-                className="rounded-lg border border-line px-2 py-0.5 text-sm text-muted hover:bg-raise"
-              >
-                ✕
-              </button>
-            </div>
             <div className="text-sm leading-snug text-ink">{content}</div>
           </div>
         </div>
