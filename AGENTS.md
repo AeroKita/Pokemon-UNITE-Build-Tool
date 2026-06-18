@@ -2,6 +2,8 @@
 
 Agent-oriented project context for **FoxForge GG** (`unite-build-optimizer`) — a Pokémon UNITE build optimizer with a pure calculation engine, versioned game data, and a React UI. Deeper dives live in `docs/`.
 
+A mobile-first UI rebuild is in progress on branch `mobile-first-rebuild`. Planning for that work lives in `../plans/Rebuild/`. This document describes the codebase as it exists today.
+
 ## Product Context
 
 ### Target Audience
@@ -55,9 +57,29 @@ Recommendations (`src/engine/recommend.ts`) sit beside the engine but must respe
 
 `src/engine/` modules are pure TypeScript with Vitest coverage. `formulas.ts`, `emblems.ts`, `attackSpeed.ts`, `effects.ts`, and `derive.ts` must remain free of React/DOM imports. New combat mechanics extend the engine and data schema first; UI toggles and panels follow.
 
+During the mobile rebuild, these paths stay frozen: `src/engine/`, `src/data/`, `tools/`, `src/state/loadout.ts`, `src/state/heldItemGrades.ts`.
+
 ### Single Derivation Path
 
 All effective-stat rendering goes through `deriveBuild`. Level-scaling graphs use `deriveAtLevel` rather than duplicating stacking logic. Violating this leads to StatPanel/CompareView drift.
+
+Formatting for display: `src/ui/format.ts` (`STAT_ROWS`, `formatStat`, `formatDelta`). Never reimplement stat math or formatting in components.
+
+### Integration Contract (`useStore`)
+
+`loadout`, `dispatch` — the in-progress build + reducer (`setPokemon`, `setLevel`, `setHeldItem`, `setBattleItem`, `addEmblem`, `removeEmblem`, `setEmblemGrade`, `toggleBoost`, `setMove`, `applyBuild`, `load`, `reset`).
+
+`saved`, `save`, `remove`, `loadSaved`, `saveError`, `shareUrl()` — saved loadouts + sharing.
+
+`owned`, `toggleOwned`, `bulkSetOwned` — emblem inventory.
+
+`mode` (`"beginner" | "expert"`), `setMode`, `expert` — complexity toggle.
+
+`heldItemGrade(id)`, `setHeldItemGradeById(id, g)`, `heldSlotGrades`, `setHeldItemGradeForSlot(slot, g)` — held-item grades.
+
+`theme`, `themePref`, `setThemePref` — appearance (see Theming below).
+
+Live stats: `deriveBuild(loadout, true, heldSlotGrades)` returns `{ pokemon, effective, base, attackSpeed, oocMoveSpeed, availableBoosts, emblemLoadout, buffedStats }`.
 
 ### Data Bundle Versioning
 
@@ -80,11 +102,47 @@ Move descriptions use the overlay pattern above: `scrape_serebii.py` writes `mov
 - Owned emblems are keyed per grade (Bronze/Silver/Gold) independently.
 - Held item grades (1–40) are global per item ID, not stored in saved builds or share links. Unique held items (`isUniqueHeldItem`) skip grade storage and controls entirely.
 - Share links encode loadout state in the URL hash (`#b=`).
-- Theme, collapsible card open state, and Beginner/Expert mode persist locally.
+- Theme preference (`themePref`), collapsible card open state, and Beginner/Expert mode persist locally (`unite-build-optimizer.theme.v1`, `unite-build-optimizer.mode.v1`).
+
+### Current UI Shell (`src/App.tsx`)
+
+No router library — navigation is local React state.
+
+- **Header** — sticky gradient bar (`--color-header-a` / `--color-header-b`), Pokémon portrait + app name, header buttons for Emblems and Held Items, Beginner/Expert segmented control, Build/Compare segmented control (Compare disabled outside Expert), settings gear.
+- **Pages** — `app` (builder), `emblems` (`InventoryManager`), `heldItems` (`HeldItemsInventory`). A "← Builder" button returns from inventory pages.
+- **Builder layout** — `max-w-6xl` two-column grid on large screens: left column has `PokemonPicker`, `LoadoutEditor`, `MovesCard`, `LoadoutBar`; right column has `StatPanel`; `LevelGraph` below in Expert mode. Compare mode renders `CompareView`.
+- **Overlays** — `SettingsMenu` (centered modal from header gear), `PickerModal` (centered modal for held/trainer/emblem pickers), `HeldItemDetailModal` on the Held Items page.
+- **Footer** — legal disclaimer, copyright, and patch line in `App.tsx`.
+- **Data updates** — `unite-data-updated` window event shows a reload banner; Tauri runs a silent app-update check on launch when auto-update is enabled.
+
+Shell primitives exist under `src/components/shell/` (`AppBar`, `TabBar`, `BottomSheet`) but are **not wired into `App.tsx` yet**.
 
 ### Semantic Theming
 
 UI surfaces use Tailwind v4 semantic tokens defined in `src/index.css` (`bg-surface`, `text-ink`, etc.), toggled via `data-theme` on the document root. Role/stat accent colors may stay literal; structural chrome must not hardcode light-only neutrals. Native form controls (`<select>`, `<option>`) need explicit `bg-surface text-ink` so dropdown popups stay legible in dark mode (`color-scheme: dark`).
+
+**Resolved themes:**
+
+| `theme` | Palette |
+| --- | --- |
+| `light` | Clean & minimal — neutral surfaces, calm indigo accent |
+| `dark` | Neon-graffiti brand — magenta→cyan accents, deep purple-black surfaces |
+
+**Preference API** (`src/state/store.tsx`):
+
+| Member | Type | Role |
+| --- | --- | --- |
+| `theme` | `"light" \| "dark"` | Resolved applied theme |
+| `themePref` | `"system" \| "light" \| "dark"` | Stored preference (default `"system"`) |
+| `setThemePref` | `(p: ThemePref) => void` | Sets preference and resolves `theme` |
+
+`system` follows `prefers-color-scheme`, defaulting to dark when the OS states no preference. A `matchMedia` listener updates `theme` live while `themePref === "system"`. Resolved theme sets `document.documentElement.dataset.theme` and the `theme-color` meta (`#110d1f` dark, `#ffffff` light). Explicit `light`/`dark` persist in localStorage; `system` removes the key.
+
+`SettingsMenu` currently exposes Light and Dark buttons only (no System option in the UI yet). When `themePref` is `system`, the active button reflects the resolved `theme`.
+
+**Token families in `src/index.css`:** core surfaces (`--color-bg`, `--color-surface`, …), tone cards (`--color-rec-*`, `--color-as-*`, `--color-an-*`), picker tiles (`--color-mon-*`), grade controls (`--color-grade-*`), legacy header gradient (`--color-header-a/-b`, used by the current `App.tsx` header), app-bar tokens (`--color-appbar-*`), tab-bar tokens (`--color-tab-*`). Safe-area helpers: `@utility pt-safe` / `pb-safe` via `env(safe-area-inset-*)`. Viewport meta includes `viewport-fit=cover` in `index.html`.
+
+Branding constants: `src/ui/brand.ts`, `docs/08-branding.md`. Historical token rationale: `docs/06-theme-plan.md`.
 
 ### Dual Distribution Shell
 
@@ -156,8 +214,24 @@ python3 tools/community/scrape_serebii.py && python3 tools/community/normalize.p
 
 ### Design System
 
-Semantic color and surface tokens are defined in `src/index.css` using Tailwind v4 `@theme` blocks; light and dark themes override CSS variables under `[data-theme="dark"]`. Components should use generated utilities (`bg-surface`, `text-ink`, `border-line`, etc.) rather than raw palette classes for chrome.
-
-Branding constants and rename guidance: `src/ui/brand.ts`, `docs/08-branding.md`. Theme rationale and token plan: `docs/06-theme-plan.md`.
+Semantic color and surface tokens are defined in `src/index.css` using Tailwind v4 `@theme` blocks; dark overrides live under `[data-theme="dark"]`. Components should use generated utilities (`bg-surface`, `text-ink`, `border-line`, etc.) rather than raw palette classes for chrome.
 
 Stat role colors (positive/negative, recommend/attack-speed/analytics tone cards) are intentional literals layered on top of semantic surfaces.
+
+Shared modal behavior (`Escape` + scroll lock): `src/ui/useModalDismiss.ts`.
+
+## Key Components
+
+| Area | Path |
+| --- | --- |
+| App shell (current) | `src/App.tsx` |
+| Shell primitives (unused in app yet) | `src/components/shell/AppBar.tsx`, `TabBar.tsx`, `BottomSheet.tsx` |
+| Builder | `RecommendPanel`, `PokemonPicker`, `LoadoutEditor`, `MovesCard`, `StatPanel`, `LoadoutBar`, `LevelGraph` |
+| Inventory | `InventoryManager`, `HeldItemsInventory` |
+| Compare | `CompareView` |
+| Pickers / settings | `PickerModal`, `SettingsMenu` |
+| Item detail | `src/ui/heldItemDetail.tsx` (`HeldItemDetailModal`) |
+| Tooltips | `src/components/Tooltip.tsx`, `src/components/tips.tsx` |
+| State | `src/state/store.tsx`, `src/state/loadout.ts`, `src/state/heldItemGrades.ts` |
+| Engine | `src/engine/derive.ts` |
+| Data | `src/data/gameData.ts`, `src/data/loadBundle.ts` |
