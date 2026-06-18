@@ -20,7 +20,7 @@ import {
   resolveOwnedHeldItems,
   topPriorityLabels,
 } from "../basicObjective";
-import type { HeldItem, Pokemon } from "../../../types";
+import type { EmblemColor, HeldItem, Pokemon } from "../../../types";
 import { makeEmblem } from "../../__tests__/fixtures";
 import { buildPool } from "../pool";
 
@@ -178,9 +178,27 @@ describe("basicSearchOptions", () => {
     expect(opts.mode).toBe("maximize");
     expect(opts.scoringMode).toBe("pokemon");
     expect(opts.pokemonContext).toBeDefined();
-    expect(opts.colorConstraints).toBeNull(); // no hard constraints in Basic
     expect(opts.colorBonuses).toBe(true);
     expect(opts.slots).toBe(10);
+  });
+
+  it("defaults to no hard color constraints when none are supplied", () => {
+    const pokemon = makePokemon("lucario", "physical", "Attacker");
+    const obj = deriveBasicObjective(pokemon, 15, []);
+    const opts = basicSearchOptions(obj);
+
+    expect(opts.colorConstraints).toBeNull();
+  });
+
+  it("enforces hard color constraints when supplied (Expert-equivalent path)", () => {
+    const pokemon = makePokemon("lucario", "physical", "Attacker");
+    const obj = deriveBasicObjective(pokemon, 15, []);
+    const constraints = new Map<EmblemColor, number>([["brown", 6], ["white", 6]]);
+    const opts = basicSearchOptions(obj, constraints);
+
+    expect(opts.colorConstraints).not.toBeNull();
+    expect(opts.colorConstraints!.get("brown")).toBe(6);
+    expect(opts.colorConstraints!.get("white")).toBe(6);
   });
 
   it("priorities match the pokemon's role-based weights", () => {

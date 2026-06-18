@@ -3,20 +3,22 @@
  *
  * Two experience levels:
  *
- *  BASIC (default)
+ *  BEGINNER (default)
  *    Single "Find Best Build" button. The engine auto-derives objectives from
  *    the selected Pokémon's role/attack type using recommend.ts meta-knowledge.
  *    Pool defaults to owned emblems only; user can toggle to the full dataset.
- *    Grade checkboxes and mixed-grades control which candidates are in play.
+ *    Grade checkboxes (full dataset) control which grades are in play; grades
+ *    are always mixed (the optimal behavior). The binary mixed-grades toggle
+ *    lives only in Expert mode.
  *    Held-item suggestions = owned items only
  *    (items the user has explicitly graded; falls back to all if none set).
  *    Shows results: emblem icons, active set bonuses, effective-stat delta,
  *    recommended held items, and Apply buttons.
  *
- *  ADVANCED
+ *  EXPERT
  *    Full custom controls: pool source, mode (maximize/target), effort, level,
  *    Pokémon-aware scoring toggle, color constraints, stat priorities/targets.
- *    Pre-filled from the Basic auto-derived values when switching from Basic.
+ *    Pre-filled from the Beginner auto-derived values when switching from Beginner.
  */
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
@@ -43,13 +45,13 @@ import { useEmblemSearch } from "../state/emblemSearch";
 import { priorityWeights } from "../engine/recommend";
 import {
   deriveBasicObjective,
-  basicSearchOptions,
   buildBasicPool,
   resolveOwnedHeldItems,
   topPriorityLabels,
   basicObjectiveDescription,
   DEFAULT_ALLOWED_GRADES,
 } from "../engine/emblemSearch/basicObjective";
+import { buildPresetSearchOptions, resolveColorSearchMode } from "../engine/emblemSearch/searchPresets";
 import { colorTargetsFor } from "../engine/recommend";
 import { deriveDefaultProtectedStats } from "../engine/emblemSearch/protectDefaults";
 import { recommendItemsForEmblemBuild } from "../engine/emblemSearch/heldItemSynergy";
@@ -85,7 +87,24 @@ const EFFORT_LABELS = {
 } as const;
 
 type Effort = "quick" | "normal" | "thorough";
-type OptimizerMode = "basic" | "advanced";
+
+/**
+ * Beginner-only effort union. Layers an "exact" option on top of the shared
+ * time-based efforts. "exact" runs the full exact color enumeration (optimal,
+ * complete) and is only offered when the resolver says it's feasible; the
+ * time-based options deliberately skip exact and run the heuristic instead.
+ */
+type BasicEffort = "exact" | Effort;
+
+const BASIC_EFFORT_LABELS: Record<BasicEffort, string> = {
+  exact: "Exact (optimal)",
+  ...EFFORT_LABELS,
+} as const;
+
+/** Effort used as the heuristic fallback when "exact" is selected but turns out infeasible at runtime. */
+const EXACT_FALLBACK_EFFORT: Effort = "normal";
+
+type OptimizerMode = "beginner" | "expert";
 /** "off" = no color control; "exact" = hard per-color constraints; "weighted" = color-bonus incentive only. */
 type ColorMode = "off" | "exact" | "weighted";
 
@@ -141,7 +160,7 @@ function fmtDelta(stat: keyof StatBlock, delta: number): string {
 }
 
 // ---------------------------------------------------------------------------
-// Shared result panels (used by both Basic and Advanced)
+// Shared result panels (used by both Beginner and Expert)
 // ---------------------------------------------------------------------------
 
 /** Which parts of the current result have been applied to the loadout. */
@@ -348,9 +367,9 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
   const pokemon = loadout.pokemonId ? pokemonById.get(loadout.pokemonId) ?? null : null;
 
   // ---- Top-level mode ----
-  const [optimizerMode, setOptimizerMode] = useState<OptimizerMode>("basic");
+  const [optimizerMode, setOptimizerMode] = useState<OptimizerMode>("beginner");
 
-  // ---- Pool state (Basic vs Advanced pool source are independent) ----
+  // ---- Pool state (Beginner vs Expert pool source are independent) ----
   const [basicUseOwned, setBasicUseOwned] = useState(true);
   const [useOwned, setUseOwned] = useState(false);
   const [mixedGrades, setMixedGrades] = useState(true);
@@ -359,6 +378,11 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
   );
   const [mode, setMode] = useState<SearchMode>("maximize");
   const [effort, setEffort] = useState<Effort>("normal");
+  // Beginner effort is independent of the Expert `effort` so the extra "exact"
+  // option never leaks into Expert. Defaults to "exact" so one click gives the
+  // optimal build whenever exact is feasible (falls back to a heuristic effort
+  // automatically when it isn't — see resolvedBasicEffort below).
+  const [basicEffort, setBasicEffort] = useState<BasicEffort>("exact");
   const [colorBonuses, setColorBonuses] = useState(true);
   const [optimizeLevel, setOptimizeLevel] = useState<number>(loadout.level ?? 15);
   const [pokemonAwareScoring, setPokemonAwareScoring] = useState(true);
@@ -389,15 +413,18 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
   // label so the user understands the two dimensions.
   const poolDistinctNames = useMemo(() => distinctPokemonCount(pool), [pool]);
 
-  const basicPoolConfig: PoolConfig = { useOwned: basicUseOwned, mixedGrades, allowedGrades };
+  // Beginner mode always allows mixed grades: an owned pool inherently mixes
+  // whatever grades you own, and mixed grades are optimal for the full dataset
+  // too. The binary mixed-grades toggle is exposed only in Expert mode.
+  const basicPoolConfig: PoolConfig = { useOwned: basicUseOwned, mixedGrades: true, allowedGrades };
   const basicPool = useMemo(
     () => buildBasicPool(allEmblems, owned, basicPoolConfig),
-    [owned, basicUseOwned, mixedGrades, allowedGrades],
+    [owned, basicUseOwned, allowedGrades],
   );
   const basicBuildCount = useMemo(() => approximateBuildCount(basicPool, SLOTS), [basicPool]);
   const basicPoolDistinctNames = useMemo(() => distinctPokemonCount(basicPool), [basicPool]);
 
-  // ---- Auto-derived Basic objective ----
+  // ---- Auto-derived Beginner objective ----
   // Pass pokemonList so protect floors are derived from population statistics.
   // pokemonList is a module-level constant (doesn't change) so it's safe to
   // omit from the dep array per the React rules-of-hooks exhaustive-deps advice
@@ -407,7 +434,34 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
     return deriveBasicObjective(pokemon, optimizeLevel, allEmblems, pokemonList);
   }, [pokemon, optimizeLevel]);
 
-  // ---- Advanced weights + context ----
+  // Resolve exact-vs-heuristic for Beginner on the ACTUAL Beginner pool, using
+  // the same shared resolver the search itself uses — so the indicator can
+  // never drift from real engine behavior.
+  const basicColorResolution = useMemo(() => {
+    if (!basicObjective) return null;
+    return resolveColorSearchMode(
+      basicPool,
+      basicObjective.colorTargets as Map<EmblemColor, number>,
+      SLOTS,
+    );
+  }, [basicObjective, basicPool]);
+
+  // Whether the Beginner exact option should be offered: the resolver says the
+  // meta color targets are enforceable AND within the exact-enumeration cap.
+  const basicExactFeasible = basicColorResolution?.willRunExact ?? false;
+
+  // The Beginner effort actually in effect. "exact" is only meaningful when
+  // feasible; if the user left it on "exact" but exact isn't possible for this
+  // Pokémon/pool, fall back to a sensible heuristic effort so the indicator and
+  // the search agree (and the hidden "exact" radio doesn't leave nothing checked).
+  const resolvedBasicEffort: BasicEffort =
+    basicEffort === "exact" && !basicExactFeasible ? EXACT_FALLBACK_EFFORT : basicEffort;
+
+  // Will the Beginner search actually run exact enumeration? Only when exact is
+  // both feasible AND chosen. Drives the ⚡/~ indicator so it tracks the real path.
+  const basicWillRunExact = resolvedBasicEffort === "exact";
+
+  // ---- Expert weights + context ----
   const defaultWeights = useMemo(
     () => (pokemon ? priorityWeights(pokemon) : {}),
     [pokemon],
@@ -588,13 +642,13 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
     onNavigate?.("app");
   }, [onNavigate]);
 
-  // Sync Advanced controls from Basic defaults (called when switching Basic→Advanced
-  // via the segmented control, the "switch to Advanced" buttons, or ↺ Reset).
-  // Advanced defaults: full dataset pool + exact meta colors + protect defaults.
+  // Sync Expert controls from Beginner defaults (called when switching Beginner→Expert
+  // via the segmented control, the "switch to Expert" buttons, or ↺ Reset).
+  // Expert defaults: full dataset pool + exact meta colors + protect defaults.
   const syncAdvancedFromBasic = useCallback(() => {
     const level = loadout.level ?? 15;
     const grades = new Set(DEFAULT_ALLOWED_GRADES);
-    setUseOwned(false);          // Advanced defaults to the full 258-emblem dataset
+    setUseOwned(false);          // Expert defaults to the full 258-emblem dataset
     setMixedGrades(true);
     setAllowedGrades(grades);
     setMode("maximize");
@@ -626,18 +680,14 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
       const targets = colorTargetsFor(pokemon, byId);
       if (targets.size > 0) {
         const fullPool = buildPool(allEmblems, { useOwned: false, mixedGrades: true, allowedGrades: grades }, owned);
-        const caps = colorGroupSizes(fullPool);
-        const sum = [...targets.values()].reduce((a, b) => a + b, 0);
-        const capacityOk = [...targets.entries()].every(([c, n]) => n <= (caps.get(c) ?? 0));
-        const feasible =
-          sum <= 2 * SLOTS &&
-          capacityOk &&
-          countConstrainedBuilds(fullPool, targets, SLOTS) !== 0n;
+        // Same feasibility logic Beginner uses, via the shared resolver, so the
+        // exact-vs-weighted decision can never drift between the two modes.
+        const resolution = resolveColorSearchMode(fullPool, targets, SLOTS);
         setActiveColors(new Set(targets.keys()));
         setColorCounts(
           Object.fromEntries(POSITIVE_COLORS.map((c) => [c, targets.get(c) ?? 0])) as Record<EmblemColor, number>,
         );
-        setColorMode(feasible ? "exact" : "weighted");
+        setColorMode(resolution.mode);
         return;
       }
     }
@@ -649,18 +699,38 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
 
 
   const handleModeSwitch = useCallback((next: OptimizerMode) => {
-    if (next === "advanced" && optimizerMode === "basic") syncAdvancedFromBasic();
+    if (next === "expert" && optimizerMode === "beginner") syncAdvancedFromBasic();
     setOptimizerMode(next);
   }, [optimizerMode, syncAdvancedFromBasic]);
 
-  // Basic search
+  // Beginner search — builds the Expert-equivalent SearchOptions (meta color
+  // targets enforced as hard constraints when feasible on the ACTUAL Beginner
+  // pool, so exact enumeration runs whenever Expert would) with the controls
+  // hidden. Feasibility is judged on basicPool (owned or full per the Beginner
+  // toggle), never the Expert full pool.
   const handleBasicSearch = useCallback(async () => {
-    if (!basicObjective || basicPool.length < SLOTS) return;
-    const opts = basicSearchOptions(basicObjective);
-    await run(basicPool, opts, setBonuses, effort);
-  }, [basicObjective, basicPool, effort, run]);
+    if (!pokemon || !basicObjective || basicPool.length < SLOTS) return;
+    // "exact" → keep the hard color constraints so the orchestrator enters
+    // Phase-2 exact enumeration. A time-based effort → forceHeuristic strips the
+    // constraints so the orchestrator deliberately skips exact and runs the
+    // heuristic at that effort, even when exact would be feasible.
+    const runExact = resolvedBasicEffort === "exact";
+    const { options } = buildPresetSearchOptions({
+      pokemon,
+      level: optimizeLevel,
+      pool: basicPool,
+      emblems: allEmblems,
+      pokemonList,
+      forceHeuristic: !runExact,
+    });
+    // When exact is selected, the heuristic budget is only used if exact turns
+    // out infeasible at runtime — pass a reasonable fallback. Otherwise use the
+    // user's chosen time-based effort.
+    const heuristicEffort: Effort = runExact ? EXACT_FALLBACK_EFFORT : resolvedBasicEffort;
+    await run(basicPool, options, setBonuses, heuristicEffort);
+  }, [pokemon, basicObjective, basicPool, optimizeLevel, resolvedBasicEffort, run]);
 
-  // Advanced search (Advanced tab only — pool source toggle applies here, not in Basic)
+  // Expert search (Expert tab only — pool source toggle applies here, not in Beginner)
   const handleAdvancedSearch = useCallback(async () => {
     if (pool.length < SLOTS) return;
     await run(pool, advancedSearchOptions, setBonuses, effort);
@@ -707,7 +777,7 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
   }, [searchState.result, pokemon, optimizeLevel, loadout.heldItemIds, heldSlotGrades]);
 
   // ---- Held items synergy ----
-  // In Basic mode: restrict to owned held items (graceful fallback to all)
+  // In Beginner mode: restrict to owned held items (graceful fallback to all)
   const ownedItems = useMemo(
     () => resolveOwnedHeldItems(allHeldItems, ownedHeldItemIds),
     [ownedHeldItemIds],
@@ -716,7 +786,7 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
   const heldItemSynergy = useMemo(() => {
     const result = searchState.result;
     if (!result || !pokemon || !result.picks.length) return null;
-    const itemPool = optimizerMode === "basic" ? ownedItems : allHeldItems;
+    const itemPool = optimizerMode === "beginner" ? ownedItems : allHeldItems;
     try {
       return recommendItemsForEmblemBuild(pokemon, optimizeLevel, result.picks, setBonuses, itemPool, 30);
     } catch {
@@ -724,7 +794,7 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
     }
   }, [searchState.result, pokemon, optimizeLevel, optimizerMode, ownedItems]);
 
-  // ---- Basic mode info ----
+  // ---- Beginner mode info ----
   const basicPriorityLabels = useMemo(
     () => (basicObjective ? topPriorityLabels(basicObjective.priorities) : []),
     [basicObjective],
@@ -739,7 +809,7 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
         <div>
           <h2 className="text-base font-bold text-ink">⚡ Emblem Optimizer</h2>
           <p className="text-xs text-muted">
-            {optimizerMode === "basic"
+            {optimizerMode === "beginner"
               ? basicUseOwned
                 ? "One-click build optimised for your Pokémon from your owned collection."
                 : "One-click build optimised for your Pokémon from the full emblem dataset."
@@ -748,16 +818,16 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
         </div>
         <Segmented<OptimizerMode>
           value={optimizerMode}
-          options={["basic", "advanced"]}
+          options={["beginner", "expert"]}
           onChange={handleModeSwitch}
-          labels={{ basic: "Basic", advanced: "Advanced" }}
+          labels={{ beginner: "Beginner", expert: "Expert" }}
         />
       </div>
 
       {/* ================================================================== */}
-      {/* BASIC MODE                                                          */}
+      {/* BEGINNER MODE                                                       */}
       {/* ================================================================== */}
-      {optimizerMode === "basic" && (
+      {optimizerMode === "beginner" && (
         <>
           {/* Auto-objective summary card */}
           {pokemon ? (
@@ -794,9 +864,7 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
                   </p>
                   {basicPool.length > basicPoolDistinctNames && basicUseOwned && (
                     <p className="text-faint">
-                      {mixedGrades
-                        ? `Mixed grades · ~${formatBuildCount(basicBuildCount)} builds`
-                        : "Best owned grade only"}
+                      Mixed grades · ~{formatBuildCount(basicBuildCount)} builds
                     </p>
                   )}
                   {basicPool.length > basicPoolDistinctNames && !basicUseOwned && (
@@ -813,7 +881,9 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
               {/* Color targets row */}
               {basicObjective && basicObjective.colorTargets.size > 0 && (
                 <div className="mt-2 flex flex-wrap items-center gap-1.5 border-t border-line pt-2">
-                  <span className="text-xs text-faint">Target colors:</span>
+                  <span className="text-xs text-faint">
+                    {basicWillRunExact ? "Target colors (enforced):" : "Target colors (soft):"}
+                  </span>
                   {[...basicObjective.colorTargets.entries()].map(([col, n]) => (
                     <span key={col} className="flex items-center gap-1 rounded-full border border-line px-2 py-0.5 text-xs">
                       <ColorDot color={col as EmblemColor} />
@@ -821,12 +891,26 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
                       <span className="font-mono text-muted">×{n}</span>
                     </span>
                   ))}
+                  {basicColorResolution && (
+                    <span
+                      className={`ml-auto text-[11px] font-medium ${basicWillRunExact ? "text-pos" : "text-faint"}`}
+                      title={
+                        basicWillRunExact
+                          ? "Color targets are feasible on this pool — the exact search exhaustively enumerates every matching build (guaranteed optimum)."
+                          : basicExactFeasible
+                            ? "Exact is available for this pool, but a time-based effort is selected — the search uses a heuristic guided by the color-bonus incentive. Pick \"Exact\" to enforce the targets."
+                            : "Color targets can't be enforced exactly on this pool — the search uses a heuristic guided by the color-bonus incentive."
+                      }
+                    >
+                      {basicWillRunExact ? "⚡ Exact search" : "~ Heuristic search"}
+                    </span>
+                  )}
                 </div>
               )}
             </div>
           ) : (
             <div className="rounded-2xl border border-line bg-surface px-4 py-3 text-sm text-muted shadow-sm">
-              Select a Pokémon in the Builder first to enable Basic optimization.
+              Select a Pokémon in the Builder first to enable Beginner optimization.
             </div>
           )}
 
@@ -844,7 +928,7 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
                 >
                   ★ Emblems
                 </button>{" "}
-                page, enable mixed grades above, or{" "}
+                page, or{" "}
                 <button
                   onClick={() => setBasicUseOwned(false)}
                   className="font-medium text-accent-ink underline"
@@ -863,31 +947,49 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
               <p className="mt-1 text-xs text-muted">
                 Enable more grades above, or{" "}
                 <button
-                  onClick={() => handleModeSwitch("advanced")}
+                  onClick={() => handleModeSwitch("expert")}
                   className="font-medium text-accent-ink underline"
                 >
-                  switch to Advanced
+                  switch to Expert
                 </button>{" "}
                 for finer pool control.
               </p>
             </div>
           )}
 
-          {/* Effort selector (subtle, but accessible) */}
+          {/* Effort selector (subtle, but accessible).
+              When exact is feasible an extra "Exact" option is offered — it runs
+              the full, complete enumeration (guaranteed optimum). The time-based
+              options deliberately skip exact and run the heuristic at that budget,
+              letting the user trade optimality for speed. When exact isn't
+              feasible the "Exact" option is hidden and only the time-based
+              efforts show (heuristic, as before). */}
           {pokemon && (
             <div className="flex flex-wrap items-center gap-3">
               <span className="text-xs text-muted">Search effort:</span>
-              {(Object.entries(EFFORT_LABELS) as [Effort, string][]).map(([e, label]) => (
-                <label key={e} className="flex cursor-pointer items-center gap-1.5 text-xs">
-                  <input
-                    type="radio"
-                    checked={effort === e}
-                    onChange={() => setEffort(e)}
-                    className="accent-accent"
-                  />
-                  <span>{label}</span>
-                </label>
-              ))}
+              {(Object.entries(BASIC_EFFORT_LABELS) as [BasicEffort, string][])
+                .filter(([e]) => e !== "exact" || basicExactFeasible)
+                .map(([e, label]) => (
+                  <label
+                    key={e}
+                    className="flex cursor-pointer items-center gap-1.5 text-xs"
+                    title={
+                      e === "exact"
+                        ? "Exhaustively enumerates every build matching the meta color targets — guaranteed optimal & complete."
+                        : "Time-budgeted heuristic — skips the exact search (faster, near-optimal)."
+                    }
+                  >
+                    <input
+                      type="radio"
+                      checked={resolvedBasicEffort === e}
+                      onChange={() => setBasicEffort(e)}
+                      className="accent-accent"
+                    />
+                    <span className={e === "exact" ? "font-semibold text-pos" : ""}>
+                      {e === "exact" ? `⚡ ${label}` : label}
+                    </span>
+                  </label>
+                ))}
             </div>
           )}
 
@@ -952,22 +1054,6 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
                   ))}
                 </div>
               )}
-              {basicUseOwned && (
-                <label className="flex cursor-pointer items-center gap-2 text-sm">
-                  <input
-                    type="checkbox"
-                    checked={mixedGrades}
-                    onChange={(e) => setMixedGrades(e.target.checked)}
-                    className="accent-accent"
-                  />
-                  <span>
-                    Mixed grades{" "}
-                    <span className="text-xs text-faint">
-                      — combine Bronze/Silver/Gold across the 10 slots (recommended)
-                    </span>
-                  </span>
-                </label>
-              )}
             </div>
           )}
 
@@ -1017,7 +1103,7 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
                   >
                     marking more emblems
                   </button>{" "}
-                  as owned, enabling mixed grades, or{" "}
+                  as owned, or{" "}
                   <button
                     onClick={() => setBasicUseOwned(false)}
                     className="font-medium text-accent-ink underline"
@@ -1029,10 +1115,10 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
                 <>
                   enabling more grades or{" "}
                   <button
-                    onClick={() => handleModeSwitch("advanced")}
+                    onClick={() => handleModeSwitch("expert")}
                     className="font-medium text-accent-ink underline"
                   >
-                    switching to Advanced
+                    switching to Expert
                   </button>
                 </>
               )}
@@ -1043,11 +1129,11 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
       )}
 
       {/* ================================================================== */}
-      {/* ADVANCED MODE                                                       */}
+      {/* EXPERT MODE                                                         */}
       {/* ================================================================== */}
-      {optimizerMode === "advanced" && (
+      {optimizerMode === "expert" && (
         <>
-          {/* Reset to Basic defaults */}
+          {/* Reset to Beginner defaults */}
           <div className="flex items-center justify-between">
             <p className="text-xs text-muted">
               Custom search — adjust any setting below.

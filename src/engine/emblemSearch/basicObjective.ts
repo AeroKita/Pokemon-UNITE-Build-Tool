@@ -7,7 +7,7 @@
  * Advanced mode, which is pre-filled from these auto-derived values.
  */
 
-import type { Emblem, EmblemGrade, HeldItem, Pokemon } from "../../types";
+import type { Emblem, EmblemColor, EmblemGrade, HeldItem, Pokemon } from "../../types";
 import { colorTargetsFor, priorityWeights, scoreHeldItem, coreItemsFor } from "../recommend";
 import { buildPool } from "./pool";
 import type { EmblemCandidate, PokemonScoringContext, PoolConfig, SearchOptions, StatFloors, StatWeights } from "./types";
@@ -93,10 +93,22 @@ export function deriveBasicObjective(
 
 /**
  * Build the SearchOptions for Basic mode from a derived objective.
- * Always uses: maximize mode, Pokémon-aware scoring, color-bonus incentive, no hard constraints.
+ *
+ * Uses: maximize mode, Pokémon-aware scoring, color-bonus incentive.
+ *
+ * `colorConstraints` controls whether the meta color targets are enforced as
+ * hard per-color constraints (triggering the orchestrator's exact enumeration
+ * when feasible) or left null (soft steering via the colorBonuses incentive
+ * → heuristic). Callers should pass the resolution from
+ * {@link resolveColorSearchMode} run on the ACTUAL pool so Beginner runs the
+ * Expert-equivalent search. Defaults to null for backward compatibility.
+ *
  * Pair with {@link buildBasicPool}; pool source (owned vs full dataset) is a UI concern.
  */
-export function basicSearchOptions(objective: BasicObjective): SearchOptions {
+export function basicSearchOptions(
+  objective: BasicObjective,
+  colorConstraints: Map<EmblemColor, number> | null = null,
+): SearchOptions {
   return {
     mode: "maximize",
     priorities: objective.priorities,
@@ -105,8 +117,9 @@ export function basicSearchOptions(objective: BasicObjective): SearchOptions {
     // Use derived protect floors so Basic mode automatically guards the
     // Pokémon's defining stats from being net-reduced by emblem choices.
     protected: objective.protectedFloors,
-    // No hard color constraints — the engine's colorBonuses incentive steers naturally.
-    colorConstraints: null,
+    // Hard color constraints when the meta targets are feasible on the pool;
+    // null lets the colorBonuses incentive steer naturally instead.
+    colorConstraints,
     colorBonuses: true,
     scoringMode: "pokemon",
     pokemonContext: objective.pokemonContext,
