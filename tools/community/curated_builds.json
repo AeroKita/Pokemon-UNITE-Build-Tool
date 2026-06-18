@@ -1,5 +1,17 @@
 {
-  "_comment": "Hand-curated builds merged by normalize.py (apply_curated_builds). Keyed by Pokémon id. Keys per id: 'builds' (replace Recommended), 'creativeBuilds' (set Creative), 'recommendedTitles' (rename raw Recommended by index). 'builds' and 'recommendedTitles' are mutually exclusive. See plans/2026-06-17-curated-builds-overlay-plan.md.",
+  "_comment": "Hand-curated builds merged by normalize.py (apply_curated_builds). Keyed by Pokémon id. Keys per id: 'builds' (replace Recommended), 'creativeBuilds' (set Creative), 'recommendedTitles' (rename raw Recommended by index). 'builds' and 'recommendedTitles' are mutually exclusive. Top-level '_emblemNameRemap' remaps raw emblemName values across all Recommended builds before per-Pokémon overrides: a string value replaces unconditionally; an object value selects by the Pokémon's role. See plans/2026-06-17-curated-builds-overlay-plan.md.",
+  "_emblemNameRemap": {
+    "Special Attack Cooldown Reduction - Bulk for Survivability": "Standard Special Attacker",
+    "Offense Leaning Physical Standard": "Attack Damage Carry (ADC)",
+    "Bulk Leaning Physical Standard": "Standard All-Rounder",
+    "Special Attack Attack Speed (Chansey may be substituted with Pidgey)": "Legendary Attack Speed",
+    "Bulk Leaning Standard Physical": {
+      "AllRounder": "Standard All-Rounder",
+      "Defender": "Standard Defender",
+      "Supporter": "Standard Support",
+      "Speedster": "Standard Speedster"
+    }
+  },
   "skeledirge": {
     "builds": [
       {
@@ -355,5 +367,32 @@
   },
   "absol": {
     "recommendedTitles": ["Critical Hit Specialist", "Critical Hit Specialist", "Critical Hit Specialist", "Critical Hit Specialist"]
+  },
+  "scizor": {
+    "recommendedTitles": ["Amplified Red Illusion Dance", "Bullet Dance", "Amplified Red Illusion Hit", "Bullet Hit"]
+  },
+  "mewtwoy": {
+    "builds": [
+      {
+        "name": "Items Only",
+        "emblemName": "Legendary Attack Speed",
+        "lane": "Path Damage",
+        "heldItemIds": ["mewtwonite-y", "muscle-band", "rapid-fire-scarf"],
+        "battleItemId": "x-attack",
+        "emblems": [
+          {"emblemId": "004-charmander", "grade": "gold"},
+          {"emblemId": "005-charmeleon", "grade": "gold"},
+          {"emblemId": "006-charizard", "grade": "gold"},
+          {"emblemId": "038-ninetales", "grade": "gold"},
+          {"emblemId": "244-entei", "grade": "gold"},
+          {"emblemId": "218-slugma", "grade": "gold"},
+          {"emblemId": "016-pidgey", "grade": "gold"},
+          {"emblemId": "242-blissey", "grade": "gold"},
+          {"emblemId": "145-zapdos", "grade": "gold"},
+          {"emblemId": "146-moltres", "grade": "gold"}
+        ],
+        "moves": ["Future Sight", "Teleport"]
+      }
+    ]
   }
 }

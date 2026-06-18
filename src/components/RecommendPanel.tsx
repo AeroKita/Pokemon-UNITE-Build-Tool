@@ -80,8 +80,6 @@ export function RecommendPanel() {
   const curated = useMemo(() => toDisplayBuilds(pokemon?.builds), [pokemon]);
   const creative = useMemo(() => toDisplayBuilds(pokemon?.creativeBuilds), [pokemon]);
 
-  const moveByName = useMemo(() => new Map((pokemon?.moves ?? []).map((m) => [m.name, m])), [pokemon]);
-
   const yours: DisplayBuild[] = useMemo(() => {
     if (!pokemon) return [];
     const rec = recommendBuild(pokemon, [...heldItemById.values()], setBonuses);
@@ -160,14 +158,16 @@ export function RecommendPanel() {
   const trainer = build?.battleItemId ? battleItemById.get(build.battleItemId) : null;
   const ownedCount = build?.emblems.length ?? 0;
 
-  const finalMoveDisplays =
-    tab === "yours"
-      ? (["move1", "move2"] as const)
-          .map((slot) => resolveFinalMove(pokemon, slot, slot === "move1" ? loadout.move1Id : loadout.move2Id))
-          .filter((m): m is NonNullable<typeof m> => m != null)
-      : (build?.moves ?? [])
-          .map((name) => moveByName.get(name))
-          .filter((m): m is NonNullable<typeof m> => m != null);
+  const finalMoveDisplays = (() => {
+    if (!build) return [];
+    const ids =
+      tab === "yours"
+        ? { move1Id: loadout.move1Id, move2Id: loadout.move2Id }
+        : moveIdsFromNames(pokemon, build.moves);
+    return (["move1", "move2"] as const)
+      .map((slot) => resolveFinalMove(pokemon, slot, slot === "move1" ? ids.move1Id : ids.move2Id))
+      .filter((m): m is NonNullable<typeof m> => m != null);
+  })();
 
   return (
     <CollapsibleCard title="Builds" persistKey="recommend" tone="indigo">

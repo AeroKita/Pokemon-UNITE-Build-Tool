@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { useStore } from "../state/store";
-import { heldItems, battleItems, emblems, heldItemById, battleItemById, emblemById } from "../data/gameData";
+import { heldItems, battleItems, emblems, heldItemById, battleItemById, emblemById, isUniqueHeldItem } from "../data/gameData";
 import { MAX_EMBLEMS } from "../state/loadout";
 import { asset } from "../ui/asset";
 import { emblemIconForGrade } from "../ui/emblemIcon";
@@ -56,7 +56,7 @@ export function LoadoutEditor() {
                     )}
                   </button>
                 </Tooltip>
-                {item && (
+                {item && !isUniqueHeldItem(item) && (
                   <div className="min-w-[10rem] flex-1">
                     <div className="mb-1 flex items-center justify-between">
                       <label className="text-xs font-medium text-muted">Grade</label>

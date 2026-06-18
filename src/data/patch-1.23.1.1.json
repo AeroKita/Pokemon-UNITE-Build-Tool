@@ -1781,7 +1781,7 @@
       "passiveAbility": {
         "id": "aroma-veil",
         "name": "Aroma Veil",
-        "description": "",
+        "description": "When an ally is under the effect of one of Alcremie's shields or buffs, remove any hindrances that are applied or are currently affecting that ally. This ability will go on cooldown for 10s after removing a hindrance. This ability can also work on Alcremie as well.",
         "effects": [],
         "iconAsset": "/assets/skills/Alcremie/Aroma+Veil.png"
       },
@@ -2393,7 +2393,7 @@
       "passiveAbility": {
         "id": "flash-fire",
         "name": "Flash Fire",
-        "description": "",
+        "description": "When this Pokémon takes Sp. Atk-based damage from opposing Pokémon, the damage this Pokémon takes is reduced by 20% for 3s, and their next auto attack deals additional damage. This Ability goes on a 10s cooldown after it ends.",
         "effects": [],
         "iconAsset": "/assets/skills/Armarouge/Flash+Fire.png"
       },
@@ -2935,7 +2935,7 @@
       "passiveAbility": {
         "id": "snow-cloak",
         "name": "Snow Cloak",
-        "description": "",
+        "description": "After Ice Shard or Ice Beam is used, the user gains 10% damage resistance for 4s; after Icy Wind, Blizzard, or Unite Move is used the user gains 20% damage resistance for 5s. If move 1 or Unite Move is used after move 2 activated the ability, then the effect is dynamically upgraded to the improved version. Afterwards the ability goes on cooldown for 10s.",
         "effects": [],
         "iconAsset": "/assets/skills/Articuno/Snow+Cloak.png"
       },
@@ -4226,7 +4226,7 @@
             }
           ],
           "lane": "Path Damage",
-          "emblemName": "Special Attack Cooldown Reduction - Bulk for Survivability",
+          "emblemName": "Standard Special Attacker",
           "heldItemOptional": "focus-band",
           "battleItemId": "eject-button",
           "moves": [
@@ -4284,7 +4284,7 @@
             }
           ],
           "lane": "Utility Carry",
-          "emblemName": "Special Attack Cooldown Reduction - Bulk for Survivability",
+          "emblemName": "Standard Special Attacker",
           "battleItemId": "eject-button",
           "moves": [
             "Hydro Pump",
@@ -4732,7 +4732,7 @@
       "passiveAbility": {
         "id": "blaze",
         "name": "Blaze",
-        "description": "",
+        "description": "When this Pokémon hits an enemy with an auto attack or move, that enemy receives a fire fragment for 4s and the duration of all other fire fragments on that enemy are refreshed. When an enemy has 5 fire fragments, all 5 are consumed to deal additional damage to the enemy and restore the user's HP. When this Pokémon's HP is at half or lower, more HP is restored.",
         "effects": [],
         "iconAsset": "/assets/skills/Blaziken/Blaze.png"
       },
@@ -4787,7 +4787,7 @@
             }
           ],
           "lane": "Path Damage",
-          "emblemName": "Bulk Leaning Physical Standard",
+          "emblemName": "Standard All-Rounder",
           "heldItemOptional": "razor-claw",
           "battleItemId": "eject-button",
           "battleItemOptional": "full-heal"
@@ -4842,7 +4842,7 @@
             }
           ],
           "lane": "Center Damage",
-          "emblemName": "Bulk Leaning Physical Standard",
+          "emblemName": "Standard All-Rounder",
           "heldItemOptional": "weakness-policy",
           "battleItemId": "eject-button",
           "battleItemOptional": "full-heal"
@@ -5861,7 +5861,7 @@
       "passiveAbility": {
         "id": "beast-boost",
         "name": "Beast Boost",
-        "description": "",
+        "description": "When Buzzwole knocks out an enemy player, movement speed is increased by 100% and basic attack speed increased by 50% for 3s. When Buzzwole assists in knocking out an enemy player, movement speed is increased by 50% and basic attack speed increased by 25% for 3s. Each time Buzzwole hits an enemy with basic attacks, Mega Punch, Lunge, or Smack Down - muscle gauge increases. Conversely, when Buzzwole has been out of combat for 10s, muscle gauge depletes by 1 increment every 5s. Up to 6 muscle gauge increments can be stored.",
         "effects": [],
         "iconAsset": "/assets/skills/Buzzwole/Beast+Boost.png"
       },
@@ -6501,7 +6501,7 @@
       "passiveAbility": {
         "id": "flame-body",
         "name": "Flame Body",
-        "description": "",
+        "description": "When Charcadet hits an enemy with an auto attack, Charcadet deals damage around themself with flames. This ability goes on a 4s cd after it's triggered.",
         "effects": [],
         "iconAsset": "/assets/skills/Ceruledge/Flame+Body.png"
       },
@@ -6556,7 +6556,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Bulk Leaning Physical Standard",
+          "emblemName": "Standard All-Rounder",
           "heldItemOptional": "energy-amplifier",
           "battleItemId": "eject-button",
           "battleItemOptional": "full-heal",
@@ -6615,7 +6615,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Bulk Leaning Physical Standard",
+          "emblemName": "Standard All-Rounder",
           "heldItemOptional": "energy-amplifier",
           "battleItemId": "eject-button",
           "battleItemOptional": "full-heal",
@@ -6674,7 +6674,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Bulk Leaning Physical Standard",
+          "emblemName": "Standard All-Rounder",
           "heldItemOptional": "energy-amplifier",
           "battleItemId": "eject-button",
           "battleItemOptional": "full-heal",
@@ -6733,7 +6733,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Bulk Leaning Physical Standard",
+          "emblemName": "Standard All-Rounder",
           "battleItemId": "eject-button",
           "battleItemOptional": "full-heal",
           "moves": [
@@ -7194,7 +7194,7 @@
       "passiveAbility": {
         "id": "infiltrator",
         "name": "Infiltrator",
-        "description": "",
+        "description": "When this Pokémon deals damage, receive a stacking buff that makes Special damage dealt by this Pokémon ignore 5% of Special Defense per stack. This buff lasts 4s, can stack up to 6 times, and the duration refreshes when gaining a new stack.",
         "effects": [],
         "iconAsset": "/assets/skills/Chandelure/Infiltrator.png"
       },
@@ -7930,7 +7930,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Bulk Leaning Physical Standard",
+          "emblemName": "Standard All-Rounder",
           "heldItemOptional": "energy-amplifier",
           "battleItemId": "x-speed",
           "battleItemOptional": "full-heal",
@@ -7989,7 +7989,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Bulk Leaning Physical Standard",
+          "emblemName": "Standard All-Rounder",
           "heldItemOptional": "energy-amplifier",
           "battleItemId": "x-speed",
           "battleItemOptional": "full-heal",
@@ -8048,7 +8048,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Bulk Leaning Physical Standard",
+          "emblemName": "Standard All-Rounder",
           "heldItemOptional": "energy-amplifier",
           "battleItemId": "full-heal",
           "battleItemOptional": "x-speed",
@@ -8435,7 +8435,7 @@
       "passiveAbility": {
         "id": "solar-power",
         "name": "Solar Power",
-        "description": "",
+        "description": "When the user uses a move, it deals additional damage but loses 5% of its current HP. This Ability's effect does not trigger when the user is in tall grass. When the user deals damage with a basic attack to opposing Pokémon that have been burned by its moves, the user restores 2% of its missing HP.",
         "effects": [],
         "iconAsset": "/assets/skills/Mega-Charizard-X/Solar+Power.png"
       },
@@ -8490,7 +8490,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Bulk Leaning Physical Standard",
+          "emblemName": "Standard All-Rounder",
           "battleItemId": "full-heal",
           "battleItemOptional": "x-speed",
           "moves": [
@@ -8883,7 +8883,7 @@
       "passiveAbility": {
         "id": "blaze",
         "name": "Blaze",
-        "description": "",
+        "description": "Increases Attack by 8% for 5 seconds after Charizard gets hit.",
         "effects": [],
         "iconAsset": "/assets/skills/Mega-Charizard-Y/Blaze.png"
       },
@@ -8938,7 +8938,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Bulk Leaning Physical Standard",
+          "emblemName": "Standard All-Rounder",
           "heldItemOptional": "scope-lens",
           "battleItemId": "full-heal",
           "battleItemOptional": "x-speed",
@@ -9413,7 +9413,7 @@
             }
           ],
           "lane": "Center Damage",
-          "emblemName": "Offense Leaning Physical Standard",
+          "emblemName": "Attack Damage Carry (ADC)",
           "battleItemId": "eject-button",
           "battleItemOptional": "full-heal",
           "moves": [
@@ -9471,7 +9471,7 @@
             }
           ],
           "lane": "Path Damage",
-          "emblemName": "Offense Leaning Physical Standard",
+          "emblemName": "Attack Damage Carry (ADC)",
           "heldItemOptional": "attack-weight",
           "battleItemId": "eject-button",
           "battleItemOptional": "full-heal",
@@ -9530,7 +9530,7 @@
             }
           ],
           "lane": "Center Damage",
-          "emblemName": "Offense Leaning Physical Standard",
+          "emblemName": "Attack Damage Carry (ADC)",
           "battleItemId": "eject-button",
           "battleItemOptional": "full-heal",
           "moves": [
@@ -9588,7 +9588,7 @@
             }
           ],
           "lane": "Path Damage",
-          "emblemName": "Offense Leaning Physical Standard",
+          "emblemName": "Attack Damage Carry (ADC)",
           "heldItemOptional": "attack-weight",
           "battleItemId": "eject-button",
           "battleItemOptional": "full-heal",
@@ -10042,7 +10042,7 @@
             }
           ],
           "lane": "Path Support",
-          "emblemName": "Special Attack Cooldown Reduction - Bulk for Survivability",
+          "emblemName": "Standard Special Attacker",
           "heldItemOptional": "energy-amplifier",
           "battleItemId": "x-speed",
           "moves": [
@@ -10099,7 +10099,7 @@
             }
           ],
           "lane": "Path Support or Tank",
-          "emblemName": "Special Attack Cooldown Reduction - Bulk for Survivability",
+          "emblemName": "Standard Special Attacker",
           "battleItemId": "eject-button",
           "battleItemOptional": "full-heal",
           "moves": [
@@ -10568,7 +10568,7 @@
       "passiveAbility": {
         "id": "triage",
         "name": "Triage",
-        "description": "",
+        "description": "Increases movement speed by 25% when near ally Pokémon at 50% max HP or below. Stores up to 8 flowers; consumes all flowers when using Synthesis, Floral Healing, or Sweet Kiss while attached, boosting their effects. Gains 1 flower every 1.5s. Gains 4 flowers when entering tall grass while detached (5s CD). Attaches to a designated ally Pokémon when using Synthesis, Floral Healing, or Sweet Kiss while detached, granting a Triage shield effect to the ally based on Comfey's max HP.",
         "effects": [],
         "iconAsset": "/assets/skills/Comfey/Triage.png"
       },
@@ -11278,7 +11278,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Special Attack Cooldown Reduction - Bulk for Survivability",
+          "emblemName": "Standard Special Attacker",
           "heldItemOptional": "slick-spoon",
           "battleItemId": "eject-button",
           "moves": [
@@ -11336,7 +11336,7 @@
             }
           ],
           "lane": "Path Damage",
-          "emblemName": "Special Attack Cooldown Reduction - Bulk for Survivability",
+          "emblemName": "Standard Special Attacker",
           "heldItemOptional": "slick-spoon",
           "battleItemId": "eject-button",
           "moves": [
@@ -11394,7 +11394,7 @@
             }
           ],
           "lane": "Path Damage",
-          "emblemName": "Special Attack Cooldown Reduction - Bulk for Survivability",
+          "emblemName": "Standard Special Attacker",
           "heldItemOptional": "slick-spoon",
           "battleItemId": "eject-button",
           "moves": [
@@ -12432,7 +12432,7 @@
       "passiveAbility": {
         "id": "bad-dreams",
         "name": "Bad Dreams",
-        "description": "",
+        "description": "When an enemy is forcibly put to sleep near Darkrai, Darkrai deals damage to the target and gains a boosted attack. When Darkrai uses this boosted, every enemy that has been marked with bad dreams in the last 2.7s is attacked simultaneously.  Sleeping enemies near Darkrai take damage over time, and Darkrai deals 10% more damage to them while they remain asleep. Damage from this Ability doesn't wake up sleeping enemies.",
         "effects": [],
         "iconAsset": "/assets/skills/Darkrai/Bad+Dreams.png"
       },
@@ -12487,7 +12487,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Special Attack Cooldown Reduction - Bulk for Survivability",
+          "emblemName": "Standard Special Attacker",
           "heldItemOptional": "sp--atk-specs",
           "battleItemId": "potion",
           "battleItemOptional": "eject-button",
@@ -12546,7 +12546,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Special Attack Cooldown Reduction - Bulk for Survivability",
+          "emblemName": "Standard Special Attacker",
           "battleItemId": "full-heal",
           "battleItemOptional": "eject-button",
           "moves": [
@@ -12604,7 +12604,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Special Attack Cooldown Reduction - Bulk for Survivability",
+          "emblemName": "Standard Special Attacker",
           "heldItemOptional": "choice-specs",
           "battleItemId": "eject-button",
           "battleItemOptional": "potion",
@@ -12663,7 +12663,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Special Attack Cooldown Reduction - Bulk for Survivability",
+          "emblemName": "Standard Special Attacker",
           "heldItemOptional": "choice-specs",
           "battleItemId": "eject-button",
           "battleItemOptional": "full-heal",
@@ -14389,7 +14389,7 @@
       "passiveAbility": {
         "id": "steelworker",
         "name": "Steelworker",
-        "description": "",
+        "description": "Dhelmise is granted a shield whenever one of the user's moves deals damage to Pokémon from the opposing team (5s cd). Each time this Ability or other effects grant the Pokémon a shield, the Pokémon's next basic attack deals increased damage. This effect can stack up to 3 times. When the shield granted by this ability expires after 3s, HP proportional to the amount of remaining shields is restored.",
         "effects": [],
         "iconAsset": "/assets/skills/Dhelmise/Steelworker.png"
       },
@@ -17321,7 +17321,7 @@
             }
           ],
           "lane": "Path Support",
-          "emblemName": "Special Attack Cooldown Reduction - Bulk for Survivability",
+          "emblemName": "Standard Special Attacker",
           "battleItemId": "x-speed",
           "battleItemOptional": "eject-button",
           "moves": [
@@ -17887,7 +17887,7 @@
       "passiveAbility": {
         "id": "torrent",
         "name": "Torrent",
-        "description": "",
+        "description": "When this Pokémon deals damage to opposing Pokémon, or as time passes, the Torrent gauge increases to a max of 100. If a move is used when the Torrent gauge exceeds 50, 50 points of the gauge is consumed and the move becomes boosted.",
         "effects": [],
         "iconAsset": "/assets/skills/Empoleon/Torrent.png"
       },
@@ -18001,7 +18001,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Special Attack Cooldown Reduction - Bulk for Survivability",
+          "emblemName": "Standard Special Attacker",
           "battleItemId": "full-heal",
           "battleItemOptional": "eject-button",
           "moves": [
@@ -19130,7 +19130,7 @@
       "passiveAbility": {
         "id": "battle-armor",
         "name": "Battle Armor",
-        "description": "",
+        "description": "The critical-hit modifier of enemies is reduced by 50% when dealing damage to Falinks. Falinks can hold 10 more Aeos Energy than other Pokémon.",
         "effects": [],
         "iconAsset": "/assets/skills/Falinks/Battle+Armor.png"
       },
@@ -19715,7 +19715,7 @@
       "passiveAbility": {
         "id": "torrent",
         "name": "Torrent",
-        "description": "",
+        "description": "While this Pokémon's HP is at half or less; reduces move cooldowns by 20% of the max cooldown for future move uses.",
         "effects": [],
         "iconAsset": "/assets/skills/Feraligatr/Torrent.png"
       },
@@ -22746,7 +22746,7 @@
       "passiveAbility": {
         "id": "gooey",
         "name": "Gooey",
-        "description": "",
+        "description": "When this Pokémon is hit by an attack, there is a chance it will spread slime around itself. The slime deals damage to Pokémon, Decreases their attack speed by 50% for 2s and applies a Gooey debuff. The Gooey debuff slows Pokémon by 10% for 6s and can stack up to 4 times per Pokémon. Gooey is a debuff that is applicable to Wild Pokémon and enemy players only.",
         "effects": [],
         "iconAsset": "/assets/skills/Goodra/Gooey.png"
       },
@@ -25245,7 +25245,7 @@
       "passiveAbility": {
         "id": "swift-swim",
         "name": "Swift Swim",
-        "description": "",
+        "description": "When the Pokémon uses a move, their movement speed increases by 30% for 3s. Each time this Pokémon knocks out an opposing Pokémon, scores a goal, or otherwise makes a contribution in battle, their effort gauge increases. Once the gauge is full, the Pokémon evolves into Gyarados.",
         "effects": [],
         "iconAsset": "/assets/skills/Mega-Gyarados/Swift+Swim.png"
       },
@@ -25300,7 +25300,7 @@
             }
           ],
           "lane": "Path Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard All-Rounder",
           "heldItemOptional": "energy-amplifier",
           "battleItemId": "eject-button",
           "battleItemOptional": "potion",
@@ -25358,7 +25358,7 @@
             }
           ],
           "lane": "Path Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard All-Rounder",
           "heldItemOptional": "rocky-helmet",
           "battleItemId": "eject-button",
           "battleItemOptional": "potion",
@@ -25776,7 +25776,7 @@
       "passiveAbility": {
         "id": "regenerator",
         "name": "Regenerator",
-        "description": "",
+        "description": "If this Pokémon doesn't take damage from enemy Pokémon (Wild Pokémon do not count) for 3s, it will recover 3% max HP every 2 seconds. Damage to shields will not deactivate Regenerator. Ho-oh additionally recovers 0.3% max HP every 2 seconds.",
         "effects": [],
         "iconAsset": "/assets/skills/Ho-Oh/Regenerator.png"
       },
@@ -25831,7 +25831,7 @@
             }
           ],
           "lane": "Path Protector",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard Defender",
           "battleItemId": "full-heal",
           "battleItemOptional": "x-speed",
           "moves": [
@@ -25889,7 +25889,7 @@
             }
           ],
           "lane": "Path Damage Support",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard Defender",
           "battleItemId": "full-heal",
           "battleItemOptional": "x-speed",
           "moves": [
@@ -25947,7 +25947,7 @@
             }
           ],
           "lane": "Path Support Protector",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard Defender",
           "heldItemOptional": "rocky-helmet",
           "battleItemId": "full-heal",
           "battleItemOptional": "x-speed",
@@ -26006,7 +26006,7 @@
             }
           ],
           "lane": "Path Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard Defender",
           "battleItemId": "full-heal",
           "battleItemOptional": "x-speed",
           "moves": [
@@ -26064,7 +26064,7 @@
             }
           ],
           "lane": "Path Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard Defender",
           "battleItemId": "full-heal",
           "battleItemOptional": "x-speed",
           "moves": [
@@ -27182,7 +27182,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Special Attack Cooldown Reduction - Bulk for Survivability",
+          "emblemName": "Standard Special Attacker",
           "heldItemOptional": "slick-spoon",
           "battleItemId": "eject-button",
           "moves": [
@@ -27721,7 +27721,7 @@
       "passiveAbility": {
         "id": "shell-armor",
         "name": "Shell Armor",
-        "description": "",
+        "description": "If Lapras would take a single instance of damage that would be greater than 10% of Lapras's maximum HP, this damage will be reduced by 20%.",
         "effects": [],
         "iconAsset": "/assets/skills/Lapras/Shell+Armor.png"
       },
@@ -28333,7 +28333,7 @@
       "passiveAbility": {
         "id": "levitate",
         "name": "Levitate",
-        "description": "",
+        "description": "After using a move: increases movement speed by 50% for 2s (decaying by 5% every 0.25s).",
         "effects": [],
         "iconAsset": "/assets/skills/Latias/Levitate.png"
       },
@@ -28388,7 +28388,7 @@
             }
           ],
           "lane": "Path Support",
-          "emblemName": "Special Attack Cooldown Reduction - Bulk for Survivability",
+          "emblemName": "Standard Special Attacker",
           "heldItemOptional": "resonant-guard",
           "battleItemId": "potion",
           "battleItemOptional": "eject-button",
@@ -28447,7 +28447,7 @@
             }
           ],
           "lane": "Path Support",
-          "emblemName": "Special Attack Cooldown Reduction - Bulk for Survivability",
+          "emblemName": "Standard Special Attacker",
           "heldItemOptional": "resonant-guard",
           "battleItemId": "potion",
           "battleItemOptional": "eject-button",
@@ -28506,7 +28506,7 @@
             }
           ],
           "lane": "Path Support",
-          "emblemName": "Special Attack Cooldown Reduction - Bulk for Survivability",
+          "emblemName": "Standard Special Attacker",
           "heldItemOptional": "drive-lens",
           "battleItemId": "potion",
           "battleItemOptional": "eject-button",
@@ -28565,7 +28565,7 @@
             }
           ],
           "lane": "Path Support",
-          "emblemName": "Special Attack Cooldown Reduction - Bulk for Survivability",
+          "emblemName": "Standard Special Attacker",
           "heldItemOptional": "shell-bell",
           "battleItemId": "potion",
           "battleItemOptional": "eject-button",
@@ -29045,7 +29045,7 @@
       "passiveAbility": {
         "id": "levitate",
         "name": "Levitate",
-        "description": "",
+        "description": "After using a move: increases movement speed by 50% for 2s (decaying by 5% every 0.25s).",
         "effects": [],
         "iconAsset": "/assets/skills/Latios/Levitate.png"
       },
@@ -29100,7 +29100,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Special Attack Cooldown Reduction - Bulk for Survivability",
+          "emblemName": "Standard Special Attacker",
           "battleItemId": "eject-button",
           "moves": [
             "Dragon Pulse",
@@ -29157,7 +29157,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Special Attack Cooldown Reduction - Bulk for Survivability",
+          "emblemName": "Standard Special Attacker",
           "heldItemOptional": "wise-glasses",
           "battleItemId": "eject-button",
           "moves": [
@@ -29215,7 +29215,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Special Attack Cooldown Reduction - Bulk for Survivability",
+          "emblemName": "Standard Special Attacker",
           "heldItemOptional": "wise-glasses",
           "battleItemId": "eject-button",
           "moves": [
@@ -31163,7 +31163,7 @@
       "passiveAbility": {
         "id": "justified",
         "name": "Justified",
-        "description": "",
+        "description": "When the user is damaged, their attack stat increases by 8% for 4s up to 4 times.",
         "effects": [],
         "iconAsset": "/assets/skills/Mega-Lucario/Justified.png"
       },
@@ -31218,7 +31218,7 @@
             }
           ],
           "lane": "Path Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard All-Rounder",
           "heldItemOptional": "razor-claw",
           "battleItemId": "eject-button",
           "moves": [
@@ -31685,7 +31685,7 @@
             }
           ],
           "lane": "Path Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard All-Rounder",
           "heldItemOptional": "scope-lens",
           "battleItemId": "eject-button",
           "moves": [
@@ -31743,7 +31743,7 @@
             }
           ],
           "lane": "Path Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard All-Rounder",
           "heldItemOptional": "razor-claw",
           "battleItemId": "eject-button",
           "battleItemOptional": "x-attack",
@@ -31802,7 +31802,7 @@
             }
           ],
           "lane": "Path Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard All-Rounder",
           "heldItemOptional": "accel-bracer",
           "battleItemId": "eject-button",
           "moves": [
@@ -32375,7 +32375,7 @@
             }
           ],
           "lane": "Path Tank",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard Defender",
           "heldItemOptional": "vanguard-bell",
           "battleItemId": "eject-button",
           "moves": [
@@ -32433,7 +32433,7 @@
             }
           ],
           "lane": "Path Tank",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard Defender",
           "heldItemOptional": "vanguard-bell",
           "battleItemId": "eject-button",
           "moves": [
@@ -32491,7 +32491,7 @@
             }
           ],
           "lane": "Path Tank",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard Defender",
           "heldItemOptional": "vanguard-bell",
           "battleItemId": "eject-button",
           "moves": [
@@ -32856,7 +32856,7 @@
       "passiveAbility": {
         "id": "overgrow",
         "name": "Overgrow",
-        "description": "",
+        "description": "The user heals an additional 10% of the healing value to allies or themself while that target is at or below 30% HP.",
         "effects": [],
         "iconAsset": "/assets/skills/Meganium/Overgrow.png"
       },
@@ -33387,7 +33387,7 @@
       "passiveAbility": {
         "id": "overgrow",
         "name": "Overgrow",
-        "description": "",
+        "description": "When the user is at 50% max HP or less, if they would take damage they instead disappear into leaves, becoming invisible for 1.5s or until attacking (60s CD). This effect also increases the user's movement speed by 15%, damage by 15% and heals by 15% of the damage dealt for 4s.",
         "effects": [],
         "iconAsset": "/assets/skills/Meowscarada/Overgrow.png"
       },
@@ -33442,7 +33442,7 @@
             }
           ],
           "lane": "Center Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard Speedster",
           "heldItemOptional": "attack-weight",
           "battleItemId": "eject-button",
           "moves": [
@@ -33500,7 +33500,7 @@
             }
           ],
           "lane": "Path Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard Speedster",
           "heldItemOptional": "accel-bracer",
           "battleItemId": "eject-button",
           "moves": [
@@ -33558,7 +33558,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard Speedster",
           "heldItemOptional": "accel-bracer",
           "battleItemId": "eject-button",
           "battleItemOptional": "full-heal",
@@ -33617,7 +33617,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard Speedster",
           "heldItemOptional": "razor-claw",
           "battleItemId": "eject-button",
           "battleItemOptional": "full-heal",
@@ -34073,7 +34073,7 @@
       "passiveAbility": {
         "id": "pickup",
         "name": "Pickup",
-        "description": "",
+        "description": "Attacking Pokémon from the opposing team copies their battle item for 30s. Defeating a wild Pokémon instead copies a random battle item for 30s. The copied item temporarily functions as the user’s battle item, without replacing or affecting the user’s original item. Once an item is copied, this ability will go on cooldown for 30s.",
         "effects": [],
         "iconAsset": "/assets/skills/Meowth/Pickup.png"
       },
@@ -34128,7 +34128,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard Speedster",
           "heldItemOptional": "muscle-band",
           "battleItemId": "full-heal",
           "battleItemOptional": "eject-button",
@@ -34187,7 +34187,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard Speedster",
           "battleItemId": "full-heal",
           "battleItemOptional": "eject-button",
           "moves": [
@@ -34772,7 +34772,7 @@
       "passiveAbility": {
         "id": "clear-body",
         "name": "Clear Body",
-        "description": "",
+        "description": "Reduces the duration of hindrance effects by 10% when enemy players are nearby. The more enemy players there are, the more the hindrance effects are reduced, up to a maximum of 5 enemy players (50% max).",
         "effects": [],
         "iconAsset": "/assets/skills/Metagross/Clear+Body.png"
       },
@@ -35922,7 +35922,7 @@
             }
           ],
           "lane": "Path Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard All-Rounder",
           "heldItemOptional": "focus-band",
           "battleItemId": "full-heal",
           "battleItemOptional": "potion",
@@ -35981,7 +35981,7 @@
             }
           ],
           "lane": "Path Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard All-Rounder",
           "heldItemOptional": "focus-band",
           "battleItemId": "full-heal",
           "battleItemOptional": "potion",
@@ -36040,7 +36040,7 @@
             }
           ],
           "lane": "Path Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard All-Rounder",
           "heldItemOptional": "focus-band",
           "battleItemId": "potion",
           "battleItemOptional": "eject-button",
@@ -36099,7 +36099,7 @@
             }
           ],
           "lane": "Path Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard All-Rounder",
           "heldItemOptional": "focus-band",
           "battleItemId": "potion",
           "battleItemOptional": "eject-button",
@@ -36512,7 +36512,7 @@
       "passiveAbility": {
         "id": "pressure",
         "name": "Pressure",
-        "description": "",
+        "description": "When Mewtwo deals damage to enemy players with a basic attack, the Mega gauge increases up to 12 times. As the Mega gauge increases, Mewtwo's Sp. Atk is increased by 1.5%, and attack speed is increased by 3%, up to 10 times. If Mewtwo is level 5 or higher, and the Mega gauge has increased at least 12 times, Mewtwo Mega Evolves. The Mega Evolution lasts 10s and increases Sp. Atk by an additional 10%, attack speed by an additional 35%, max HP by 10%, and movement speed by 5%.",
         "effects": [],
         "iconAsset": "/assets/skills/MewtwoY/Pressure.png"
       },
@@ -36567,8 +36567,12 @@
             }
           ],
           "lane": "Path Damage",
-          "emblemName": "Special Attack Attack Speed (Chansey may be substituted with Pidgey)",
-          "battleItemId": "x-attack"
+          "emblemName": "Legendary Attack Speed",
+          "battleItemId": "x-attack",
+          "moves": [
+            "Future Sight",
+            "Teleport"
+          ]
         }
       ]
     },
@@ -36995,7 +36999,7 @@
       "passiveAbility": {
         "id": "disguise",
         "name": "Disguise",
-        "description": "",
+        "description": "Mimikyu starts the game in Disguised Form. While in Disguised Form, when Mimikyu would take damage from an enemy, Mimikyu instead takes 5% remaining HP as piercing damage, becomes Impervious for 0.5s (immune to damage but not hindrances) and changes to Busted Form. A revenge mark is applied on the enemy that broke the disguise. Mimikyu's movement speed increases by 10% when approaching revenge-marked enemies and deals 10% increased damage to them. After 50s in Busted Form, Mimikyu returns to Disguised Form. The time it takes to return to Disguised Form is reduced by 25s when Mimikyu knocks out an enemy player and is fully reset upon respawning.",
         "effects": [],
         "iconAsset": "/assets/skills/Mimikyu/Disguise.png"
       },
@@ -37050,7 +37054,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard All-Rounder",
           "heldItemOptional": "curse-bangle",
           "battleItemId": "full-heal",
           "battleItemOptional": "eject-button",
@@ -37594,7 +37598,7 @@
       "passiveAbility": {
         "id": "hadron-engine",
         "name": "Hadron Engine",
-        "description": "",
+        "description": "Create Electric Terrain around Miraidon for 10s when hitting an enemy player with a Move. If Miraidon has Aeos Energy, up to 40 energy (in multiples of 10) will be consumed when the Electric Terrain is created, increasing the size of the Electric Terrain. Miraidon and Pokémon cannot be put to sleep on Electric Terrain. Miraidon on the Electric Terrain deals 30% additional Move damage while allies will deal 10% additional Move damage. Electric Terrain also strengthens ally team goals' healing and shielding by 30% and weakens enemy team goals' healing and shielding by 30%. This ability goes on a 30s cooldown after it's triggered.",
         "effects": [],
         "iconAsset": "/assets/skills/Miraidon/Hadron+Engine.png"
       },
@@ -37707,7 +37711,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Special Attack Cooldown Reduction - Bulk for Survivability",
+          "emblemName": "Standard Special Attacker",
           "heldItemOptional": "energy-amplifier",
           "battleItemId": "eject-button",
           "battleItemOptional": "full-heal",
@@ -38066,7 +38070,7 @@
       "passiveAbility": {
         "id": "flame-body",
         "name": "Flame Body",
-        "description": "",
+        "description": "Whenever the user deals damage with a Basic Attack, Boosted Attack, Wing Attack, or Sky Attack, the target is left with a burn and a burn counter that caps at 5 stacks. The burn and burn counter lasts 4s and deals damage every 0.5s.",
         "effects": [],
         "iconAsset": "/assets/skills/Moltres/Flame+Body.png"
       },
@@ -39259,7 +39263,7 @@
             }
           ],
           "lane": "Path Damage",
-          "emblemName": "Special Attack Cooldown Reduction - Bulk for Survivability",
+          "emblemName": "Standard Special Attacker",
           "heldItemOptional": "choice-specs",
           "battleItemId": "eject-button",
           "moves": [
@@ -39334,7 +39338,7 @@
             }
           ],
           "lane": "Path Damage",
-          "emblemName": "Special Attack Cooldown Reduction - Bulk for Survivability",
+          "emblemName": "Standard Special Attacker",
           "heldItemOptional": "drive-lens",
           "battleItemId": "x-attack",
           "moves": [
@@ -39392,7 +39396,7 @@
             }
           ],
           "lane": "Path Damage",
-          "emblemName": "Special Attack Cooldown Reduction - Bulk for Survivability",
+          "emblemName": "Standard Special Attacker",
           "heldItemOptional": "wise-glasses",
           "battleItemId": "eject-button",
           "battleItemOptional": "x-attack",
@@ -39848,7 +39852,7 @@
       "passiveAbility": {
         "id": "iron-fist",
         "name": "Iron Fist",
-        "description": "",
+        "description": "After this Pokémon hits with a move, the next auto attack will be enhanced, dealing increased damage and restoring the user's HP.",
         "effects": [],
         "iconAsset": "/assets/skills/Pawmot/Iron+Fist.png"
       },
@@ -39903,7 +39907,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard All-Rounder",
           "heldItemOptional": "attack-weight",
           "battleItemId": "eject-button",
           "battleItemOptional": "full-heal"
@@ -40361,7 +40365,7 @@
             }
           ],
           "lane": "Path Damage",
-          "emblemName": "Special Attack Cooldown Reduction - Bulk for Survivability",
+          "emblemName": "Standard Special Attacker",
           "heldItemOptional": "choice-specs",
           "battleItemId": "eject-button",
           "battleItemOptional": "x-speed",
@@ -40420,7 +40424,7 @@
             }
           ],
           "lane": "Path Damage",
-          "emblemName": "Special Attack Cooldown Reduction - Bulk for Survivability",
+          "emblemName": "Standard Special Attacker",
           "heldItemOptional": "shell-bell",
           "battleItemId": "eject-button",
           "battleItemOptional": "x-speed",
@@ -40479,7 +40483,7 @@
             }
           ],
           "lane": "Path Damage",
-          "emblemName": "Special Attack Cooldown Reduction - Bulk for Survivability",
+          "emblemName": "Standard Special Attacker",
           "heldItemOptional": "buddy-barrier",
           "battleItemId": "eject-button",
           "battleItemOptional": "x-speed",
@@ -40538,7 +40542,7 @@
             }
           ],
           "lane": "Path Damage",
-          "emblemName": "Special Attack Cooldown Reduction - Bulk for Survivability",
+          "emblemName": "Standard Special Attacker",
           "heldItemOptional": "drive-lens",
           "battleItemId": "eject-button",
           "battleItemOptional": "x-speed",
@@ -40980,7 +40984,7 @@
       "passiveAbility": {
         "id": "swift-swim",
         "name": "Swift Swim",
-        "description": "",
+        "description": "When damaged by a Pokémon from the opposing team; increases movement speed by 40% for 2s, decaying by 10% every 0.5s (minimum 25% increased movement speed) (10s CD).",
         "effects": [],
         "iconAsset": "/assets/skills/Psyduck/Swift+Swim.png"
       },
@@ -41638,7 +41642,7 @@
       "passiveAbility": {
         "id": "static",
         "name": "Static",
-        "description": "",
+        "description": "Upon receiving damage: paralyzes all nearby opposing Pokémon (30s CD).",
         "effects": [],
         "iconAsset": "/assets/skills/Raichu/Static.png"
       },
@@ -41693,7 +41697,7 @@
             }
           ],
           "lane": "Path Damage",
-          "emblemName": "Special Attack Cooldown Reduction - Bulk for Survivability",
+          "emblemName": "Standard Special Attacker",
           "heldItemOptional": "muscle-band",
           "battleItemId": "eject-button",
           "battleItemOptional": "full-heal",
@@ -41752,7 +41756,7 @@
             }
           ],
           "lane": "Path Damage",
-          "emblemName": "Special Attack Cooldown Reduction - Bulk for Survivability",
+          "emblemName": "Standard Special Attacker",
           "heldItemOptional": "shell-bell",
           "battleItemId": "eject-button",
           "battleItemOptional": "full-heal",
@@ -41811,7 +41815,7 @@
             }
           ],
           "lane": "Path Damage",
-          "emblemName": "Special Attack Cooldown Reduction - Bulk for Survivability",
+          "emblemName": "Standard Special Attacker",
           "heldItemOptional": "shell-bell",
           "battleItemId": "eject-button",
           "battleItemOptional": "full-heal",
@@ -42217,7 +42221,7 @@
       "passiveAbility": {
         "id": "pastel-veil",
         "name": "Pastel Veil",
-        "description": "",
+        "description": "The Pokémon's psychic counter charges based on the distance they run (up to 10 times). When the counter is full, the Pokémon is granted a shield, becoming hindrance resistant while the shield remains.",
         "effects": [],
         "iconAsset": "/assets/skills/Rapidash/Pastel+Veil.png"
       },
@@ -42858,7 +42862,7 @@
             }
           ],
           "lane": "Anywhere Support",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard Support",
           "heldItemOptional": "vanguard-bell",
           "battleItemId": "eject-button",
           "moves": [
@@ -42916,7 +42920,7 @@
             }
           ],
           "lane": "Anywhere Support",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard Support",
           "heldItemOptional": "vanguard-bell",
           "battleItemId": "full-heal",
           "battleItemOptional": "eject-button",
@@ -42975,7 +42979,7 @@
             }
           ],
           "lane": "Anywhere Support",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard Support",
           "heldItemOptional": "vanguard-bell",
           "battleItemId": "eject-button",
           "battleItemOptional": "x-speed",
@@ -43034,7 +43038,7 @@
             }
           ],
           "lane": "Anywhere Support",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard Support",
           "heldItemOptional": "vanguard-bell",
           "battleItemId": "full-heal",
           "battleItemOptional": "eject-button",
@@ -43493,7 +43497,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Amplified Red Illusion Dance",
           "battleItemId": "full-heal",
           "battleItemOptional": "eject-button",
           "moves": [
@@ -43551,7 +43555,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Bullet Dance",
           "battleItemId": "full-heal",
           "battleItemOptional": "eject-button",
           "moves": [
@@ -43609,7 +43613,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Amplified Red Illusion Hit",
           "battleItemId": "full-heal",
           "battleItemOptional": "eject-button",
           "moves": [
@@ -43667,7 +43671,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Bullet Hit",
           "battleItemId": "full-heal",
           "battleItemOptional": "eject-button",
           "moves": [
@@ -44713,7 +44717,7 @@
       "passiveAbility": {
         "id": "steadfast",
         "name": "Steadfast",
-        "description": "",
+        "description": "Tenacity is increased by 50% while the user has a shield. When the user hits an opposing Pokémon with a basic attack or move, the user's critical-hit rate increases by 5% up to 5 times for a maximum of 25%. This enhanced critical-hit rate remains for up to 8s after the user last dealt damage with a basic attack or move.",
         "effects": [],
         "iconAsset": "/assets/skills/Sirfetchd/Steadfast.png"
       },
@@ -44768,7 +44772,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Bulk Leaning Physical Standard",
+          "emblemName": "Standard All-Rounder",
           "heldItemOptional": "energy-amplifier",
           "battleItemId": "eject-button",
           "battleItemOptional": "potion",
@@ -44827,7 +44831,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Bulk Leaning Physical Standard",
+          "emblemName": "Standard All-Rounder",
           "heldItemOptional": "energy-amplifier",
           "battleItemId": "eject-button",
           "battleItemOptional": "potion",
@@ -45200,7 +45204,7 @@
       "passiveAbility": {
         "id": "blaze",
         "name": "Blaze",
-        "description": "",
+        "description": "The user's next move is granted 35% SpDef Pierce (20s CD).",
         "effects": [],
         "iconAsset": "/assets/skills/Skeledirge/Blaze.png"
       },
@@ -46387,7 +46391,7 @@
             }
           ],
           "lane": "Path Tank",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard Defender",
           "heldItemOptional": "focus-band",
           "battleItemId": "eject-button",
           "battleItemOptional": "x-speed",
@@ -46446,7 +46450,7 @@
             }
           ],
           "lane": "Path Tank",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard Defender",
           "heldItemOptional": "buddy-barrier",
           "battleItemId": "eject-button",
           "battleItemOptional": "x-speed",
@@ -46505,7 +46509,7 @@
             }
           ],
           "lane": "Path Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard Defender",
           "heldItemOptional": "buddy-barrier",
           "battleItemId": "x-speed",
           "battleItemOptional": "full-heal",
@@ -46564,7 +46568,7 @@
             }
           ],
           "lane": "Path Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard Defender",
           "heldItemOptional": "big-root",
           "battleItemId": "x-speed",
           "battleItemOptional": "full-heal",
@@ -46999,7 +47003,7 @@
       "passiveAbility": {
         "id": "pressure",
         "name": "Pressure",
-        "description": "",
+        "description": "Damaging a Pokémon from the opposing team below 10% max HP and frozen by Suicune deals an additional 15% max HP as true damage to the target (sufficient damage reduction can prevent the target from being knocked out). Using a move grants a shield for 5s (up to 2 times); separately increases the crystal gauge by 1 for 5s (becoming full when increased 2 times).",
         "effects": [],
         "iconAsset": "/assets/skills/Suicune/Pressure.png"
       },
@@ -48840,7 +48844,7 @@
       "passiveAbility": {
         "id": "mold-breaker",
         "name": "Mold Breaker",
-        "description": "",
+        "description": "When damaging an opposing Pokémon with an active shield effect, 30% of the damage dealt to the shield is dealt as additional damage to the target's HP.",
         "effects": [],
         "iconAsset": "/assets/skills/Tinkaton/Mold+Breaker.png"
       },
@@ -48895,7 +48899,7 @@
             }
           ],
           "lane": "Path Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard All-Rounder",
           "heldItemOptional": "resonant-guard",
           "battleItemId": "eject-button",
           "moves": [
@@ -48953,7 +48957,7 @@
             }
           ],
           "lane": "Path Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard All-Rounder",
           "heldItemOptional": "charging-charm",
           "battleItemId": "eject-button",
           "moves": [
@@ -49011,7 +49015,7 @@
             }
           ],
           "lane": "Path Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard All-Rounder",
           "heldItemOptional": "resonant-guard",
           "battleItemId": "eject-button",
           "moves": [
@@ -49069,7 +49073,7 @@
             }
           ],
           "lane": "Path Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard All-Rounder",
           "heldItemOptional": "resonant-guard",
           "battleItemId": "eject-button",
           "moves": [
@@ -49510,7 +49514,7 @@
       "passiveAbility": {
         "id": "natural-cure",
         "name": "Natural Cure",
-        "description": "",
+        "description": "When Trevenant deals or receives damage while at or below 35% max HP, a continuous HP recovery effect is triggered every 0.5s for 4s. This effect also reduces the cooldowns of Trevenant's moves by 1s every 1s. When this HP recovery effect ends, there is a 100s cooldown. However, this cooldown is reduced by 1s each time one of Trevenant's moves damage an enemy. This cooldown reduction cannot be triggered more than once every 0.5s.",
         "effects": [],
         "iconAsset": "/assets/skills/Trevenant/Natural+Cure.png"
       },
@@ -49681,7 +49685,7 @@
             }
           ],
           "lane": "Path Tank",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard Defender",
           "heldItemOptional": "attack-weight",
           "battleItemId": "eject-button",
           "battleItemOptional": "x-speed",
@@ -50226,7 +50230,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard All-Rounder",
           "heldItemOptional": "energy-amplifier",
           "battleItemId": "full-heal",
           "battleItemOptional": "eject-button",
@@ -50284,7 +50288,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard All-Rounder",
           "heldItemOptional": "weakness-policy",
           "battleItemId": "full-heal",
           "battleItemOptional": "eject-button",
@@ -50342,7 +50346,7 @@
             }
           ],
           "lane": "Path Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard All-Rounder",
           "heldItemOptional": "aeos-cookie",
           "battleItemId": "full-heal",
           "battleItemOptional": "eject-button",
@@ -50721,7 +50725,7 @@
       "passiveAbility": {
         "id": "blaze",
         "name": "Blaze",
-        "description": "",
+        "description": "The user builds up rage when attacking with basic attacks or moves. Once 14 rage has been reached, the user gains 15% SpAtk for 8s, reduces move cooldowns by 65% of their current cooldown, and empowers move effects for 8s. Afterwards the ability goes on cooldown for 10s.",
         "effects": [],
         "iconAsset": "/assets/skills/Typhlosion/Blaze.png"
       },
@@ -51278,7 +51282,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard All-Rounder",
           "heldItemOptional": "resonant-guard",
           "battleItemId": "eject-button",
           "moves": [
@@ -51336,7 +51340,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard All-Rounder",
           "heldItemOptional": "focus-band",
           "battleItemId": "eject-button",
           "battleItemOptional": "x-speed",
@@ -51395,7 +51399,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard All-Rounder",
           "heldItemOptional": "resonant-guard",
           "battleItemId": "eject-button",
           "moves": [
@@ -51870,7 +51874,7 @@
             }
           ],
           "lane": "Path Disrupter",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard Defender",
           "heldItemOptional": "vanguard-bell",
           "battleItemId": "eject-button",
           "battleItemOptional": "x-speed",
@@ -51929,7 +51933,7 @@
             }
           ],
           "lane": "Path Support",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard Defender",
           "heldItemOptional": "focus-band",
           "battleItemId": "eject-button",
           "battleItemOptional": "x-speed",
@@ -51988,7 +51992,7 @@
             }
           ],
           "lane": "Path Support",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard Defender",
           "heldItemOptional": "focus-band",
           "battleItemId": "eject-button",
           "battleItemOptional": "x-speed",
@@ -52047,7 +52051,7 @@
             }
           ],
           "lane": "Path Disrupter",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard Defender",
           "heldItemOptional": "vanguard-bell",
           "battleItemId": "eject-button",
           "battleItemOptional": "x-speed",
@@ -52608,7 +52612,7 @@
             }
           ],
           "lane": "Center Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard All-Rounder",
           "heldItemOptional": "charging-charm",
           "battleItemId": "full-heal",
           "battleItemOptional": "eject-button",
@@ -52667,7 +52671,7 @@
             }
           ],
           "lane": "Center Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard All-Rounder",
           "heldItemOptional": "charging-charm",
           "battleItemId": "eject-button",
           "moves": [
@@ -53930,7 +53934,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Special Attack Cooldown Reduction - Bulk for Survivability",
+          "emblemName": "Standard Special Attacker",
           "heldItemOptional": "choice-specs",
           "battleItemId": "eject-button",
           "moves": [
@@ -53988,7 +53992,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Special Attack Cooldown Reduction - Bulk for Survivability",
+          "emblemName": "Standard Special Attacker",
           "heldItemOptional": "focus-band",
           "battleItemId": "full-heal",
           "battleItemOptional": "eject-button",
@@ -54047,7 +54051,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Special Attack Cooldown Reduction - Bulk for Survivability",
+          "emblemName": "Standard Special Attacker",
           "heldItemOptional": "choice-specs",
           "battleItemId": "eject-button",
           "moves": [
@@ -55142,7 +55146,7 @@
       "passiveAbility": {
         "id": "intrepid-sword",
         "name": "Intrepid Sword",
-        "description": "",
+        "description": "If the goal scoring button is held down, Zacian charges its sword  with Aeos energy. For a short time, its basic attacks become boosted attacks. In addition, during this time, Zacian can use a boosted version of one of its moves once (this use does not share the same cooldown as the base move). The longer the goal scoring button is held down, the more Aeos energy is charged into the sword, lengthening the duration of the boost effect on basic attacks and moves. This Ability goes on an 8s cooldown after it’s triggered.",
         "effects": [],
         "iconAsset": "/assets/skills/Zacian/Intrepid+Sword.png"
       },
@@ -55197,7 +55201,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard All-Rounder",
           "heldItemOptional": "charging-charm",
           "battleItemId": "full-heal",
           "battleItemOptional": "eject-button",
@@ -55256,7 +55260,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard All-Rounder",
           "heldItemOptional": "razor-claw",
           "battleItemId": "eject-button",
           "battleItemOptional": "full-heal",
@@ -55315,7 +55319,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Standard All-Rounder",
           "heldItemOptional": "charging-charm",
           "battleItemId": "full-heal",
           "battleItemOptional": "eject-button",
@@ -55681,7 +55685,7 @@
       "passiveAbility": {
         "id": "static",
         "name": "Static",
-        "description": "",
+        "description": "When the user receives damage from nearby Pokémon from the opposing team, the damaging Pokémon becomes paralyzed. This Ability goes on a 15s cooldown when triggered. When the user hits with a boosted attack, Thunder Shock, or Thunderbolt, they create an electric field. This field will remain for 3s, dealing damage and slowing opposing Pokémon in it by 30%.",
         "effects": [],
         "iconAsset": "/assets/skills/Zapdos/Static.png"
       },
@@ -55736,7 +55740,7 @@
             }
           ],
           "lane": "Path Damage",
-          "emblemName": "Special Attack Cooldown Reduction - Bulk for Survivability",
+          "emblemName": "Standard Special Attacker",
           "heldItemOptional": "sp--atk-specs",
           "battleItemId": "eject-button",
           "moves": [

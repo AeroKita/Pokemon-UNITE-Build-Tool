@@ -296,8 +296,8 @@ def build_pokemon(pokemon_rows, stats_rows, pokedex_to_id: dict, descs: dict | N
                 if not (m.get("description") or "").strip():
                     m["description"] = over.get(_norm_move_name(m["name"]), m.get("description", ""))
         passive_desc = (passive or {}).get("description", "") or ""
-        if over and not passive_desc.strip():
-            passive_desc = over.get(_norm_move_name(passive.get("name", "") if passive else ""), passive_desc)
+        if passive and not passive_desc.strip():
+            passive_desc = ((passive.get("rsb") or {}).get("true_desc") or "").strip()
         out.append({
             "id": pid,
             "displayName": p.get("display_name", name),
@@ -382,6 +382,18 @@ def apply_curated_builds(pokemon, emblems, held, battle) -> None:
         print("  (no curated_builds.json — skipping curation overlay)")
         return
     overlay = json.loads(CURATED.read_text())
+    remap = overlay.get("_emblemNameRemap", {})
+    for p in pokemon:
+        for b in p.get("builds", []):
+            rule = remap.get(b.get("emblemName"))
+            if rule is None:
+                continue
+            new = rule if isinstance(rule, str) else rule.get(p["role"])
+            if new:
+                b["emblemName"] = new
+            elif not isinstance(rule, str):
+                print(f"  ! {p['id']}: no _emblemNameRemap entry for role {p['role']!r} "
+                      f"on label {b.get('emblemName')!r} — left unchanged")
     emblem_ids = {e["id"] for e in emblems}
     held_ids = {h["id"] for h in held}
     battle_ids = {b["id"] for b in battle}
@@ -599,7 +611,7 @@ def main() -> None:
         "setBonuses": set_bonuses,
     }
     OUT.parent.mkdir(parents=True, exist_ok=True)
-    OUT.write_text(json.dumps(bundle, indent=2, ensure_ascii=False))
+    OUT.write_text(json.dumps(bundle, indent=2, ensure_ascii=False) + "\n")
     print(f"\nWrote {OUT}")
     print(f"  pokemon={len(pokemon)} heldItems={len(held)} battleItems={len(battle)} "
           f"emblems={len(emblems)} setBonuses={len(set_bonuses)}")
