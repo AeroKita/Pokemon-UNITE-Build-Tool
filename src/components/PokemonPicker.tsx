@@ -31,7 +31,7 @@ export function PokemonPickerSheet({ onClose }: PokemonPickerSheetProps) {
   );
 
   return (
-    <BottomSheet title="Choose Pokémon" onClose={onClose}>
+    <BottomSheet title="Choose Pokémon" onClose={onClose} fillHeight>
       <div className="sticky top-0 z-10 -mx-4 border-b border-line bg-surface px-4 pb-3 pt-1">
         <input
           value={query}

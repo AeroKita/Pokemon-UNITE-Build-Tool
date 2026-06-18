@@ -119,7 +119,7 @@ No router library — navigation is local React state.
 - **Items screen** — `ItemsScreen` renders `HeldItemsInventory` (global held-item grades, 3-column tile grid on phones, `HeldItemDetailModal` on icon tap).
 - **Compare screen** — `CompareScreen` renders `CompareView` (Advanced only; build A/B selects stack on phones; stat table scrolls horizontally inside its wrapper).
 - **Layout** — single column, `max-w-2xl` centered, `gap-3` between sections. `<main>` padding clears the fixed app bar and tab bar (safe-area aware). Interactive controls target ≥44px hit areas (`min-h-11`); tappable labels use `text-sm` minimum — the Build glance hero (`BuildSummaryBar`) is the primary oversized readout.
-- **Overlays** — `BottomSheet` (`src/components/shell/BottomSheet.tsx`) is the shared responsive overlay (bottom sheet on phones, centered card on `sm+`). Callers: `SettingsMenu` (gear), `PokemonPickerSheet` (app-bar icon or title tap, or hero empty state; search does not auto-focus on open so the grid is browsable without the on-screen keyboard), and `PickerModal` (held/trainer/emblem pickers from `LoadoutEditor`; search does not auto-focus on open so the list is browsable without the on-screen keyboard). `HeldItemDetailModal` keeps its existing centered-modal shell.
+- **Overlays** — `BottomSheet` (`src/components/shell/BottomSheet.tsx`) is the shared responsive overlay (bottom sheet on phones, centered card on `sm+`). Callers: `SettingsMenu` (gear), `PokemonPickerSheet` (app-bar icon or title tap, or hero empty state; search does not auto-focus on open so the grid is browsable without the on-screen keyboard), and `PickerModal` (held/trainer/emblem pickers from `LoadoutEditor`; search does not auto-focus on open so the list is browsable without the on-screen keyboard). Picker callers pass `fillHeight` so the panel stays at fixed `88vh`/`80vh` while search filters results in place; `SettingsMenu` omits it and keeps content-fit sizing. `HeldItemDetailModal` keeps its existing centered-modal shell.
 - **Footer** — legal disclaimer, copyright, and patch line live in Settings → Legal (sourced from `src/ui/brand.ts`); they are not rendered in `App.tsx`.
 - **Data updates** — `unite-data-updated` window event shows a reload banner inside `<main>`; Tauri runs a silent app-update check on launch when auto-update is enabled.
 
@@ -224,7 +224,7 @@ Semantic color and surface tokens are defined in `src/index.css` using Tailwind 
 
 Stat role colors (positive/negative, recommend/attack-speed/analytics tone cards) are intentional literals layered on top of semantic surfaces.
 
-Shared modal behavior (`Escape` + scroll lock): `src/ui/useModalDismiss.ts` (used inside `BottomSheet`). `BottomSheet` (`src/components/shell/BottomSheet.tsx`) is the shared responsive overlay primitive; callers are `SettingsMenu`, `PokemonPickerSheet`, and `PickerModal`.
+Shared modal behavior (`Escape` + scroll lock): `src/ui/useModalDismiss.ts` (used inside `BottomSheet`). `BottomSheet` (`src/components/shell/BottomSheet.tsx`) is the shared responsive overlay primitive; callers are `SettingsMenu`, `PokemonPickerSheet`, and `PickerModal`. Pickers pass optional `fillHeight` for a constant panel height during live filtering; Settings stays content-fit.
 
 Mobile layout conventions: column spacing `gap-3`; `CollapsibleCard` headers `px-4 py-3` with `min-h-11` tap row; buttons, chips, tab items, the app-bar mode toggle, picker tiles, sliders, and emblem grade dots use ≥44px hit areas. Section collapse uses `CollapsibleCard` (`src/components/CollapsibleCard.tsx`) — open state is per `persistKey`, not a global default.
 
@@ -235,11 +235,11 @@ Mobile layout conventions: column spacing `gap-3`; `CollapsibleCard` headers `px
 | App shell | `src/App.tsx` |
 | Shell primitives | `src/components/shell/AppBar.tsx`, `TabBar.tsx`, `BottomSheet.tsx` |
 | Build tab | `src/components/screens/BuildScreen.tsx` — `BuildSummaryBar`, `RecommendPanel`, `LoadoutEditor`, `MovesCard`, `StatPanel`, `LoadoutBar`, `LevelGraph` (Advanced) |
-| Pokémon picker | `PokemonPickerSheet` in `src/components/PokemonPicker.tsx` (bottom sheet; role filter chips color-coded when active via `ROLE_FILTER_HEX`; search does not auto-focus on open) |
+| Pokémon picker | `PokemonPickerSheet` in `src/components/PokemonPicker.tsx` (`BottomSheet fillHeight`; role filter chips color-coded when active via `ROLE_FILTER_HEX`; search does not auto-focus on open) |
 | Emblems tab | `src/components/screens/EmblemsScreen.tsx` → `InventoryManager` |
 | Items tab | `src/components/screens/ItemsScreen.tsx` → `HeldItemsInventory` (`HeldItemDetailModal`) |
 | Compare tab (Advanced) | `src/components/screens/CompareScreen.tsx` → `CompareView` |
-| Pickers / settings | `PickerModal` (search does not auto-focus on open), `SettingsMenu` (both use `BottomSheet`) |
+| Pickers / settings | `PickerModal` (`BottomSheet fillHeight`; search does not auto-focus on open), `SettingsMenu` (content-fit `BottomSheet`) |
 | Item detail | `src/ui/heldItemDetail.tsx` (`HeldItemDetailModal`) |
 | Tooltips | `src/components/Tooltip.tsx`, `src/components/tips.tsx` |
 | State | `src/state/store.tsx`, `src/state/loadout.ts`, `src/state/heldItemGrades.ts` |

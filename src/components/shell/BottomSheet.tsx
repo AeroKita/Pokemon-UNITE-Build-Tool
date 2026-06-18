@@ -6,13 +6,16 @@ interface BottomSheetProps {
   onClose: () => void;
   children: ReactNode;
   footer?: ReactNode;
+  /** Pin the panel to a constant height so it doesn't resize as content
+   *  changes (e.g. live-filtering a picker). Defaults to content-fit. */
+  fillHeight?: boolean;
 }
 
 /**
  * Responsive overlay: bottom sheet on phones, centered modal on sm+.
  * Shared shell for pickers, settings, and other modal flows.
  */
-export function BottomSheet({ title, onClose, children, footer }: BottomSheetProps) {
+export function BottomSheet({ title, onClose, children, footer, fillHeight }: BottomSheetProps) {
   useModalDismiss(onClose);
 
   return (
@@ -22,7 +25,9 @@ export function BottomSheet({ title, onClose, children, footer }: BottomSheetPro
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="flex max-h-[88vh] w-full flex-col rounded-t-2xl bg-surface pb-safe shadow-xl sm:max-h-[80vh] sm:max-w-2xl sm:rounded-2xl"
+        className={`flex w-full flex-col rounded-t-2xl bg-surface pb-safe shadow-xl sm:max-w-2xl sm:rounded-2xl ${
+          fillHeight ? "h-[88vh] sm:h-[80vh]" : "max-h-[88vh] sm:max-h-[80vh]"
+        }`}
       >
         <div className="mx-auto mt-2 h-1.5 w-9 rounded-full bg-line sm:hidden" />
         <div className="flex shrink-0 items-center justify-between gap-3 border-b border-line px-4 py-3">
