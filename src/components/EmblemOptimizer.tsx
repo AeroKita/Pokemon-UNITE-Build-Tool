@@ -19,8 +19,9 @@
  *    Pre-filled from the Basic auto-derived values when switching from Basic.
  */
 
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useStore } from "../state/store";
+import type { EmblemPick } from "../state/loadout";
 import {
   emblems as allEmblems,
   heldItems as allHeldItems,
@@ -57,6 +58,7 @@ import type {
   SearchOptions,
   SearchMode,
   PoolConfig,
+  SearchResult,
 } from "../engine/emblemSearch/types";
 import type { EmblemColor, EmblemGrade, HeldItem, StatBlock } from "../types";
 import { computeEmblemLoadout } from "../engine/emblems";
@@ -120,6 +122,16 @@ function ColorDot({ color }: { color: EmblemColor }) {
   );
 }
 
+/** Map optimizer search slots → loadout emblem picks (worker-safe). */
+function emblemPicksFromResult(result: SearchResult | null | undefined): EmblemPick[] {
+  if (!result?.picks?.length) return [];
+  return result.picks.flatMap((slot) => {
+    const emblemId = slot.emblem?.id;
+    if (!emblemId || !slot.grade) return [];
+    return [{ emblemId, grade: slot.grade }];
+  });
+}
+
 function fmtDelta(stat: keyof StatBlock, delta: number): string {
   if (stat === "critRate" || stat === "cdr" || stat === "lifesteal" || stat === "spLifesteal" || stat === "attackSpeed") {
     return `${delta >= 0 ? "+" : ""}${(delta * 100).toFixed(1)}%`;
@@ -132,6 +144,12 @@ function fmtDelta(stat: keyof StatBlock, delta: number): string {
 // Shared result panels (used by both Basic and Advanced)
 // ---------------------------------------------------------------------------
 
+/** Which parts of the current result have been applied to the loadout. */
+interface AppliedState {
+  emblems: boolean;
+  items: boolean;
+}
+
 interface ResultPanelProps {
   picks: { emblemId: string; grade: EmblemGrade }[];
   effectiveDelta: EffectiveDelta | null;
@@ -140,8 +158,12 @@ interface ResultPanelProps {
   pokemon: ReturnType<typeof pokemonById.get> | null;
   optimizeLevel: number;
   pokemonAwareScoring: boolean;
+  applied: AppliedState;
+  canOpenBuilder: boolean;
   onApplyEmblems: () => void;
   onApplyItems: (ids: string[]) => void;
+  onApplyAll: (ids: string[]) => void;
+  onOpenBuilder: () => void;
 }
 
 interface EffectiveDelta {
@@ -157,9 +179,15 @@ function ResultCards({
   pokemon,
   optimizeLevel,
   pokemonAwareScoring,
+  applied,
+  canOpenBuilder,
   onApplyEmblems,
   onApplyItems,
+  onApplyAll,
+  onOpenBuilder,
 }: ResultPanelProps) {
+  const itemIds = heldItemSynergy?.suggestions.map((s) => s.itemId) ?? [];
+  const hasItems = itemIds.length > 0;
   return (
     <>
       <CollapsibleCard title="Result" persistKey="optimizer-results" tone="indigo">
@@ -229,12 +257,42 @@ function ResultCards({
             </p>
           )}
 
-          <button
-            onClick={onApplyEmblems}
-            className="rounded-xl bg-accent px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-accent/90 active:scale-95"
-          >
-            Apply Emblems to Loadout
-          </button>
+          {/* Apply actions — each is independent and stays on this page.
+              Emblems and held items apply separately so the user can do
+              either or both without being navigated away. */}
+          <div className="flex flex-col gap-2">
+            <div className="flex flex-wrap items-center gap-2">
+              <button
+                type="button"
+                onClick={onApplyEmblems}
+                className="rounded-xl bg-accent px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-accent/90 active:scale-95"
+              >
+                {applied.emblems ? "Applied ✓ — Re-apply Emblems" : "Apply Emblems"}
+              </button>
+              {hasItems && (
+                <button
+                  type="button"
+                  onClick={() => onApplyAll(itemIds)}
+                  className="rounded-xl border border-accent/40 bg-accent/10 px-4 py-2 text-sm font-semibold text-accent-ink hover:bg-accent/20 active:scale-95"
+                >
+                  {applied.emblems && applied.items ? "Applied ✓ — Re-apply All" : "Apply Emblems + Held Items"}
+                </button>
+              )}
+              {canOpenBuilder && (
+                <button
+                  type="button"
+                  onClick={onOpenBuilder}
+                  className="rounded-xl border border-line bg-white/10 px-4 py-2 text-sm font-medium text-ink hover:bg-white/20 active:scale-95"
+                >
+                  View in Builder →
+                </button>
+              )}
+            </div>
+            <p className="text-xs text-faint">
+              Applies to your current loadout without leaving this page. Held items apply
+              separately below.
+            </p>
+          </div>
         </div>
       </CollapsibleCard>
 
@@ -274,12 +332,18 @@ function ResultCards({
                 );
               })}
             </div>
-            <button
-              onClick={() => onApplyItems(heldItemSynergy.suggestions.map((s) => s.itemId))}
-              className="self-start rounded-xl border border-line bg-white/10 px-4 py-1.5 text-xs font-medium text-ink hover:bg-white/20 active:scale-95"
-            >
-              Apply Held Items to Loadout
-            </button>
+            <div className="flex flex-col gap-1">
+              <button
+                type="button"
+                onClick={() => onApplyItems(itemIds)}
+                className="self-start rounded-xl border border-line bg-white/10 px-4 py-1.5 text-xs font-medium text-ink hover:bg-white/20 active:scale-95"
+              >
+                {applied.items ? "Applied ✓ — Re-apply Held Items" : "Apply Held Items"}
+              </button>
+              <span className="text-[10px] text-faint">
+                Held items only — your applied emblems are left untouched.
+              </span>
+            </div>
           </div>
         </CollapsibleCard>
       )}
@@ -455,6 +519,87 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
   // ---- Search engine ----
   const { state: searchState, run, cancel } = useEmblemSearch();
 
+  const resultPicks = useMemo(
+    () => emblemPicksFromResult(searchState.result),
+    [searchState.result],
+  );
+
+  // ---- Apply feedback (inline, since the Builder isn't visible here) ----
+  // `applied` tracks what's been pushed to the loadout for the *current* result;
+  // it resets whenever a fresh result arrives. `toast` is a transient banner.
+  const [applied, setApplied] = useState<AppliedState>({ emblems: false, items: false });
+  const [toast, setToast] = useState<string | null>(null);
+  const toastTimer = useRef<number | null>(null);
+
+  const showToast = useCallback((msg: string) => {
+    setToast(msg);
+    if (toastTimer.current !== null) window.clearTimeout(toastTimer.current);
+    toastTimer.current = window.setTimeout(() => setToast(null), 3000);
+  }, []);
+
+  // Reset applied state when a new search result comes in.
+  useEffect(() => {
+    setApplied({ emblems: false, items: false });
+  }, [searchState.result]);
+
+  // Clear any pending toast timer on unmount.
+  useEffect(() => () => {
+    if (toastTimer.current !== null) window.clearTimeout(toastTimer.current);
+  }, []);
+
+  const toHeldSlots = (itemIds: string[]): (string | null)[] => [
+    itemIds[0] ?? null,
+    itemIds[1] ?? null,
+    itemIds[2] ?? null,
+  ];
+
+  // Emblems only — never touches held items.
+  const applyEmblemsToLoadout = useCallback((emblems: EmblemPick[]) => {
+    if (!emblems.length) return;
+    dispatch({ type: "applyBuild", level: optimizeLevel, emblems });
+    setApplied((prev) => ({ ...prev, emblems: true }));
+    showToast(`Applied ${emblems.length} emblem${emblems.length !== 1 ? "s" : ""} to your loadout.`);
+  }, [dispatch, optimizeLevel, showToast]);
+
+  // Held items only — never touches emblems.
+  const applyHeldItemsToLoadout = useCallback((itemIds: string[]) => {
+    const present = itemIds.filter(Boolean);
+    if (!present.length) return;
+    dispatch({ type: "applyBuild", level: optimizeLevel, heldItemIds: toHeldSlots(itemIds) });
+    setApplied((prev) => ({ ...prev, items: true }));
+    showToast(`Applied ${present.length} held item${present.length !== 1 ? "s" : ""} to your loadout.`);
+  }, [dispatch, optimizeLevel, showToast]);
+
+  // Both at once — single dispatch so the level is synced exactly once.
+  const applyAllToLoadout = useCallback((emblems: EmblemPick[], itemIds: string[]) => {
+    const present = itemIds.filter(Boolean);
+    if (!emblems.length && !present.length) return;
+    dispatch({
+      type: "applyBuild",
+      level: optimizeLevel,
+      ...(emblems.length ? { emblems } : {}),
+      ...(present.length ? { heldItemIds: toHeldSlots(itemIds) } : {}),
+    });
+    setApplied({ emblems: emblems.length > 0, items: present.length > 0 });
+    showToast("Applied emblems + held items to your loadout.");
+  }, [dispatch, optimizeLevel, showToast]);
+
+  const handleApplyEmblems = useCallback(() => {
+    applyEmblemsToLoadout(resultPicks ?? []);
+  }, [applyEmblemsToLoadout, resultPicks]);
+
+  const handleApplyItems = useCallback((itemIds: string[]) => {
+    applyHeldItemsToLoadout(itemIds);
+  }, [applyHeldItemsToLoadout]);
+
+  const handleApplyAll = useCallback((itemIds: string[]) => {
+    applyAllToLoadout(resultPicks ?? [], itemIds);
+  }, [applyAllToLoadout, resultPicks]);
+
+  const handleOpenBuilder = useCallback(() => {
+    onNavigate?.("app");
+  }, [onNavigate]);
+
   // Sync Advanced controls from Basic defaults (called when switching Basic→Advanced
   // via the segmented control, the "switch to Advanced" buttons, or ↺ Reset).
   // Advanced defaults: full dataset pool + exact meta colors + protect defaults.
@@ -533,35 +678,8 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
     await run(pool, advancedSearchOptions, setBonuses, effort);
   }, [pool, advancedSearchOptions, effort, run]);
 
-  // Apply emblem picks to loadout
-  const handleApplyEmblems = useCallback(() => {
-    const result = searchState.result;
-    if (!result?.picks.length) return;
-    dispatch({
-      type: "applyBuild",
-      heldItemIds: loadout.heldItemIds,
-      battleItemId: loadout.battleItemId,
-      emblems: result.picks.map((s) => ({ emblemId: s.emblem.id, grade: s.grade })),
-    });
-  }, [searchState.result, loadout, dispatch]);
+  // Apply suggested held items to loadout — see handleApplyItems / applyHeldItemsToLoadout above.
 
-  // Apply suggested held items to loadout
-  const handleApplyItems = useCallback((itemIds: string[]) => {
-    const result = searchState.result;
-    if (!result) return;
-    dispatch({
-      type: "applyBuild",
-      heldItemIds: [itemIds[0] ?? null, itemIds[1] ?? null, itemIds[2] ?? null],
-      battleItemId: loadout.battleItemId,
-      emblems: result.picks.map((s) => ({ emblemId: s.emblem.id, grade: s.grade })),
-    });
-  }, [searchState.result, loadout, dispatch]);
-
-  // ---- Result picks ----
-  const resultPicks = useMemo(
-    () => searchState.result?.picks.map((s) => ({ emblemId: s.emblem.id, grade: s.grade })),
-    [searchState.result],
-  );
   const hasResult = (searchState.status === "done" || searchState.status === "cancelled")
     && !!resultPicks?.length;
 
@@ -893,8 +1011,12 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
               pokemon={pokemon}
               optimizeLevel={optimizeLevel}
               pokemonAwareScoring
+              applied={applied}
+              canOpenBuilder={!!onNavigate}
               onApplyEmblems={handleApplyEmblems}
               onApplyItems={handleApplyItems}
+              onApplyAll={handleApplyAll}
+              onOpenBuilder={handleOpenBuilder}
             />
           )}
 
@@ -1490,8 +1612,12 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
               pokemon={pokemon}
               optimizeLevel={optimizeLevel}
               pokemonAwareScoring={pokemonAwareScoring}
+              applied={applied}
+              canOpenBuilder={!!onNavigate}
               onApplyEmblems={handleApplyEmblems}
               onApplyItems={handleApplyItems}
+              onApplyAll={handleApplyAll}
+              onOpenBuilder={handleOpenBuilder}
             />
           )}
 
@@ -1506,6 +1632,29 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
       {/* Progress overlay (shared) */}
       {searchState.status === "running" && searchState.progress && (
         <SearchProgressOverlay progress={searchState.progress} eta={searchState.eta} onCancel={cancel} />
+      )}
+
+      {/* Apply confirmation toast — inline feedback since the Builder isn't visible here */}
+      {toast && (
+        <div
+          role="status"
+          aria-live="polite"
+          className="pointer-events-none fixed inset-x-0 bottom-6 z-50 flex justify-center px-4"
+        >
+          <div className="pointer-events-auto flex items-center gap-3 rounded-xl border border-pos/40 bg-surface px-4 py-2.5 text-sm font-medium text-ink shadow-lg">
+            <span className="text-pos">✓</span>
+            <span>{toast}</span>
+            {onNavigate && (
+              <button
+                type="button"
+                onClick={handleOpenBuilder}
+                className="ml-1 rounded-lg border border-line px-2 py-1 text-xs font-semibold text-accent-ink hover:bg-white/10"
+              >
+                View in Builder →
+              </button>
+            )}
+          </div>
+        </div>
       )}
     </div>
   );

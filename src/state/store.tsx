@@ -28,7 +28,7 @@ import {
   saveHeldItemGradeMemory,
 } from "./heldItemGrades";
 
-type Action =
+export type Action =
   | { type: "setPokemon"; pokemonId: string }
   | { type: "setLevel"; level: number }
   | { type: "setHeldItem"; slot: number; id: string | null }
@@ -38,11 +38,14 @@ type Action =
   | { type: "setEmblemGrade"; index: number; grade: EmblemGrade }
   | { type: "toggleBoost"; id: string }
   | { type: "setMove"; slot: "move1" | "move2"; moveId: string }
-  | { type: "applyBuild"; heldItemIds: (string | null)[]; battleItemId: string | null; emblems: EmblemPick[]; move1Id?: string | null; move2Id?: string | null }
+  // applyBuild is a partial merge: only the fields that are provided overwrite
+  // the loadout. This lets the optimizer apply emblems-only or held-items-only
+  // without clobbering the other, and makes repeated applies composable.
+  | { type: "applyBuild"; heldItemIds?: (string | null)[]; battleItemId?: string | null; emblems?: EmblemPick[]; level?: number; move1Id?: string | null; move2Id?: string | null }
   | { type: "load"; loadout: Loadout }
   | { type: "reset" };
 
-function reducer(state: Loadout, action: Action): Loadout {
+export function reducer(state: Loadout, action: Action): Loadout {
   switch (action.type) {
     case "setPokemon":
       // Switching Pokémon invalidates move-based active boosts and move picks
@@ -78,11 +81,16 @@ function reducer(state: Loadout, action: Action): Loadout {
     case "applyBuild":
       return normalizeLoadout({
         ...state,
-        heldItemIds: [action.heldItemIds[0] ?? null, action.heldItemIds[1] ?? null, action.heldItemIds[2] ?? null],
-        battleItemId: action.battleItemId,
+        level: action.level !== undefined
+          ? Math.max(1, Math.min(15, action.level))
+          : state.level,
+        heldItemIds: action.heldItemIds !== undefined
+          ? [action.heldItemIds[0] ?? null, action.heldItemIds[1] ?? null, action.heldItemIds[2] ?? null]
+          : state.heldItemIds,
+        battleItemId: action.battleItemId !== undefined ? action.battleItemId : state.battleItemId,
         move1Id: action.move1Id !== undefined ? action.move1Id : state.move1Id,
         move2Id: action.move2Id !== undefined ? action.move2Id : state.move2Id,
-        emblems: action.emblems.slice(0, MAX_EMBLEMS),
+        emblems: action.emblems !== undefined ? action.emblems.slice(0, MAX_EMBLEMS) : state.emblems,
       });
     case "load":
       return normalizeLoadout(action.loadout);
