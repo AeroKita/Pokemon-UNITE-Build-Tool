@@ -151,7 +151,7 @@ Branding constants: `src/ui/brand.ts`, `docs/08-branding.md`. Historical token r
 
 ### Web distribution & build
 
-FoxForge GG ships as a **hosted PWA only** — no native desktop shell. The same Vite build serves local dev, installable PWA (`base: "./"`), and GitHub Pages (`VITE_BASE=/FoxForge-GG/` via `npm run build:pages`). CI deploys via [`.github/workflows/pages.yml`](.github/workflows/pages.yml) on push to `main`; game-data refresh runs weekly (and on demand) via [`.github/workflows/data.yml`](.github/workflows/data.yml), which validates the regenerated bundle in-job, publishes to `public/data/`, and opens a PR for review — it never commits directly to `main`.
+FoxForge GG ships as a **hosted PWA only** — no native desktop shell. The same Vite build serves local dev, installable PWA (`base: "./"`), and GitHub Pages (`VITE_BASE=/FoxForge-GG/` via `npm run build:pages`). CI deploys via [`.github/workflows/pages.yml`](.github/workflows/pages.yml) on push to `main`; game-data refresh runs daily at 09:00 UTC (and on demand) via [`.github/workflows/data.yml`](.github/workflows/data.yml): scrape/normalize, mirror new art (`fetch_art.py`), validate (`verifyPatch.ts`, `npm test`, `validate:art`), publish to `public/data/`, and open or update a PR on `data/auto-refresh` with a semantic changelog from `tools/community/diff_bundle.py` (new entities flagged for curation). When that PR already exists, a follow-up `@AeroKita` comment re-notifies on each update — it never commits directly to `main`.
 
 Two independent update channels: **app code** (PWA service worker picks up a new deploy on reload) and **game data** (`src/data/dataSource.ts` fetches `data/manifest.json` from Pages, caches to localStorage, and `gameData.ts` applies it on the next load via `activeRaw()`; see `docs/07-distribution.md`). `vite.config.ts` encodes Pages-specific service-worker self-destruct behavior to avoid stale-cache blank screens—distribution concerns live in config, not business logic.
 
@@ -193,6 +193,8 @@ Tests run in **Vitest** with `environment: "node"`, matching `src/**/*.test.ts` 
 | `npm test` | Engine, bundle, dataSource, attack-speed, share, and state unit tests |
 | `npm run validate` | Known-values gate from `docs/03-Calculation-Engine.md` |
 | `npx tsx src/data/verifyPatch.ts` | End-to-end validation of the live UNITE-DB bundle |
+| `npm run validate:art` | Validates mirrored images under `public/assets/` are real files (not corrupt/HTML) |
+| `python3 -m unittest tools/community/test_diff_bundle.py` | Semantic bundle-diff changelog unit tests (`diff_bundle.py`) |
 | `npm run typecheck` | `tsc --noEmit` |
 
 Game data refresh (not part of routine CI for app logic):
@@ -202,7 +204,7 @@ cd tools/community && source ../extract/.venv/bin/activate
 python3 fetch.py && python3 scrape_serebii.py && python3 normalize.py && python3 fetch_art.py && python3 normalize_as_boosts.py
 ```
 
-`scrape_serebii.py` fetches Serebii move text into `move_descriptions.json` (run after `fetch.py`, before `normalize.py`). `normalize.py` writes `src/data/patch-current.json`; the Refresh game data workflow copies it to `public/data/patch-<version>.json` and updates `manifest.json` (or sync manually when running locally). Edit `curated_builds.json` (`_emblemNameRemap`, per-Pokémon `builds`/`creativeBuilds`/`recommendedTitles`) before re-running — never hand-edit curated labels in the bundle. Bump the patch id via `PATCH_VERSION=… python3 normalize.py` or the workflow's optional `patch_version` input.
+`scrape_serebii.py` fetches Serebii move text into `move_descriptions.json` (run after `fetch.py`, before `normalize.py`). `normalize.py` writes `src/data/patch-current.json`; the Refresh game data workflow copies it to `public/data/patch-<version>.json`, updates `manifest.json`, mirrors art, and posts a field-level PR changelog via `diff_bundle.py` (or sync manually when running locally). Edit `curated_builds.json` (`_emblemNameRemap`, per-Pokémon `builds`/`creativeBuilds`/`recommendedTitles`) before re-running — never hand-edit curated labels in the bundle. Bump the patch id via `PATCH_VERSION=… python3 normalize.py` or the workflow's optional `patch_version` input.
 
 Curated-build-only edits (no UNITE-DB re-scrape):
 
