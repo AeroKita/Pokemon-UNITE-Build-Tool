@@ -207,10 +207,13 @@ describe("buildBasicPool", () => {
   it("BASIC_POOL_DEFAULTS use owned inventory by default", () => {
     expect(BASIC_POOL_DEFAULTS.useOwned).toBe(true);
     expect(BASIC_POOL_DEFAULTS.mixedGrades).toBe(true);
+    expect(BASIC_POOL_DEFAULTS.allowedGrades.has("bronze")).toBe(true);
+    expect(BASIC_POOL_DEFAULTS.allowedGrades.has("silver")).toBe(true);
     expect(BASIC_POOL_DEFAULTS.allowedGrades.has("gold")).toBe(true);
+    expect(BASIC_POOL_DEFAULTS.allowedGrades.size).toBe(3);
   });
 
-  it("owned mode includes only owned grade keys matching allowed grades", () => {
+  it("owned mode includes all owned grade keys regardless of allowedGrades", () => {
     const owned = new Set(["owneda:gold", "ownedb:silver"]);
     const pool = buildBasicPool(emblems, owned, {
       useOwned: true,
@@ -218,9 +221,10 @@ describe("buildBasicPool", () => {
       allowedGrades: goldOnly,
     });
 
-    expect(pool).toHaveLength(1);
-    expect(pool[0].id).toBe("owneda");
-    expect(pool[0].grade).toBe("gold");
+    expect(pool).toHaveLength(2);
+    for (const c of pool) {
+      expect(owned.has(`${c.id}:${c.grade}`)).toBe(true);
+    }
   });
 
   it("owned mode with all grades includes every owned variant", () => {
@@ -248,7 +252,7 @@ describe("buildBasicPool", () => {
     ).toHaveLength(0);
   });
 
-  it("mixedGrades=false → best owned grade among allowed grades", () => {
+  it("mixedGrades=false → best owned grade only", () => {
     const owned = new Set(["owneda:bronze", "owneda:gold"]);
     const mixed = buildBasicPool(emblems, owned, {
       useOwned: true,
@@ -283,7 +287,7 @@ describe("buildBasicPool", () => {
     expect(fullPool.length).toBe(3);
   });
 
-  it("differs from generic buildPool owned path (no grade filter there)", () => {
+  it("owned mode matches generic buildPool (no grade filter on owned)", () => {
     const owned = new Set(["owneda:gold", "ownedb:silver"]);
     const basic = buildBasicPool(emblems, owned, {
       useOwned: true,
@@ -296,8 +300,11 @@ describe("buildBasicPool", () => {
       owned,
     );
 
-    expect(basic).toHaveLength(1);
+    expect(basic).toHaveLength(2);
     expect(advancedOwned).toHaveLength(2);
+    expect(basic.map((c) => `${c.id}:${c.grade}`).sort()).toEqual(
+      advancedOwned.map((c) => `${c.id}:${c.grade}`).sort(),
+    );
   });
 });
 

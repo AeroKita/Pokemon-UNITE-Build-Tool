@@ -12,20 +12,18 @@ export { distinctPokemonCount };
  * Build the search pool according to the configuration.
  * - useOwned=true: only owned emblems; mixedGrades controls whether all owned
  *   grade variants are included (true) or only the best-owned grade (false).
- *   Pass `filterOwnedGrades: true` (Basic mode) to also restrict by allowedGrades.
+ *   allowedGrades is ignored for owned pools.
  * - useOwned=false: all emblems at the specified allowedGrades.
  */
 export function buildPool(
   emblems: Emblem[],
   config: PoolConfig,
   ownedKeys: Set<string>,
-  opts: { filterOwnedGrades?: boolean } = {},
 ): EmblemCandidate[] {
   if (config.useOwned) {
     return buildCandidatePool(emblems, {
       ownedKeys,
       mixedGrades: config.mixedGrades ?? true,
-      ...(opts.filterOwnedGrades ? { grades: [...config.allowedGrades] } : {}),
     });
   }
   return buildCandidatePool(emblems, { grades: [...config.allowedGrades] });

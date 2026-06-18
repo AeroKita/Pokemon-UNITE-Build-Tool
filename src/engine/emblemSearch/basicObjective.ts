@@ -13,25 +13,30 @@ import { buildPool } from "./pool";
 import type { EmblemCandidate, PokemonScoringContext, PoolConfig, SearchOptions, StatFloors, StatWeights } from "./types";
 import { deriveDefaultProtectedStats } from "./protectDefaults";
 
-/** Default pool settings when Basic mode loads (owned inventory, gold-only grades). */
+/** Default grade filter: bronze, silver, and gold all enabled. */
+export const DEFAULT_ALLOWED_GRADES: ReadonlySet<EmblemGrade> = new Set<EmblemGrade>([
+  "bronze",
+  "silver",
+  "gold",
+]);
+
+/** Default pool settings when Basic mode loads (owned inventory, all grades). */
 export const BASIC_POOL_DEFAULTS: Readonly<PoolConfig> = {
   useOwned: true,
   mixedGrades: true,
-  allowedGrades: new Set<EmblemGrade>(["gold"]),
+  allowedGrades: new Set(DEFAULT_ALLOWED_GRADES),
 };
 
 /**
  * Build the emblem search pool for Basic mode.
- * When `useOwned` is true, owned keys are filtered by `allowedGrades` as well.
+ * Same semantics as Advanced {@link buildPool}: owned inventory uses all owned
+ * grades (subject to mixedGrades); allowedGrades applies only when useOwned=false.
  */
 export function buildBasicPool(
   emblems: Emblem[],
   ownedKeys: Set<string>,
   config: Pick<PoolConfig, "useOwned" | "mixedGrades" | "allowedGrades">,
 ): EmblemCandidate[] {
-  if (config.useOwned) {
-    return buildPool(emblems, config, ownedKeys, { filterOwnedGrades: true });
-  }
   return buildPool(emblems, config, ownedKeys);
 }
 

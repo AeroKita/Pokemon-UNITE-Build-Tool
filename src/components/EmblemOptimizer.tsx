@@ -47,6 +47,7 @@ import {
   resolveOwnedHeldItems,
   topPriorityLabels,
   basicObjectiveDescription,
+  DEFAULT_ALLOWED_GRADES,
 } from "../engine/emblemSearch/basicObjective";
 import { colorTargetsFor } from "../engine/recommend";
 import { deriveDefaultProtectedStats } from "../engine/emblemSearch/protectDefaults";
@@ -301,7 +302,9 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
   const [basicUseOwned, setBasicUseOwned] = useState(true);
   const [useOwned, setUseOwned] = useState(false);
   const [mixedGrades, setMixedGrades] = useState(true);
-  const [allowedGrades, setAllowedGrades] = useState<Set<EmblemGrade>>(new Set(["gold"]));
+  const [allowedGrades, setAllowedGrades] = useState<Set<EmblemGrade>>(
+    () => new Set(DEFAULT_ALLOWED_GRADES),
+  );
   const [mode, setMode] = useState<SearchMode>("maximize");
   const [effort, setEffort] = useState<Effort>("normal");
   const [colorBonuses, setColorBonuses] = useState(true);
@@ -457,7 +460,7 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
   // Advanced defaults: full dataset pool + exact meta colors + protect defaults.
   const syncAdvancedFromBasic = useCallback(() => {
     const level = loadout.level ?? 15;
-    const grades = new Set<EmblemGrade>(["gold"]);
+    const grades = new Set(DEFAULT_ALLOWED_GRADES);
     setUseOwned(false);          // Advanced defaults to the full 258-emblem dataset
     setMixedGrades(true);
     setAllowedGrades(grades);
@@ -725,7 +728,7 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
           {pokemon && basicNotEnoughEmblems && basicUseOwned && (
             <div className="rounded-2xl border border-amber-500/30 bg-amber-500/10 px-4 py-3 text-sm">
               <p className="font-medium text-amber-700 dark:text-amber-300">
-                You own only {basicPool.length} emblem{basicPool.length !== 1 ? "s" : ""} matching your grade filters — need {SLOTS} for a full build.
+                You own only {basicPool.length} emblem{basicPool.length !== 1 ? "s" : ""} — need {SLOTS} for a full build.
               </p>
               <p className="mt-1 text-xs text-muted">
                 Mark more emblems as owned on the{" "}
@@ -735,7 +738,7 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
                 >
                   ★ Emblems
                 </button>{" "}
-                page, allow more grades above, or{" "}
+                page, enable mixed grades above, or{" "}
                 <button
                   onClick={() => setBasicUseOwned(false)}
                   className="font-medium text-accent-ink underline"
@@ -823,24 +826,26 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
                   <span>Full dataset (all 258)</span>
                 </label>
               </div>
-              <div className="flex flex-wrap gap-3 text-sm">
-                <span className="text-muted">Grades:</span>
-                {(["gold", "silver", "bronze"] as EmblemGrade[]).map((g) => (
-                  <label key={g} className="flex cursor-pointer items-center gap-1.5 capitalize">
-                    <input
-                      type="checkbox"
-                      checked={allowedGrades.has(g)}
-                      onChange={(e) => {
-                        const next = new Set(allowedGrades);
-                        e.target.checked ? next.add(g) : next.delete(g);
-                        if (next.size > 0) setAllowedGrades(next);
-                      }}
-                      className="accent-accent"
-                    />
-                    {g}
-                  </label>
-                ))}
-              </div>
+              {!basicUseOwned && (
+                <div className="flex flex-wrap gap-3 text-sm">
+                  <span className="text-muted">Grades:</span>
+                  {(["gold", "silver", "bronze"] as EmblemGrade[]).map((g) => (
+                    <label key={g} className="flex cursor-pointer items-center gap-1.5 capitalize">
+                      <input
+                        type="checkbox"
+                        checked={allowedGrades.has(g)}
+                        onChange={(e) => {
+                          const next = new Set(allowedGrades);
+                          e.target.checked ? next.add(g) : next.delete(g);
+                          if (next.size > 0) setAllowedGrades(next);
+                        }}
+                        className="accent-accent"
+                      />
+                      {g}
+                    </label>
+                  ))}
+                </div>
+              )}
               {basicUseOwned && (
                 <label className="flex cursor-pointer items-center gap-2 text-sm">
                   <input
@@ -904,7 +909,7 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
                   >
                     marking more emblems
                   </button>{" "}
-                  as owned, allowing more grades, or{" "}
+                  as owned, enabling mixed grades, or{" "}
                   <button
                     onClick={() => setBasicUseOwned(false)}
                     className="font-medium text-accent-ink underline"

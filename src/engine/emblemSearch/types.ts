@@ -131,7 +131,7 @@ export interface PoolConfig {
    * When useOwned=false: ignored — allowedGrades controls which grades appear.
    */
   mixedGrades: boolean;
-  /** When useOwned=false, which grades to include. Defaults to gold-only. */
+  /** When useOwned=false, which grades to include. Ignored when useOwned=true. */
   allowedGrades: Set<EmblemGrade>;
 }
 
