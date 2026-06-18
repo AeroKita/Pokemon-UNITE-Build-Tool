@@ -5,8 +5,8 @@ import { ROLE_COLOR, ROLE_LABEL } from "./ui/theme";
 import { asset } from "./ui/asset";
 import { AppBar } from "./components/shell/AppBar";
 import { TabBar, TAB_ICONS, type Tab } from "./components/shell/TabBar";
-import { BottomSheet } from "./components/shell/BottomSheet";
 import { BuildScreen } from "./components/screens/BuildScreen";
+import { PokemonPickerSheet } from "./components/PokemonPicker";
 import { CompareScreen } from "./components/screens/CompareScreen";
 import { EmblemsScreen } from "./components/screens/EmblemsScreen";
 import { ItemsScreen } from "./components/screens/ItemsScreen";
@@ -44,15 +44,6 @@ function usePersistentTab(): [Tab, (t: Tab) => void] {
   }, []);
 
   return [tab, setTab];
-}
-
-/** Temporary picker shell — Phase 3 replaces with full PokémonPickerSheet. */
-function PokePickerPlaceholder({ onClose }: { onClose: () => void }) {
-  return (
-    <BottomSheet title="Choose Pokémon" onClose={onClose}>
-      <p className="text-sm text-muted">Pokémon picker — Phase 3</p>
-    </BottomSheet>
-  );
 }
 
 function Workspace() {
@@ -141,7 +132,7 @@ function Workspace() {
       </main>
       <TabBar active={tab} onChange={setTab} tabs={tabs} />
       <SettingsMenu open={settingsOpen} onClose={() => setSettingsOpen(false)} />
-      {pokePickerOpen && <PokePickerPlaceholder onClose={() => setPokePickerOpen(false)} />}
+      {pokePickerOpen && <PokemonPickerSheet onClose={() => setPokePickerOpen(false)} />}
     </div>
   );
 }

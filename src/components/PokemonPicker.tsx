@@ -2,13 +2,18 @@ import { useMemo, useState } from "react";
 import { useStore } from "../state/store";
 import { pokemonList } from "../data/gameData";
 import { asset } from "../ui/asset";
-import { CollapsibleCard } from "./CollapsibleCard";
+import { BottomSheet } from "./shell/BottomSheet";
 import type { Role } from "../types";
 
 const ROLES: (Role | "All")[] = ["All", "Attacker", "AllRounder", "Speedster", "Defender", "Supporter"];
 const ROLE_LABEL: Record<string, string> = { AllRounder: "All-Rounder" };
 
-export function PokemonPicker() {
+interface PokemonPickerSheetProps {
+  onClose: () => void;
+}
+
+/** Pokémon search + role filter in a bottom sheet; replaces the inline Build card. */
+export function PokemonPickerSheet({ onClose }: PokemonPickerSheetProps) {
   const { loadout, dispatch } = useStore();
   const [query, setQuery] = useState("");
   const [role, setRole] = useState<Role | "All">("All");
@@ -24,47 +29,84 @@ export function PokemonPicker() {
   );
 
   return (
-    <CollapsibleCard title="Pokémon" persistKey="picker">
-      <div className="mb-3 flex flex-wrap items-center gap-2">
+    <BottomSheet title="Choose Pokémon" onClose={onClose}>
+      <div className="sticky top-0 z-10 -mx-4 border-b border-line bg-surface px-4 pb-3 pt-1">
         <input
+          autoFocus
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Search Pokémon…"
-          className="flex-1 rounded-lg border border-line px-3 py-1.5 text-sm outline-none focus:border-accent"
+          className="mb-3 min-h-11 w-full rounded-lg border border-line px-3 text-sm outline-none focus:border-accent"
         />
-        <select
-          value={role}
-          onChange={(e) => setRole(e.target.value as Role | "All")}
-          className="rounded-lg border border-line bg-surface px-2 py-1.5 text-sm text-ink"
-        >
+        <div className="-mx-1 flex gap-1.5 overflow-x-auto px-1 pb-1">
           {ROLES.map((r) => (
-            <option key={r} value={r} className="bg-surface text-ink">{ROLE_LABEL[r] ?? r}</option>
+            <FilterChip
+              key={r}
+              label={ROLE_LABEL[r] ?? r}
+              active={role === r}
+              onClick={() => setRole(r)}
+            />
           ))}
-        </select>
+        </div>
       </div>
-      <div className="grid max-h-72 grid-cols-6 gap-1.5 overflow-y-auto sm:grid-cols-8">
+      <div className="mt-3 grid grid-cols-4 gap-2">
         {filtered.map((p) => {
           const selected = p.id === loadout.pokemonId;
           return (
             <button
               key={p.id}
-              onClick={() => dispatch({ type: "setPokemon", pokemonId: p.id })}
+              type="button"
+              onClick={() => {
+                dispatch({ type: "setPokemon", pokemonId: p.id });
+                onClose();
+              }}
               title={p.displayName}
               aria-pressed={selected}
-              className={`group relative aspect-square rounded-lg border-2 p-0.5 transition
+              className={`group relative aspect-square min-h-16 rounded-lg border-2 p-1 transition
                 ${selected
                   ? "border-transparent bg-mon-sel-bg ring-2 ring-mon-sel-ring"
                   : "border-transparent bg-mon-bg hover:border-mon-hover"}`}
             >
-              <img src={asset(p.iconAsset)} alt={p.displayName} loading="lazy" className="h-full w-full object-contain" />
+              <img
+                src={asset(p.iconAsset)}
+                alt={p.displayName}
+                loading="lazy"
+                className="h-full w-full object-contain"
+              />
               {selected && (
-                <span className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-mon-sel-ring text-[9px] font-bold text-white ring-2 ring-surface">✓</span>
+                <span className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-mon-sel-ring text-[9px] font-bold text-white ring-2 ring-surface">
+                  ✓
+                </span>
               )}
             </button>
           );
         })}
       </div>
-      <p className="mt-2 text-xs text-faint">{filtered.length} Pokémon</p>
-    </CollapsibleCard>
+      <p className="mt-3 text-xs text-faint">{filtered.length} Pokémon</p>
+    </BottomSheet>
+  );
+}
+
+function FilterChip({
+  label,
+  active,
+  onClick,
+}: {
+  label: string;
+  active: boolean;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className={`shrink-0 rounded-full border px-3 py-2 text-xs font-medium capitalize ${
+        active
+          ? "border-transparent bg-accent text-white"
+          : "border-transparent bg-raise text-muted hover:bg-raise"
+      }`}
+    >
+      {label}
+    </button>
   );
 }

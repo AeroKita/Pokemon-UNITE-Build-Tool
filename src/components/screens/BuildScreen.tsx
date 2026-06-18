@@ -1,19 +1,29 @@
+import { useStore } from "../../state/store";
+import { BuildSummaryBar } from "../BuildSummaryBar";
+import { RecommendPanel } from "../RecommendPanel";
+import { LoadoutEditor } from "../LoadoutEditor";
+import { MovesCard } from "../MovesCard";
+import { StatPanel } from "../StatPanel";
+import { LoadoutBar } from "../LoadoutBar";
+import { LevelGraph } from "../LevelGraph";
+
 interface BuildScreenProps {
   onOpenPokePicker: () => void;
 }
 
-/** Build tab content — filled in Phase 3 (hero, panels, pickers). */
+/** Build tab: glance hero, recommendations, editor, stats, and persistence. */
 export function BuildScreen({ onOpenPokePicker }: BuildScreenProps) {
+  const { expert } = useStore();
+
   return (
-    <div className="flex flex-col gap-3 rounded-2xl border border-line bg-surface p-4 text-sm text-muted">
-      <p>Build screen — Phase 3 adds the glance hero and editor panels.</p>
-      <button
-        type="button"
-        onClick={onOpenPokePicker}
-        className="min-h-11 self-start rounded-xl bg-accent-weak px-4 py-2 font-medium text-accent-ink"
-      >
-        Select a Pokémon
-      </button>
+    <div className="flex flex-col gap-3">
+      <BuildSummaryBar onOpenPokePicker={onOpenPokePicker} />
+      <RecommendPanel />
+      <LoadoutEditor />
+      <MovesCard />
+      <StatPanel />
+      <LoadoutBar />
+      {expert && <LevelGraph />}
     </div>
   );
 }
