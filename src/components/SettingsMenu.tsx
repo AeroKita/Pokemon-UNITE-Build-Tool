@@ -64,6 +64,7 @@ export function SettingsMenu({ open, onClose }: { open: boolean; onClose: () => 
             <span className="text-sm font-medium">Game data</span>
             <span className="font-mono text-xs text-faint">patch {activePatch}</span>
           </div>
+          <p className="text-xs text-faint">Data: UNITE-DB · Serebii — fan project, not affiliated with Nintendo/TPC.</p>
           <button type="button" onClick={checkData} className="mt-1 min-h-11 rounded-lg border border-line px-3 py-2.5 text-sm font-medium hover:bg-raise">
             Check for data update
           </button>

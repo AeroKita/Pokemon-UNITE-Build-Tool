@@ -9,7 +9,7 @@ import { computeEmblemLoadout } from "../engine/emblems";
 import type { CalcContext } from "../types";
 
 const here = dirname(fileURLToPath(import.meta.url));
-const raw = JSON.parse(readFileSync(join(here, "patch-1.23.1.1.json"), "utf8"));
+const raw = JSON.parse(readFileSync(join(here, "patch-current.json"), "utf8"));
 
 let pass = 0;
 let fail = 0;

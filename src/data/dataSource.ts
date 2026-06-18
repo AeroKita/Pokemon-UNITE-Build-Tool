@@ -33,6 +33,21 @@ function readCache(): CacheEntry | null {
 export function loadCachedRaw(): unknown | null {
   return readCache()?.raw ?? null;
 }
+
+/**
+ * The raw bundle the app should load: the cached remote copy when it is
+ * strictly newer than the build-time baseline, otherwise the baseline.
+ * `version` and `lastUpdated` are ISO dates, so string compare = date compare.
+ * Clears a non-newer cache so a freshly shipped app build always wins.
+ */
+export function activeRaw(baseline: { lastUpdated?: string }): unknown {
+  const cache = readCache();
+  if (cache && typeof cache.version === "string" && cache.version > (baseline.lastUpdated ?? "")) {
+    return cache.raw;
+  }
+  if (cache) clearDataCache();
+  return baseline;
+}
 export function cachedPatchVersion(): string | null {
   return readCache()?.patchVersion ?? null;
 }

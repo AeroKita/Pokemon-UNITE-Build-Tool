@@ -1,17 +1,21 @@
 name: Refresh game data
 
 # Re-scrapes UNITE-DB and publishes a fresh data bundle + manifest to
-# public/data. The remote-data channel was served via GitHub Pages, which is
-# currently disabled, so this runs on-demand only (Actions tab → Run workflow).
-# Re-enable the weekly `schedule` below once a hosting target is configured.
+# public/data. The remote-data channel is served by pages.yml on merge to main;
+# this workflow opens a PR for review (never pushes directly to main).
 
 on:
-  # schedule:
-  #   - cron: "0 9 * * 1" # weekly, Monday 09:00 UTC
+  schedule:
+    - cron: "0 9 * * *" # daily, 09:00 UTC
   workflow_dispatch:
+    inputs:
+      patch_version:
+        description: "New patch version (leave blank to refresh the current patch)"
+        required: false
 
 permissions:
   contents: write
+  pull-requests: write
 
 jobs:
   refresh:
@@ -22,18 +26,29 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install requests openpyxl
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+          cache: npm
+      - run: npm ci
       - name: Scrape + normalize
         working-directory: tools/community
+        env:
+          PATCH_VERSION: ${{ github.event.inputs.patch_version }}
         run: |
           python3 fetch.py
           python3 normalize.py
           python3 normalize_as_boosts.py
+      - name: Fetch new art
+        working-directory: tools/community
+        run: python3 fetch_art.py
       - name: Publish bundle + manifest to public/data
         run: |
           mkdir -p public/data
-          PATCH=$(python3 -c "import json;print(json.load(open('src/data/patch-1.23.1.1.json'))['patchVersion'])")
-          VER=$(python3 -c "import json;print(json.load(open('src/data/patch-1.23.1.1.json'))['lastUpdated'])")
-          cp "src/data/patch-1.23.1.1.json" "public/data/patch-${PATCH}.json"
+          rm -f public/data/patch-*.json
+          PATCH=$(python3 -c "import json;print(json.load(open('src/data/patch-current.json'))['patchVersion'])")
+          VER=$(python3 -c "import json;print(json.load(open('src/data/patch-current.json'))['lastUpdated'])")
+          cp src/data/patch-current.json "public/data/patch-${PATCH}.json"
           python3 - "$PATCH" "$VER" <<'PY'
           import json, sys
           patch, ver = sys.argv[1], sys.argv[2]
@@ -41,10 +56,40 @@ jobs:
           json.dump({"version": ver, "patchVersion": patch, "url": f"{base}/patch-{patch}.json"},
                     open("public/data/manifest.json", "w"), indent=2)
           PY
-      - name: Commit if changed
+      - name: Validate regenerated bundle
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add -A
-          git diff --cached --quiet || git commit -m "chore(data): refresh UNITE data $(date -u +%F)"
-          git push
+          npx tsx src/data/verifyPatch.ts
+          npm test
+          npm run validate:art
+      - name: Build change summary
+        id: summary
+        run: |
+          git show origin/main:src/data/patch-current.json > /tmp/old.json 2>/dev/null || rm -f /tmp/old.json
+          python3 tools/community/diff_bundle.py /tmp/old.json src/data/patch-current.json > /tmp/changelog.md
+          {
+            echo "text<<EOF"
+            cat /tmp/changelog.md
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
+      - name: Open data-refresh PR
+        id: cpr
+        uses: peter-evans/create-pull-request@v6
+        with:
+          branch: data/auto-refresh
+          commit-message: "chore(data): refresh UNITE data"
+          title: "chore(data): refresh UNITE data"
+          reviewers: AeroKita
+          body: |
+            Automated UNITE-DB data refresh.
+            ${{ steps.summary.outputs.text }}
+      - name: Re-notify on updated PR
+        if: steps.cpr.outputs.pull-request-operation == 'updated'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          {
+            echo '@AeroKita — the open data-refresh PR changed again:'
+            echo ''
+            cat /tmp/changelog.md
+          } > /tmp/comment.md
+          gh pr comment ${{ steps.cpr.outputs.pull-request-number }} --body-file /tmp/comment.md

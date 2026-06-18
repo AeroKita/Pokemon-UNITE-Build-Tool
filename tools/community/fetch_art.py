@@ -23,7 +23,7 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 PROJECT = HERE.parent.parent
-BUNDLE = PROJECT / "src" / "data" / "patch-1.23.1.1.json"
+BUNDLE = PROJECT / "src" / "data" / "patch-current.json"
 PUBLIC = PROJECT / "public" / "assets"
 CDN = "https://d275t8dp8rxb42.cloudfront.net"
 GRADE_SUFFIX = ("A", "B", "C")  # gold, silver, bronze — matches emblemIcon.ts

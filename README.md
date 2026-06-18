@@ -34,6 +34,12 @@ The hosted app redeploys automatically: every push to `main` triggers
 GitHub Pages. There is no separate release step — bump `"version"` in `package.json`
 when you want the displayed version to change, then push.
 
+## Data & attribution
+
+Game stats are sourced from [UNITE-DB](https://unite-db.com); move descriptions from [Serebii](https://serebii.net). Pokémon UNITE and all related data © Nintendo / The Pokémon Company / TiMi Studio Group. This is a non-commercial fan project.
+
+Licensed under [AGPL-3.0-only](LICENSE).
+
 ## Documentation
 
 - [Project Brief](docs/01-project-brief.md) — what we're building and why
@@ -57,7 +63,7 @@ when you want the displayed version to change, then push.
 - [`src/engine/derive.ts`](src/engine/derive.ts) — Loadout → effective stats + attack speed (one path)
 
 **Data (versioned, update-able)**
-- [`src/data/patch-1.23.1.1.json`](src/data/patch-1.23.1.1.json) — full game bundle (94 Pokémon,
+- [`src/data/patch-current.json`](src/data/patch-current.json) — full game bundle (94 Pokémon,
   41 held items, 10 battle items, 258 emblems), community-sourced from UNITE-DB
 - [`src/data/attackSpeedBoosts.json`](src/data/attackSpeedBoosts.json) — AS boost catalog
   (10 global items + 61 per-Pokémon move buffs with level gating)

@@ -2,7 +2,7 @@ import { describe, it, expect } from "vitest";
 import { availableActiveBoosts } from "../effects";
 import asb from "../../data/attackSpeedBoosts.json";
 import { loadBundle } from "../../data/loadBundle";
-import raw from "../../data/patch-1.23.1.1.json";
+import raw from "../../data/patch-current.json";
 
 const bundle = loadBundle(raw);
 const find = (id: string) => bundle.pokemon.find((p) => p.id === id)!;
