@@ -13,7 +13,7 @@ Pokémon UNITE players ranging from casual newcomers to competitive optimizers w
 ### Use Cases
 
 - Select a Pokémon and assemble a loadout (up to 10 emblems, 3 held items, trainer/battle item) with live effective-stat feedback.
-- Tune each held item's grade (1–40) — on a dedicated Held Items page or inline in the Builder — and pick each Pokémon's two final (upgraded) moves; both feed the live stats. Unique Items (Mega Stones and Rusted Sword) have no grade stats or grade UI on either surface (`isUniqueHeldItem` in `gameData.ts`).
+- Tune each held item's grade (1–40) — tap-to-type via shared `GradeField` on the Held Items page and in the Builder (Build held-item slots also keep a grade slider); pick each Pokémon's two final (upgraded) moves; both feed the live stats. Unique Items (Mega Stones and Rusted Sword) have no grade stats or grade UI on either surface (`isUniqueHeldItem` in `gameData.ts`).
 - Visualize how a build scales from level 1–15, including attack-speed breakpoints and active combat boosts.
 - Browse curated community builds (UNITE-DB sourced), apply them in one click, or get emblem recommendations constrained by an owned-inventory model.
 - Save up to 20 loadouts locally, compare two builds side-by-side, and share builds via URL hash.
@@ -114,9 +114,9 @@ No router library — navigation is local React state.
 
 - **App bar** — fixed top bar (`AppBar` from `src/components/shell/`), gradient from `--color-appbar-*` tokens, `pt-safe`. On the Build tab: selected Pokémon cropped thumbnail (`iconAsset`, same crop as the picker grid), name, role badge, and attack type. Icon and name are separate tappable buttons — both open the Pokémon picker overlay (placeholder circle opens the picker when none is selected). On other tabs: static screen title ("Emblems", "Held Items", "Compare"). Single **Basic**/**Advanced** mode toggle (`ModeToggle` in `AppBar.tsx` — shows current mode, tap flips; color-coded via `--color-mode-*` tokens) and settings gear on all tabs.
 - **Tab bar** — fixed bottom navigation (`TabBar`): Build · Emblems · Items; Compare appears only in Advanced mode (4 tabs vs 3). Switching from Advanced to Basic while on Compare redirects to Build.
-- **Build screen** — `BuildScreen` composes `BuildSummaryBar` (sticky glance hero pinned under the app bar), `RecommendPanel`, `LoadoutEditor`, `MovesCard`, `StatPanel`, `LoadoutBar`, and `LevelGraph` (Advanced only). Pokémon selection is not inline; the hero empty state and app-bar icon or title tap open `PokemonPickerSheet`.
+- **Build screen** — `BuildScreen` composes `BuildSummaryBar` (sticky glance hero pinned under the app bar), `RecommendPanel`, `LoadoutEditor`, `MovesCard`, `StatPanel`, `LoadoutBar`, and `LevelGraph` (Advanced only). `LoadoutEditor` held-item slots use shared `GradeField` plus a grade slider (unique items skip both). Pokémon selection is not inline; the hero empty state and app-bar icon or title tap open `PokemonPickerSheet`.
 - **Emblems screen** — `EmblemsScreen` renders `InventoryManager` (per-grade ownership, search, horizontal color chip filters, responsive emblem grid).
-- **Items screen** — `ItemsScreen` renders `HeldItemsInventory` (global held-item grades, 3-column tile grid on phones, `HeldItemDetailModal` on icon tap).
+- **Items screen** — `ItemsScreen` renders `HeldItemsInventory` (global held-item grades via shared `GradeField`, 3-column tile grid on phones, `HeldItemDetailModal` on icon tap).
 - **Compare screen** — `CompareScreen` renders `CompareView` (Advanced only; build A/B selects stack on phones; stat table scrolls horizontally inside its wrapper).
 - **Layout** — single column, `max-w-2xl` centered, `gap-3` between sections. `<main>` padding clears the fixed app bar and tab bar (safe-area aware). Interactive controls target ≥44px hit areas (`min-h-11`); tappable labels use `text-sm` minimum — the Build glance hero (`BuildSummaryBar`) is the primary oversized readout.
 - **Overlays** — `BottomSheet` (`src/components/shell/BottomSheet.tsx`) is the shared responsive overlay (bottom sheet on phones, centered card on `sm+`). Callers: `SettingsMenu` (gear), `PokemonPickerSheet` (app-bar icon or title tap, or hero empty state; search does not auto-focus on open so the grid is browsable without the on-screen keyboard), and `PickerModal` (held/trainer/emblem pickers from `LoadoutEditor`; search does not auto-focus on open so the list is browsable without the on-screen keyboard). Picker callers pass `fillHeight` so the panel stays at fixed `88vh`/`80vh` while search filters results in place; `SettingsMenu` omits it and keeps content-fit sizing. `HeldItemDetailModal` keeps its existing centered-modal shell.
@@ -224,7 +224,9 @@ Semantic color and surface tokens are defined in `src/index.css` using Tailwind 
 
 Stat role colors (positive/negative, recommend/attack-speed/analytics tone cards) are intentional literals layered on top of semantic surfaces.
 
-Shared modal behavior (`Escape` + scroll lock): `src/ui/useModalDismiss.ts` (used inside `BottomSheet`). `BottomSheet` (`src/components/shell/BottomSheet.tsx`) is the shared responsive overlay primitive; callers are `SettingsMenu`, `PokemonPickerSheet`, and `PickerModal`. Pickers pass optional `fillHeight` for a constant panel height during live filtering; Settings stays content-fit.
+Shared modal behavior (`Escape` + scroll lock): `src/ui/useModalDismiss.ts` (used by `BottomSheet`, `HeldItemDetailModal`, and the touch long-press pinned popup in `Tooltip.tsx`). `BottomSheet` (`src/components/shell/BottomSheet.tsx`) is the shared responsive overlay primitive; callers are `SettingsMenu`, `PokemonPickerSheet`, and `PickerModal`. Pickers pass optional `fillHeight` for a constant panel height during live filtering; Settings stays content-fit.
+
+`Tooltip.tsx` wraps emblems, moves, trainer items, and held items: CSS hover tooltip on mouse; touch/pen long-press (~500 ms) opens the same content in a dismissible centered popup (backdrop tap, ✕, Escape). Movement cancels the press; the trailing tap is suppressed so long-press does not trigger underlying controls.
 
 Mobile layout conventions: column spacing `gap-3`; `CollapsibleCard` headers `px-4 py-3` with `min-h-11` tap row; buttons, chips, tab items, the app-bar mode toggle, picker tiles, sliders, and emblem grade dots use ≥44px hit areas. Section collapse uses `CollapsibleCard` (`src/components/CollapsibleCard.tsx`) — open state is per `persistKey`, not a global default.
 
@@ -240,8 +242,9 @@ Mobile layout conventions: column spacing `gap-3`; `CollapsibleCard` headers `px
 | Items tab | `src/components/screens/ItemsScreen.tsx` → `HeldItemsInventory` (`HeldItemDetailModal`) |
 | Compare tab (Advanced) | `src/components/screens/CompareScreen.tsx` → `CompareView` |
 | Pickers / settings | `PickerModal` (`BottomSheet fillHeight`; search does not auto-focus on open), `SettingsMenu` (content-fit `BottomSheet`) |
+| Grade input | `src/components/GradeField.tsx` — shared tap-to-type grade field (`HeldItemsInventory`, `LoadoutEditor` held-item slots) |
 | Item detail | `src/ui/heldItemDetail.tsx` (`HeldItemDetailModal`) |
-| Tooltips | `src/components/Tooltip.tsx`, `src/components/tips.tsx` |
+| Tooltips | `src/components/Tooltip.tsx` (hover + touch long-press popup), `src/components/tips.tsx` |
 | State | `src/state/store.tsx`, `src/state/loadout.ts`, `src/state/heldItemGrades.ts` |
 | Engine | `src/engine/derive.ts` |
 | Data | `src/data/gameData.ts`, `src/data/loadBundle.ts` |

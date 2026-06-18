@@ -1,6 +1,10 @@
-import { type ReactNode } from "react";
+import { type ReactNode, useRef, useState } from "react";
+import { useModalDismiss } from "../ui/useModalDismiss";
+
+const LONG_PRESS_MS = 500;
 
 // Lightweight CSS hover tooltip (no deps). Renders a styled popup on hover/focus.
+// Touch/pen long-press opens the same content in a dismissible modal popup.
 // Use inside containers that don't clip overflow (panels, not scroll lists).
 export function Tooltip({
   content,
@@ -14,8 +18,56 @@ export function Tooltip({
   className?: string;
 }) {
   const pos = side === "top" ? "bottom-full mb-1.5" : "top-full mt-1.5";
+  const [pinned, setPinned] = useState(false);
+  const timer = useRef<number | null>(null);
+  const start = useRef<{ x: number; y: number } | null>(null);
+  const firedRef = useRef(false);
+
+  useModalDismiss(() => setPinned(false), pinned);
+
+  const clearTimer = () => {
+    if (timer.current !== null) {
+      clearTimeout(timer.current);
+      timer.current = null;
+    }
+  };
+
+  const onPointerDown = (e: React.PointerEvent) => {
+    if (e.pointerType !== "touch" && e.pointerType !== "pen") return;
+    start.current = { x: e.clientX, y: e.clientY };
+    clearTimer();
+    timer.current = window.setTimeout(() => {
+      firedRef.current = true;
+      setPinned(true);
+    }, LONG_PRESS_MS);
+  };
+
+  const onPointerMove = (e: React.PointerEvent) => {
+    if (!start.current) return;
+    if (Math.hypot(e.clientX - start.current.x, e.clientY - start.current.y) > 10) clearTimer();
+  };
+
+  const cancel = () => {
+    clearTimer();
+    start.current = null;
+  };
+
   return (
-    <span className={`group/tt relative inline-flex ${className}`}>
+    <span
+      className={`group/tt relative inline-flex select-none [-webkit-touch-callout:none] ${className}`}
+      onPointerDown={onPointerDown}
+      onPointerMove={onPointerMove}
+      onPointerUp={cancel}
+      onPointerLeave={cancel}
+      onPointerCancel={cancel}
+      onClickCapture={(e) => {
+        if (firedRef.current) {
+          e.preventDefault();
+          e.stopPropagation();
+          firedRef.current = false;
+        }
+      }}
+    >
       {children}
       <span
         role="tooltip"
@@ -24,6 +76,31 @@ export function Tooltip({
       >
         {content}
       </span>
+
+      {pinned && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4"
+          onClick={() => setPinned(false)}
+        >
+          <div
+            className="max-h-[70vh] w-full max-w-sm overflow-y-auto rounded-2xl border border-line bg-surface p-4 shadow-xl"
+            onClick={(e) => e.stopPropagation()}
+            role="dialog"
+            aria-modal="true"
+          >
+            <div className="mb-2 flex justify-end">
+              <button
+                onClick={() => setPinned(false)}
+                aria-label="Close"
+                className="rounded-lg border border-line px-2 py-0.5 text-sm text-muted hover:bg-raise"
+              >
+                ✕
+              </button>
+            </div>
+            <div className="text-sm leading-snug text-ink">{content}</div>
+          </div>
+        </div>
+      )}
     </span>
   );
 }

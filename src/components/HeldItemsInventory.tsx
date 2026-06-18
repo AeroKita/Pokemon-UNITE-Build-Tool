@@ -1,35 +1,10 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { useStore } from "../state/store";
 import { heldItems, isUniqueHeldItem, ITEM_GRADE_MAX } from "../data/gameData";
-import { parseGradeInput } from "../state/heldItemGrades";
 import { asset } from "../ui/asset";
 import { HeldItemDetailModal } from "../ui/heldItemDetail";
+import { GradeField } from "./GradeField";
 import type { HeldItem } from "../types";
-
-function GradeField({ value, onCommit, label }:
-  { value: number; onCommit: (g: number) => void; label: string }) {
-  const [draft, setDraft] = useState(String(value));
-  const [invalid, setInvalid] = useState(false);
-
-  useEffect(() => { setDraft(String(value)); setInvalid(false); }, [value]);
-
-  const onChange = (raw: string) => {
-    const res = parseGradeInput(raw);
-    setDraft(res.digits);
-    setInvalid(!res.valid);
-    if (res.valid && res.value !== null) onCommit(res.value);
-  };
-
-  return (
-    <input
-      type="text" inputMode="numeric" value={draft}
-      onChange={(e) => onChange(e.target.value)}
-      aria-label={`${label} grade`}
-      className={`min-w-[2rem] w-10 rounded px-1 py-1 text-center text-base font-bold text-white outline-none
-        ${invalid ? "bg-neg" : "bg-grade-badge"}`}
-    />
-  );
-}
 
 function ItemTile({
   item,

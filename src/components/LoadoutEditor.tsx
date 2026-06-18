@@ -11,6 +11,7 @@ import { PickerModal, type PickItem } from "./PickerModal";
 import { EmblemSetSummary } from "./EmblemSetSummary";
 import { CollapsibleCard } from "./CollapsibleCard";
 import { Tooltip } from "./Tooltip";
+import { GradeField } from "./GradeField";
 import { itemTip, emblemTip, statsAtGrade } from "./tips";
 
 type Picker = { kind: "held"; slot: number } | { kind: "battle" } | { kind: "emblem" } | null;
@@ -60,7 +61,7 @@ export function LoadoutEditor() {
                   <div className="min-w-[10rem] flex-1">
                     <div className="mb-1 flex items-center justify-between">
                       <label className="text-xs font-medium text-muted">Grade</label>
-                      <span className="rounded-md bg-grade-badge px-2 py-0.5 text-xs font-bold text-white">{grade}</span>
+                      <GradeField value={grade} label={item!.displayName} onCommit={(g) => setHeldItemGradeForSlot(slot, g)} />
                     </div>
                     <div className="py-3">
                       <input
