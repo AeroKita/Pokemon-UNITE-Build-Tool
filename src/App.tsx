@@ -138,7 +138,7 @@ function Workspace() {
             </button>
           </div>
         )}
-        {tab === "build" && <BuildScreen onOpenPokePicker={() => setPokePickerOpen(true)} />}
+        {tab === "build" && <BuildScreen />}
         {tab === "compare" && expert && <CompareScreen />}
         {tab === "emblems" && <EmblemsScreen />}
         {tab === "items" && <ItemsScreen />}

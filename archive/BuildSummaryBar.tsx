@@ -1,3 +1,15 @@
+/**
+ * ARCHIVED — Build "Hero Glance" (BuildSummaryBar), removed 2026-06-19.
+ *
+ * This component is intentionally kept out of the build (this folder is
+ * outside `src/`, so it is not compiled, bundled, linted, or formatted).
+ *
+ * To restore: move this file back to `src/components/BuildSummaryBar.tsx`
+ * (its relative imports — ../state/store, ../engine/derive, ../ui/format —
+ * resolve correctly from that location), then re-add it to
+ * `src/components/screens/BuildScreen.tsx` and re-thread the
+ * `onOpenPokePicker` prop from App.tsx → BuildScreen → BuildSummaryBar.
+ */
 import { useMemo } from "react";
 import { useStore } from "../state/store";
 import { deriveBuild } from "../engine/derive";
