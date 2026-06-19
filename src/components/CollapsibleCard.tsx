@@ -14,13 +14,15 @@ const TONES: Record<Tone, { card: string; title: string }> = {
 /**
  * A titled card whose body collapses/expands via a chevron. Open state persists
  * per `persistKey`. `right` renders controls in the header (clicks there don't
- * toggle). Used for every major section so the UI stays uncluttered.
+ * toggle). `center` renders centered in the header row (same click behavior).
+ * Used for every major section so the UI stays uncluttered.
  */
 export function CollapsibleCard({
   title,
   persistKey,
   defaultOpen = true,
   right,
+  center,
   tone = "default",
   children,
 }: {
@@ -28,6 +30,7 @@ export function CollapsibleCard({
   persistKey: string;
   defaultOpen?: boolean;
   right?: ReactNode;
+  center?: ReactNode;
   tone?: Tone;
   children: ReactNode;
 }) {
@@ -54,13 +57,17 @@ export function CollapsibleCard({
   return (
     <section className={`rounded-2xl border shadow-sm ${t.card}`}>
       <header
-        className="flex min-h-11 cursor-pointer select-none items-center justify-between gap-2 px-4 py-3"
+        className={`relative flex cursor-pointer select-none items-center gap-2 px-4 py-3 ${
+          center ? "min-h-[4.25rem] justify-start" : "min-h-11 justify-between"
+        }`}
         onClick={toggle}
       >
-        <div className="flex items-center gap-2">
+        <div
+          className={`flex min-w-0 items-center gap-2 ${center ? "max-w-[calc(50%-4.5rem)]" : ""}`}
+        >
           <span
             aria-hidden
-            className={`text-faint transition-transform ${open ? "" : "-rotate-90"}`}
+            className={`shrink-0 text-faint transition-transform ${open ? "" : "-rotate-90"}`}
           >
             <svg
               className="h-4 w-4"
@@ -74,8 +81,17 @@ export function CollapsibleCard({
               <path d="M5.5 7.5 10 12l4.5-4.5" />
             </svg>
           </span>
-          <h3 className={`text-sm font-semibold uppercase tracking-wide ${t.title}`}>{title}</h3>
+          <h3 className={`truncate text-sm font-semibold uppercase tracking-wide ${t.title}`}>
+            {title}
+          </h3>
         </div>
+        {center && (
+          <div className="pointer-events-none absolute inset-x-0 top-0 flex justify-center px-4 pt-3 pb-3">
+            <div className="pointer-events-auto" onClick={(e) => e.stopPropagation()}>
+              {center}
+            </div>
+          </div>
+        )}
         {right && <div onClick={(e) => e.stopPropagation()}>{right}</div>}
       </header>
       {open && <div className="px-4 pb-4">{children}</div>}

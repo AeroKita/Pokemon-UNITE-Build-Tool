@@ -589,6 +589,7 @@ export function useEmblemOptimizer(): {
     historyCount,
     historyIndex,
     goHistory,
+    clearResult,
     handleApplyEmblems,
     applied,
     optimizeLevel,

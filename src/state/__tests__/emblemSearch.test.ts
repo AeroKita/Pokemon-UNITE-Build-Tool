@@ -122,25 +122,34 @@ describe("multi-result helpers", () => {
     expect(mapped.pct).toBeLessThan(40);
   });
 
-  it("appendSearchHistoryEntries jumps to newest for a single entry", () => {
+  it("appendSearchHistoryEntries shows first build on initial search", () => {
     const key = buildSearchSettingsKey(BASE);
     const first = { ...MOCK_RESULT, score: 1 };
-    const second = { ...MOCK_RESULT, score: 2 };
 
     const initial = appendSearchHistoryEntries([], [{ result: first, settingsKey: key }]);
     expect(initial.history).toHaveLength(1);
     expect(initial.historyIndex).toBe(0);
     expect(initial.history[0]?.result.score).toBe(1);
-
-    const sequential = appendSearchHistoryEntries(initial.history, [
-      { result: second, settingsKey: key },
-    ]);
-    expect(sequential.history).toHaveLength(2);
-    expect(sequential.historyIndex).toBe(1);
-    expect(sequential.history[sequential.historyIndex]?.result.score).toBe(2);
   });
 
-  it("appendSearchHistoryEntries does not jump on multi-entry batch", () => {
+  it("appendSearchHistoryEntries preserves index on append", () => {
+    const key = buildSearchSettingsKey(BASE);
+    const first = { ...MOCK_RESULT, score: 1 };
+    const second = { ...MOCK_RESULT, score: 2 };
+
+    const initial = appendSearchHistoryEntries([], [{ result: first, settingsKey: key }]);
+    const sequential = appendSearchHistoryEntries(
+      initial.history,
+      [{ result: second, settingsKey: key }],
+      initial.historyIndex,
+    );
+    expect(sequential.history).toHaveLength(2);
+    expect(sequential.historyIndex).toBe(0);
+    expect(sequential.history[sequential.historyIndex]?.result.score).toBe(1);
+    expect(sequential.history[1]?.result.score).toBe(2);
+  });
+
+  it("appendSearchHistoryEntries preserves index on multi-entry batch", () => {
     const key = buildSearchSettingsKey(BASE);
     const prior = [
       { result: { ...MOCK_RESULT, score: 1 }, settingsKey: key },

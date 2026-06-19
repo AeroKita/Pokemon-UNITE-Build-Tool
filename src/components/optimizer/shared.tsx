@@ -19,10 +19,10 @@ export const SLOTS = 10;
 export const WEIGHT_UI_MAX = 5;
 
 export const PHASE_LABEL: Record<string, string> = {
-  recipe: "recipe match",
-  exact: "exact search",
-  heuristic: "smart search",
-  none: "search",
+  recipe: "Recipe match",
+  exact: "Exact search",
+  heuristic: "Smart search",
+  none: "Search",
 };
 
 export type Effort = "quick" | "normal" | "thorough";
@@ -90,6 +90,7 @@ export interface OptimizerSharedProps {
   historyCount: number;
   historyIndex: number;
   goHistory: (delta: number) => void;
+  clearResult: () => void;
   handleApplyEmblems: () => void;
   applied: AppliedState;
   optimizeLevel: number;
@@ -184,6 +185,28 @@ export interface OptimizerAdvancedProps {
 // ---------------------------------------------------------------------------
 // Helpers
 // ---------------------------------------------------------------------------
+
+/** Section-level copy when the search pool has fewer than SLOTS candidates. */
+export function flatStatEstimateUnavailableMessage(
+  poolCount: number,
+  useOwned: boolean,
+  slots = SLOTS,
+): string {
+  if (useOwned) {
+    if (poolCount === 0) {
+      return `Approx. flat stats can't be calculated — you don't own any emblems yet. You need ${slots} for a full build.`;
+    }
+    return `Approx. flat stats can't be calculated — you only have ${poolCount} owned emblem candidate${poolCount !== 1 ? "s" : ""} in this pool (need ${slots} for a full build).`;
+  }
+  return `Approx. flat stats can't be calculated — only ${poolCount} candidate${poolCount !== 1 ? "s" : ""} in the current pool (need ${slots} for a full build). Enable more grades or use the full dataset.`;
+}
+
+/** Short inline hint under a priority slider when estimates are unavailable. */
+export function flatStatEstimateUnavailableHint(poolCount: number, useOwned: boolean): string {
+  if (useOwned && poolCount === 0) return "Can't calculate — no owned emblems";
+  if (useOwned) return "Can't calculate — not enough owned emblems";
+  return "Can't calculate — pool too small";
+}
 
 export function presetAutofillIntro(
   displayName: string,

@@ -32,6 +32,7 @@ export function AdvancedOptimizer({
     historyCount,
     historyIndex,
     goHistory,
+    clearResult,
     handleApplyEmblems,
     applied,
     optimizeLevel,
@@ -198,6 +199,9 @@ export function AdvancedOptimizer({
           priorities={priorities}
           setCustomWeights={setCustomWeights}
           flatStatPredictionByStat={flatStatPredictionByStat}
+          flatStatEstimatesUnavailable={advancedNotEnoughEmblems}
+          poolCandidateCount={candidateCount}
+          useOwned={useOwned}
           pokemon={pokemon}
           emblemPresetResolution={emblemPresetResolution}
         />
@@ -270,6 +274,7 @@ export function AdvancedOptimizer({
           historyCount={historyCount}
           historyIndex={historyIndex}
           onGoHistory={goHistory}
+          onClearResults={clearResult}
           onApplyEmblems={handleApplyEmblems}
         />
       )}

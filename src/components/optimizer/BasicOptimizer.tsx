@@ -26,6 +26,7 @@ export function BasicOptimizer({
     historyCount,
     historyIndex,
     goHistory,
+    clearResult,
     handleApplyEmblems,
     applied,
     optimizeLevel,
@@ -223,6 +224,7 @@ export function BasicOptimizer({
           historyCount={historyCount}
           historyIndex={historyIndex}
           onGoHistory={goHistory}
+          onClearResults={clearResult}
           onApplyEmblems={handleApplyEmblems}
         />
       )}

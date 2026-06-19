@@ -113,9 +113,9 @@ export function SearchPoolCard({
                 >
                   {colorExact ? (
                     constrainedBuildCount === null ? (
-                      "many"
+                      "Many"
                     ) : constrainedBuildCount === 0n ? (
-                      "none match"
+                      "None match"
                     ) : (
                       <>
                         {formatBuildCount(constrainedBuildCount)}{" "}
@@ -147,7 +147,7 @@ export function SearchPoolCard({
                     title={
                       willRunExact
                         ? `Checks all ${formatBuildCount(constrainedBuildCount)} matching builds — guaranteed best`
-                        : `${formatBuildCount(constrainedBuildCount)} builds exceeds the cap — smart search finds a strong result`
+                        : `${formatBuildCount(constrainedBuildCount)} builds exceeds the cap — Smart search finds a strong result`
                     }
                   >
                     {willRunExact ? "⚡ Exact" : "Smart search"}

@@ -55,7 +55,8 @@ export function mapMultiRunProgress(
 
 /**
  * Append completed runs to history; returns the index the UI should show.
- * Single-entry append jumps to the newest build; multi-entry batch does not.
+ * First search (empty history) shows Build 1 (index 0). Later appends preserve
+ * the user's current viewing position so new builds do not auto-jump focus.
  */
 export function appendSearchHistoryEntries(
   history: SearchHistoryEntry[],
@@ -66,14 +67,13 @@ export function appendSearchHistoryEntries(
     return { history, historyIndex: -1 };
   }
   const next = [...history, ...entries];
-  if (entries.length === 1) {
-    return { history: next, historyIndex: next.length - 1 };
+  if (history.length === 0) {
+    return { history: next, historyIndex: 0 };
   }
-  const firstOfBatch = history.length;
   const historyIndex =
     currentHistoryIndex >= 0 && currentHistoryIndex < next.length
       ? currentHistoryIndex
-      : firstOfBatch;
+      : Math.max(0, history.length - 1);
   return { history: next, historyIndex };
 }
 

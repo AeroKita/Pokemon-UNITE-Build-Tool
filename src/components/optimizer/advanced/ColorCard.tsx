@@ -207,9 +207,9 @@ export function ColorCard({
                       {formatBuildCount(constrainedBuildCount)}
                     </span>{" "}
                     {willRunExact ? (
-                      <span className="text-pos">· exact search</span>
+                      <span className="text-pos">· Exact search</span>
                     ) : (
-                      <span className="text-muted">· smart search (above cap)</span>
+                      <span className="text-muted">· Smart search (above cap)</span>
                     )}
                   </>
                 )}

@@ -26,6 +26,7 @@ export interface ResultPanelProps {
   historyCount: number;
   historyIndex: number;
   onGoHistory: (delta: number) => void;
+  onClearResults: () => void;
   onApplyEmblems: () => void;
 }
 
@@ -40,10 +41,25 @@ export function ResultCards({
   historyCount,
   historyIndex,
   onGoHistory,
+  onClearResults,
   onApplyEmblems,
 }: ResultPanelProps) {
   return (
-    <CollapsibleCard title="Results" persistKey="optimizer-results" tone="indigo">
+    <CollapsibleCard
+      title="Results"
+      persistKey="optimizer-results"
+      tone="indigo"
+      center={
+        <button
+          type="button"
+          onClick={onClearResults}
+          aria-label="Clear Results"
+          className="min-h-11 rounded-lg border border-line px-4 py-2 text-sm font-medium text-muted transition hover:bg-neg/10 hover:text-neg active:scale-[0.98]"
+        >
+          Clear Results
+        </button>
+      }
+    >
       <div className="flex flex-col gap-4">
         {historyCount > 0 && (
           <div className="flex items-center gap-2">
@@ -70,6 +86,10 @@ export function ResultCards({
               ›
             </button>
           </div>
+        )}
+
+        {historyCount > 1 && historyIndex < historyCount - 1 && (
+          <p className="text-center text-xs text-accent-ink">New results — tap › to view</p>
         )}
 
         <div className="flex flex-col gap-2.5">

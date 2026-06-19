@@ -76,7 +76,7 @@ export function ModeEffortCard({
                   onClick={() => setExactCap(DEFAULT_EXACT_CAP)}
                   className="text-xs text-faint underline hover:text-muted"
                 >
-                  reset to 1B
+                  Reset to 1B
                 </button>
               )}
             </div>
@@ -98,9 +98,9 @@ export function ModeEffortCard({
               <span className="text-xs text-faint">
                 {exactCap.toLocaleString()} —{" "}
                 {colorMode === "exact" && willRunExact
-                  ? "exact"
+                  ? "Exact"
                   : colorMode === "exact"
-                    ? "smart search"
+                    ? "Smart search"
                     : ""}
               </span>
             </div>

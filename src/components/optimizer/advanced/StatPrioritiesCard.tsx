@@ -4,7 +4,9 @@ import type { StatBlock } from "../../../types";
 import { CollapsibleCard } from "../../CollapsibleCard";
 import { PriorityFlatEstimate } from "../PriorityFlatEstimate";
 import {
+  flatStatEstimateUnavailableMessage,
   presetAutofillIntro,
+  SLOTS,
   STAT_LABELS,
   STAT_ROW_GRID,
   WEIGHT_UI_MAX,
@@ -17,6 +19,9 @@ export interface StatPrioritiesCardProps {
     weights: Record<string, number> | ((prev: Record<string, number>) => Record<string, number>),
   ) => void;
   flatStatPredictionByStat: Map<keyof StatBlock, FlatStatPrediction>;
+  flatStatEstimatesUnavailable: boolean;
+  poolCandidateCount: number;
+  useOwned: boolean;
   pokemon: OptimizerPokemon;
   emblemPresetResolution: ResolvedEmblemPreset | null;
 }
@@ -25,6 +30,9 @@ export function StatPrioritiesCard({
   priorities,
   setCustomWeights,
   flatStatPredictionByStat,
+  flatStatEstimatesUnavailable,
+  poolCandidateCount,
+  useOwned,
   pokemon,
   emblemPresetResolution,
 }: StatPrioritiesCardProps) {
@@ -33,9 +41,16 @@ export function StatPrioritiesCard({
       <div className="flex flex-col gap-2">
         <p className="text-xs text-faint">
           {pokemon
-            ? `${presetAutofillIntro(pokemon.displayName, emblemPresetResolution)}. Adjust sliders to reprioritize — predicted flat stats update below each one.`
+            ? flatStatEstimatesUnavailable
+              ? `${presetAutofillIntro(pokemon.displayName, emblemPresetResolution)}. Adjust sliders to reprioritize — approx. flat stats appear below each one once your pool has at least ${SLOTS} emblems.`
+              : `${presetAutofillIntro(pokemon.displayName, emblemPresetResolution)}. Adjust sliders to reprioritize — predicted flat stats update below each one.`
             : "Select a Pokémon to auto-populate weights."}
         </p>
+        {flatStatEstimatesUnavailable && (
+          <p className="text-xs text-amber-700 dark:text-amber-300">
+            {flatStatEstimateUnavailableMessage(poolCandidateCount, useOwned)}
+          </p>
+        )}
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
           {Object.entries(STAT_LABELS).map(([stat, label]) => {
             const w = priorities[stat as keyof typeof priorities] ?? 0;
@@ -62,15 +77,24 @@ export function StatPrioritiesCard({
                   {uiValue.toFixed(1)}
                 </span>
                 <div className="col-start-2 row-start-2 leading-tight">
-                  <PriorityFlatEstimate stat={stat as keyof StatBlock} pred={pred} weight={w} />
+                  <PriorityFlatEstimate
+                    stat={stat as keyof StatBlock}
+                    pred={pred}
+                    weight={w}
+                    poolTooSmall={flatStatEstimatesUnavailable}
+                    poolCandidateCount={poolCandidateCount}
+                    useOwned={useOwned}
+                  />
                 </div>
               </div>
             );
           })}
         </div>
-        <p className="text-xs text-faint">
-          Estimated flat emblem totals for the current priorities on this pool.
-        </p>
+        {!flatStatEstimatesUnavailable && (
+          <p className="text-xs text-faint">
+            Estimated flat emblem totals for the current priorities on this pool.
+          </p>
+        )}
         <button
           onClick={() => setCustomWeights({})}
           className="self-start text-xs text-muted underline hover:text-ink"

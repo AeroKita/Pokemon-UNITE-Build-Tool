@@ -1,22 +1,39 @@
 import type { FlatStatPrediction } from "../../engine/emblemSearch/predictStats";
 import type { StatBlock } from "../../types";
-import { fmtDelta } from "./shared";
+import { flatStatEstimateUnavailableHint, fmtDelta } from "./shared";
 
 /** Inline estimate under a priority slider — sign is color-coded for quick scanning. */
 export function PriorityFlatEstimate({
   stat,
   pred,
   weight,
+  poolTooSmall = false,
+  poolCandidateCount = 0,
+  useOwned = false,
 }: {
   stat: keyof StatBlock;
   pred?: FlatStatPrediction;
   weight: number;
+  poolTooSmall?: boolean;
+  poolCandidateCount?: number;
+  useOwned?: boolean;
 }) {
   if (stat === "cdr") {
-    return <span className="text-faint">from black set bonus, not flat emblems</span>;
+    return <span className="text-faint">From black set bonus, not flat emblems</span>;
   }
   if (!pred) {
-    return <span className="text-faint">no priority</span>;
+    if (poolTooSmall && weight > 0) {
+      return (
+        <span className="text-faint">
+          {flatStatEstimateUnavailableHint(poolCandidateCount, useOwned)}
+        </span>
+      );
+    }
+    return (
+      <span className="text-faint">
+        {weight > 0 ? "Pool too small to estimate" : "No priority"}
+      </span>
+    );
   }
   const protectedOnly = weight <= 0 && pred.weight <= 0;
   const v = pred.predicted;
