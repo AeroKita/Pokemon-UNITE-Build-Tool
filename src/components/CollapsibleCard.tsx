@@ -62,7 +62,9 @@ export function CollapsibleCard({
         }`}
         onClick={toggle}
       >
-        <div className={`flex min-w-0 items-center gap-2 ${center ? "max-w-[calc(50%-4.5rem)]" : ""}`}>
+        <div
+          className={`flex min-w-0 items-center gap-2 ${center ? "max-w-[calc(50%-4.5rem)]" : ""}`}
+        >
           <span
             aria-hidden
             className={`shrink-0 text-faint transition-transform ${open ? "" : "-rotate-90"}`}

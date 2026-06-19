@@ -89,9 +89,7 @@ export function ResultCards({
         )}
 
         {historyCount > 1 && historyIndex < historyCount - 1 && (
-          <p className="text-center text-xs text-accent-ink">
-            New results — tap › to view
-          </p>
+          <p className="text-center text-xs text-accent-ink">New results — tap › to view</p>
         )}
 
         <div className="flex flex-col gap-2.5">

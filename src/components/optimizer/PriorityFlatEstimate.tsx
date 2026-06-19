@@ -30,7 +30,9 @@ export function PriorityFlatEstimate({
       );
     }
     return (
-      <span className="text-faint">{weight > 0 ? "Pool too small to estimate" : "No priority"}</span>
+      <span className="text-faint">
+        {weight > 0 ? "Pool too small to estimate" : "No priority"}
+      </span>
     );
   }
   const protectedOnly = weight <= 0 && pred.weight <= 0;
