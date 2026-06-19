@@ -70,7 +70,7 @@ export interface DataCheckResult {
 }
 
 /**
- * Check the remote manifest; if its `version` differs from what we already use
+ * Check the remote manifest; if its `version` is newer than what we already use
  * (cached, else the bundled `currentVersion`), download + validate + cache it.
  * Network/validation failures are swallowed (we keep what we have).
  */
@@ -81,8 +81,12 @@ export async function checkDataNow(currentVersion: string): Promise<DataCheckRes
     );
     if (!m?.version || !m?.url) return { status: "offline" };
 
-    const effective = readCache()?.version ?? currentVersion;
-    if (m.version === effective)
+    // What the app actually loads today: the cached copy only when it is
+    // strictly newer than the bundled baseline (mirrors activeRaw), else the
+    // baseline. `version` values are ISO dates, so string compare = date compare.
+    const cachedVer = readCache()?.version;
+    const effective = cachedVer && cachedVer > currentVersion ? cachedVer : currentVersion;
+    if (m.version <= effective)
       return { status: "current", patchVersion: cachedPatchVersion() ?? m.patchVersion };
 
     const raw = await fetch(m.url, { cache: "no-store" }).then((r) => (r.ok ? r.json() : null));

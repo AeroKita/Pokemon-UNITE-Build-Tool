@@ -1,6 +1,5 @@
-import { useState } from "react";
 import { bundle } from "../data/gameData";
-import { cachedPatchVersion, checkDataNow } from "../data/dataSource";
+import { cachedPatchVersion } from "../data/dataSource";
 import { useStore, type ThemePref } from "../state/store";
 import { APP_NAME, APP_OWNER, LEGAL_DISCLAIMER, copyrightLine } from "../ui/brand";
 import { APP_VERSION } from "../ui/version";
@@ -19,22 +18,9 @@ const THEME_PREFS: { id: ThemePref; label: string }[] = [
  */
 export function SettingsMenu({ open, onClose }: { open: boolean; onClose: () => void }) {
   const { themePref, setThemePref } = useStore();
-  const [dataMsg, setDataMsg] = useState("");
-  const [dataUpdated, setDataUpdated] = useState(false);
   const activePatch = cachedPatchVersion() ?? bundle.patchVersion;
 
   if (!open) return null;
-
-  const checkData = async () => {
-    setDataMsg("Checking…");
-    const r = await checkDataNow(bundle.lastUpdated);
-    if (r.status === "updated") {
-      setDataMsg(`New data (patch ${r.patchVersion}) downloaded.`);
-      setDataUpdated(true);
-    } else if (r.status === "current")
-      setDataMsg(`Game data is up to date (patch ${r.patchVersion}).`);
-    else setDataMsg("Couldn't reach the data server (using bundled data).");
-  };
 
   return (
     <BottomSheet title="Settings" onClose={onClose}>
@@ -70,23 +56,6 @@ export function SettingsMenu({ open, onClose }: { open: boolean; onClose: () => 
           <p className="text-xs text-faint">
             Data: UNITE-DB · Serebii — fan project, not affiliated with Nintendo/TPC.
           </p>
-          <button
-            type="button"
-            onClick={checkData}
-            className="mt-1 min-h-11 rounded-lg border border-line px-3 py-2.5 text-sm font-medium hover:bg-raise"
-          >
-            Check for data update
-          </button>
-          {dataMsg && <p className="mt-1 text-xs text-muted">{dataMsg}</p>}
-          {dataUpdated && (
-            <button
-              type="button"
-              onClick={() => location.reload()}
-              className="mt-1 min-h-11 rounded-lg bg-accent px-3 py-2.5 text-sm font-semibold text-white hover:bg-accent-strong"
-            >
-              Reload to apply
-            </button>
-          )}
 
           {/* App version — web/PWA only */}
           <div className="mt-3 border-t border-line-soft pt-3">

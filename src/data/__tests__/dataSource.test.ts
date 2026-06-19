@@ -81,3 +81,92 @@ describe("activeRaw", () => {
     expect(store.has(CACHE_KEY)).toBe(false);
   });
 });
+
+describe("checkDataNow", () => {
+  let fetchMock: ReturnType<typeof vi.fn>;
+
+  beforeEach(() => {
+    vi.resetModules();
+    mockLocalStorage();
+    fetchMock = vi.fn();
+    vi.stubGlobal("fetch", fetchMock);
+  });
+
+  afterEach(() => {
+    vi.unstubAllGlobals();
+  });
+
+  function mockManifest(manifest: { version: string; patchVersion: string; url: string }) {
+    fetchMock.mockImplementation((url: string) => {
+      if (url.includes("manifest.json")) {
+        return Promise.resolve({ ok: true, json: () => Promise.resolve(manifest) });
+      }
+      return Promise.resolve({ ok: false, json: () => Promise.resolve(null) });
+    });
+  }
+
+  function mockManifestAndBundle(
+    manifest: { version: string; patchVersion: string; url: string },
+    bundleBody: unknown,
+  ) {
+    fetchMock.mockImplementation((url: string) => {
+      if (url.includes("manifest.json")) {
+        return Promise.resolve({ ok: true, json: () => Promise.resolve(manifest) });
+      }
+      return Promise.resolve({ ok: true, json: () => Promise.resolve(bundleBody) });
+    });
+  }
+
+  it("does not treat an older remote version as an update", async () => {
+    const store = mockLocalStorage();
+    mockManifest({
+      version: "2026-06-16",
+      patchVersion: bundled.patchVersion,
+      url: "https://example.com/patch.json",
+    });
+    const { checkDataNow } = await import("../dataSource");
+    const result = await checkDataNow(bundled.lastUpdated);
+    expect(result.status).toBe("current");
+    expect(store.has(CACHE_KEY)).toBe(false);
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+    expect(fetchMock.mock.calls[0][0]).toContain("manifest.json");
+  });
+
+  it("treats a strictly newer remote version as an update and caches it", async () => {
+    const store = mockLocalStorage();
+    mockManifestAndBundle(
+      {
+        version: "2099-01-01",
+        patchVersion: "9.99.9.9",
+        url: "https://example.com/patch-9.99.9.9.json",
+      },
+      bundled,
+    );
+    const { checkDataNow } = await import("../dataSource");
+    const result = await checkDataNow(bundled.lastUpdated);
+    expect(result.status).toBe("updated");
+    expect(result.patchVersion).toBe("9.99.9.9");
+    expect(store.has(CACHE_KEY)).toBe(true);
+    const cached = JSON.parse(store.get(CACHE_KEY)!);
+    expect(cached.version).toBe("2099-01-01");
+  });
+
+  it("treats an equal remote version as current", async () => {
+    mockManifest({
+      version: bundled.lastUpdated,
+      patchVersion: bundled.patchVersion,
+      url: "https://example.com/patch.json",
+    });
+    const { checkDataNow } = await import("../dataSource");
+    const result = await checkDataNow(bundled.lastUpdated);
+    expect(result.status).toBe("current");
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+  });
+
+  it("returns offline when the manifest is unreachable", async () => {
+    fetchMock.mockResolvedValue({ ok: false });
+    const { checkDataNow } = await import("../dataSource");
+    const result = await checkDataNow(bundled.lastUpdated);
+    expect(result.status).toBe("offline");
+  });
+});
