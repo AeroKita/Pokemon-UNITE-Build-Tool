@@ -16,7 +16,7 @@
 
  *   → { type: "cancel", id }
 
- *   ← { type: "progress", id, pct, label, candidates? }
+ *   ← { type: "progress", id, pct, label, candidates?, totalCandidates? }
 
  *   ← { type: "done", id, result }
 
@@ -101,6 +101,8 @@ self.onmessage = async (ev: MessageEvent) => {
             label: p.label,
 
             candidates: p.candidates,
+
+            totalCandidates: p.totalCandidates,
 
           } satisfies WorkerProgressMessage);
 
@@ -215,6 +217,8 @@ interface WorkerProgressMessage {
   label: string;
 
   candidates?: number;
+
+  totalCandidates?: number;
 
 }
 

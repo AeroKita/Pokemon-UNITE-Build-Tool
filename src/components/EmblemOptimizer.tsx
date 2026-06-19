@@ -1122,7 +1122,7 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
               disabled={!pokemon || basicNotEnoughEmblems || searchState.status === "running"}
               className="rounded-xl bg-accent px-6 py-2.5 text-sm font-bold text-white shadow-sm hover:bg-accent/90 active:scale-95 disabled:cursor-not-allowed disabled:opacity-50"
             >
-              {searchState.status === "running" ? "Searching…" : "Find Best Build"}
+              {searchState.status === "running" ? "Searching…" : "Find Build"}
             </button>
             {searchState.status === "done" && searchState.result && (
               <span className="text-xs text-muted">

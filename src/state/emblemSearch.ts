@@ -273,7 +273,7 @@ export function useEmblemSearch(): UseEmblemSearchReturn {
         const eta = computeSearchEta(progress.pct, searchStartTimeRef.current, etaSmoothedRef);
         setState((s) =>
           s.status === "running"
-            ? { ...s, progress: { pct: progress.pct, label: progress.label, candidates: progress.candidates }, eta }
+            ? { ...s, progress: { pct: progress.pct, label: progress.label, candidates: progress.candidates, totalCandidates: progress.totalCandidates }, eta }
             : s,
         );
       },

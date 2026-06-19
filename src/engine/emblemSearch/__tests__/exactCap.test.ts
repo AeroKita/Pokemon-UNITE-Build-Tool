@@ -300,14 +300,14 @@ describe("[CAP-12] exact search skips the heuristic pass on completion", () => {
       const pool = [...singles(5, "brown", "B"), ...singles(5, "green", "G")];
       const opts = makeOpts(new Map([["brown", 5], ["green", 5]]));
 
-      const progressEvents: { pct: number; label: string }[] = [];
+      const progressEvents: { pct: number; label: string; totalCandidates?: number }[] = [];
       const result = await runSearch(
         {
           pool,
           options: opts,
           setBonuses,
           effort: "quick",
-          onProgress: (p) => { progressEvents.push({ pct: p.pct, label: p.label }); },
+          onProgress: (p) => { progressEvents.push({ pct: p.pct, label: p.label, totalCandidates: p.totalCandidates }); },
         },
       );
 
@@ -316,6 +316,7 @@ describe("[CAP-12] exact search skips the heuristic pass on completion", () => {
       expect(result!.phase).toBe("exact");
       // Candidates must equal the exact evaluated count (1), NOT inflated by heuristic
       expect(result!.candidates).toBe(1);
+      expect(progressEvents.some((e) => e.totalCandidates === 1)).toBe(true);
       // Progress must NOT contain a heuristic label
       expect(progressEvents.some(e => e.label.toLowerCase().includes("heuristic"))).toBe(false);
       // Final progress must reach 100 (exact reports 100)

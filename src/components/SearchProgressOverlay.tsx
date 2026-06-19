@@ -34,7 +34,11 @@ export function SearchProgressOverlay({ progress, eta, onCancel }: Props) {
         <div className="mt-1 flex min-h-4 flex-wrap gap-x-2 text-xs tabular-nums text-faint">
           {eta != null && <span>{eta}</span>}
           {progress.candidates != null && (
-            <span>{progress.candidates.toLocaleString()} evaluated</span>
+            <span>
+              {progress.totalCandidates != null
+                ? `${progress.candidates.toLocaleString()} / ${progress.totalCandidates.toLocaleString()} builds`
+                : `${progress.candidates.toLocaleString()} evaluated`}
+            </span>
           )}
         </div>
         <button

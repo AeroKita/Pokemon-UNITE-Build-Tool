@@ -64,12 +64,13 @@ export async function runSearch(
   const slots = options.slots;
   const t0 = Date.now();
   let candidates = 0;
+  let totalCandidates: number | undefined;
   let bestLoadout: EmblemCandidate[] | null = null;
   let bestEv: EvalResult | null = null;
   let phase = "none";
 
   const report = (pct: number, label: string) => {
-    input.onProgress?.({ pct, label, candidates });
+    input.onProgress?.({ pct, label, candidates, totalCandidates });
   };
 
   function updateBest(loadout: EmblemCandidate[], ev: EvalResult, newPhase: string) {
@@ -127,6 +128,7 @@ export async function runSearch(
   if (willRunExact) {
     const countLabel = formatBuildCount(constrainedCount!);
     const totalCombos = Number(constrainedCount!);
+    totalCandidates = totalCombos;
     report(5, `Exact · enumerating ${countLabel} color-valid builds…`);
 
     // Try parallel when the space is large enough to amortize worker overhead.
@@ -175,6 +177,7 @@ export async function runSearch(
   // ---- Phase 3: Heuristic search ----
   // Runs when exact was gated off (no color constraints / count null/0 / above
   // cap) OR when exact returned null (shouldn't happen normally).
+  totalCandidates = undefined;
   const heuristicLo = willRunExact ? 55 : 5;
   report(heuristicLo, "Smart search…");
 

@@ -90,6 +90,18 @@ const OFFENSIVE_ROLES: ReadonlySet<Role> = new Set([
 /** Roles that should not receive HP via sub-threshold role rules. */
 const GLASS_ROLES: ReadonlySet<Role> = new Set(["Attacker", "Speedster"]);
 
+/**
+ * Roles whose kit depends on mobility. For these, net-negative move speed from
+ * emblems is a default-bad trade — we guard it with a floor of 0. Stationary
+ * roles (Defender / Supporter) intentionally trade mobility for survivability,
+ * so they are excluded.
+ */
+const MOBILITY_ROLES: ReadonlySet<Role> = new Set([
+  "Attacker",
+  "Speedster",
+  "AllRounder",
+]);
+
 // ---------------------------------------------------------------------------
 // Helpers
 // ---------------------------------------------------------------------------
@@ -209,4 +221,28 @@ export function deriveDefaultProtectedStats(
     floors[stat] = 0;
   }
   return floors;
+}
+
+/**
+ * Derive a move-speed protect floor for mobility-dependent roles.
+ *
+ * Returns `{ moveSpeed: 0 }` for Attacker / Speedster / AllRounder ("don't let
+ * emblems net-reduce move speed"), otherwise `{}`.
+ *
+ * Rationale: most physical/mobile roles weight `moveSpeed` at 0 in
+ * {@link priorityWeights}, so the search engine sees no cost for the −35 move
+ * speed tax carried by many +HP/+attack emblems (Rhyhorn, Pupitar, Machop, …).
+ * Left unguarded the optimizer happily stacks them, producing tanky-but-sluggish
+ * builds that diverge from curated community builds (which keep move speed ≥
+ * base). A floor of 0 is a soft, graduated penalty: tiny net negatives barely
+ * register, while large mobility losses are strongly discouraged when cleaner
+ * emblems exist. It never *seeks* move speed (no weight added), so it won't
+ * over-correct toward move-speed emblems.
+ *
+ * Kept separate from {@link deriveDefaultProtectedStats} because it is a
+ * role-based kit guard, not a population-relative "defining stat" pick, and so
+ * is intentionally not subject to the MAX_PROTECT cap.
+ */
+export function deriveMobilityFloor(pokemon: Pokemon): StatFloors {
+  return MOBILITY_ROLES.has(pokemon.role) ? { moveSpeed: 0 } : {};
 }

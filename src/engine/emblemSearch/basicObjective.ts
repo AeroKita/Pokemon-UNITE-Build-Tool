@@ -11,7 +11,7 @@ import type { Emblem, EmblemColor, EmblemGrade, HeldItem, Pokemon } from "../../
 import { colorTargetsFor, priorityWeights, scoreHeldItem, coreItemsFor } from "../recommend";
 import { buildPool } from "./pool";
 import type { EmblemCandidate, PokemonScoringContext, PoolConfig, SearchOptions, StatFloors, StatWeights } from "./types";
-import { deriveDefaultProtectedStats } from "./protectDefaults";
+import { deriveDefaultProtectedStats, deriveMobilityFloor } from "./protectDefaults";
 
 /** Default grade filter: bronze, silver, and gold all enabled. */
 export const DEFAULT_ALLOWED_GRADES: ReadonlySet<EmblemGrade> = new Set<EmblemGrade>([
@@ -56,9 +56,11 @@ export interface BasicObjective {
   /** Pokémon/level context for inner-loop scoring. */
   pokemonContext: PokemonScoringContext;
   /**
-   * Default protect floors derived from the Pokémon's population-relative base
-   * stats. Each entry maps a stat → floor of 0 ("don't let emblems net-reduce
-   * this stat"). Applied as a soft penalty in the search engine.
+   * Default protect floors. Combines the Pokémon's population-relative defining
+   * stats (see {@link deriveDefaultProtectedStats}) with a role-based move-speed
+   * guard for mobile kits (see {@link deriveMobilityFloor}). Each entry maps a
+   * stat → floor of 0 ("don't let emblems net-reduce this stat"). Applied as a
+   * soft penalty in the search engine.
    */
   protectedFloors: StatFloors;
 }
@@ -87,7 +89,12 @@ export function deriveBasicObjective(
     level,
     baseStats,
   };
-  const protectedFloors = deriveDefaultProtectedStats(pokemon, allPokemon, level);
+  // Population-relative "defining stat" floors, plus a role-based move-speed
+  // guard for mobile kits (so emblems can't silently net-reduce move speed).
+  // Both require roster context; with no roster we keep the legacy empty default.
+  const baseFloors = deriveDefaultProtectedStats(pokemon, allPokemon, level);
+  const protectedFloors: StatFloors =
+    allPokemon.length >= 2 ? { ...baseFloors, ...deriveMobilityFloor(pokemon) } : baseFloors;
   return { priorities, colorTargets, pokemonContext, protectedFloors };
 }
 

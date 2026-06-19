@@ -142,7 +142,9 @@ export interface PoolConfig {
 export interface SearchProgress {
   pct: number; // 0–100
   label: string;
-  candidates?: number; // total loadouts evaluated so far
+  candidates?: number; // loadouts evaluated so far
+  /** Total builds to enumerate (exact search only). */
+  totalCandidates?: number;
 }
 
 export interface SearchResult {

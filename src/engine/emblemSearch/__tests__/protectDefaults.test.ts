@@ -16,7 +16,7 @@
  */
 
 import { describe, it, expect } from "vitest";
-import { deriveDefaultProtectedStats } from "../protectDefaults";
+import { deriveDefaultProtectedStats, deriveMobilityFloor } from "../protectDefaults";
 import { deriveBasicObjective, basicSearchOptions } from "../basicObjective";
 import { evaluateLoadout } from "../evaluate";
 import { makeEmblem } from "../../__tests__/fixtures";
@@ -157,6 +157,83 @@ describe("deriveDefaultProtectedStats", () => {
 });
 
 // ---------------------------------------------------------------------------
+// deriveMobilityFloor (role-based move-speed guard)
+// ---------------------------------------------------------------------------
+
+describe("deriveMobilityFloor", () => {
+  it("[MOB-1] mobile roles get a moveSpeed floor of 0", () => {
+    for (const role of ["Attacker", "Speedster", "AllRounder"] as const) {
+      const poke = makePokemon(`m-${role}`, BASELINE, { role });
+      expect(deriveMobilityFloor(poke)).toEqual({ moveSpeed: 0 });
+    }
+  });
+
+  it("[MOB-2] stationary roles get no move-speed floor", () => {
+    for (const role of ["Defender", "Supporter"] as const) {
+      const poke = makePokemon(`s-${role}`, BASELINE, { role });
+      expect(deriveMobilityFloor(poke)).toEqual({});
+    }
+  });
+
+  it("[MOB-3] does not interfere with z-score defining-stat picks", () => {
+    // Mobility floor is derived separately, so the base derivation is unchanged.
+    const attacker = makePokemon("attacker-mob", { ...BASELINE, attack: 500 });
+    const pop = [...POP_BASE, attacker];
+    expect(deriveDefaultProtectedStats(attacker, pop, 15)).toEqual({ attack: 0 });
+  });
+
+  it("[MOB-4] deriveBasicObjective merges move-speed floor for mobile roles", () => {
+    const lucarioLike = makePokemon(
+      "lucario-mob",
+      { ...BASELINE, attack: 320 },
+      { role: "AllRounder", attackType: "physical" },
+    );
+    const pop = [...POP_BASE, lucarioLike];
+    const obj = deriveBasicObjective(lucarioLike, 15, [], pop);
+    expect(obj.protectedFloors.moveSpeed).toBe(0);
+    // Defining-stat protection is still present alongside the mobility guard.
+    expect(obj.protectedFloors.attack).toBe(0);
+  });
+
+  it("[MOB-5] deriveBasicObjective omits move-speed floor for stationary roles", () => {
+    const defender = makePokemon(
+      "tank-mob",
+      { ...BASELINE, hp: 12000, defense: 300 },
+      { role: "Defender", attackType: "physical" },
+    );
+    const pop = [...POP_BASE, defender];
+    const obj = deriveBasicObjective(defender, 15, [], pop);
+    expect(obj.protectedFloors.moveSpeed).toBeUndefined();
+  });
+
+  it("[MOB-6] empty roster → no move-speed floor (backward-compatible)", () => {
+    const poke = makePokemon("solo-mob", BASELINE, { role: "Speedster" });
+    const obj = deriveBasicObjective(poke, 15, [], []);
+    expect(obj.protectedFloors).toEqual({});
+  });
+
+  it("[MOB-7] move-speed floor penalises an emblem build that nets negative move speed", () => {
+    const setBonuses: import("../../../types").EmblemSetBonus[] = [];
+    // Emblem mimicking the +HP / −move-speed tax (Rhyhorn/Pupitar-style).
+    const candidates = buildCandidatePool(
+      [makeEmblem("rhyhorn-like", ["brown"], { hp: 50, moveSpeed: -35 })],
+      {},
+    );
+    const opts = {
+      mode: "maximize" as const,
+      priorities: { hp: 4.5 },
+      targets: {}, targetActive: {},
+      protected: {},
+      colorConstraints: null, colorBonuses: false,
+      slots: 10,
+    };
+    const noGuard = evaluateLoadout(candidates, opts, setBonuses);
+    const withGuard = evaluateLoadout(candidates, { ...opts, protected: { moveSpeed: 0 } }, setBonuses);
+    expect(withGuard.score).toBeLessThan(noGuard.score);
+  });
+});
+
+// ---------------------------------------------------------------------------
 // Live roster: hybrid role rules on real UNITE-DB stats
 // ---------------------------------------------------------------------------
 
@@ -192,6 +269,13 @@ describe("deriveDefaultProtectedStats — live roster cases", () => {
   it("[PROT-18] Charizard: attack protected (z > 0.4 primary pick)", () => {
     const floors = floorsFor("charizard");
     expect(Object.keys(floors)).toEqual(["attack"]);
+  });
+
+  it("[PROT-19] Lucario objective guards move speed (regression: HP-for-speed trade)", () => {
+    const lucario = pop.find((p) => p.id === "lucario")!;
+    const obj = deriveBasicObjective(lucario, 15, bundle.emblems, pop);
+    expect(obj.protectedFloors.moveSpeed).toBe(0);
+    expect(obj.protectedFloors.attack).toBe(0);
   });
 });
 

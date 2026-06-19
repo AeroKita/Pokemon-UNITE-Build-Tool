@@ -37,6 +37,7 @@ export interface WorkerProgress {
   pct: number;
   label: string;
   candidates?: number;
+  totalCandidates?: number;
 }
 
 interface PendingJob {
@@ -129,14 +130,19 @@ export class SearchWorkerController {
 
     worker.addEventListener("message", (ev: { data: unknown }) => {
       const msg = ev.data as
-        | { type: "progress"; id: string; pct: number; label: string; candidates?: number }
+        | { type: "progress"; id: string; pct: number; label: string; candidates?: number; totalCandidates?: number }
         | { type: "done"; id: string; result: SearchResult | null }
         | { type: "error"; id: string; message: string };
       const pending = this.pending;
       if (!pending || msg.id !== pending.id) return;
 
       if (msg.type === "progress") {
-        this.progressCallback?.({ pct: msg.pct, label: msg.label, candidates: msg.candidates });
+        this.progressCallback?.({
+          pct: msg.pct,
+          label: msg.label,
+          candidates: msg.candidates,
+          totalCandidates: msg.totalCandidates,
+        });
       } else if (msg.type === "done") {
         this.pending = null;
         pending.resolve(msg.result);
