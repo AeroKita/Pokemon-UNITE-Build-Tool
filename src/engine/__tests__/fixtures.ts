@@ -8,9 +8,7 @@ export const bundle = loadBundle(rawBundle);
 
 export const lucario = bundle.pokemon.find((p) => p.id === "lucario")!;
 export const floatStone = bundle.heldItems.find((i) => i.id === "float-stone")!;
-export const attackWeight = bundle.heldItems.find(
-  (i) => i.id === "attack-weight",
-)!;
+export const attackWeight = bundle.heldItems.find((i) => i.id === "attack-weight")!;
 export const diglett = bundle.emblems.find((e) => e.id === "diglett")!;
 export const aerodactyl = bundle.emblems.find((e) => e.id === "aerodactyl")!;
 

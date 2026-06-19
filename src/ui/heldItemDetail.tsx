@@ -17,7 +17,9 @@ export function HeldItemDetailBody({ item, grade }: { item: HeldItem; grade: num
 
   return (
     <div className="flex flex-col gap-3 text-sm leading-relaxed">
-      <h3 id="held-item-detail-title" className="text-base font-bold text-ink">{item.displayName}</h3>
+      <h3 id="held-item-detail-title" className="text-base font-bold text-ink">
+        {item.displayName}
+      </h3>
 
       {/* Flat stats at the current grade — green because they scale with the slider. */}
       {statLines.length > 0 && (
@@ -74,7 +76,10 @@ export function HeldItemDetailModal({
   if (!open || !item) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4" onClick={onClose}>
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4"
+      onClick={onClose}
+    >
       <div
         className="max-h-[85vh] w-full max-w-md overflow-y-auto rounded-2xl border border-line bg-surface p-5 shadow-xl"
         onClick={(e) => e.stopPropagation()}

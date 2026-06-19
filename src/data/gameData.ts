@@ -1,12 +1,25 @@
 // Single load + validation of the game-data bundle, with lookup maps.
 // Imported once; the rest of the app reads from here.
 
-import bundled from "./patch-1.23.1.1.json";
+import bundled from "./patch-current.json";
 import { loadBundle } from "./loadBundle";
-import { refreshDataInBackground } from "./dataSource";
+import { activeRaw, clearDataCache, refreshDataInBackground } from "./dataSource";
+import { ZodError } from "zod";
 import type { Pokemon, HeldItem, BattleItem, Emblem } from "../types";
 
-export const bundle = loadBundle(bundled);
+function loadActiveBundle() {
+  try {
+    return loadBundle(activeRaw(bundled));
+  } catch (e) {
+    if (e instanceof ZodError) {
+      clearDataCache();
+      return loadBundle(bundled);
+    }
+    throw e;
+  }
+}
+
+export const bundle = loadActiveBundle();
 
 if (typeof window !== "undefined") {
   void refreshDataInBackground(bundle.lastUpdated, (patch) =>

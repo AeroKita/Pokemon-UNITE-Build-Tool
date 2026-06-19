@@ -96,9 +96,13 @@ export default defineConfig({
         maximumFileSizeToCacheInBytes: 4_000_000,
         runtimeCaching: [
           {
-            urlPattern: ({ url }) => url.pathname.includes("/assets/") && url.pathname.endsWith(".png"),
+            urlPattern: ({ url }) =>
+              url.pathname.includes("/assets/") && url.pathname.endsWith(".png"),
             handler: "CacheFirst",
-            options: { cacheName: "unite-art", expiration: { maxEntries: 2000, maxAgeSeconds: 60 * 60 * 24 * 60 } },
+            options: {
+              cacheName: "unite-art",
+              expiration: { maxEntries: 2000, maxAgeSeconds: 60 * 60 * 24 * 60 },
+            },
           },
         ],
       },

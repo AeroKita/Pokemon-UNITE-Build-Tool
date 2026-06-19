@@ -22,7 +22,7 @@ import { evaluateLoadout } from "../evaluate";
 import { makeEmblem } from "../../__tests__/fixtures";
 import { buildCandidatePool } from "../adapt";
 import { loadBundle } from "../../../data/loadBundle";
-import rawPatch from "../../../data/patch-1.23.1.1.json";
+import rawPatch from "../../../data/patch-current.json";
 import type { Pokemon, StatBlock } from "../../../types";
 
 // ---------------------------------------------------------------------------

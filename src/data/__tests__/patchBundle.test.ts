@@ -3,10 +3,10 @@ import { loadBundle } from "../loadBundle";
 import { computeEmblemLoadout } from "../../engine/emblems";
 import { computeEffectiveStats } from "../../engine/formulas";
 import type { CalcContext } from "../../types";
-import raw from "../patch-1.23.1.1.json";
+import raw from "../patch-current.json";
 
 // Guards the live community bundle (UNITE-DB) against schema drift and bad data.
-describe("patch-1.23.1.1 community bundle", () => {
+describe("community data bundle", () => {
   const bundle = loadBundle(raw);
 
   it("zod-validates and has the full roster", () => {
@@ -56,9 +56,14 @@ describe("patch-1.23.1.1 community bundle", () => {
 
   it("marks UNITE-DB gold-only emblems (no silver/bronze on CDN)", () => {
     const goldOnly = bundle.emblems.filter((e) => e.goldOnly);
-    expect(goldOnly.map((e) => e.pokemonName).sort()).toEqual(
-      ["Floragato", "Latias", "Latios", "Meowscarada", "Miraidon", "Sprigatito"],
-    );
+    expect(goldOnly.map((e) => e.pokemonName).sort()).toEqual([
+      "Floragato",
+      "Latias",
+      "Latios",
+      "Meowscarada",
+      "Miraidon",
+      "Sprigatito",
+    ]);
   });
 
   it("gives every non-basic move a local skill-icon path", () => {
@@ -104,5 +109,12 @@ describe("patch-1.23.1.1 community bundle", () => {
     expect(mb.effect).toEqual({ label: "Remaining HP", tiers: ["1%", "2%", "3%"] });
     const dc = bundle.heldItems.find((i) => i.id === "drain-crown")!;
     expect(dc.effect).toEqual({ label: "Lifesteal", tiers: ["9%", "12%", "15%"] });
+  });
+
+  // Curated-merge regression guard: normalize.py must keep hand-curated emblemName labels.
+  it("preserves curated build emblemName from curated_builds.json", () => {
+    const skeledirge = bundle.pokemon.find((p) => p.id === "skeledirge")!;
+    const build = skeledirge.builds!.find((b) => b.name === "Singing Special Attacker")!;
+    expect(build.emblemName).toBe("Singing Special Attacker");
   });
 });

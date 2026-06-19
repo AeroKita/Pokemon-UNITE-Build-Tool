@@ -1,7 +1,12 @@
 import { describe, it, expect } from "vitest";
 import {
-  emptyLoadout, encodeLoadout, decodeLoadout,
-  loadoutToFileJSON, parseLoadoutFile, sanitizeLoadout, loadoutFileName,
+  emptyLoadout,
+  encodeLoadout,
+  decodeLoadout,
+  loadoutToFileJSON,
+  parseLoadoutFile,
+  sanitizeLoadout,
+  loadoutFileName,
   type Loadout,
 } from "../loadout";
 
@@ -14,7 +19,10 @@ describe("loadout sharing", () => {
       battleItemId: "x-attack",
       move1Id: "power-up-punch",
       move2Id: "bone-rush",
-      emblems: [{ emblemId: "001-bulbasaur", grade: "gold" }, { emblemId: "004-charmander", grade: "silver" }],
+      emblems: [
+        { emblemId: "001-bulbasaur", grade: "gold" },
+        { emblemId: "004-charmander", grade: "silver" },
+      ],
       activeBoostIds: ["x-attack", "move:Feint"],
     };
     const decoded = decodeLoadout(encodeLoadout(l));
@@ -54,7 +62,10 @@ describe("loadout file export/import", () => {
     battleItemId: "x-attack",
     move1Id: null,
     move2Id: null,
-    emblems: [{ emblemId: "001-bulbasaur", grade: "gold" }, { emblemId: "004-charmander", grade: "silver" }],
+    emblems: [
+      { emblemId: "001-bulbasaur", grade: "gold" },
+      { emblemId: "004-charmander", grade: "silver" },
+    ],
     activeBoostIds: ["x-attack"],
   };
 

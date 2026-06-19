@@ -7,7 +7,14 @@ import { ROLE_FILTER_HEX } from "../ui/theme";
 import { BottomSheet } from "./shell/BottomSheet";
 import type { Role } from "../types";
 
-const ROLES: (Role | "All")[] = ["All", "Attacker", "AllRounder", "Speedster", "Defender", "Supporter"];
+const ROLES: (Role | "All")[] = [
+  "All",
+  "Attacker",
+  "AllRounder",
+  "Speedster",
+  "Defender",
+  "Supporter",
+];
 const ROLE_LABEL: Record<string, string> = { AllRounder: "All-Rounder" };
 
 interface PokemonPickerSheetProps {
@@ -65,9 +72,11 @@ export function PokemonPickerSheet({ onClose }: PokemonPickerSheetProps) {
               title={p.displayName}
               aria-pressed={selected}
               className={`group relative aspect-square min-h-16 rounded-lg border-2 p-1 transition
-                ${selected
-                  ? "border-transparent bg-mon-sel-bg ring-2 ring-mon-sel-ring"
-                  : "border-transparent bg-mon-bg hover:border-mon-hover"}`}
+                ${
+                  selected
+                    ? "border-transparent bg-mon-sel-bg ring-2 ring-mon-sel-ring"
+                    : "border-transparent bg-mon-bg hover:border-mon-hover"
+                }`}
             >
               <img
                 src={asset(p.iconAsset)}
@@ -100,9 +109,10 @@ function FilterChip({
   onClick: () => void;
   activeColor?: string;
 }) {
-  const style = active && activeColor
-    ? { background: activeColor, color: readableTextColor(activeColor) }
-    : undefined;
+  const style =
+    active && activeColor
+      ? { background: activeColor, color: readableTextColor(activeColor) }
+      : undefined;
   return (
     <button
       type="button"
@@ -110,7 +120,9 @@ function FilterChip({
       style={style}
       className={`shrink-0 rounded-full border px-3 py-2 text-sm font-medium capitalize min-h-11 ${
         active
-          ? activeColor ? "border-line" : "border-transparent bg-accent text-white"
+          ? activeColor
+            ? "border-line"
+            : "border-transparent bg-accent text-white"
           : "border-transparent bg-raise text-muted hover:bg-raise"
       }`}
     >

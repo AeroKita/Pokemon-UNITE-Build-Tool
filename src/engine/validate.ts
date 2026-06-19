@@ -85,8 +85,6 @@ try {
 check("Corrupt bundle (14 level rows) throws", threw, true);
 
 console.log(
-  failures === 0
-    ? "\nAll validation targets PASS."
-    : `\n${failures} validation target(s) FAILED.`,
+  failures === 0 ? "\nAll validation targets PASS." : `\n${failures} validation target(s) FAILED.`,
 );
 process.exit(failures === 0 ? 0 : 1);

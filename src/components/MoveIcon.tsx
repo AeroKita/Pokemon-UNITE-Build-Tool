@@ -14,7 +14,9 @@ export function MoveIcon({
   const [err, setErr] = useState(false);
   if (!src || err) {
     return (
-      <span className={`flex ${size} items-center justify-center rounded-lg bg-raise text-center text-[9px] font-medium leading-tight text-faint`}>
+      <span
+        className={`flex ${size} items-center justify-center rounded-lg bg-raise text-center text-[9px] font-medium leading-tight text-faint`}
+      >
         {alt.slice(0, 4)}
       </span>
     );

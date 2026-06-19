@@ -19,12 +19,7 @@ export interface StatBlock {
 
 // ----- Pokémon ---------------------------------------------------------------
 
-export type Role =
-  | "Attacker"
-  | "Speedster"
-  | "AllRounder"
-  | "Defender"
-  | "Supporter";
+export type Role = "Attacker" | "Speedster" | "AllRounder" | "Defender" | "Supporter";
 
 export type AttackType = "physical" | "special" | "hybrid";
 

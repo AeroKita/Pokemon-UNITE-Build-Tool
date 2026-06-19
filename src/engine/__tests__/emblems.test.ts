@@ -1,18 +1,6 @@
 import { describe, expect, it } from "vitest";
-import {
-  activeBonusPercent,
-  computeEmblemLoadout,
-  countColors,
-  sumEmblemFlats,
-} from "../emblems";
-import {
-  aerodactyl,
-  bundle,
-  diglett,
-  distinctEmblems,
-  gold,
-  makeEmblem,
-} from "./fixtures";
+import { activeBonusPercent, computeEmblemLoadout, countColors, sumEmblemFlats } from "../emblems";
+import { aerodactyl, bundle, diglett, distinctEmblems, gold, makeEmblem } from "./fixtures";
 
 const setBonuses = bundle.setBonuses;
 
@@ -84,13 +72,8 @@ describe("sumEmblemFlats", () => {
 
 describe("computeEmblemLoadout", () => {
   it("activates the right set bonuses from the bundle table", () => {
-    const loadout = computeEmblemLoadout(
-      distinctEmblems(6, ["brown"]),
-      setBonuses,
-    );
-    expect(loadout.activeSetBonuses).toEqual([
-      { color: "brown", bonusPercent: 0.04 },
-    ]);
+    const loadout = computeEmblemLoadout(distinctEmblems(6, ["brown"]), setBonuses);
+    expect(loadout.activeSetBonuses).toEqual([{ color: "brown", bonusPercent: 0.04 }]);
   });
 
   it("no bonus below the lowest threshold", () => {
@@ -102,10 +85,7 @@ describe("computeEmblemLoadout", () => {
   });
 
   it("navy/gray emblems never produce a bonus (absent from table)", () => {
-    const loadout = computeEmblemLoadout(
-      distinctEmblems(7, ["navy"]),
-      setBonuses,
-    );
+    const loadout = computeEmblemLoadout(distinctEmblems(7, ["navy"]), setBonuses);
     expect(loadout.activeSetBonuses).toEqual([]);
   });
 
@@ -126,8 +106,8 @@ describe("computeEmblemLoadout", () => {
   });
 
   it("rejects more than 10 slots", () => {
-    expect(() =>
-      computeEmblemLoadout(distinctEmblems(11, ["brown"]), setBonuses),
-    ).toThrow(/max is 10/);
+    expect(() => computeEmblemLoadout(distinctEmblems(11, ["brown"]), setBonuses)).toThrow(
+      /max is 10/,
+    );
   });
 });

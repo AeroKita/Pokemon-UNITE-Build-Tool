@@ -93,7 +93,9 @@ function Workspace() {
         title: p?.displayName ?? "Select Pokémon",
         subtitle: p ? (
           <span className="flex items-center gap-1.5">
-            <span className={`rounded-full px-2 py-0.5 text-[10px] font-semibold ${role!.bg} ${role!.text}`}>
+            <span
+              className={`rounded-full px-2 py-0.5 text-[10px] font-semibold ${role!.bg} ${role!.text}`}
+            >
               {ROLE_LABEL[p.role]}
             </span>
             <span className="capitalize">{p.attackType}</span>
@@ -130,7 +132,11 @@ function Workspace() {
         {dataUpdate && (
           <div className="mb-2 bg-accent px-4 py-2 text-center text-sm text-white">
             New game data (patch {dataUpdate}) is ready.{" "}
-            <button type="button" onClick={() => location.reload()} className="font-semibold underline">
+            <button
+              type="button"
+              onClick={() => location.reload()}
+              className="font-semibold underline"
+            >
               Reload to apply
             </button>
           </div>

@@ -42,7 +42,11 @@ export function CollapsibleCard({
   const toggle = () =>
     setOpen((o) => {
       const next = !o;
-      try { localStorage.setItem(storageKey(persistKey), next ? "1" : "0"); } catch { /* quota */ }
+      try {
+        localStorage.setItem(storageKey(persistKey), next ? "1" : "0");
+      } catch {
+        /* quota */
+      }
       return next;
     });
 
@@ -54,8 +58,19 @@ export function CollapsibleCard({
         onClick={toggle}
       >
         <div className="flex items-center gap-2">
-          <span aria-hidden className={`text-faint transition-transform ${open ? "" : "-rotate-90"}`}>
-            <svg className="h-4 w-4" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <span
+            aria-hidden
+            className={`text-faint transition-transform ${open ? "" : "-rotate-90"}`}
+          >
+            <svg
+              className="h-4 w-4"
+              viewBox="0 0 20 20"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
               <path d="M5.5 7.5 10 12l4.5-4.5" />
             </svg>
           </span>

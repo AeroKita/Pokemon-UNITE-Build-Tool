@@ -1,4 +1,4 @@
-"""Normalize UNITE-DB raw JSON into a GameDataBundle (src/data/patch-1.23.1.1.json).
+"""Normalize UNITE-DB raw JSON into a GameDataBundle (src/data/patch-current.json).
 
 Maps UNITE-DB's shapes onto schema/types.ts. Conventions applied here:
   - Percentages become decimals (crit 20 -> 0.20, attack_speed 40 -> 0.40).
@@ -20,16 +20,17 @@ Usage:  python3 normalize.py
 from __future__ import annotations
 
 import json
+import os
 import re
 from datetime import date
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 RAW = HERE / "_raw"
-OUT = HERE.parent.parent / "src" / "data" / "patch-1.23.1.1.json"
+OUT = HERE.parent.parent / "src" / "data" / "patch-current.json"
 CDN = "https://d275t8dp8rxb42.cloudfront.net"
 ASSETS = "/assets"  # local mirror under public/assets (see fetch_art.py)
-PATCH_VERSION = "1.23.1.1"
+PATCH_VERSION = os.environ.get("PATCH_VERSION") or "1.23.1.1"
 
 # ---- helpers ---------------------------------------------------------------
 

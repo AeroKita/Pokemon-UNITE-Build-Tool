@@ -1,6 +1,13 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useStore } from "../state/store";
-import { pokemonById, heldItemById, battleItemById, emblemById, emblems as allEmblems, setBonuses } from "../data/gameData";
+import {
+  pokemonById,
+  heldItemById,
+  battleItemById,
+  emblemById,
+  emblems as allEmblems,
+  setBonuses,
+} from "../data/gameData";
 import { recommendBuild, solveOwnedEmblemSet } from "../engine/recommend";
 import { moveIdsFromNames, resolveFinalMove } from "../engine/moves";
 import { asset } from "../ui/asset";
@@ -85,19 +92,25 @@ export function RecommendPanel() {
     const rec = recommendBuild(pokemon, [...heldItemById.values()], setBonuses);
     const emblems = solveOwnedEmblemSet(pokemon, allEmblems, owned);
     return emblems.length
-      ? [{
-          name: "Your Emblems",
-          emblemName: "From your inventory",
-          source: "owned" as const,
-          heldItemIds: rec.heldItemIds,
-          battleItemId: rec.battleItemId ?? undefined,
-          emblems,
-        }]
+      ? [
+          {
+            name: "Your Emblems",
+            emblemName: "From your inventory",
+            source: "owned" as const,
+            heldItemIds: rec.heldItemIds,
+            battleItemId: rec.battleItemId ?? undefined,
+            emblems,
+          },
+        ]
       : [];
   }, [pokemon, owned]);
 
   const [tab, setTab] = useState<Tab>("recommended");
-  const [idxByTab, setIdxByTab] = useState<Record<Tab, number>>({ recommended: 0, creative: 0, yours: 0 });
+  const [idxByTab, setIdxByTab] = useState<Record<Tab, number>>({
+    recommended: 0,
+    creative: 0,
+    yours: 0,
+  });
 
   // The Pokémon we've already auto-applied for. Initialised to the cold-load
   // restored build's Pokémon so we never overwrite it. Because this ref is only
@@ -152,7 +165,10 @@ export function RecommendPanel() {
   const build = builds[idx] ?? null;
 
   const resolvedEmblems = (build?.emblems ?? [])
-    .map((p) => { const e = emblemById.get(p.emblemId); return e ? { emblem: e, grade: p.grade } : null; })
+    .map((p) => {
+      const e = emblemById.get(p.emblemId);
+      return e ? { emblem: e, grade: p.grade } : null;
+    })
     .filter((x): x is NonNullable<typeof x> => x !== null);
 
   const trainer = build?.battleItemId ? battleItemById.get(build.battleItemId) : null;
@@ -241,8 +257,14 @@ export function RecommendPanel() {
                   return item ? (
                     <Tooltip key={id} content={itemTip(item)}>
                       <span className="flex w-16 flex-col items-center">
-                        <img src={asset(item.iconAsset)} alt={item.displayName} className="h-10 w-10 object-contain" />
-                        <span className="mt-0.5 text-center text-[10px] leading-tight text-muted">{item.displayName}</span>
+                        <img
+                          src={asset(item.iconAsset)}
+                          alt={item.displayName}
+                          className="h-10 w-10 object-contain"
+                        />
+                        <span className="mt-0.5 text-center text-[10px] leading-tight text-muted">
+                          {item.displayName}
+                        </span>
                       </span>
                     </Tooltip>
                   ) : null;
@@ -257,7 +279,9 @@ export function RecommendPanel() {
                     <Tooltip key={mv.id} content={moveTip(mv)}>
                       <span className="flex w-16 flex-col items-center">
                         <MoveIcon src={mv.iconAsset} alt={mv.name} />
-                        <span className="mt-0.5 text-center text-[10px] leading-tight text-muted">{mv.name}</span>
+                        <span className="mt-0.5 text-center text-[10px] leading-tight text-muted">
+                          {mv.name}
+                        </span>
                       </span>
                     </Tooltip>
                   ))}
@@ -269,11 +293,19 @@ export function RecommendPanel() {
               {trainer ? (
                 <Tooltip content={itemTip(trainer)}>
                   <span className="flex w-16 flex-col items-center">
-                    <img src={asset(trainer.iconAsset)} alt={trainer.displayName} className="h-10 w-10 object-contain" />
-                    <span className="mt-0.5 text-center text-[10px] leading-tight text-muted">{trainer.displayName}</span>
+                    <img
+                      src={asset(trainer.iconAsset)}
+                      alt={trainer.displayName}
+                      className="h-10 w-10 object-contain"
+                    />
+                    <span className="mt-0.5 text-center text-[10px] leading-tight text-muted">
+                      {trainer.displayName}
+                    </span>
                   </span>
                 </Tooltip>
-              ) : <span className="text-xs text-faint">—</span>}
+              ) : (
+                <span className="text-xs text-faint">—</span>
+              )}
             </div>
             <div>
               <p className="mb-1 text-xs font-medium text-faint">Emblems ({ownedCount})</p>
@@ -281,11 +313,21 @@ export function RecommendPanel() {
                 {resolvedEmblems.map(({ emblem, grade }, i) => (
                   <Tooltip key={i} content={emblemTip(emblem, grade)}>
                     <span className="relative inline-block">
-                      <img src={asset(emblemIconForGrade(emblem, grade))} alt={emblem.pokemonName} className="h-16 w-16 object-contain" />
-                      <span className="absolute -bottom-0.5 -right-0.5 rounded bg-neutral-800 px-0.5 text-[9px] font-bold text-white">{GRADE_LETTER[grade]}</span>
+                      <img
+                        src={asset(emblemIconForGrade(emblem, grade))}
+                        alt={emblem.pokemonName}
+                        className="h-16 w-16 object-contain"
+                      />
+                      <span className="absolute -bottom-0.5 -right-0.5 rounded bg-neutral-800 px-0.5 text-[9px] font-bold text-white">
+                        {GRADE_LETTER[grade]}
+                      </span>
                       <span className="absolute -left-0.5 -top-0.5 flex gap-0.5">
                         {emblem.colors.map((c) => (
-                          <span key={c} className="h-2 w-2 rounded-full ring-1 ring-white" style={{ background: EMBLEM_COLOR_HEX[c] }} />
+                          <span
+                            key={c}
+                            className="h-2 w-2 rounded-full ring-1 ring-white"
+                            style={{ background: EMBLEM_COLOR_HEX[c] }}
+                          />
                         ))}
                       </span>
                     </span>

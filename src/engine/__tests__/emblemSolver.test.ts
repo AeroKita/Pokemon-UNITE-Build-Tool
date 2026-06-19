@@ -22,7 +22,10 @@ describe("emblem solver", () => {
   });
 
   it("meets the color targets it is given (feasible targets)", () => {
-    const targets = new Map<EmblemColor, number>([["brown", 6], ["white", 6]]);
+    const targets = new Map<EmblemColor, number>([
+      ["brown", 6],
+      ["white", 6],
+    ]);
     const set = solveEmblemSet(physical, emblems, { targets, seed: 3 });
     const counts = colorCountsOf(set, emblemById);
     expect(counts.get("brown") ?? 0).toBeGreaterThanOrEqual(6);
@@ -42,8 +45,12 @@ describe("emblem solver", () => {
   });
 
   it("varies with the seed (Reroll)", () => {
-    const a = solveEmblemSet(physical, emblems, { seed: 1 }).map((p) => p.emblemId).join();
-    const b = solveEmblemSet(physical, emblems, { seed: 99 }).map((p) => p.emblemId).join();
+    const a = solveEmblemSet(physical, emblems, { seed: 1 })
+      .map((p) => p.emblemId)
+      .join();
+    const b = solveEmblemSet(physical, emblems, { seed: 99 })
+      .map((p) => p.emblemId)
+      .join();
     expect(a).not.toBe(b);
   });
 

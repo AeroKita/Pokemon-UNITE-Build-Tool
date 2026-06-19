@@ -53,9 +53,7 @@ describe("stacking order (the #1 source of third-party inaccuracy)", () => {
       distinctEmblems(6, ["brown"], { attack: 16.7 }),
       setBonuses,
     );
-    const stats = computeEffectiveStats(
-      lucario, 15, emblems, [floatStone], [40], IN_COMBAT,
-    );
+    const stats = computeEffectiveStats(lucario, 15, emblems, [floatStone], [40], IN_COMBAT);
     // correct:               floor((429+100) * 1.04) + 28 = 550 + 28  = 578
     // item flats inside %:   floor((429+100+28) * 1.04)   = 579   (wrong)
     // flats not multiplied:  floor(429*1.04) + 100 + 28   = 574   (wrong)
@@ -115,10 +113,7 @@ describe("yellow set bonus is out-of-combat only", () => {
 
 describe("real bundle emblems (Diglett / Aerodactyl)", () => {
   it("Diglett+Aerodactyl: 2 brown (+1% Atk), negative flats, summed move speed", () => {
-    const emblems = computeEmblemLoadout(
-      [gold(diglett), gold(aerodactyl)],
-      setBonuses,
-    );
+    const emblems = computeEmblemLoadout([gold(diglett), gold(aerodactyl)], setBonuses);
     const stats = computeEffectiveStats(lucario, 15, emblems, [], [], IN_COMBAT);
     expect(stats.attack).toBe(Math.floor(429 * 1.01)); // 433, no attack flats
     expect(stats.hp).toBe(7249 - 50);
@@ -143,26 +138,22 @@ describe("real bundle emblems (Diglett / Aerodactyl)", () => {
 
 describe("conditional item effects", () => {
   it("Attack Weight: +12 attack per goal scored", () => {
-    const stats = computeEffectiveStats(
-      lucario, 15, noEmblems, [attackWeight], [40],
-      { inCombat: true, goalsScored: 2 },
-    );
+    const stats = computeEffectiveStats(lucario, 15, noEmblems, [attackWeight], [40], {
+      inCombat: true,
+      goalsScored: 2,
+    });
     // 429 + 21 (grade-40 flat) + 12×2
     expect(stats.attack).toBe(474);
   });
 
   it("Float Stone grade-40 flats: +28 Atk, +175 MS (documented target)", () => {
-    const stats = computeEffectiveStats(
-      lucario, 15, noEmblems, [floatStone], [40], IN_COMBAT,
-    );
+    const stats = computeEffectiveStats(lucario, 15, noEmblems, [floatStone], [40], IN_COMBAT);
     expect(stats.attack).toBe(429 + 28);
     expect(stats.moveSpeed).toBe(4300 + 175);
   });
 
   it("Float Stone +20% move speed applies only out of combat (display layer)", () => {
-    const stats = computeEffectiveStats(
-      lucario, 15, noEmblems, [floatStone], [40], OUT_OF_COMBAT,
-    );
+    const stats = computeEffectiveStats(lucario, 15, noEmblems, [floatStone], [40], OUT_OF_COMBAT);
     expect(outOfCombatMoveSpeed(stats, [floatStone], OUT_OF_COMBAT)).toBe(
       Math.floor((4300 + 175) * 1.2), // 5370
     );

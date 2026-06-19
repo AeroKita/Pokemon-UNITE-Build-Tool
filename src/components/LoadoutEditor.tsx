@@ -1,6 +1,14 @@
 import { useMemo, useState } from "react";
 import { useStore } from "../state/store";
-import { heldItems, battleItems, emblems, heldItemById, battleItemById, emblemById, isUniqueHeldItem } from "../data/gameData";
+import {
+  heldItems,
+  battleItems,
+  emblems,
+  heldItemById,
+  battleItemById,
+  emblemById,
+  isUniqueHeldItem,
+} from "../data/gameData";
 import { MAX_EMBLEMS } from "../state/loadout";
 import { asset } from "../ui/asset";
 import { emblemIconForGrade } from "../ui/emblemIcon";
@@ -17,7 +25,8 @@ import { itemTip, emblemTip, statsAtGrade } from "./tips";
 type Picker = { kind: "held"; slot: number } | { kind: "battle" } | { kind: "emblem" } | null;
 
 export function LoadoutEditor() {
-  const { loadout, dispatch, owned, toggleOwned, expert, heldSlotGrades, setHeldItemGradeForSlot } = useStore();
+  const { loadout, dispatch, owned, toggleOwned, expert, heldSlotGrades, setHeldItemGradeForSlot } =
+    useStore();
   const [picker, setPicker] = useState<Picker>(null);
 
   const emblemGoldOnlyIds = useMemo(
@@ -25,10 +34,23 @@ export function LoadoutEditor() {
     [],
   );
 
-  const heldPickItems: PickItem[] = heldItems.map((i) => ({ id: i.id, name: i.displayName, icon: i.iconAsset, title: i.description }));
-  const battlePickItems: PickItem[] = battleItems.map((i) => ({ id: i.id, name: i.displayName, icon: i.iconAsset, title: i.description }));
+  const heldPickItems: PickItem[] = heldItems.map((i) => ({
+    id: i.id,
+    name: i.displayName,
+    icon: i.iconAsset,
+    title: i.description,
+  }));
+  const battlePickItems: PickItem[] = battleItems.map((i) => ({
+    id: i.id,
+    name: i.displayName,
+    icon: i.iconAsset,
+    title: i.description,
+  }));
   const emblemPickItems: PickItem[] = emblems.map((e) => ({
-    id: e.id, name: e.pokemonName, icon: e.iconAsset, subtitle: e.colors.join("/"),
+    id: e.id,
+    name: e.pokemonName,
+    icon: e.iconAsset,
+    subtitle: e.colors.join("/"),
     colors: e.colors,
   }));
 
@@ -49,8 +71,14 @@ export function LoadoutEditor() {
                   >
                     {item ? (
                       <>
-                        <img src={asset(item.iconAsset)} alt={item.displayName} className="h-10 w-10 object-contain" />
-                        <span className="mt-0.5 text-[10px] leading-tight text-muted">{item.displayName}</span>
+                        <img
+                          src={asset(item.iconAsset)}
+                          alt={item.displayName}
+                          className="h-10 w-10 object-contain"
+                        />
+                        <span className="mt-0.5 text-[10px] leading-tight text-muted">
+                          {item.displayName}
+                        </span>
                       </>
                     ) : (
                       <span className="text-2xl text-faint">+</span>
@@ -61,7 +89,11 @@ export function LoadoutEditor() {
                   <div className="min-w-[10rem] flex-1">
                     <div className="mb-1 flex items-center justify-between">
                       <label className="text-xs font-medium text-muted">Grade</label>
-                      <GradeField value={grade} label={item!.displayName} onCommit={(g) => setHeldItemGradeForSlot(slot, g)} />
+                      <GradeField
+                        value={grade}
+                        label={item!.displayName}
+                        onCommit={(g) => setHeldItemGradeForSlot(slot, g)}
+                      />
                     </div>
                     <div className="py-3">
                       <input
@@ -74,7 +106,9 @@ export function LoadoutEditor() {
                       />
                     </div>
                     <p className="mt-1 font-mono text-[10px] text-faint">
-                      {heldItemStatLines(statsAtGrade(item, grade)).map((l) => `${l.label} ${l.value}`).join(" · ") || "—"}
+                      {heldItemStatLines(statsAtGrade(item, grade))
+                        .map((l) => `${l.label} ${l.value}`)
+                        .join(" · ") || "—"}
                     </p>
                   </div>
                 )}
@@ -86,15 +120,27 @@ export function LoadoutEditor() {
 
       {/* Trainer (battle) item */}
       <Section title="Trainer Item">
-        <Tooltip content={loadout.battleItemId && battleItemById.get(loadout.battleItemId) ? itemTip(battleItemById.get(loadout.battleItemId)!) : "Add a Trainer Item"}>
+        <Tooltip
+          content={
+            loadout.battleItemId && battleItemById.get(loadout.battleItemId)
+              ? itemTip(battleItemById.get(loadout.battleItemId)!)
+              : "Add a Trainer Item"
+          }
+        >
           <button
             onClick={() => setPicker({ kind: "battle" })}
             className="flex h-20 w-20 flex-col items-center justify-center rounded-xl border-2 border-dashed border-line p-1 hover:border-accent hover:bg-accent-weak"
           >
             {loadout.battleItemId && battleItemById.get(loadout.battleItemId) ? (
               <>
-                <img src={asset(battleItemById.get(loadout.battleItemId)!.iconAsset)} alt="" className="h-10 w-10 object-contain" />
-                <span className="mt-0.5 text-[10px] leading-tight text-muted">{battleItemById.get(loadout.battleItemId)!.displayName}</span>
+                <img
+                  src={asset(battleItemById.get(loadout.battleItemId)!.iconAsset)}
+                  alt=""
+                  className="h-10 w-10 object-contain"
+                />
+                <span className="mt-0.5 text-[10px] leading-tight text-muted">
+                  {battleItemById.get(loadout.battleItemId)!.displayName}
+                </span>
               </>
             ) : (
               <span className="text-2xl text-faint">+</span>
@@ -113,10 +159,18 @@ export function LoadoutEditor() {
               <div key={i} className="flex flex-col items-center rounded-lg border border-line p-1">
                 <Tooltip content={emblemTip(emblem, pick.grade)}>
                   <span className="relative inline-block">
-                    <img src={asset(emblemIconForGrade(emblem, pick.grade))} alt={emblem.pokemonName} className="h-16 w-16 object-contain" />
+                    <img
+                      src={asset(emblemIconForGrade(emblem, pick.grade))}
+                      alt={emblem.pokemonName}
+                      className="h-16 w-16 object-contain"
+                    />
                     <span className="absolute -left-1 -top-1 flex gap-0.5">
                       {emblem.colors.map((c) => (
-                        <span key={c} className="h-2.5 w-2.5 rounded-full ring-1 ring-white" style={{ background: EMBLEM_COLOR_HEX[c] }} />
+                        <span
+                          key={c}
+                          className="h-2.5 w-2.5 rounded-full ring-1 ring-white"
+                          style={{ background: EMBLEM_COLOR_HEX[c] }}
+                        />
                       ))}
                     </span>
                   </span>
@@ -125,7 +179,12 @@ export function LoadoutEditor() {
                   {gradesForEmblem(emblem).map((g) => {
                     const on = pick.grade === g;
                     return (
-                      <button key={g} type="button" title={g} aria-label={`${g} grade`} aria-pressed={on}
+                      <button
+                        key={g}
+                        type="button"
+                        title={g}
+                        aria-label={`${g} grade`}
+                        aria-pressed={on}
                         onClick={() => dispatch({ type: "setEmblemGrade", index: i, grade: g })}
                         className="flex h-11 w-11 items-center justify-center rounded-full transition"
                       >
@@ -139,7 +198,12 @@ export function LoadoutEditor() {
                     );
                   })}
                 </div>
-                <button onClick={() => dispatch({ type: "removeEmblem", index: i })} className="min-h-11 px-2 text-sm text-neg hover:text-neg">remove</button>
+                <button
+                  onClick={() => dispatch({ type: "removeEmblem", index: i })}
+                  className="min-h-11 px-2 text-sm text-neg hover:text-neg"
+                >
+                  remove
+                </button>
               </div>
             );
           })}
@@ -147,27 +211,41 @@ export function LoadoutEditor() {
             <button
               onClick={() => setPicker({ kind: "emblem" })}
               className="flex h-24 w-16 items-center justify-center rounded-lg border-2 border-dashed border-line text-xl text-faint hover:border-accent hover:bg-accent-weak"
-            >+</button>
+            >
+              +
+            </button>
           )}
         </div>
         {loadout.emblems.length > 0 && (
-          <div className="mt-3"><EmblemSetSummary picks={loadout.emblems} precise={expert} /></div>
+          <div className="mt-3">
+            <EmblemSetSummary picks={loadout.emblems} precise={expert} />
+          </div>
         )}
       </Section>
 
       {picker?.kind === "held" && (
-        <PickerModal title="Choose Held Item" items={heldPickItems}
+        <PickerModal
+          title="Choose Held Item"
+          items={heldPickItems}
           onPick={(id) => dispatch({ type: "setHeldItem", slot: picker.slot, id })}
-          onClose={() => setPicker(null)} />
+          onClose={() => setPicker(null)}
+        />
       )}
       {picker?.kind === "battle" && (
-        <PickerModal title="Choose Trainer Item" items={battlePickItems}
+        <PickerModal
+          title="Choose Trainer Item"
+          items={battlePickItems}
           onPick={(id) => dispatch({ type: "setBattleItem", id })}
-          onClose={() => setPicker(null)} />
+          onClose={() => setPicker(null)}
+        />
       )}
       {picker?.kind === "emblem" && (
-        <PickerModal title="Choose Emblem" items={emblemPickItems}
-          onPick={(id, grade) => dispatch({ type: "addEmblem", emblemId: id, grade: grade ?? "gold" })}
+        <PickerModal
+          title="Choose Emblem"
+          items={emblemPickItems}
+          onPick={(id, grade) =>
+            dispatch({ type: "addEmblem", emblemId: id, grade: grade ?? "gold" })
+          }
           onClose={() => setPicker(null)}
           grades
           owned={owned}
@@ -178,7 +256,8 @@ export function LoadoutEditor() {
             label: c,
             activeColor: EMBLEM_COLOR_HEX[c],
             predicate: (id) => emblemById.get(id)?.colors.includes(c) ?? false,
-          }))} />
+          }))}
+        />
       )}
     </div>
   );
@@ -186,7 +265,11 @@ export function LoadoutEditor() {
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <CollapsibleCard title={title} persistKey={`editor-${title.split(" ")[0].toLowerCase()}`} defaultOpen={false}>
+    <CollapsibleCard
+      title={title}
+      persistKey={`editor-${title.split(" ")[0].toLowerCase()}`}
+      defaultOpen={false}
+    >
       {children}
     </CollapsibleCard>
   );

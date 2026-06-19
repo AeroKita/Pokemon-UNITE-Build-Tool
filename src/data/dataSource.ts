@@ -18,7 +18,12 @@ const DATA_BASE =
   "https://aerokita.github.io/FoxForge-GG/data";
 const MANIFEST_URL = `${DATA_BASE}/manifest.json`;
 
-interface CacheEntry { version: string; patchVersion: string; raw: unknown; fetchedAt: number; }
+interface CacheEntry {
+  version: string;
+  patchVersion: string;
+  raw: unknown;
+  fetchedAt: number;
+}
 
 function readCache(): CacheEntry | null {
   try {
@@ -33,11 +38,30 @@ function readCache(): CacheEntry | null {
 export function loadCachedRaw(): unknown | null {
   return readCache()?.raw ?? null;
 }
+
+/**
+ * The raw bundle the app should load: the cached remote copy when it is
+ * strictly newer than the build-time baseline, otherwise the baseline.
+ * `version` and `lastUpdated` are ISO dates, so string compare = date compare.
+ * Clears a non-newer cache so a freshly shipped app build always wins.
+ */
+export function activeRaw(baseline: { lastUpdated?: string }): unknown {
+  const cache = readCache();
+  if (cache && typeof cache.version === "string" && cache.version > (baseline.lastUpdated ?? "")) {
+    return cache.raw;
+  }
+  if (cache) clearDataCache();
+  return baseline;
+}
 export function cachedPatchVersion(): string | null {
   return readCache()?.patchVersion ?? null;
 }
 export function clearDataCache(): void {
-  try { localStorage.removeItem(CACHE_KEY); } catch { /* ignore */ }
+  try {
+    localStorage.removeItem(CACHE_KEY);
+  } catch {
+    /* ignore */
+  }
 }
 
 export interface DataCheckResult {
@@ -52,18 +76,31 @@ export interface DataCheckResult {
  */
 export async function checkDataNow(currentVersion: string): Promise<DataCheckResult> {
   try {
-    const m = await fetch(MANIFEST_URL, { cache: "no-store" }).then((r) => (r.ok ? r.json() : null));
+    const m = await fetch(MANIFEST_URL, { cache: "no-store" }).then((r) =>
+      r.ok ? r.json() : null,
+    );
     if (!m?.version || !m?.url) return { status: "offline" };
 
     const effective = readCache()?.version ?? currentVersion;
-    if (m.version === effective) return { status: "current", patchVersion: cachedPatchVersion() ?? m.patchVersion };
+    if (m.version === effective)
+      return { status: "current", patchVersion: cachedPatchVersion() ?? m.patchVersion };
 
     const raw = await fetch(m.url, { cache: "no-store" }).then((r) => (r.ok ? r.json() : null));
     if (!raw) return { status: "offline" };
     loadBundle(raw); // validate against the schema; throws on malformed data
     try {
-      localStorage.setItem(CACHE_KEY, JSON.stringify({ version: m.version, patchVersion: m.patchVersion ?? "?", raw, fetchedAt: Date.now() } satisfies CacheEntry));
-    } catch { /* quota */ }
+      localStorage.setItem(
+        CACHE_KEY,
+        JSON.stringify({
+          version: m.version,
+          patchVersion: m.patchVersion ?? "?",
+          raw,
+          fetchedAt: Date.now(),
+        } satisfies CacheEntry),
+      );
+    } catch {
+      /* quota */
+    }
     return { status: "updated", patchVersion: m.patchVersion };
   } catch {
     return { status: "offline" };
@@ -71,7 +108,10 @@ export async function checkDataNow(currentVersion: string): Promise<DataCheckRes
 }
 
 /** Fire-and-forget refresh on startup; calls onUpdate(patchVersion) if a newer bundle was cached. */
-export async function refreshDataInBackground(currentVersion: string, onUpdate?: (patch: string) => void): Promise<void> {
+export async function refreshDataInBackground(
+  currentVersion: string,
+  onUpdate?: (patch: string) => void,
+): Promise<void> {
   const result = await checkDataNow(currentVersion);
   if (result.status === "updated") onUpdate?.(result.patchVersion ?? "");
 }

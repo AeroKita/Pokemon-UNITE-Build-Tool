@@ -1,7 +1,12 @@
 import { useRef, useState } from "react";
 import { useStore } from "../state/store";
 import { pokemonById } from "../data/gameData";
-import { MAX_SAVED_LOADOUTS, loadoutToFileJSON, parseLoadoutFile, loadoutFileName } from "../state/loadout";
+import {
+  MAX_SAVED_LOADOUTS,
+  loadoutToFileJSON,
+  parseLoadoutFile,
+  loadoutFileName,
+} from "../state/loadout";
 import { asset } from "../ui/asset";
 import { CollapsibleCard } from "./CollapsibleCard";
 
@@ -17,7 +22,9 @@ export function LoadoutBar() {
       await navigator.clipboard.writeText(shareUrl());
       setCopied(true);
       setTimeout(() => setCopied(false), 1500);
-    } catch { /* clipboard blocked */ }
+    } catch {
+      /* clipboard blocked */
+    }
   };
 
   const exportFile = () => {
@@ -39,7 +46,10 @@ export function LoadoutBar() {
     if (!file) return;
     try {
       const parsed = parseLoadoutFile(await file.text());
-      if (!parsed) { setImportMsg("Not a valid loadout file."); return; }
+      if (!parsed) {
+        setImportMsg("Not a valid loadout file.");
+        return;
+      }
       dispatch({ type: "load", loadout: parsed });
       setImportMsg("Loadout imported ✓");
       setTimeout(() => setImportMsg(null), 2000);
@@ -58,7 +68,8 @@ export function LoadoutBar() {
     <CollapsibleCard title="Save & Load" persistKey="loadouts" defaultOpen={false}>
       <div className="mb-3 flex items-center gap-2">
         <input
-          value={name} onChange={(e) => setName(e.target.value)}
+          value={name}
+          onChange={(e) => setName(e.target.value)}
           placeholder="Loadout name…"
           className="min-h-11 flex-1 rounded-lg border border-line px-3 py-2 text-sm outline-none focus:border-accent"
         />
@@ -113,7 +124,9 @@ export function LoadoutBar() {
       {importMsg && <p className="mb-2 text-xs text-muted">{importMsg}</p>}
       <div className="mb-1 flex items-center justify-between text-xs text-faint">
         <span>Saved loadouts</span>
-        <span>{saved.length}/{MAX_SAVED_LOADOUTS}</span>
+        <span>
+          {saved.length}/{MAX_SAVED_LOADOUTS}
+        </span>
       </div>
       {saved.length === 0 ? (
         <p className="text-sm text-faint">No saved loadouts yet.</p>
@@ -122,11 +135,24 @@ export function LoadoutBar() {
           {saved.map((s) => {
             const p = s.pokemonId ? pokemonById.get(s.pokemonId) : null;
             return (
-              <li key={s.id} className="flex min-h-11 items-center gap-2 rounded-lg border border-line-soft px-3 py-1">
+              <li
+                key={s.id}
+                className="flex min-h-11 items-center gap-2 rounded-lg border border-line-soft px-3 py-1"
+              >
                 {p && <img src={asset(p.iconAsset)} alt="" className="h-7 w-7 object-contain" />}
                 <span className="flex-1 truncate text-sm text-ink">{s.name}</span>
-                <button onClick={() => loadSaved(s)} className="min-h-11 min-w-11 rounded-lg px-2 text-sm font-medium text-accent-ink hover:bg-accent-weak">Load</button>
-                <button onClick={() => remove(s.id)} className="min-h-11 min-w-11 rounded-lg px-2 text-sm text-neg hover:bg-neg/10">Delete</button>
+                <button
+                  onClick={() => loadSaved(s)}
+                  className="min-h-11 min-w-11 rounded-lg px-2 text-sm font-medium text-accent-ink hover:bg-accent-weak"
+                >
+                  Load
+                </button>
+                <button
+                  onClick={() => remove(s.id)}
+                  className="min-h-11 min-w-11 rounded-lg px-2 text-sm text-neg hover:bg-neg/10"
+                >
+                  Delete
+                </button>
               </li>
             );
           })}

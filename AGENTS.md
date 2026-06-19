@@ -48,7 +48,7 @@ FoxForge GG is a three-layer app: a **pure calculation engine**, a **versioned d
 
 User edits flow through `src/state/store.tsx` (reducer + context) into a `Loadout` model (`src/state/loadout.ts`, persisted in localStorage). Every stat display path calls `deriveBuild` / `deriveAtLevel` in `src/engine/derive.ts`, which is the single aggregation point: emblem flats and set bonuses → held items → active toggles → attack speed. UI components (`BuildSummaryBar`, `StatPanel`, `CompareView`, `LevelGraph`) consume `DerivedBuild` only—changing formulas happens in `src/engine/` without touching components.
 
-Game facts live in patch-keyed JSON (`src/data/patch-*.json`) loaded and validated by zod in `src/data/loadBundle.ts`, with lookup maps exposed via `src/data/gameData.ts`. Numeric data is refreshed by Python tooling under `tools/community/`—hand-editing bundle JSON is discouraged; curated builds and label overrides belong in `curated_builds.json` (see below). UNITE-DB ships blank move descriptions for many Pokémon; `tools/community/move_descriptions.json` (Serebii-sourced, via `scrape_serebii.py`) is merged by `normalize.py` to fill only empty move `description` fields—existing UNITE-DB text always wins. Blank passive descriptions are backfilled from the raw passive skill's `rsb.true_desc` in `_raw/pokemon.json` (local UNITE-DB mirror, not Serebii). The bundled baseline (`src/data/`) and the published runtime copy (`public/data/`) must stay byte-identical. Art mirrors under `public/assets/` and resolves portably via `src/ui/asset.ts` (supports relative `base: "./"` for static hosts and GitHub Pages sub-paths).
+Game facts live in zod-validated JSON loaded via `src/data/loadBundle.ts`, with lookup maps exposed via `src/data/gameData.ts`. The build-time baseline is `src/data/patch-current.json` (stable filename; `patchVersion` is inside the JSON). The published runtime copy under `public/data/` is version-stamped (`patch-<version>.json` plus `manifest.json`) for cache-busting and is produced by the data refresh workflow. Numeric data is refreshed by Python tooling under `tools/community/`—hand-editing bundle JSON is discouraged; curated builds and label overrides belong in `curated_builds.json` (see below). UNITE-DB ships blank move descriptions for many Pokémon; `tools/community/move_descriptions.json` (Serebii-sourced, via `scrape_serebii.py`) is merged by `normalize.py` to fill only empty move `description` fields—existing UNITE-DB text always wins. Blank passive descriptions are backfilled from the raw passive skill's `rsb.true_desc` in `_raw/pokemon.json` (local UNITE-DB mirror, not Serebii). Art mirrors under `public/assets/` and resolves portably via `src/ui/asset.ts` (supports relative `base: "./"` for static hosts and GitHub Pages sub-paths).
 
 Recommendations (`src/engine/recommend.ts`) sit beside the engine but must respect the same stat model and owned-emblem inventory semantics as the editor.
 
@@ -56,7 +56,7 @@ Recommendations (`src/engine/recommend.ts`) sit beside the engine but must respe
 
 `src/engine/` modules are pure TypeScript with Vitest coverage. `formulas.ts`, `emblems.ts`, `attackSpeed.ts`, `effects.ts`, and `derive.ts` must remain free of React/DOM imports. New combat mechanics extend the engine and data schema first; UI toggles and panels follow.
 
-Treat these paths as frozen unless a task explicitly requires engine or data-pipeline changes: `src/engine/`, `tools/`, `src/state/loadout.ts`, `src/state/heldItemGrades.ts`. Patch bundles under `src/data/` and `public/data/` are normally pipeline-generated; keep both copies in sync when making runtime-only exceptions (see Data Bundle Versioning). `src/state/store.tsx` has been edited for theme preference wiring only (`themePref`, `setThemePref`, OS listener); all other store behavior is unchanged.
+Treat these paths as frozen unless a task explicitly requires engine or data-pipeline changes: `src/engine/`, `tools/`, `src/state/loadout.ts`, `src/state/heldItemGrades.ts`. Patch bundles under `src/data/` and `public/data/` are normally pipeline-generated; the baseline uses a stable filename while the published copy is version-stamped (see Data Bundle Versioning). `src/state/store.tsx` has been edited for theme preference wiring only (`themePref`, `setThemePref`, OS listener); all other store behavior is unchanged.
 
 ### Single Derivation Path
 
@@ -82,7 +82,7 @@ Live stats: `deriveBuild(loadout, true, heldSlotGrades)` returns `{ pokemon, eff
 
 ### Data Bundle Versioning
 
-Each game patch is a self-contained JSON bundle (e.g. `patch-1.23.1.1.json`) plus optional sidecars (`attackSpeedBoosts.json`). Runtime can fetch updated bundles from GitHub Pages without rebuilding or redeploying the app. Schema changes require zod updates in `loadBundle.ts` and corresponding tests.
+The build-time baseline bundle is `src/data/patch-current.json` plus optional sidecars (`attackSpeedBoosts.json`). The `patchVersion` field inside the JSON is the human-set patch id (`PATCH_VERSION` env in `normalize.py`, default `1.23.1.1` — UNITE-DB exposes no version). Published copies land in `public/data/patch-<version>.json` with a `manifest.json` pointer. At launch, `src/data/dataSource.ts` checks the remote manifest, downloads and caches validated payloads in localStorage (`unite-build-optimizer.dataCache.v1`), and `src/data/gameData.ts` loads via `activeRaw()` — cached data applies only when strictly newer than the baseline's `lastUpdated`, with a zod fallback to the shipped baseline on schema mismatch. Schema changes require zod updates in `loadBundle.ts` and corresponding tests (including the curated-merge guard in `patchBundle.test.ts`).
 
 Each Pokémon may carry two build arrays:
 - `builds` — **Recommended** tab; UNITE-DB builds emitted by `normalize.py`. Array order is the tab display order; the first entry auto-applies when the user switches Pokémon (`RecommendPanel`).
@@ -113,12 +113,12 @@ No router library — navigation is local React state.
 
 - **App bar** — fixed top bar (`AppBar` from `src/components/shell/`), gradient from `--color-appbar-*` tokens, `pt-safe`. On the Build tab: selected Pokémon cropped thumbnail (`iconAsset`, same crop as the picker grid), name, role badge, and attack type. Icon and name are separate tappable buttons — both open the Pokémon picker overlay (placeholder circle opens the picker when none is selected). On other tabs: static screen title ("Emblems", "Held Items", "Compare"). Single **Basic**/**Advanced** mode toggle (`ModeToggle` in `AppBar.tsx` — shows current mode, tap flips; color-coded via `--color-mode-*` tokens) and settings gear on all tabs.
 - **Tab bar** — fixed bottom navigation (`TabBar`): Build · Emblems · Items; Compare appears only in Advanced mode (4 tabs vs 3). Switching from Advanced to Basic while on Compare redirects to Build.
-- **Build screen** — `BuildScreen` composes `BuildSummaryBar` (sticky glance hero pinned under the app bar), `RecommendPanel`, `LoadoutEditor`, `MovesCard`, `StatPanel`, `LoadoutBar`, and `LevelGraph` (Advanced only). `LoadoutEditor` held-item slots use shared `GradeField` plus a grade slider (unique items skip both). Pokémon selection is not inline; the hero empty state and app-bar icon or title tap open `PokemonPickerSheet`.
+- **Build screen** — `BuildScreen` composes `BuildSummaryBar` (sticky glance hero pinned under the app bar), `RecommendPanel`, `LoadoutEditor`, `MovesCard`, `StatPanel`, `LoadoutBar`, and `LevelGraph` (Advanced only; lazy-loaded via `React.lazy` + `Suspense` in `BuildScreen.tsx` so recharts is not in the initial bundle). `LoadoutEditor` held-item slots use shared `GradeField` plus a grade slider (unique items skip both). Pokémon selection is not inline; the hero empty state and app-bar icon or title tap open `PokemonPickerSheet`.
 - **Emblems screen** — `EmblemsScreen` renders `InventoryManager` (per-grade ownership, search, horizontal color chip filters, responsive emblem grid).
 - **Items screen** — `ItemsScreen` renders `HeldItemsInventory` (global held-item grades via shared `GradeField`, grade instructions with a tap-for-detail hint, 3-column tile grid on phones, `HeldItemDetailModal` on icon tap).
 - **Compare screen** — `CompareScreen` renders `CompareView` (Advanced only; build A/B selects stack on phones; stat table scrolls horizontally inside its wrapper).
 - **Layout** — single column, `max-w-2xl` centered, `gap-3` between sections. `<main>` padding clears the fixed app bar and tab bar (safe-area aware). Interactive controls target ≥44px hit areas (`min-h-11`); tappable labels use `text-sm` minimum — the Build glance hero (`BuildSummaryBar`) is the primary oversized readout.
-- **Overlays** — `BottomSheet` (`src/components/shell/BottomSheet.tsx`) is the shared responsive overlay (bottom sheet on phones, centered card on `sm+`). Callers: `SettingsMenu` (gear; Appearance theme picker, Updates with manual game-data check + displayed app version/PWA-install copy, About, Legal), `PokemonPickerSheet` (app-bar icon or title tap, or hero empty state; search does not auto-focus on open so the grid is browsable without the on-screen keyboard), and `PickerModal` (held/trainer/emblem pickers from `LoadoutEditor`; search does not auto-focus on open so the list is browsable without the on-screen keyboard). Picker callers pass `fillHeight` so the panel stays at fixed `88vh`/`80vh` while search filters results in place; `SettingsMenu` omits it and keeps content-fit sizing. `HeldItemDetailModal` keeps its existing centered-modal shell.
+- **Overlays** — `BottomSheet` (`src/components/shell/BottomSheet.tsx`) is the shared responsive overlay (bottom sheet on phones, centered card on `sm+`). Callers: `SettingsMenu` (gear; Appearance theme picker, Updates with manual game-data check + displayed patch version and data attribution, app version/PWA-install copy, About, Legal), `PokemonPickerSheet` (app-bar icon or title tap, or hero empty state; search does not auto-focus on open so the grid is browsable without the on-screen keyboard), and `PickerModal` (held/trainer/emblem pickers from `LoadoutEditor`; search does not auto-focus on open so the list is browsable without the on-screen keyboard). Picker callers pass `fillHeight` so the panel stays at fixed `88vh`/`80vh` while search filters results in place; `SettingsMenu` omits it and keeps content-fit sizing. `HeldItemDetailModal` keeps its existing centered-modal shell.
 - **Footer** — legal disclaimer, copyright, and patch line live in Settings → Legal (sourced from `src/ui/brand.ts`); they are not rendered in `App.tsx`.
 - **Data updates** — `unite-data-updated` window event shows a reload banner inside `<main>`.
 
@@ -151,9 +151,9 @@ Branding constants: `src/ui/brand.ts`, `docs/08-branding.md`. Historical token r
 
 ### Web distribution & build
 
-FoxForge GG ships as a **hosted PWA only** — no native desktop shell. The same Vite build serves local dev, installable PWA (`base: "./"`), and GitHub Pages (`VITE_BASE=/FoxForge-GG/` via `npm run build:pages`). CI deploys via [`.github/workflows/pages.yml`](.github/workflows/pages.yml) on push to `main`; game-data refresh runs weekly via [`.github/workflows/data.yml`](.github/workflows/data.yml).
+FoxForge GG ships as a **hosted PWA only** — no native desktop shell. The same Vite build serves local dev, installable PWA (`base: "./"`), and GitHub Pages (`VITE_BASE=/FoxForge-GG/` via `npm run build:pages`). [`.github/workflows/ci.yml`](.github/workflows/ci.yml) runs lint, format check, typecheck, tests, and accuracy gates on every push and pull request. [`.github/workflows/pages.yml`](.github/workflows/pages.yml) redeploys to GitHub Pages on push to `main` (after the same accuracy gates, then `build:pages`). Game-data refresh runs daily at 09:00 UTC (and on demand) via [`.github/workflows/data.yml`](.github/workflows/data.yml): scrape/normalize, mirror new art (`fetch_art.py`), validate (`verifyPatch.ts`, `npm test`, `validate:art`), publish to `public/data/`, and open or update a PR on `data/auto-refresh` with a semantic changelog from `tools/community/diff_bundle.py` (new entities flagged for curation). When that PR already exists, a follow-up `@AeroKita` comment re-notifies on each update — it never commits directly to `main`.
 
-Two independent update channels: **app code** (PWA service worker picks up a new deploy on reload) and **game data** (`src/data/dataSource.ts` fetches `data/manifest.json` from Pages; see `docs/07-distribution.md`). `vite.config.ts` encodes Pages-specific service-worker self-destruct behavior to avoid stale-cache blank screens—distribution concerns live in config, not business logic.
+Two independent update channels: **app code** (PWA service worker picks up a new deploy on reload) and **game data** (`src/data/dataSource.ts` fetches `data/manifest.json` from Pages, caches to localStorage, and `gameData.ts` applies it on the next load via `activeRaw()`; see `docs/07-distribution.md`). `vite.config.ts` encodes Pages-specific service-worker self-destruct behavior to avoid stale-cache blank screens—distribution concerns live in config, not business logic.
 
 ### Documentation Authority
 
@@ -179,8 +179,10 @@ Clone, `npm install`, and you're ready to develop.
 | TypeScript | Type-checking (`tsc --noEmit`) | `tsconfig.json` |
 | Tailwind CSS v4 | Semantic token styling via `@tailwindcss/vite` | `src/index.css`, `vite.config.ts` |
 | vite-plugin-pwa | PWA manifest + Workbox caching (non-Pages builds) | `vite.config.ts` |
+| oxlint | Lint (React hooks, correctness category); CI fails on errors | `.oxlintrc.json` |
+| oxfmt | Format TS/TSX (Prettier-compatible); data JSON bundles are excluded | `.oxfmtrc.json` |
 
-Key scripts (from `package.json`): `npm run dev`, `npm run build`, `npm run build:pages`, `npm run typecheck`.
+Key scripts (from `package.json`): `npm run dev`, `npm run build`, `npm run build:pages`, `npm run typecheck`, `npm run lint`, `npm run lint:fix`, `npm run format`, `npm run format:check`.
 
 Version is sourced from `package.json`.
 
@@ -190,19 +192,29 @@ Tests run in **Vitest** with `environment: "node"`, matching `src/**/*.test.ts` 
 
 | Command | Purpose |
 | --- | --- |
-| `npm test` | Engine, bundle, attack-speed, share, and state unit tests |
+| `npm run lint` | oxlint — errors fail CI; `react/exhaustive-deps` is warn-only |
+| `npm run format:check` | oxfmt `--check` on `src/**/*.{ts,tsx}` and `vite.config.ts` |
+| `npm test` | Engine, bundle, dataSource, attack-speed, share, and state unit tests |
 | `npm run validate` | Known-values gate from `docs/03-Calculation-Engine.md` |
 | `npx tsx src/data/verifyPatch.ts` | End-to-end validation of the live UNITE-DB bundle |
+| `npm run validate:art` | Validates mirrored images under `public/assets/` are real files (not corrupt/HTML) |
+| `python3 -m unittest tools/community/test_diff_bundle.py` | Semantic bundle-diff changelog unit tests (`diff_bundle.py`) |
 | `npm run typecheck` | `tsc --noEmit` |
 
-Game data refresh (not part of routine CI for app logic):
+Every push and PR runs the full gate via `.github/workflows/ci.yml` (lint through `validate:art`, in that order). Local pre-push equivalent:
+
+```bash
+npm run lint && npm run format:check && npm run typecheck && npm test && npm run validate && npx tsx src/data/verifyPatch.ts
+```
+
+Game data refresh (separate `data.yml` workflow):
 
 ```bash
 cd tools/community && source ../extract/.venv/bin/activate
 python3 fetch.py && python3 scrape_serebii.py && python3 normalize.py && python3 fetch_art.py && python3 normalize_as_boosts.py
 ```
 
-`scrape_serebii.py` fetches Serebii move text into `move_descriptions.json` (run after `fetch.py`, before `normalize.py`). `normalize.py` writes `src/data/patch-*.json`; sync to `public/data/` manually (or via the Refresh game data CI workflow) so the runtime fetch path matches. Edit `curated_builds.json` (`_emblemNameRemap`, per-Pokémon `builds`/`creativeBuilds`/`recommendedTitles`) before re-running — never hand-edit curated labels in the bundle.
+`scrape_serebii.py` fetches Serebii move text into `move_descriptions.json` (run after `fetch.py`, before `normalize.py`). `normalize.py` writes `src/data/patch-current.json`; the Refresh game data workflow copies it to `public/data/patch-<version>.json`, updates `manifest.json`, mirrors art, and posts a field-level PR changelog via `diff_bundle.py` (or sync manually when running locally). Edit `curated_builds.json` (`_emblemNameRemap`, per-Pokémon `builds`/`creativeBuilds`/`recommendedTitles`) before re-running — never hand-edit curated labels in the bundle. Bump the patch id via `PATCH_VERSION=… python3 normalize.py` or the workflow's optional `patch_version` input.
 
 Curated-build-only edits (no UNITE-DB re-scrape):
 
@@ -235,7 +247,7 @@ Mobile layout conventions: column spacing `gap-3`; `CollapsibleCard` headers `px
 | --- | --- |
 | App shell | `src/App.tsx` |
 | Shell primitives | `src/components/shell/AppBar.tsx`, `TabBar.tsx`, `BottomSheet.tsx` |
-| Build tab | `src/components/screens/BuildScreen.tsx` — `BuildSummaryBar`, `RecommendPanel`, `LoadoutEditor`, `MovesCard`, `StatPanel`, `LoadoutBar`, `LevelGraph` (Advanced) |
+| Build tab | `src/components/screens/BuildScreen.tsx` — `BuildSummaryBar`, `RecommendPanel`, `LoadoutEditor`, `MovesCard`, `StatPanel`, `LoadoutBar`, `LevelGraph` (Advanced; lazy-loaded) |
 | Pokémon picker | `PokemonPickerSheet` in `src/components/PokemonPicker.tsx` (`BottomSheet fillHeight`; role filter chips color-coded when active via `ROLE_FILTER_HEX`; search does not auto-focus on open) |
 | Emblems tab | `src/components/screens/EmblemsScreen.tsx` → `InventoryManager` |
 | Items tab | `src/components/screens/ItemsScreen.tsx` → `HeldItemsInventory` (`HeldItemDetailModal`) |
@@ -246,4 +258,4 @@ Mobile layout conventions: column spacing `gap-3`; `CollapsibleCard` headers `px
 | Tooltips | `src/components/Tooltip.tsx` (hover + touch long-press popup), `src/components/tips.tsx` |
 | State | `src/state/store.tsx`, `src/state/loadout.ts`, `src/state/heldItemGrades.ts` |
 | Engine | `src/engine/derive.ts` |
-| Data | `src/data/gameData.ts`, `src/data/loadBundle.ts` |
+| Data | `src/data/gameData.ts`, `src/data/loadBundle.ts`, `src/data/dataSource.ts` |

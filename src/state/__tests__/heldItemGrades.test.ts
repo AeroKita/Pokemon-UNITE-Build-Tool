@@ -32,7 +32,11 @@ describe("heldItemGrades memory", () => {
   it("resolves slot grades from global memory", () => {
     const loadout = {
       ...emptyLoadout(),
-      heldItemIds: ["muscle-band", "score-shield", null] as [string | null, string | null, string | null],
+      heldItemIds: ["muscle-band", "score-shield", null] as [
+        string | null,
+        string | null,
+        string | null,
+      ],
     };
     const memory = { "muscle-band": 13, "score-shield": 20 };
     expect(resolveSlotGrades(loadout, memory)).toEqual([13, 20, 40]);

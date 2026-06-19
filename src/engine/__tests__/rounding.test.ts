@@ -16,9 +16,11 @@ describe("roundEmblemTotals (standard rounding on summed flats)", () => {
   });
 
   it("rounds each stat independently and keeps negatives sane", () => {
-    expect(
-      roundEmblemTotals({ hp: -49.6, attack: 2.5, moveSpeed: 34.4 }),
-    ).toEqual({ hp: -50, attack: 3, moveSpeed: 34 });
+    expect(roundEmblemTotals({ hp: -49.6, attack: 2.5, moveSpeed: 34.4 })).toEqual({
+      hp: -50,
+      attack: 3,
+      moveSpeed: 34,
+    });
   });
 
   it("ignores undefined entries", () => {

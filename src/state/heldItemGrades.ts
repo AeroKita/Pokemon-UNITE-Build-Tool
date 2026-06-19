@@ -6,7 +6,11 @@ import type { Loadout } from "./loadout";
 
 const STORAGE_KEY = "unite-build-optimizer.heldItemGrades.v1";
 
-export interface GradeInputResult { digits: string; valid: boolean; value: number | null; }
+export interface GradeInputResult {
+  digits: string;
+  valid: boolean;
+  value: number | null;
+}
 
 /** Parse a typed grade field: strips non-digits, validates 1–40. */
 export function parseGradeInput(raw: string): GradeInputResult {
@@ -40,7 +44,9 @@ export function loadHeldItemGradeMemory(): Record<string, number> {
 export function saveHeldItemGradeMemory(memory: Record<string, number>): void {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(memory));
-  } catch { /* quota */ }
+  } catch {
+    /* quota */
+  }
 }
 
 /** Grade for one held item id (default 40 when unset). */

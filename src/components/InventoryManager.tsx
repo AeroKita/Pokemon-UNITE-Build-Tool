@@ -2,7 +2,12 @@ import { useMemo, useState } from "react";
 import { useStore } from "../state/store";
 import { emblems as allEmblems } from "../data/gameData";
 import { asset } from "../ui/asset";
-import { EMBLEM_COLOR_HEX, ALL_EMBLEM_COLORS, EMBLEM_GRADE_HEX, readableTextColor } from "../ui/colors";
+import {
+  EMBLEM_COLOR_HEX,
+  ALL_EMBLEM_COLORS,
+  EMBLEM_GRADE_HEX,
+  readableTextColor,
+} from "../ui/colors";
 import { statLines } from "../ui/format";
 import { emblemsForGrade } from "../ui/emblems";
 import { ownedKey } from "../state/loadout";
@@ -57,12 +62,18 @@ export function InventoryManager() {
             </button>
           </h2>
           <p className="text-xs text-muted">
-            Mark what you own per grade — owned emblems are highlighted in pickers and preferred by recommendations.
+            Mark what you own per grade — owned emblems are highlighted in pickers and preferred by
+            recommendations.
           </p>
         </div>
         <div className="text-right text-sm">
-          <span className="font-semibold" style={{ color: EMBLEM_GRADE_HEX[grade] }}>{ownedCount}</span>
-          <span className="text-faint"> / {gradeEmblems.length} {grade} owned</span>
+          <span className="font-semibold" style={{ color: EMBLEM_GRADE_HEX[grade] }}>
+            {ownedCount}
+          </span>
+          <span className="text-faint">
+            {" "}
+            / {gradeEmblems.length} {grade} owned
+          </span>
         </div>
       </div>
 
@@ -132,10 +143,19 @@ export function InventoryManager() {
               }`}
             >
               <span className="relative shrink-0">
-                <img src={asset(emblemIconForGrade(e, grade))} alt={e.pokemonName} loading="lazy" className="h-10 w-10 object-contain" />
+                <img
+                  src={asset(emblemIconForGrade(e, grade))}
+                  alt={e.pokemonName}
+                  loading="lazy"
+                  className="h-10 w-10 object-contain"
+                />
                 <span className="absolute -left-0.5 -top-0.5 flex gap-0.5">
                   {e.colors.map((c) => (
-                    <span key={c} className="h-2 w-2 rounded-full ring-1 ring-white" style={{ background: EMBLEM_COLOR_HEX[c] }} />
+                    <span
+                      key={c}
+                      className="h-2 w-2 rounded-full ring-1 ring-white"
+                      style={{ background: EMBLEM_COLOR_HEX[c] }}
+                    />
                   ))}
                 </span>
               </span>
@@ -145,7 +165,9 @@ export function InventoryManager() {
                   {stats.map((l) => `${l.label} ${l.value}`).join(" · ") || "—"}
                 </span>
               </span>
-              <span className={`text-base leading-none ${isOwned ? "text-as-ink" : "text-faint"}`}>★</span>
+              <span className={`text-base leading-none ${isOwned ? "text-as-ink" : "text-faint"}`}>
+                ★
+              </span>
             </button>
           );
         })}
@@ -167,9 +189,10 @@ function ColorFilterChip({
   onClick: () => void;
   activeColor?: string;
 }) {
-  const style = active && activeColor
-    ? { background: activeColor, color: readableTextColor(activeColor) }
-    : undefined;
+  const style =
+    active && activeColor
+      ? { background: activeColor, color: readableTextColor(activeColor) }
+      : undefined;
   return (
     <button
       type="button"
@@ -177,7 +200,9 @@ function ColorFilterChip({
       style={style}
       className={`shrink-0 rounded-full border px-3 py-2 text-xs font-medium capitalize ${
         active
-          ? activeColor ? "border-line" : "border-transparent bg-accent text-white"
+          ? activeColor
+            ? "border-line"
+            : "border-transparent bg-accent text-white"
           : "border-transparent bg-raise text-muted hover:bg-raise"
       } min-h-11`}
     >

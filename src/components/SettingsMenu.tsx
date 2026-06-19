@@ -28,8 +28,11 @@ export function SettingsMenu({ open, onClose }: { open: boolean; onClose: () => 
   const checkData = async () => {
     setDataMsg("Checking…");
     const r = await checkDataNow(bundle.lastUpdated);
-    if (r.status === "updated") { setDataMsg(`New data (patch ${r.patchVersion}) downloaded.`); setDataUpdated(true); }
-    else if (r.status === "current") setDataMsg(`Game data is up to date (patch ${r.patchVersion}).`);
+    if (r.status === "updated") {
+      setDataMsg(`New data (patch ${r.patchVersion}) downloaded.`);
+      setDataUpdated(true);
+    } else if (r.status === "current")
+      setDataMsg(`Game data is up to date (patch ${r.patchVersion}).`);
     else setDataMsg("Couldn't reach the data server (using bundled data).");
   };
 
@@ -64,12 +67,23 @@ export function SettingsMenu({ open, onClose }: { open: boolean; onClose: () => 
             <span className="text-sm font-medium">Game data</span>
             <span className="font-mono text-xs text-faint">patch {activePatch}</span>
           </div>
-          <button type="button" onClick={checkData} className="mt-1 min-h-11 rounded-lg border border-line px-3 py-2.5 text-sm font-medium hover:bg-raise">
+          <p className="text-xs text-faint">
+            Data: UNITE-DB · Serebii — fan project, not affiliated with Nintendo/TPC.
+          </p>
+          <button
+            type="button"
+            onClick={checkData}
+            className="mt-1 min-h-11 rounded-lg border border-line px-3 py-2.5 text-sm font-medium hover:bg-raise"
+          >
             Check for data update
           </button>
           {dataMsg && <p className="mt-1 text-xs text-muted">{dataMsg}</p>}
           {dataUpdated && (
-            <button type="button" onClick={() => location.reload()} className="mt-1 min-h-11 rounded-lg bg-accent px-3 py-2.5 text-sm font-semibold text-white hover:bg-accent-strong">
+            <button
+              type="button"
+              onClick={() => location.reload()}
+              className="mt-1 min-h-11 rounded-lg bg-accent px-3 py-2.5 text-sm font-semibold text-white hover:bg-accent-strong"
+            >
               Reload to apply
             </button>
           )}
@@ -81,7 +95,8 @@ export function SettingsMenu({ open, onClose }: { open: boolean; onClose: () => 
               <span className="font-mono text-xs text-faint">v{APP_VERSION}</span>
             </div>
             <p className="mt-2 text-xs text-faint">
-              The app auto-updates on reload. Install it from your browser ("Add to Home Screen" / "Install") for an offline-capable window.
+              The app auto-updates on reload. Install it from your browser ("Add to Home Screen" /
+              "Install") for an offline-capable window.
             </p>
           </div>
         </Section>
@@ -95,7 +110,9 @@ export function SettingsMenu({ open, onClose }: { open: boolean; onClose: () => 
           <p className="text-xs text-faint">
             Data from UNITE-DB · attack-speed model from community calculator · patch {activePatch}
           </p>
-          <p className="mx-auto mt-3 max-w-3xl text-xs leading-relaxed text-muted">{LEGAL_DISCLAIMER}</p>
+          <p className="mx-auto mt-3 max-w-3xl text-xs leading-relaxed text-muted">
+            {LEGAL_DISCLAIMER}
+          </p>
           <p className="mt-2 text-xs text-faint">{copyrightLine()}</p>
         </Section>
       </div>

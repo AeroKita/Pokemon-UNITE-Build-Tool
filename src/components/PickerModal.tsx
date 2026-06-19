@@ -29,7 +29,18 @@ interface Props {
   footer?: ReactNode;
 }
 
-export function PickerModal({ title, items, onPick, onClose, filters, grades, owned, onToggleOwn, iconForGrade, goldOnlyIds }: Props) {
+export function PickerModal({
+  title,
+  items,
+  onPick,
+  onClose,
+  filters,
+  grades,
+  owned,
+  onToggleOwn,
+  iconForGrade,
+  goldOnlyIds,
+}: Props) {
   const [query, setQuery] = useState("");
   const [activeFilter, setActiveFilter] = useState<string | null>(null);
   const [ownedOnly, setOwnedOnly] = useState(false);
@@ -49,7 +60,11 @@ export function PickerModal({ title, items, onPick, onClose, filters, grades, ow
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [items, query, activeFilter, filters, ownedOnly, owned, grade, goldOnlyIds]);
 
-  const ownedCount = owned ? (grades ? [...owned].filter((k) => k.endsWith(`:${grade}`)).length : owned.size) : 0;
+  const ownedCount = owned
+    ? grades
+      ? [...owned].filter((k) => k.endsWith(`:${grade}`)).length
+      : owned.size
+    : 0;
 
   return (
     <BottomSheet title={title} onClose={onClose} fillHeight>
@@ -69,7 +84,14 @@ export function PickerModal({ title, items, onPick, onClose, filters, grades, ow
                   key={g}
                   type="button"
                   onClick={() => setGrade(g)}
-                  style={grade === g ? { background: EMBLEM_GRADE_HEX[g], color: readableTextColor(EMBLEM_GRADE_HEX[g]) } : undefined}
+                  style={
+                    grade === g
+                      ? {
+                          background: EMBLEM_GRADE_HEX[g],
+                          color: readableTextColor(EMBLEM_GRADE_HEX[g]),
+                        }
+                      : undefined
+                  }
                   className={`min-h-11 rounded-md px-3 py-1 text-xs font-semibold capitalize transition ${
                     grade === g ? "shadow-sm" : "text-muted hover:text-ink"
                   }`}
@@ -82,10 +104,29 @@ export function PickerModal({ title, items, onPick, onClose, filters, grades, ow
         )}
         {(filters || owned) && (
           <div className="-mx-1 flex flex-wrap gap-1.5 overflow-x-auto px-1 pb-1">
-            <FilterChip label="All" active={activeFilter === null && !ownedOnly} onClick={() => { setActiveFilter(null); setOwnedOnly(false); }} />
-            {owned && <FilterChip label={`★ Owned (${ownedCount})`} active={ownedOnly} onClick={() => setOwnedOnly((v) => !v)} />}
+            <FilterChip
+              label="All"
+              active={activeFilter === null && !ownedOnly}
+              onClick={() => {
+                setActiveFilter(null);
+                setOwnedOnly(false);
+              }}
+            />
+            {owned && (
+              <FilterChip
+                label={`★ Owned (${ownedCount})`}
+                active={ownedOnly}
+                onClick={() => setOwnedOnly((v) => !v)}
+              />
+            )}
             {filters?.map((f) => (
-              <FilterChip key={f.label} label={f.label} active={activeFilter === f.label} activeColor={f.activeColor} onClick={() => setActiveFilter(f.label)} />
+              <FilterChip
+                key={f.label}
+                label={f.label}
+                active={activeFilter === f.label}
+                activeColor={f.activeColor}
+                onClick={() => setActiveFilter(f.label)}
+              />
             ))}
           </div>
         )}
@@ -97,7 +138,10 @@ export function PickerModal({ title, items, onPick, onClose, filters, grades, ow
             <button
               key={it.id}
               type="button"
-              onClick={() => { onPick(it.id, grades ? grade : undefined); onClose(); }}
+              onClick={() => {
+                onPick(it.id, grades ? grade : undefined);
+                onClose();
+              }}
               title={it.title ?? it.name}
               className={`relative flex min-h-24 flex-col items-center justify-center gap-1 rounded-xl border p-2 text-center hover:border-accent hover:bg-accent-weak ${
                 ownedHere ? "border-as-border bg-as-bg" : "border-line"
@@ -106,22 +150,35 @@ export function PickerModal({ title, items, onPick, onClose, filters, grades, ow
               {it.colors && it.colors.length > 0 && (
                 <span className="absolute -left-1 -top-1 flex gap-0.5">
                   {it.colors.map((c) => (
-                    <span key={c} className="h-2 w-2 rounded-full ring-1 ring-white"
-                      style={{ background: EMBLEM_COLOR_HEX[c] }} />
+                    <span
+                      key={c}
+                      className="h-2 w-2 rounded-full ring-1 ring-white"
+                      style={{ background: EMBLEM_COLOR_HEX[c] }}
+                    />
                   ))}
                 </span>
               )}
               {onToggleOwn && (
                 <span
                   role="button"
-                  title={ownedHere ? `Owned (${grade}) — click to unmark` : `Mark ${grade} as owned`}
-                  onClick={(e) => { e.stopPropagation(); onToggleOwn(it.id, grade); }}
+                  title={
+                    ownedHere ? `Owned (${grade}) — click to unmark` : `Mark ${grade} as owned`
+                  }
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onToggleOwn(it.id, grade);
+                  }}
                   className={`absolute right-1 top-1 flex min-h-11 min-w-11 items-center justify-center text-sm leading-none ${ownedHere ? "text-as-ink" : "text-faint hover:text-as-ink"}`}
                 >
                   ★
                 </span>
               )}
-              <img src={asset(grades && iconForGrade ? iconForGrade(it.id, grade) : it.icon)} alt={it.name} loading="lazy" className="h-12 w-12 object-contain" />
+              <img
+                src={asset(grades && iconForGrade ? iconForGrade(it.id, grade) : it.icon)}
+                alt={it.name}
+                loading="lazy"
+                className="h-12 w-12 object-contain"
+              />
               <span className="text-xs font-medium leading-tight text-ink">{it.name}</span>
               {it.subtitle && <span className="text-[10px] text-faint">{it.subtitle}</span>}
             </button>
@@ -132,17 +189,34 @@ export function PickerModal({ title, items, onPick, onClose, filters, grades, ow
   );
 }
 
-function FilterChip({ label, active, onClick, activeColor }:
-  { label: string; active: boolean; onClick: () => void; activeColor?: string }) {
-  const style = active && activeColor
-    ? { background: activeColor, color: readableTextColor(activeColor) } : undefined;
+function FilterChip({
+  label,
+  active,
+  onClick,
+  activeColor,
+}: {
+  label: string;
+  active: boolean;
+  onClick: () => void;
+  activeColor?: string;
+}) {
+  const style =
+    active && activeColor
+      ? { background: activeColor, color: readableTextColor(activeColor) }
+      : undefined;
   return (
-    <button type="button" onClick={onClick} style={style}
+    <button
+      type="button"
+      onClick={onClick}
+      style={style}
       className={`min-h-11 rounded-full border px-3 py-1 text-xs font-medium capitalize ${
         active
-          ? activeColor ? "border-line" : "border-transparent bg-accent text-white"
+          ? activeColor
+            ? "border-line"
+            : "border-transparent bg-accent text-white"
           : "border-transparent bg-raise text-muted hover:bg-raise"
-      }`}>
+      }`}
+    >
       {label}
     </button>
   );

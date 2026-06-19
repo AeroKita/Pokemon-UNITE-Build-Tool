@@ -105,14 +105,7 @@ const pokemon = z.object({
 });
 
 const itemEffect = z.object({
-  type: z.enum([
-    "onBasicAttack",
-    "onMove",
-    "onScore",
-    "passive",
-    "outOfCombat",
-    "onHpThreshold",
-  ]),
+  type: z.enum(["onBasicAttack", "onMove", "onScore", "passive", "outOfCombat", "onHpThreshold"]),
   description: z.string(),
   value: z.number().optional(),
   isPercentHp: z.boolean().optional(),
@@ -130,10 +123,12 @@ const heldItem = z.object({
   description: z.string(),
   statsByGrade: z.record(z.string(), partialStatBlock),
   conditionalEffects: z.array(itemEffect),
-  effect: z.object({
-    label: z.string(),
-    tiers: z.tuple([z.string(), z.string(), z.string()]),
-  }).optional(),
+  effect: z
+    .object({
+      label: z.string(),
+      tiers: z.tuple([z.string(), z.string(), z.string()]),
+    })
+    .optional(),
 });
 
 const emblemColor = z.enum([

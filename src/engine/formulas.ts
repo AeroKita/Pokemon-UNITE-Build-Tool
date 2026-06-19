@@ -49,11 +49,7 @@ export function specialDamageTaken(raw: number, spDefense: number): number {
  * Damage taken with flat damage reduction (reductions stack ADDITIVELY):
  * FLOOR( FLOOR(raw * 600 / (600 + Def)) * (1 - reduction) )
  */
-export function damageTakenWithReduction(
-  raw: number,
-  defense: number,
-  reduction: number,
-): number {
+export function damageTakenWithReduction(raw: number, defense: number, reduction: number): number {
   return Math.floor(physicalDamageTaken(raw, defense) * (1 - reduction));
 }
 
@@ -70,9 +66,7 @@ export function effectiveHp(maxHp: number, defenseOrSpDef: number): number {
  * Total emblem flats use STANDARD rounding (e.g. 18.6 -> 19, 18.4 -> 18).
  * Apply to the SUMMED flats, not per-emblem.
  */
-export function roundEmblemTotals(
-  flats: Partial<StatBlock>,
-): Partial<StatBlock> {
+export function roundEmblemTotals(flats: Partial<StatBlock>): Partial<StatBlock> {
   const out: Partial<StatBlock> = {};
   for (const key of Object.keys(flats) as (keyof StatBlock)[]) {
     const v = flats[key];
@@ -101,10 +95,7 @@ const INTEGER_STATS: ReadonlySet<keyof StatBlock> = new Set([
  * Stats that are themselves percentages. Their set bonuses add percentage
  * points instead of multiplying (e.g. 7 Red: attackSpeed 0.40 -> 0.48).
  */
-const PERCENT_POINT_STATS: ReadonlySet<keyof StatBlock> = new Set([
-  "attackSpeed",
-  "cdr",
-] as const);
+const PERCENT_POINT_STATS: ReadonlySet<keyof StatBlock> = new Set(["attackSpeed", "cdr"] as const);
 
 /**
  * Compute a Pokémon's effective stats at a given level with the chosen
@@ -173,10 +164,7 @@ export function computeEffectiveStats(
     for (const effect of item.conditionalEffects) {
       // Example: Attack Weight stacks per goal scored.
       if (effect.stacking && effect.type === "onScore" && effect.stackValue) {
-        const stacks = Math.min(
-          context.goalsScored,
-          effect.maxStacks ?? context.goalsScored,
-        );
+        const stacks = Math.min(context.goalsScored, effect.maxStacks ?? context.goalsScored);
         stats.attack += effect.stackValue * stacks;
       }
       // % OOC move speed (Float Stone) is applied at the display layer via
@@ -203,11 +191,7 @@ export function outOfCombatMoveSpeed(
   let oocPercent = 0;
   for (const item of items) {
     for (const effect of item.conditionalEffects) {
-      if (
-        effect.type === "outOfCombat" &&
-        effect.appliesInCombat === false &&
-        effect.value
-      ) {
+      if (effect.type === "outOfCombat" && effect.appliesInCombat === false && effect.value) {
         oocPercent += effect.value;
       }
     }

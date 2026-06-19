@@ -9,13 +9,7 @@
 //   - Platinum emblems use the same stat values as Gold (cosmetic upgrade).
 //   - The highest threshold met per color wins (2/4/6 or 3/5/7 scales).
 
-import type {
-  EmblemColor,
-  EmblemLoadout,
-  EmblemSetBonus,
-  EmblemSlot,
-  StatBlock,
-} from "../types";
+import type { EmblemColor, EmblemLoadout, EmblemSetBonus, EmblemSlot, StatBlock } from "../types";
 
 export const MAX_EMBLEM_SLOTS = 10;
 
@@ -87,9 +81,7 @@ export function computeEmblemLoadout(
   setBonuses: EmblemSetBonus[],
 ): EmblemLoadout {
   if (slots.length > MAX_EMBLEM_SLOTS) {
-    throw new Error(
-      `Emblem loadout has ${slots.length} slots; max is ${MAX_EMBLEM_SLOTS}`,
-    );
+    throw new Error(`Emblem loadout has ${slots.length} slots; max is ${MAX_EMBLEM_SLOTS}`);
   }
 
   const counts = countColors(slots);

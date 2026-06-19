@@ -12,7 +12,10 @@ interface BuildSummaryBarProps {
  */
 export function BuildSummaryBar({ onOpenPokePicker }: BuildSummaryBarProps) {
   const { loadout, heldSlotGrades } = useStore();
-  const derived = useMemo(() => deriveBuild(loadout, true, heldSlotGrades), [loadout, heldSlotGrades]);
+  const derived = useMemo(
+    () => deriveBuild(loadout, true, heldSlotGrades),
+    [loadout, heldSlotGrades],
+  );
   const { pokemon, effective } = derived;
 
   if (!pokemon || !effective) {

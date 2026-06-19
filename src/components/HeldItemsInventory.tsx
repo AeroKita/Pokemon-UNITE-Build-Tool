@@ -29,9 +29,11 @@ function ItemTile({
         aria-pressed={selected}
         aria-label={item.displayName}
         className={`group relative aspect-square min-h-11 rounded-lg border-2 p-0.5 transition
-          ${selected
-            ? "border-transparent bg-mon-sel-bg ring-2 ring-mon-sel-ring"
-            : "border-transparent bg-mon-bg hover:border-mon-hover"}`}
+          ${
+            selected
+              ? "border-transparent bg-mon-sel-bg ring-2 ring-mon-sel-ring"
+              : "border-transparent bg-mon-bg hover:border-mon-hover"
+          }`}
       >
         <img
           src={asset(item.iconAsset)}
@@ -93,7 +95,8 @@ export function HeldItemsInventory() {
     <div className="rounded-2xl border border-line bg-surface p-3 shadow-sm">
       <div className="mb-3">
         <p className="text-xs text-muted">
-          Set each item&apos;s grade (1–{ITEM_GRADE_MAX}). Grades apply everywhere that item appears in your builds. Tap on a Held Item for more info!
+          Set each item&apos;s grade (1–{ITEM_GRADE_MAX}). Grades apply everywhere that item appears
+          in your builds. Tap on a Held Item for more info!
         </p>
       </div>
 
@@ -125,7 +128,9 @@ export function HeldItemsInventory() {
       {uniqueItems.length > 0 && (
         <div className="mt-4">
           <h3 className="mb-1 text-sm font-semibold text-ink">Unique Items</h3>
-          <p className="mb-2 text-xs text-muted">Mega Stones &amp; Rusted Sword have no grade or level.</p>
+          <p className="mb-2 text-xs text-muted">
+            Mega Stones &amp; Rusted Sword have no grade or level.
+          </p>
           <div className="grid grid-cols-3 gap-3 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-8">
             {uniqueItems.map((item) => {
               const selected = detailItem?.id === item.id;

@@ -1,6 +1,18 @@
 import { describe, it, expect } from "vitest";
-import { priorityWeights, scoreHeldItem, recommendBuild, solveOwnedEmblemSet, bestOwnedGrade } from "../recommend";
-import { pokemonList, heldItems, heldItemById, setBonuses, emblems as allEmblems } from "../../data/gameData";
+import {
+  priorityWeights,
+  scoreHeldItem,
+  recommendBuild,
+  solveOwnedEmblemSet,
+  bestOwnedGrade,
+} from "../recommend";
+import {
+  pokemonList,
+  heldItems,
+  heldItemById,
+  setBonuses,
+  emblems as allEmblems,
+} from "../../data/gameData";
 import type { StatBlock } from "../../types";
 
 const physical = pokemonList.find((p) => p.attackType === "physical")!;
@@ -23,20 +35,25 @@ describe("recommendation engine", () => {
   it("recommends attack-oriented items for a physical Pokémon", () => {
     const rec = recommendBuild(physical, heldItems, setBonuses);
     expect(rec.heldItemIds).toHaveLength(3);
-    expect(combinedStat(rec.heldItemIds, "attack")).toBeGreaterThan(combinedStat(rec.heldItemIds, "spAttack"));
+    expect(combinedStat(rec.heldItemIds, "attack")).toBeGreaterThan(
+      combinedStat(rec.heldItemIds, "spAttack"),
+    );
     expect(rec.emblemColors[0].color).toBe("brown");
   });
 
   it("recommends sp. atk-oriented items for a special Pokémon", () => {
     const rec = recommendBuild(special, heldItems, setBonuses);
-    expect(combinedStat(rec.heldItemIds, "spAttack")).toBeGreaterThan(combinedStat(rec.heldItemIds, "attack"));
+    expect(combinedStat(rec.heldItemIds, "spAttack")).toBeGreaterThan(
+      combinedStat(rec.heldItemIds, "attack"),
+    );
     expect(rec.emblemColors[0].color).toBe("green");
   });
 
   it("picks X-Attack for offense, Eject Button for defenders/supporters", () => {
     const defender = pokemonList.find((p) => p.role === "Defender");
     expect(recommendBuild(physical, heldItems, setBonuses).battleItemId).toBe("x-attack");
-    if (defender) expect(recommendBuild(defender, heldItems, setBonuses).battleItemId).toBe("eject-button");
+    if (defender)
+      expect(recommendBuild(defender, heldItems, setBonuses).battleItemId).toBe("eject-button");
   });
 
   it("scores a pure-attack item above a pure-defense item for an attacker", () => {

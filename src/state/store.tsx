@@ -1,5 +1,13 @@
 // App state: the in-progress loadout (reducer) + saved loadouts (localStorage).
-import { createContext, useContext, useEffect, useMemo, useReducer, useState, type ReactNode } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useMemo,
+  useReducer,
+  useState,
+  type ReactNode,
+} from "react";
 import type { EmblemGrade } from "../types";
 import {
   type Loadout,
@@ -50,7 +58,13 @@ export function reducer(state: Loadout, action: Action): Loadout {
     case "setPokemon":
       // Switching Pokémon invalidates move-based active boosts and move picks
       // (null → the Moves UI derives the new Pokémon's default final moves).
-      return { ...state, pokemonId: action.pokemonId, move1Id: null, move2Id: null, activeBoostIds: state.activeBoostIds.filter((b) => !b.startsWith("move:")) };
+      return {
+        ...state,
+        pokemonId: action.pokemonId,
+        move1Id: null,
+        move2Id: null,
+        activeBoostIds: state.activeBoostIds.filter((b) => !b.startsWith("move:")),
+      };
     case "setLevel":
       return { ...state, level: Math.max(1, Math.min(15, action.level)) };
     case "setHeldItem": {
@@ -61,18 +75,35 @@ export function reducer(state: Loadout, action: Action): Loadout {
       return { ...state, heldItemIds };
     }
     case "setBattleItem":
-      return { ...state, battleItemId: action.id, activeBoostIds: state.activeBoostIds.filter((b) => b !== "x-attack") };
+      return {
+        ...state,
+        battleItemId: action.id,
+        activeBoostIds: state.activeBoostIds.filter((b) => b !== "x-attack"),
+      };
     case "addEmblem": {
       if (state.emblems.length >= MAX_EMBLEMS) return state;
-      return { ...state, emblems: [...state.emblems, { emblemId: action.emblemId, grade: action.grade }] };
+      return {
+        ...state,
+        emblems: [...state.emblems, { emblemId: action.emblemId, grade: action.grade }],
+      };
     }
     case "removeEmblem":
       return { ...state, emblems: state.emblems.filter((_, i) => i !== action.index) };
     case "setEmblemGrade":
-      return { ...state, emblems: state.emblems.map((e, i) => (i === action.index ? { ...e, grade: action.grade } : e)) };
+      return {
+        ...state,
+        emblems: state.emblems.map((e, i) =>
+          i === action.index ? { ...e, grade: action.grade } : e,
+        ),
+      };
     case "toggleBoost": {
       const on = state.activeBoostIds.includes(action.id);
-      return { ...state, activeBoostIds: on ? state.activeBoostIds.filter((b) => b !== action.id) : [...state.activeBoostIds, action.id] };
+      return {
+        ...state,
+        activeBoostIds: on
+          ? state.activeBoostIds.filter((b) => b !== action.id)
+          : [...state.activeBoostIds, action.id],
+      };
     }
     case "setMove":
       return action.slot === "move1"
@@ -104,7 +135,11 @@ export function reducer(state: Loadout, action: Action): Loadout {
 export type ViewMode = "beginner" | "expert";
 const MODE_KEY = "unite-build-optimizer.mode.v1";
 function loadMode(): ViewMode {
-  try { return localStorage.getItem(MODE_KEY) === "expert" ? "expert" : "beginner"; } catch { return "beginner"; }
+  try {
+    return localStorage.getItem(MODE_KEY) === "expert" ? "expert" : "beginner";
+  } catch {
+    return "beginner";
+  }
 }
 
 export type Theme = "light" | "dark";
@@ -112,8 +147,12 @@ export type ThemePref = "system" | "light" | "dark";
 const THEME_KEY = "unite-build-optimizer.theme.v1";
 
 function loadThemePref(): ThemePref {
-  try { const t = localStorage.getItem(THEME_KEY); return t === "light" || t === "dark" ? t : "system"; }
-  catch { return "system"; }
+  try {
+    const t = localStorage.getItem(THEME_KEY);
+    return t === "light" || t === "dark" ? t : "system";
+  } catch {
+    return "system";
+  }
 }
 
 const prefersLight = () =>
@@ -141,7 +180,7 @@ interface Store {
   mode: ViewMode;
   setMode: (m: ViewMode) => void;
   expert: boolean; // convenience: mode === "expert"
-  theme: Theme;        // resolved, for any theme-conditional rendering
+  theme: Theme; // resolved, for any theme-conditional rendering
   themePref: ThemePref;
   setThemePref: (p: ThemePref) => void;
   /** Global per-item held grade (default 40). Synced with Builder sliders. */
@@ -172,7 +211,9 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   const [saved, setSaved] = useState<SavedLoadout[]>(() => loadSavedLoadouts());
   const [saveError, setSaveError] = useState<string | null>(null);
   const [owned, setOwned] = useState<Set<string>>(() => loadOwnedEmblems());
-  const [heldGradeMemory, setHeldGradeMemory] = useState<Record<string, number>>(() => loadHeldItemGradeMemory());
+  const [heldGradeMemory, setHeldGradeMemory] = useState<Record<string, number>>(() =>
+    loadHeldItemGradeMemory(),
+  );
   const [mode, setModeState] = useState<ViewMode>(() => loadMode());
   const [themePref, setThemePrefState] = useState<ThemePref>(() => loadThemePref());
   const [theme, setThemeState] = useState<Theme>(() => resolveTheme(loadThemePref()));
@@ -198,7 +239,9 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   };
 
   // Persist the in-progress build across reloads.
-  useEffect(() => { saveCurrent(loadout); }, [loadout]);
+  useEffect(() => {
+    saveCurrent(loadout);
+  }, [loadout]);
 
   // Apply the resolved theme to <html data-theme>; CSS variables cascade from there.
   useEffect(() => {
@@ -216,56 +259,74 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     return () => mql.removeEventListener("change", onChange);
   }, [themePref]);
 
-  const store = useMemo<Store>(() => ({
-    loadout,
-    dispatch,
-    saved,
-    saveError,
-    owned,
-    save: (name, id) => {
-      try {
-        setSaved(persistSave(saved, loadout, name, id));
-        setSaveError(null);
-      } catch (e) {
-        setSaveError(e instanceof Error ? e.message : String(e));
-      }
-    },
-    remove: (id) => setSaved(persistDelete(saved, id)),
-    loadSaved: (s) => dispatch({ type: "load", loadout: toLoadout(s) }),
-    toggleOwned: (emblemId, grade) => setOwned((prev) => {
-      const next = new Set(prev);
-      const key = ownedKey(emblemId, grade);
-      next.has(key) ? next.delete(key) : next.add(key);
-      saveOwnedEmblems(next);
-      return next;
+  const store = useMemo<Store>(
+    () => ({
+      loadout,
+      dispatch,
+      saved,
+      saveError,
+      owned,
+      save: (name, id) => {
+        try {
+          setSaved(persistSave(saved, loadout, name, id));
+          setSaveError(null);
+        } catch (e) {
+          setSaveError(e instanceof Error ? e.message : String(e));
+        }
+      },
+      remove: (id) => setSaved(persistDelete(saved, id)),
+      loadSaved: (s) => dispatch({ type: "load", loadout: toLoadout(s) }),
+      toggleOwned: (emblemId, grade) =>
+        setOwned((prev) => {
+          const next = new Set(prev);
+          const key = ownedKey(emblemId, grade);
+          if (next.has(key)) next.delete(key);
+          else next.add(key);
+          saveOwnedEmblems(next);
+          return next;
+        }),
+      bulkSetOwned: (emblemIds, grade, own) =>
+        setOwned((prev) => {
+          const next = new Set(prev);
+          for (const id of emblemIds) {
+            const key = ownedKey(id, grade);
+            if (own) next.add(key);
+            else next.delete(key);
+          }
+          saveOwnedEmblems(next);
+          return next;
+        }),
+      shareUrl: () => shareUrlFor(loadout),
+      mode,
+      expert: mode === "expert",
+      setMode: (m) => {
+        setModeState(m);
+        try {
+          localStorage.setItem(MODE_KEY, m);
+        } catch {
+          /* quota */
+        }
+      },
+      theme,
+      themePref,
+      setThemePref: (p) => {
+        setThemePrefState(p);
+        setThemeState(resolveTheme(p));
+        try {
+          if (p === "system") localStorage.removeItem(THEME_KEY);
+          else localStorage.setItem(THEME_KEY, p);
+        } catch {
+          /* quota */
+        }
+      },
+      heldItemGrade: (itemId) => gradeForHeldItem(heldGradeMemory, itemId),
+      setHeldItemGradeById,
+      heldSlotGrades,
+      setHeldItemGradeForSlot,
+      ownedHeldItemIds: Object.keys(heldGradeMemory),
     }),
-    bulkSetOwned: (emblemIds, grade, own) => setOwned((prev) => {
-      const next = new Set(prev);
-      for (const id of emblemIds) {
-        const key = ownedKey(id, grade);
-        own ? next.add(key) : next.delete(key);
-      }
-      saveOwnedEmblems(next);
-      return next;
-    }),
-    shareUrl: () => shareUrlFor(loadout),
-    mode,
-    expert: mode === "expert",
-    setMode: (m) => { setModeState(m); try { localStorage.setItem(MODE_KEY, m); } catch { /* quota */ } },
-    theme,
-    themePref,
-    setThemePref: (p) => {
-      setThemePrefState(p);
-      setThemeState(resolveTheme(p));
-      try { p === "system" ? localStorage.removeItem(THEME_KEY) : localStorage.setItem(THEME_KEY, p); }
-      catch { /* quota */ }
-    },
-    heldItemGrade: (itemId) => gradeForHeldItem(heldGradeMemory, itemId),
-    setHeldItemGradeById,
-    heldSlotGrades,
-    setHeldItemGradeForSlot,
-    ownedHeldItemIds: Object.keys(heldGradeMemory),
-  }), [loadout, saved, saveError, owned, mode, theme, themePref, heldGradeMemory, heldSlotGrades]);
+    [loadout, saved, saveError, owned, mode, theme, themePref, heldGradeMemory, heldSlotGrades],
+  );
 
   return <Ctx.Provider value={store}>{children}</Ctx.Provider>;
 }

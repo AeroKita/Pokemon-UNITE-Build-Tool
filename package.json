@@ -14,7 +14,11 @@
     "validate": "tsx src/engine/validate.ts",
     "validate:art": "python3 tools/community/validate_art.py",
     "fetch:art": "python3 tools/community/fetch_art.py",
-    "build:pages": "VITE_BASE=/FoxForge-GG/ npm run build"
+    "build:pages": "VITE_BASE=/FoxForge-GG/ npm run build",
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix",
+    "format": "oxfmt \"src/**/*.{ts,tsx}\" vite.config.ts",
+    "format:check": "oxfmt --check \"src/**/*.{ts,tsx}\" vite.config.ts"
   },
   "dependencies": {
     "react": "^19.2.7",
@@ -23,17 +27,19 @@
     "zod": "^4.4.3"
   },
   "devDependencies": {
-    "@tailwindcss/vite": "^4.3.0",
+    "@tailwindcss/vite": "^4.3.1",
     "@types/node": "^25.9.3",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.2",
+    "oxfmt": "0.55.0",
+    "oxlint": "1.70.0",
     "sharp": "^0.35.1",
-    "tailwindcss": "^4.3.0",
+    "tailwindcss": "^4.3.1",
     "tsx": "^4.22.4",
     "typescript": "^6.0.3",
     "vite": "^8.0.16",
     "vite-plugin-pwa": "^1.3.0",
-    "vitest": "^4.1.8"
+    "vitest": "^4.1.9"
   }
 }

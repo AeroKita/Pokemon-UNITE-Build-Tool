@@ -66,7 +66,12 @@ function persist(list: SavedLoadout[]): void {
 }
 
 /** Save a loadout (new or overwrite by id). Enforces the 20-loadout cap. */
-export function saveLoadout(current: SavedLoadout[], loadout: Loadout, name: string, id?: string): SavedLoadout[] {
+export function saveLoadout(
+  current: SavedLoadout[],
+  loadout: Loadout,
+  name: string,
+  id?: string,
+): SavedLoadout[] {
   const now = Date.now();
   if (id) {
     const next = current.map((l) => (l.id === id ? { ...loadout, id, name, savedAt: now } : l));
@@ -96,14 +101,20 @@ export function toLoadout(saved: SavedLoadout): Loadout {
 // ----- Current (in-progress) build persistence ------------------------------
 
 export function saveCurrent(loadout: Loadout): void {
-  try { localStorage.setItem(CURRENT_KEY, JSON.stringify(loadout)); } catch { /* quota */ }
+  try {
+    localStorage.setItem(CURRENT_KEY, JSON.stringify(loadout));
+  } catch {
+    /* quota */
+  }
 }
 export function loadCurrent(): Loadout | null {
   try {
     const raw = localStorage.getItem(CURRENT_KEY);
     if (!raw) return null;
     return normalizeLoadout(JSON.parse(raw));
-  } catch { return null; }
+  } catch {
+    return null;
+  }
 }
 
 // ----- Shareable build links (base64 in the URL hash) -----------------------
@@ -115,7 +126,9 @@ export function decodeLoadout(encoded: string): Loadout | null {
   try {
     const json = decodeURIComponent(escape(atob(encoded)));
     return sanitizeLoadout(JSON.parse(json));
-  } catch { return null; }
+  } catch {
+    return null;
+  }
 }
 
 /** Read a shared build from the URL hash (#b=...), if present. */
@@ -203,10 +216,13 @@ function sanitizeSavedLoadout(x: unknown): SavedLoadout | null {
 
 /** Coerce persisted/shared/partial loadouts into a valid in-memory Loadout. */
 export function normalizeLoadout(x: unknown): Loadout {
-  return sanitizeLoadout(x) ?? emptyLoadout(
-    x && typeof x === "object" && typeof (x as Record<string, unknown>).pokemonId === "string"
-      ? (x as Record<string, unknown>).pokemonId as string
-      : null,
+  return (
+    sanitizeLoadout(x) ??
+    emptyLoadout(
+      x && typeof x === "object" && typeof (x as Record<string, unknown>).pokemonId === "string"
+        ? ((x as Record<string, unknown>).pokemonId as string)
+        : null,
+    )
   );
 }
 
@@ -241,8 +257,14 @@ export function loadOwnedEmblems(): Set<string> {
   try {
     const raw = localStorage.getItem(OWNED_KEY);
     return new Set<string>(raw ? JSON.parse(raw) : []);
-  } catch { return new Set(); }
+  } catch {
+    return new Set();
+  }
 }
 export function saveOwnedEmblems(owned: Set<string>): void {
-  try { localStorage.setItem(OWNED_KEY, JSON.stringify([...owned])); } catch { /* quota */ }
+  try {
+    localStorage.setItem(OWNED_KEY, JSON.stringify([...owned]));
+  } catch {
+    /* quota */
+  }
 }

@@ -50,7 +50,10 @@ export function resolveFinalMove(
 }
 
 /** Default { move1Id, move2Id } for a Pokémon (top Recommended build, else first upgrades). */
-export function defaultFinalMoveIds(pokemon: Pokemon): { move1Id: string | null; move2Id: string | null } {
+export function defaultFinalMoveIds(pokemon: Pokemon): {
+  move1Id: string | null;
+  move2Id: string | null;
+} {
   return {
     move1Id: resolveFinalMove(pokemon, "move1")?.id ?? null,
     move2Id: resolveFinalMove(pokemon, "move2")?.id ?? null,

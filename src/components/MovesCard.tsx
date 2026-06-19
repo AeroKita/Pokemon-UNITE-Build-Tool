@@ -31,7 +31,15 @@ function MoveRow({ move, dimLabel }: { move: Move; dimLabel?: string }) {
  * player chooses between. The selected upgrade is the "final move" shown in the
  * Builds card. Clicking an option updates the loadout (single source of truth).
  */
-function ChoosableMoveSlot({ label, pokemon, slot }: { label: string; pokemon: Pokemon; slot: FinalSlot }) {
+function ChoosableMoveSlot({
+  label,
+  pokemon,
+  slot,
+}: {
+  label: string;
+  pokemon: Pokemon;
+  slot: FinalSlot;
+}) {
   const { loadout, dispatch } = useStore();
   const base = baseMove(pokemon, slot);
   const options = upgradeOptions(pokemon, slot);
@@ -54,13 +62,17 @@ function ChoosableMoveSlot({ label, pokemon, slot }: { label: string; pokemon: P
                   onClick={() => dispatch({ type: "setMove", slot, moveId: u.id })}
                   aria-pressed={isSel}
                   className={`flex min-h-11 w-full items-center gap-2 rounded-lg border px-3 py-2.5 text-left transition ${
-                    isSel ? "border-accent bg-accent-weak ring-1 ring-accent" : "border-line hover:bg-raise"
+                    isSel
+                      ? "border-accent bg-accent-weak ring-1 ring-accent"
+                      : "border-line hover:bg-raise"
                   }`}
                 >
                   <MoveIcon src={u.iconAsset} alt={u.name} size="h-8 w-8" />
                   <span className="min-w-0 flex-1 truncate text-sm text-ink">{u.name}</span>
                   {u.upgradeLevel ? (
-                    <span className="shrink-0 rounded bg-raise px-1 text-[10px] text-faint">Lv {u.upgradeLevel}</span>
+                    <span className="shrink-0 rounded bg-raise px-1 text-[10px] text-faint">
+                      Lv {u.upgradeLevel}
+                    </span>
                   ) : null}
                   {isSel && <span className="shrink-0 text-xs font-bold text-accent-ink">✓</span>}
                 </button>
@@ -86,7 +98,8 @@ export function MovesCard() {
   return (
     <CollapsibleCard title="Moves" persistKey="moves" tone="sky" defaultOpen={false}>
       <p className="mb-3 text-xs text-faint">
-        {pokemon.displayName}'s kit — pick one upgrade per move; your picks set the final moves in the Builds card.
+        {pokemon.displayName}'s kit — pick one upgrade per move; your picks set the final moves in
+        the Builds card.
       </p>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <ChoosableMoveSlot label="Move 1" pokemon={pokemon} slot="move1" />
@@ -103,7 +116,9 @@ export function MovesCard() {
             content={
               <span>
                 <span className="font-semibold">{passive.name}</span>
-                {passive.description && <span className="mt-0.5 block text-faint">{passive.description}</span>}
+                {passive.description && (
+                  <span className="mt-0.5 block text-faint">{passive.description}</span>
+                )}
               </span>
             }
           >

@@ -47,7 +47,10 @@ const MOVES = boostsData.moves as Record<string, MoveBoost[]>;
 const globalById = (id: string) => GLOBALS.find((g) => g.id === id);
 
 /** Is a level-gated boost available at this level? */
-export function boostAvailableAtLevel(b: { minLevel?: number; maxLevel?: number }, level: number): boolean {
+export function boostAvailableAtLevel(
+  b: { minLevel?: number; maxLevel?: number },
+  level: number,
+): boolean {
   if (b.minLevel != null && level < b.minLevel) return false;
   if (b.maxLevel != null && level > b.maxLevel) return false;
   return true;
@@ -73,14 +76,24 @@ export function availableActiveBoosts(
 
   if (battleItem?.id === "x-attack") {
     const g = globalById("x-attack")!;
-    out.push({ id: "x-attack", label: "X Attack (active)", asPoints: g.asPoints, source: "item",
+    out.push({
+      id: "x-attack",
+      label: "X Attack (active)",
+      asPoints: g.asPoints,
+      source: "item",
       statMultipliers: { attack: 0.2, spAttack: 0.2 },
-      note: "+20% Attack, +20% Sp. Atk, +25% attack speed for 6s." });
+      note: "+20% Attack, +20% Sp. Atk, +25% attack speed for 6s.",
+    });
   }
   if (heldItems.some((i) => i?.id === "rapid-fire-scarf")) {
     const g = globalById("rapid-fire-scarf-proc")!;
-    out.push({ id: "rfs-proc", label: "Rapid-Fire Scarf (proc)", asPoints: g.asPoints, source: "item",
-      note: "After a move: next basic attacks gain attack speed." });
+    out.push({
+      id: "rfs-proc",
+      label: "Rapid-Fire Scarf (proc)",
+      asPoints: g.asPoints,
+      source: "item",
+      note: "After a move: next basic attacks gain attack speed.",
+    });
   }
   for (const g of GLOBALS.filter((x) => x.kind === "ally")) {
     out.push({ id: g.id, label: g.label, asPoints: g.asPoints, source: "ally" });
