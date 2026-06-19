@@ -243,6 +243,13 @@ describe("computeConfidence", () => {
     const divergent = computeConfidence(2, [{ hp: 600, attack: 0 }, { hp: 0, attack: 28 }]);
     expect(divergent).toBeLessThan(consistent);
   });
+
+  it("[GEN-20b] mobility variant pair passes (moveSpeed excluded from distance)", () => {
+    // Skeledirge / Miraidon pattern: standard green shell vs mobility shell.
+    const standard = { hp: 350, attack: -9.8, defense: 5, spAttack: 1.5, spDefense: -8 };
+    const mobile = { hp: 200, attack: -15, spAttack: 4.5, moveSpeed: 140 };
+    expect(computeConfidence(2, [standard, mobile])).toBeGreaterThanOrEqual(0.4);
+  });
 });
 
 // ---------------------------------------------------------------------------

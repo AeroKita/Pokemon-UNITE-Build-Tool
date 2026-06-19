@@ -173,4 +173,12 @@ describe("preset regressions vs generic", () => {
       expect(resolveEmblemPreset(pokemonById.get(id)!)).not.toBeNull();
     }
   });
+
+  it("[OPT-REG] Skeledirge: mobility + standard Recommended builds → auto preset", () => {
+    const skeledirge = pokemonById.get("skeledirge")!;
+    const resolved = resolveEmblemPreset(skeledirge);
+    expect(resolved).not.toBeNull();
+    expect(resolved!.source).toBe("auto");
+    expect((resolved!.preset.priorities.spAttack ?? 0)).toBeGreaterThan(0);
+  });
 });

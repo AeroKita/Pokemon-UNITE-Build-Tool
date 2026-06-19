@@ -278,18 +278,29 @@ export function deriveColorTargets(
 }
 
 /**
- * Each build's normalized stat distance from the median build, across the key
- * flat stats (STAT_NORM-scaled so stats are comparable). Used by the confidence
- * metric; exported for testing.
+ * Flat stats used for build-to-build consistency (confidence). Excludes moveSpeed
+ * because UNITE-DB often lists a separate mobility Recommended build (e.g.
+ * Skeledirge "Mobile Special Attacker") whose emblem shell trades HP for move
+ * speed while sharing the same offense role — penalizing that divergence would
+ * drop otherwise-valid presets below the confidence threshold.
+ */
+export const CONFIDENCE_STATS: (keyof StatBlock)[] = FLOOR_STATS.filter(
+  (s) => s !== "moveSpeed",
+);
+
+/**
+ * Each build's normalized stat distance from the median build, across
+ * {@link CONFIDENCE_STATS} (STAT_NORM-scaled so stats are comparable). Used by
+ * the confidence metric; exported for testing.
  */
 export function buildDistances(totalsList: Partial<StatBlock>[]): number[] {
   const medians: Partial<Record<keyof StatBlock, number>> = {};
-  for (const stat of FLOOR_STATS) {
+  for (const stat of CONFIDENCE_STATS) {
     medians[stat] = median(totalsList.map((t) => t[stat] ?? 0));
   }
   return totalsList.map((t) => {
     let d = 0;
-    for (const stat of FLOOR_STATS) {
+    for (const stat of CONFIDENCE_STATS) {
       d += Math.abs((t[stat] ?? 0) - (medians[stat] ?? 0)) / (STAT_NORM[stat] ?? 1);
     }
     return d;

@@ -5,8 +5,8 @@
     "generatedAt": "2026-06-19",
     "algorithm": "v1: priorities = normalized median positive flat magnitudes (0–1); protectedFloors = clamp(min(0, round(p10))) with moveSpeed 0 when builds keep it ≥ 0; colorTargets = vote-weighted (Recommended 1.0, Creative 0.5) counts ≥ 2; confidence = min(1, builds/2) × (1 − avg coefficient of variation)",
     "confidenceThreshold": 0.4,
-    "pokemonWithPresets": 92,
-    "pokemonFallback": 2
+    "pokemonWithPresets": 94,
+    "pokemonFallback": 0
   },
   "presets": {
     "absol": {
@@ -1243,7 +1243,7 @@
         "brown": 5,
         "black": 4
       },
-      "confidence": 0.56,
+      "confidence": 0.59,
       "buildCount": 4,
       "source": "auto"
     },
@@ -1350,6 +1350,30 @@
       },
       "confidence": 1,
       "buildCount": 3,
+      "source": "auto"
+    },
+    "miraidon": {
+      "priorities": {
+        "hp": 0.57,
+        "defense": 0.06,
+        "spAttack": 1,
+        "moveSpeed": 0.15
+      },
+      "protectedFloors": {
+        "hp": 0,
+        "attack": -14,
+        "defense": 0,
+        "spAttack": 0,
+        "spDefense": -7,
+        "moveSpeed": 0
+      },
+      "colorTargets": {
+        "green": 6,
+        "black": 7,
+        "white": 2
+      },
+      "confidence": 0.47,
+      "buildCount": 2,
       "source": "auto"
     },
     "moltres": {
@@ -1609,6 +1633,31 @@
         "white": 6
       },
       "confidence": 1,
+      "buildCount": 2,
+      "source": "auto"
+    },
+    "skeledirge": {
+      "priorities": {
+        "hp": 0.78,
+        "defense": 0.08,
+        "spAttack": 1,
+        "cdr": 0.06,
+        "moveSpeed": 0.21
+      },
+      "protectedFloors": {
+        "hp": 0,
+        "attack": -14,
+        "defense": 0,
+        "spAttack": 0,
+        "spDefense": -7,
+        "moveSpeed": 0
+      },
+      "colorTargets": {
+        "green": 6,
+        "white": 2,
+        "black": 7
+      },
+      "confidence": 0.47,
       "buildCount": 2,
       "source": "auto"
     },
