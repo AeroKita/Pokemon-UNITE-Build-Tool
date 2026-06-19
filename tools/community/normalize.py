@@ -377,6 +377,10 @@ def apply_curated_builds(pokemon, emblems, held, battle) -> None:
       - "creativeBuilds": full list -> SET as the Creative tab.
       - "recommendedTitles": [str] -> override emblemName by index on the
         raw-derived Recommended builds (mutually exclusive with "builds").
+      - "emblemPreset": object -> SET as the Pokémon's manual emblem-optimizer
+        preset (priorities / protectedFloors / colorTargets). This is the
+        highest-priority override consumed by optimizerPresets.ts, taking
+        precedence over the auto-generated emblemOptimizerPresets.json entry.
     Underscore-prefixed keys (e.g. "_comment") are ignored.
     """
     if not CURATED.exists():
@@ -401,7 +405,7 @@ def apply_curated_builds(pokemon, emblems, held, battle) -> None:
     by_id = {p["id"]: p for p in pokemon}
     moves_by_id = {p["id"]: {m["name"] for m in p["moves"] if m.get("isUpgrade")}
                    for p in pokemon}
-    n_rec = n_creative = n_titles = 0
+    n_rec = n_creative = n_titles = n_presets = 0
     for pid, spec in overlay.items():
         if pid.startswith("_"):
             continue
@@ -429,8 +433,15 @@ def apply_curated_builds(pokemon, emblems, held, battle) -> None:
             for b, t in zip(existing, titles):
                 b["emblemName"] = t
                 n_titles += 1
+        if "emblemPreset" in spec:
+            preset = spec["emblemPreset"]
+            if not isinstance(preset, dict):
+                raise ValueError(f"{pid}: emblemPreset must be an object")
+            preset.setdefault("source", "manual")
+            p["emblemPreset"] = preset
+            n_presets += 1
     print(f"  curated overlay: +{n_rec} recommended, +{n_creative} creative, "
-          f"{n_titles} titles renamed")
+          f"{n_titles} titles renamed, {n_presets} emblem presets")
 
 
 # ---- held items ------------------------------------------------------------

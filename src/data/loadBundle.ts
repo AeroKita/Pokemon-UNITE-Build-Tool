@@ -85,6 +85,17 @@ const pokemonBuild = z.object({
   moves: z.array(z.string()).optional(),
 });
 
+const emblemOptimizerPreset = z.object({
+  priorities: partialStatBlock,
+  protectedFloors: partialStatBlock,
+  // Color keys validated loosely (z.record) — the EmblemColor enum is defined
+  // further below; keeping this a string-keyed record avoids a forward ref.
+  colorTargets: z.record(z.string(), z.number()),
+  confidence: z.number().optional(),
+  buildCount: z.number().optional(),
+  source: z.enum(["auto", "manual"]).optional(),
+});
+
 const pokemon = z.object({
   id: z.string(),
   displayName: z.string(),
@@ -102,6 +113,7 @@ const pokemon = z.object({
   excludeStats: z.array(z.string()).optional(),
   hasMegaEvolution: z.boolean().optional(),
   megaStats: z.array(statBlock).optional(),
+  emblemPreset: emblemOptimizerPreset.optional(),
 });
 
 const itemEffect = z.object({

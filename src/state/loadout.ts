@@ -3,6 +3,7 @@
 // (battle) item, an emblem set, and which active effects are toggled on.
 
 import type { EmblemGrade } from "../types";
+import { generateId } from "../utils/generateId";
 
 export interface EmblemPick {
   emblemId: string;
@@ -80,7 +81,7 @@ export function saveLoadout(
   if (current.length >= MAX_SAVED_LOADOUTS) {
     throw new Error(`Loadout limit reached (${MAX_SAVED_LOADOUTS}). Delete one first.`);
   }
-  const entry: SavedLoadout = { ...loadout, id: crypto.randomUUID(), name, savedAt: now };
+  const entry: SavedLoadout = { ...loadout, id: generateId(), name, savedAt: now };
   const next = [...current, entry];
   persist(next);
   return next;

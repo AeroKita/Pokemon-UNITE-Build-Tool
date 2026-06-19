@@ -95,6 +95,8 @@ Curated Recommended/Creative builds and build-label overrides live in `tools/com
 - Per Pokémon `id`: `builds` (replace Recommended), `creativeBuilds` (set Creative), or `recommendedTitles` (override `emblemName` by build index — for distinct labels from one raw name, e.g. Scizor). `builds` and `recommendedTitles` are mutually exclusive.
 - `lane` edits that aren't covered by remap use full `builds`/`creativeBuilds` overlay entries.
 
+Per-Pokémon emblem-optimizer presets live in `src/data/emblemOptimizerPresets.json`, generated from each Pokémon's community builds (UNITE-DB `builds[]` + `creativeBuilds[]`, 10-emblem sets) by `tools/meta-defaults/generate-presets.ts`. They supply community-derived stat priorities, protect floors, and a color shell that replace the role-generic derivation in `deriveBasicObjective` when confident enough (fallback chain: manual `curated_builds.json` `emblemPreset` overlay → auto preset ≥ confidence threshold → generic). Regenerate after `builds` change: `npm run generate:presets` (or `npm run data:post-normalize` to re-run `normalize.py` first). Preview without writing: `npm run generate:presets:dry`. The daily `data.yml` workflow runs `generate:presets` automatically after normalize; CI fails if `src/data/__tests__/presetsSync.test.ts` detects a stale file. The engine consumes the JSON via `src/engine/emblemSearch/optimizerPresets.ts`.
+
 Move descriptions use the overlay pattern above: `scrape_serebii.py` writes `move_descriptions.json`; `normalize.py` backfills blank move descriptions from it (Serebii slug map is explicit—do not derive slugs algorithmically). Passive descriptions fall back to `rsb.true_desc` when UNITE-DB's top-level `description` is blank. In `RecommendPanel.tsx`, the Builds card header shows `emblemName ?? name`, then optional ` · lane`; its Final Moves sub-block always resolves both slots via `resolveFinalMove` + `moveIdsFromNames` so partial or empty curated `moves` lists still show two icons matching the applied loadout.
 
 ### State and Persistence
@@ -211,7 +213,7 @@ Game data refresh (separate `data.yml` workflow):
 
 ```bash
 cd tools/community && source ../extract/.venv/bin/activate
-python3 fetch.py && python3 scrape_serebii.py && python3 normalize.py && python3 fetch_art.py && python3 normalize_as_boosts.py
+python3 fetch.py && python3 scrape_serebii.py && python3 normalize.py && cd ../.. && npm run generate:presets && cd tools/community && python3 fetch_art.py && python3 normalize_as_boosts.py
 ```
 
 `scrape_serebii.py` fetches Serebii move text into `move_descriptions.json` (run after `fetch.py`, before `normalize.py`). `normalize.py` writes `src/data/patch-current.json`; the Refresh game data workflow copies it to `public/data/patch-<version>.json`, updates `manifest.json`, mirrors art, and posts a field-level PR changelog via `diff_bundle.py` (or sync manually when running locally). Edit `curated_builds.json` (`_emblemNameRemap`, per-Pokémon `builds`/`creativeBuilds`/`recommendedTitles`) before re-running — never hand-edit curated labels in the bundle. Bump the patch id via `PATCH_VERSION=… python3 normalize.py` or the workflow's optional `patch_version` input.
@@ -219,7 +221,7 @@ python3 fetch.py && python3 scrape_serebii.py && python3 normalize.py && python3
 Curated-build-only edits (no UNITE-DB re-scrape):
 
 ```bash
-python3 tools/community/normalize.py   # re-merge curated_builds.json (_emblemNameRemap + overlays) + move_descriptions.json into the bundle
+npm run data:post-normalize   # normalize.py + emblemOptimizerPresets.json
 npx tsx src/data/verifyPatch.ts && npm run typecheck && npm test
 ```
 

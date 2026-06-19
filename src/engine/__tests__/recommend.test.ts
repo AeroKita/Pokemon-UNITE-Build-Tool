@@ -32,6 +32,40 @@ describe("recommendation engine", () => {
     expect(priorityWeights(physical).spAttack ?? 0).toBe(0);
   });
 
+  it("keeps offense dominant for pure carries (Attacker/Speedster) but still values HP", () => {
+    // Meta carries on unite-db run +HP emblems inside their color shell; because
+    // "white" emblems don't all carry +HP, HP must be weighted highly enough that
+    // the optimizer fills the survivability shell with the +HP variants. For pure
+    // carry roles the primary offense stat still outweighs HP.
+    for (const role of ["Attacker", "Speedster"] as const) {
+      const phys = pokemonList.find((p) => p.role === role && p.attackType !== "special");
+      if (!phys) continue;
+      const w = priorityWeights(phys);
+      expect(w.hp ?? 0).toBeGreaterThan(0);
+      const offense = Math.max(w.attack ?? 0, w.spAttack ?? 0);
+      expect(offense).toBeGreaterThanOrEqual(w.hp ?? 0);
+    }
+  });
+
+  it("lets bruiser All-Rounders weight HP at least as high as offense", () => {
+    // All-Rounders are bruisers: meta builds run a full 6-white HP shell, so HP is
+    // weighted on par with (or above) their offense stat to match that bulk.
+    const ar = pokemonList.find((p) => p.role === "AllRounder");
+    if (!ar) return;
+    const w = priorityWeights(ar);
+    const offense = Math.max(w.attack ?? 0, w.spAttack ?? 0);
+    expect(offense).toBeGreaterThan(0);
+    expect(w.hp ?? 0).toBeGreaterThanOrEqual(offense);
+  });
+
+  it("keeps special attackers offense-weighted but bulk-aware", () => {
+    const w = priorityWeights(special);
+    if (special.role === "Attacker") {
+      expect(w.hp ?? 0).toBeGreaterThan(0);
+      expect(w.spAttack ?? 0).toBeGreaterThan(w.hp ?? 0);
+    }
+  });
+
   it("recommends attack-oriented items for a physical Pokémon", () => {
     const rec = recommendBuild(physical, heldItems, setBonuses);
     expect(rec.heldItemIds).toHaveLength(3);

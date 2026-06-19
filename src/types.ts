@@ -45,6 +45,35 @@ export interface Pokemon {
   excludeStats?: string[]; // stats this Pokémon doesn't use (UNITE-DB), e.g. ["attack"]
   hasMegaEvolution?: boolean;
   megaStats?: StatBlock[]; // if applicable (e.g. Mega Lucario)
+  // Optional hand-curated emblem-optimizer override (highest-priority preset).
+  // Rides in the bundle via tools/community/curated_builds.json → normalize.py.
+  // Takes precedence over the auto-generated emblemOptimizerPresets.json entry.
+  emblemPreset?: EmblemOptimizerPreset;
+}
+
+// A per-Pokémon emblem-optimizer "preset": the auto-derived (or hand-curated)
+// search objective for Basic/Advanced mode. Auto presets are generated from the
+// Pokémon's community builds by tools/meta-defaults/generate-presets.ts and
+// shipped in src/data/emblemOptimizerPresets.json; a manual override may instead
+// live on Pokemon.emblemPreset (see curated_builds.json). When present and
+// confident enough, it replaces the role-generic priorityWeights /
+// deriveProtectFloors / colorTargetsFor derivation in deriveBasicObjective().
+export interface EmblemOptimizerPreset {
+  // Stat priority weights on a 0–1 "importance" scale (matches the Advanced UI
+  // sliders; scaled to the engine's weight range when the objective is built).
+  priorities: Partial<Record<keyof StatBlock, number>>;
+  // Protect floors: the total flat emblem contribution to a stat must not drop
+  // below this value (0 = "don't net-reduce"; negative = a tolerated tax).
+  protectedFloors: Partial<Record<keyof StatBlock, number>>;
+  // Recommended emblem color shell (color → emblem count) from community builds.
+  colorTargets: Partial<Record<EmblemColor, number>>;
+  // Confidence 0–1 from community build count + cross-build consistency. Auto
+  // presets below the engine threshold fall back to the generic derivation.
+  confidence?: number;
+  // Number of community builds the preset was derived from.
+  buildCount?: number;
+  // Provenance: "auto" (generated) or "manual" (curated override).
+  source?: "auto" | "manual";
 }
 
 // A curated build (from UNITE-DB's per-Pokémon "Builds" tab): held items, a

@@ -10,13 +10,15 @@ import { PokemonPickerSheet } from "./components/PokemonPicker";
 import { CompareScreen } from "./components/screens/CompareScreen";
 import { EmblemsScreen } from "./components/screens/EmblemsScreen";
 import { ItemsScreen } from "./components/screens/ItemsScreen";
+import { OptimizeScreen } from "./components/screens/OptimizeScreen";
 import { SettingsMenu } from "./components/SettingsMenu";
 
 const TAB_KEY = "unite-build-optimizer.tab.v1";
-const VALID_TABS: Tab[] = ["build", "compare", "emblems", "items"];
+const VALID_TABS: Tab[] = ["build", "optimize", "compare", "emblems", "items"];
 
 const ALL_TABS: { id: Tab; label: string; icon: ReactNode }[] = [
   { id: "build", label: "Build", icon: TAB_ICONS.build },
+  { id: "optimize", label: "Optimize", icon: TAB_ICONS.optimize },
   { id: "emblems", label: "Emblems", icon: TAB_ICONS.emblems },
   { id: "items", label: "Items", icon: TAB_ICONS.items },
   { id: "compare", label: "Compare", icon: TAB_ICONS.compare },
@@ -68,7 +70,9 @@ function Workspace() {
   const role = p ? ROLE_COLOR[p.role] : null;
 
   const appBarProps = useMemo(() => {
-    if (tab === "build") {
+    // Build and Optimize both pin the selected Pokémon to the top-left of the
+    // fixed app bar so it stays visible while scrolling the search controls.
+    if (tab === "build" || tab === "optimize") {
       return {
         leading: (
           <button
@@ -97,6 +101,7 @@ function Workspace() {
               {ROLE_LABEL[p.role]}
             </span>
             <span className="capitalize">{p.attackType}</span>
+            {tab === "optimize" && <span className="text-faint">· Optimize</span>}
           </span>
         ) : undefined,
         onTitleTap: () => setPokePickerOpen(true),
@@ -104,6 +109,7 @@ function Workspace() {
     }
 
     const titles: Record<Exclude<Tab, "build">, string> = {
+      optimize: "Optimize",
       compare: "Compare",
       emblems: "Emblems",
       items: "Held Items",
@@ -138,7 +144,10 @@ function Workspace() {
             </button>
           </div>
         )}
-        {tab === "build" && <BuildScreen />}
+        {tab === "build" && <BuildScreen onOpenPokePicker={() => setPokePickerOpen(true)} />}
+        <div className={tab === "optimize" ? undefined : "hidden"} aria-hidden={tab !== "optimize"}>
+          <OptimizeScreen onNavigate={setTab} />
+        </div>
         {tab === "compare" && expert && <CompareScreen />}
         {tab === "emblems" && <EmblemsScreen />}
         {tab === "items" && <ItemsScreen />}

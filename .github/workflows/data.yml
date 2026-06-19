@@ -39,6 +39,8 @@ jobs:
           python3 fetch.py
           python3 normalize.py
           python3 normalize_as_boosts.py
+      - name: Regenerate emblem optimizer presets
+        run: npm run generate:presets
       - name: Fetch new art
         working-directory: tools/community
         run: python3 fetch_art.py

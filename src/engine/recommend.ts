@@ -271,6 +271,46 @@ export function coreItemsFor(pokemon: Pokemon): Set<string> {
   return ids;
 }
 
+/**
+ * Per-Pokémon held-item "votes" from its curated community builds.
+ *
+ * This is the strongest ground-truth signal: expert builds are, by definition,
+ * the items that make sense for that Pokémon's kit. We return, per item id, the
+ * weighted fraction of builds that include it (0..1), so the value is both
+ * interpretable ("in ~X% of expert builds") and stable to scale in scoring.
+ *
+ * Refresh behavior: reads `pokemon.builds` / `creativeBuilds` straight from the
+ * bundle, so new UNITE-DB builds change the votes automatically.
+ *
+ * Weighting: Recommended builds count full; Creative builds count at 0.5; the
+ * `heldItemOptional` slot counts at 0.4 (a real but secondary suggestion).
+ */
+export function communityItemVotes(pokemon: Pokemon): Map<string, number> {
+  const sources: { builds: typeof pokemon.builds; weight: number }[] = [
+    { builds: pokemon.builds, weight: 1 },
+    { builds: pokemon.creativeBuilds, weight: 0.5 },
+  ];
+
+  const raw = new Map<string, number>();
+  let totalWeight = 0;
+  for (const { builds, weight } of sources) {
+    for (const b of builds ?? []) {
+      totalWeight += weight;
+      for (const id of b.heldItemIds ?? []) {
+        raw.set(id, (raw.get(id) ?? 0) + weight);
+      }
+      if (b.heldItemOptional) {
+        raw.set(b.heldItemOptional, (raw.get(b.heldItemOptional) ?? 0) + weight * 0.4);
+      }
+    }
+  }
+
+  if (totalWeight === 0) return raw;
+  const votes = new Map<string, number>();
+  for (const [id, w] of raw) votes.set(id, w / totalWeight);
+  return votes;
+}
+
 // Typical grade-30 magnitude per stat — used to normalise raw values to ~0..1
 // so HP (hundreds) doesn't swamp Attack (tens) when scoring.
 const SCALE: Record<keyof StatBlock, number> = {
@@ -307,30 +347,46 @@ export function priorityWeights(pokemon: Pokemon): Partial<Record<keyof StatBloc
   }
 
   switch (pokemon.role) {
+    // Survivability weight (HP) is deliberately high — comparable to the primary
+    // offense stat. unite-db meta carries run a 6-white (HP set bonus) shell and
+    // fill it with the +50 HP white emblems (Pidgey/Pidgeotto/Chansey/Blissey…),
+    // NOT the offensive white variants (Stantler +spAtk, Snorlax +spDef, etc.).
+    // Because "white" alone does not guarantee +HP, HP must outweigh those white
+    // emblems' offensive secondaries (~0.9 normalised) or the optimizer fills the
+    // survivability shell with glass and nets ~0 flat HP. Offense still dominates
+    // the OFFENSIVE color shell (brown/green), where +HP emblems are scarce, so a
+    // high HP weight mainly converts the white shell to real bulk — matching meta.
     case "Attacker":
       add(physical ? "attack" : "spAttack", 1.5);
       add("critRate", physical ? 0.8 : 0);
+      add("hp", 4);
       break;
     case "AllRounder":
       add("attack", 0.8);
-      add("hp", 0.8);
+      add("hp", 4.5);
+      add("defense", 1);
+      add("spDefense", 1);
       add("lifesteal", 0.6);
       break;
+    // Speedsters skew glass-cannon in meta (burst over bulk), so HP is lower than
+    // the bruiser/tank roles — enough to fill a forced white shell with some real
+    // HP, but not so high it over-stacks survivability on assassins.
     case "Speedster":
       add("attack", 1);
       add("critRate", 1);
       add("moveSpeed", 0.6);
       add("lifesteal", 0.6);
+      add("hp", 2.8);
       break;
     case "Defender":
-      add("hp", 2.5);
+      add("hp", 6);
       add("defense", 2);
       add("spDefense", 2);
       add("cdr", 1);
       break;
     case "Supporter":
       add("cdr", 2);
-      add("hp", 1.5);
+      add("hp", 4.5);
       add("spDefense", 1.2);
       break;
   }

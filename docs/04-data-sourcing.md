@@ -33,7 +33,7 @@ Hand-curated Recommended/Creative builds and title overrides live in
 `tools/community/curated_builds.json` and are merged by `normalize.py` on top of the  
 UNITE-DB-derived bundle, so they survive data refreshes while raw builds stay the base layer.
 
-After `normalize.py`, run `npm test`, `npx tsx src/data/verifyPatch.ts`, and sync  
+After `normalize.py`, run `npm run generate:presets` (or `npm run data:post-normalize` to chain both), then `npm test`, `npx tsx src/data/verifyPatch.ts`, and sync  
 `public/data/` if the runtime fetch path should match.  
   
 ## Principles  
