@@ -1106,10 +1106,10 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
                 <Segmented<BasicEffort>
                   fluid
                   value={basicEffort}
-                  options={(["exact", "quick", "normal", "thorough"] as BasicEffort[]).filter(
+                  options={(["quick", "normal", "thorough", "exact"] as BasicEffort[]).filter(
                     (e) => e !== "exact" || basicExactFeasible,
                   )}
-                  labels={{ exact: "Best", quick: "Fast", normal: "Balanced", thorough: "Thorough" }}
+                  labels={{ exact: "Exact", quick: "Fast", normal: "Balanced", thorough: "Thorough" }}
                   onChange={setBasicEffort}
                 />
               </div>

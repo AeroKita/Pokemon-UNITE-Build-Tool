@@ -57,6 +57,15 @@ Run this when a new patch drops (or when UNITE-DB publishes patch changes).
    (skill icons present, build moves resolve, etc.).
 5. **Spot-check against in-game.** Verify a few high-traffic builds (e.g. Lucario
    Lv15 HP/Atk; one item %; one emblem set threshold) match in-game readouts.
+   - **Held-item recommendations are auto-derived** (community-build votes, kit
+     profile from move data, and effect tags parsed from item text — see
+     `src/engine/itemTags.ts` / `kitProfile.ts` / `heldItemSynergy.ts`), so they
+     track the refreshed bundle automatically. The one thing automation can't
+     catch is an **item rework** that changes what an effect *does* without
+     changing its id: if the patch reworks a held item's effect, skim
+     `src/engine/itemTags.ts` (keyword rules + `ITEM_TAG_OVERRIDES`) and adjust.
+     `src/engine/__tests__/itemTags.test.ts` fails loudly if an override points at
+     an item id that no longer exists.
 6. **Manual forum watch.** Skim Mathcord / r/PokemonUnite for corrections on any
    mechanic the patch touched (attack-speed buffs, RSB, new move interactions). If
    a value disagrees with UNITE-DB, prefer the in-game readout, then reconcile and
