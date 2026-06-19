@@ -1031,8 +1031,8 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
           {pokemon && (
             <div className="flex flex-col gap-4 rounded-2xl border border-line bg-surface px-4 py-3 shadow-sm">
               {/* Level */}
-              <div className="flex items-center gap-3">
-                <span className="w-16 shrink-0 text-xs font-medium text-muted">Level</span>
+              <div className="flex items-center gap-3 rounded-lg bg-white/5 px-3 py-2">
+                <span className="shrink-0 text-xs text-muted">Optimize for level</span>
                 <input
                   type="range"
                   min={1} max={15} step={1}
