@@ -1,3 +1,4 @@
+import { lazy, Suspense } from "react";
 import { useStore } from "../../state/store";
 import { BuildSummaryBar } from "../BuildSummaryBar";
 import { RecommendPanel } from "../RecommendPanel";
@@ -5,7 +6,8 @@ import { LoadoutEditor } from "../LoadoutEditor";
 import { MovesCard } from "../MovesCard";
 import { StatPanel } from "../StatPanel";
 import { LoadoutBar } from "../LoadoutBar";
-import { LevelGraph } from "../LevelGraph";
+
+const LevelGraph = lazy(() => import("../LevelGraph").then((m) => ({ default: m.LevelGraph })));
 
 interface BuildScreenProps {
   onOpenPokePicker: () => void;
@@ -23,7 +25,11 @@ export function BuildScreen({ onOpenPokePicker }: BuildScreenProps) {
       <MovesCard />
       <StatPanel />
       <LoadoutBar />
-      {expert && <LevelGraph />}
+      {expert && (
+        <Suspense fallback={null}>
+          <LevelGraph />
+        </Suspense>
+      )}
     </div>
   );
 }
