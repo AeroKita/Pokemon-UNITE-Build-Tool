@@ -55,7 +55,7 @@ import {
   DEFAULT_ALLOWED_GRADES,
 } from "../engine/emblemSearch/basicObjective";
 import { buildPresetSearchOptions, deriveAdvancedColorUiDefaults, resolveBasicEffort, resolveColorSearchMode, EXACT_FALLBACK_EFFORT, type BasicEffort } from "../engine/emblemSearch/searchPresets";
-import { deriveDefaultProtectedStats } from "../engine/emblemSearch/protectDefaults";
+import { deriveProtectFloors } from "../engine/emblemSearch/protectDefaults";
 import { isSearchResultStale } from "../engine/emblemSearch/staleResult";
 import { predictFlatStatRanges, type FlatStatPrediction } from "../engine/emblemSearch/predictStats";
 import { recommendItemsForEmblemBuild } from "../engine/emblemSearch/heldItemSynergy";
@@ -825,7 +825,7 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
 
   const applyAdvancedProtectDefaults = useCallback((level: number) => {
     if (pokemon) {
-      const floors = deriveDefaultProtectedStats(pokemon, pokemonList, level);
+      const floors = deriveProtectFloors(pokemon, pokemonList, level);
       const newFloorActive: Record<string, boolean> = {};
       const newFloorValues: Record<string, string> = {};
       for (const stat of Object.keys(floors)) {

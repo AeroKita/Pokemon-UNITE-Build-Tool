@@ -246,3 +246,21 @@ export function deriveDefaultProtectedStats(
 export function deriveMobilityFloor(pokemon: Pokemon): StatFloors {
   return MOBILITY_ROLES.has(pokemon.role) ? { moveSpeed: 0 } : {};
 }
+
+/**
+ * Combined protect floors for search and Advanced UI defaults: population
+ * z-score defining-stat picks plus the role-based move-speed guard.
+ *
+ * Requires a roster of at least 2 Pokémon for any floors (including mobility);
+ * with an empty roster returns `{}` for backward compatibility.
+ */
+export function deriveProtectFloors(
+  pokemon: Pokemon,
+  allPokemon: Pokemon[],
+  level = 15,
+): StatFloors {
+  const baseFloors = deriveDefaultProtectedStats(pokemon, allPokemon, level);
+  return allPokemon.length >= 2
+    ? { ...baseFloors, ...deriveMobilityFloor(pokemon) }
+    : baseFloors;
+}

@@ -11,7 +11,7 @@ import type { Emblem, EmblemColor, EmblemGrade, HeldItem, Pokemon } from "../../
 import { colorTargetsFor, priorityWeights, scoreHeldItem, coreItemsFor } from "../recommend";
 import { buildPool } from "./pool";
 import type { EmblemCandidate, PokemonScoringContext, PoolConfig, SearchOptions, StatFloors, StatWeights } from "./types";
-import { deriveDefaultProtectedStats, deriveMobilityFloor } from "./protectDefaults";
+import { deriveProtectFloors } from "./protectDefaults";
 
 /** Default grade filter: bronze, silver, and gold all enabled. */
 export const DEFAULT_ALLOWED_GRADES: ReadonlySet<EmblemGrade> = new Set<EmblemGrade>([
@@ -89,12 +89,7 @@ export function deriveBasicObjective(
     level,
     baseStats,
   };
-  // Population-relative "defining stat" floors, plus a role-based move-speed
-  // guard for mobile kits (so emblems can't silently net-reduce move speed).
-  // Both require roster context; with no roster we keep the legacy empty default.
-  const baseFloors = deriveDefaultProtectedStats(pokemon, allPokemon, level);
-  const protectedFloors: StatFloors =
-    allPokemon.length >= 2 ? { ...baseFloors, ...deriveMobilityFloor(pokemon) } : baseFloors;
+  const protectedFloors = deriveProtectFloors(pokemon, allPokemon, level);
   return { priorities, colorTargets, pokemonContext, protectedFloors };
 }
 

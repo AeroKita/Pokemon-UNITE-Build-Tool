@@ -17,6 +17,9 @@ import { buildCandidatePool } from "../adapt";
 import { countConstrainedBuilds } from "../pool";
 import { colorGroupSizes } from "../exactColor";
 import { colorTargetsFor } from "../../recommend";
+import { deriveProtectFloors } from "../protectDefaults";
+import { deriveBasicObjective } from "../basicObjective";
+import { pokemonList } from "../../../data/gameData";
 import type { EmblemColor } from "../../../types";
 
 // ---------------------------------------------------------------------------
@@ -155,5 +158,33 @@ describe("feasibility check — Advanced defaults gating", () => {
     const count = countConstrainedBuilds(pool, targets, SLOTS);
     expect(count).not.toBeNull();
     expect(count! > 0n).toBe(true);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// Protect floors — Advanced UI must match Basic objective defaults
+// ---------------------------------------------------------------------------
+
+describe("Advanced protect defaults parity", () => {
+  it("[ADV-10] deriveProtectFloors matches deriveBasicObjective for mobile roles", () => {
+    const speedster = pokemonList.find((p) => p.role === "Speedster");
+    if (!speedster) return;
+
+    const obj = deriveBasicObjective(speedster, 15, [], pokemonList);
+    const floors = deriveProtectFloors(speedster, pokemonList, 15);
+    expect(floors).toEqual(obj.protectedFloors);
+    expect(floors.moveSpeed).toBe(0);
+  });
+
+  it("[ADV-11] Dragapult gets moveSpeed protect floor (Attacker mobility guard)", () => {
+    const dragapult = pokemonList.find((p) => p.id === "dragapult");
+    if (!dragapult) return;
+
+    const floors = deriveProtectFloors(dragapult, pokemonList, 15);
+    expect(dragapult.role).toBe("Attacker");
+    expect(floors.moveSpeed).toBe(0);
+
+    const obj = deriveBasicObjective(dragapult, 15, [], pokemonList);
+    expect(floors).toEqual(obj.protectedFloors);
   });
 });

@@ -16,7 +16,7 @@
  */
 
 import { describe, it, expect } from "vitest";
-import { deriveDefaultProtectedStats, deriveMobilityFloor } from "../protectDefaults";
+import { deriveDefaultProtectedStats, deriveMobilityFloor, deriveProtectFloors } from "../protectDefaults";
 import { deriveBasicObjective, basicSearchOptions } from "../basicObjective";
 import { evaluateLoadout } from "../evaluate";
 import { makeEmblem } from "../../__tests__/fixtures";
@@ -331,6 +331,36 @@ describe("protect penalty influences evaluateLoadout", () => {
     const noProtect = evaluateLoadout(candidates, opts, setBonuses);
     const withProtect = evaluateLoadout(candidates, { ...opts, protected: { hp: 0 } }, setBonuses);
     expect(withProtect.score).toBeCloseTo(noProtect.score);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// deriveProtectFloors (combined z-score + mobility guard)
+// ---------------------------------------------------------------------------
+
+describe("deriveProtectFloors", () => {
+  it("[PROT-14] merges defining-stat floors with mobility guard for mobile roles", () => {
+    const lucarioLike = makePokemon(
+      "lucario-protect",
+      { ...BASELINE, attack: 320 },
+      { role: "AllRounder", attackType: "physical" },
+    );
+    const pop = [...POP_BASE, lucarioLike];
+    const floors = deriveProtectFloors(lucarioLike, pop, 15);
+    expect(floors.attack).toBe(0);
+    expect(floors.moveSpeed).toBe(0);
+  });
+
+  it("[PROT-15] empty roster → no floors (backward-compatible)", () => {
+    const poke = makePokemon("solo-protect", BASELINE, { role: "Speedster" });
+    expect(deriveProtectFloors(poke, [], 15)).toEqual({});
+  });
+
+  it("[PROT-16] matches deriveBasicObjective protectedFloors (Advanced parity contract)", () => {
+    const attacker = makePokemon("att-protect", { ...BASELINE, attack: 500 }, { role: "Attacker" });
+    const pop = [...POP_BASE, attacker];
+    const obj = deriveBasicObjective(attacker, 15, [], pop);
+    expect(deriveProtectFloors(attacker, pop, 15)).toEqual(obj.protectedFloors);
   });
 });
 
