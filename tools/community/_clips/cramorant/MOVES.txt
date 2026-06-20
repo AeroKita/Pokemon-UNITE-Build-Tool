@@ -1,0 +1,10 @@
+Cramorant  —  drop each file here as <move-id>.mp4
+Scope: Base + Final + Unite moves (no passive).
+
+  whirlpool.mp4   →  Whirlpool   [Move 1 · Base]
+  surf.mp4   →  Surf (Lv 6)   [Move 1 · Final]
+  dive.mp4   →  Dive (Lv 6)   [Move 1 · Final]
+  feather-dance.mp4   →  Feather Dance   [Move 2 · Base]
+  hurricane.mp4   →  Hurricane (Lv 4)   [Move 2 · Final]
+  air-slash.mp4   →  Air Slash (Lv 4)   [Move 2 · Final]
+  gatling-gulp-missile.mp4   →  Gatling Gulp Missile   [Unite · Unite]

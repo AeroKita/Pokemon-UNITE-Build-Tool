@@ -1,0 +1,10 @@
+Eldegoss  —  drop each file here as <move-id>.mp4
+Scope: Base + Final + Unite moves (no passive).
+
+  leafage.mp4   →  Leafage   [Move 1 · Base]
+  pollen-puff.mp4   →  Pollen Puff (Lv 4)   [Move 1 · Final]
+  leaf-tornado.mp4   →  Leaf Tornado (Lv 4)   [Move 1 · Final]
+  synthesis.mp4   →  Synthesis   [Move 2 · Base]
+  cotton-guard.mp4   →  Cotton Guard (Lv 6)   [Move 2 · Final]
+  cotton-spore.mp4   →  Cotton Spore (Lv 6)   [Move 2 · Final]
+  cotton-cloud-crash.mp4   →  Cotton Cloud Crash   [Unite · Unite]

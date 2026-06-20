@@ -1,0 +1,10 @@
+Zeraora  —  drop each file here as <move-id>.mp4
+Scope: Base + Final + Unite moves (no passive).
+
+  agility.mp4   →  Agility   [Move 1 · Base]
+  volt-switch.mp4   →  Volt Switch (Lv 5)   [Move 1 · Final]
+  spark.mp4   →  Spark (Lv 5)   [Move 1 · Final]
+  slash.mp4   →  Slash   [Move 2 · Base]
+  discharge.mp4   →  Discharge (Lv 7)   [Move 2 · Final]
+  wild-charge.mp4   →  Wild Charge (Lv 7)   [Move 2 · Final]
+  plasma-gale.mp4   →  Plasma Gale   [Unite · Unite]

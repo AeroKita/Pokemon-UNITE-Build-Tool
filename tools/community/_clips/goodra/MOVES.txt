@@ -1,0 +1,10 @@
+Goodra  —  drop each file here as <move-id>.mp4
+Scope: Base + Final + Unite moves (no passive).
+
+  bubble.mp4   →  Bubble   [Move 1 · Base]
+  muddy-water.mp4   →  Muddy Water (Lv 5)   [Move 1 · Final]
+  dragon-pulse.mp4   →  Dragon Pulse (Lv 5)   [Move 1 · Final]
+  tackle.mp4   →  Tackle   [Move 2 · Base]
+  power-whip.mp4   →  Power Whip (Lv 8)   [Move 2 · Final]
+  acid-spray.mp4   →  Acid Spray (Lv 8)   [Move 2 · Final]
+  right-as-rain.mp4   →  Right as Rain   [Unite · Unite]

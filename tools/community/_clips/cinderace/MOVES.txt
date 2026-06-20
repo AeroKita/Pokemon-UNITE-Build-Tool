@@ -1,0 +1,10 @@
+Cinderace  —  drop each file here as <move-id>.mp4
+Scope: Base + Final + Unite moves (no passive).
+
+  ember.mp4   →  Ember   [Move 1 · Base]
+  pyro-ball.mp4   →  Pyro Ball (Lv 7)   [Move 1 · Final]
+  blaze-kick.mp4   →  Blaze Kick (Lv 7)   [Move 1 · Final]
+  low-sweep.mp4   →  Low Sweep   [Move 2 · Base]
+  flame-charge.mp4   →  Flame Charge (Lv 8)   [Move 2 · Final]
+  feint.mp4   →  Feint (Lv 8)   [Move 2 · Final]
+  blazing-bicycle-kick.mp4   →  Blazing Bicycle Kick   [Unite · Unite]

@@ -1,0 +1,10 @@
+Psyduck  —  drop each file here as <move-id>.mp4
+Scope: Base + Final + Unite moves (no passive).
+
+  confusion.mp4   →  Confusion   [Move 1 · Base]
+  surf.mp4   →  Surf (Lv 4)   [Move 1 · Final]
+  bubble-beam.mp4   →  Bubble Beam (Lv 4)   [Move 1 · Final]
+  tail-whip.mp4   →  Tail Whip   [Move 2 · Base]
+  disable.mp4   →  Disable (Lv 6)   [Move 2 · Final]
+  psychic.mp4   →  Psychic (Lv 6)   [Move 2 · Final]
+  full-power-psy-ay-ay.mp4   →  Full-Power Psy-ay-ay!   [Unite · Unite]

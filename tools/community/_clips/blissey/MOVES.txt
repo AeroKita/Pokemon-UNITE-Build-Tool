@@ -1,0 +1,10 @@
+Blissey  —  drop each file here as <move-id>.mp4
+Scope: Base + Final + Unite moves (no passive).
+
+  pound.mp4   →  Pound   [Move 1 · Base]
+  egg-bomb.mp4   →  Egg Bomb (Lv 6)   [Move 1 · Final]
+  helping-hand.mp4   →  Helping Hand (Lv 6)   [Move 1 · Final]
+  heal-pulse.mp4   →  Heal Pulse   [Move 2 · Base]
+  soft-boiled.mp4   →  Soft-Boiled (Lv 4)   [Move 2 · Final]
+  safeguard.mp4   →  Safeguard (Lv 4)   [Move 2 · Final]
+  bliss-assistance.mp4   →  Bliss Assistance   [Unite · Unite]

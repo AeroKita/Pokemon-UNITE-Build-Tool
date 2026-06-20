@@ -1,0 +1,10 @@
+Hoopa  —  drop each file here as <move-id>.mp4
+Scope: Base + Final + Unite moves (no passive).
+
+  astonish.mp4   →  Astonish   [Move 1 · Base]
+  phantom-force.mp4   →  Phantom Force (Lv 6)   [Move 1 · Final]
+  shadow-ball.mp4   →  Shadow Ball (Lv 6)   [Move 1 · Final]
+  confusion.mp4   →  Confusion   [Move 2 · Base]
+  hyperspace-hole.mp4   →  Hyperspace Hole (Lv 4)   [Move 2 · Final]
+  trick.mp4   →  Trick (Lv 4)   [Move 2 · Final]
+  rings-unbound.mp4   →  Rings Unbound   [Unite · Unite]

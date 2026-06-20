@@ -1,0 +1,10 @@
+Pikachu  —  drop each file here as <move-id>.mp4
+Scope: Base + Final + Unite moves (no passive).
+
+  thunder-shock.mp4   →  Thunder Shock   [Move 1 · Base]
+  electro-ball.mp4   →  Electro Ball (Lv 4)   [Move 1 · Final]
+  thunder.mp4   →  Thunder (Lv 4)   [Move 1 · Final]
+  electroweb.mp4   →  Electroweb   [Move 2 · Base]
+  volt-tackle.mp4   →  Volt Tackle (Lv 6)   [Move 2 · Final]
+  thunderbolt.mp4   →  Thunderbolt (Lv 6)   [Move 2 · Final]
+  thunderstorm.mp4   →  Thunderstorm   [Unite · Unite]

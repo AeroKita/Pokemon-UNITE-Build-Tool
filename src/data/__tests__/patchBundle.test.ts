@@ -206,4 +206,36 @@ describe("community data bundle", () => {
       expect(garchomp.passiveAbility.gifAsset).toBeUndefined();
     });
   });
+
+  describe("move video assets", () => {
+    it("Talonflame Fly has a well-formed videoAsset", () => {
+      const talonflame = bundle.pokemon.find((p) => p.id === "talonflame")!;
+      const fly = talonflame.moves.find((m) => m.id === "fly")!;
+      expect(fly.videoAsset).toBe("/assets/skills/Talonflame/Fly.mp4");
+    });
+
+    it("every videoAsset is a local skills MP4 path", () => {
+      for (const p of bundle.pokemon) {
+        for (const m of p.moves) {
+          if (!m.videoAsset) continue;
+          expect(m.videoAsset, `${p.id}/${m.name}`).toMatch(/^\/assets\/skills\//);
+          expect(m.videoAsset, `${p.id}/${m.name}`).toMatch(/\.mp4$/);
+        }
+      }
+    });
+
+    it("a move with videoAsset may still carry gifAsset (video wins at render time)", () => {
+      const talonflame = bundle.pokemon.find((p) => p.id === "talonflame")!;
+      const fly = talonflame.moves.find((m) => m.id === "fly")!;
+      expect(fly.videoAsset).toBeDefined();
+      expect(fly.gifAsset).toBeDefined();
+    });
+
+    it("Garchomp has no videoAsset on any move", () => {
+      const garchomp = bundle.pokemon.find((p) => p.id === "garchomp")!;
+      for (const m of garchomp.moves) {
+        expect(m.videoAsset).toBeUndefined();
+      }
+    });
+  });
 });

@@ -1,0 +1,10 @@
+Aegislash  —  drop each file here as <move-id>.mp4
+Scope: Base + Final + Unite moves (no passive).
+
+  shadow-sneak.mp4   →  Shadow Sneak   [Move 1 · Base]
+  sacred-sword.mp4   →  Sacred Sword (Lv 5)   [Move 1 · Final]
+  shadow-claw.mp4   →  Shadow Claw (Lv 5)   [Move 1 · Final]
+  iron-defense.mp4   →  Iron Defense   [Move 2 · Base]
+  wide-guard.mp4   →  Wide Guard (Lv 7)   [Move 2 · Final]
+  iron-head.mp4   →  Iron Head (Lv 7)   [Move 2 · Final]
+  coup-de-grace.mp4   →  Coup de Grace   [Unite · Unite]

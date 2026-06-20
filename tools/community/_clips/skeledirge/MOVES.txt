@@ -1,0 +1,8 @@
+Skeledirge  —  drop each file here as <move-id>.mp4
+Scope: Base + Final + Unite moves (no passive).
+
+  disarming-voice.mp4   →  Disarming Voice   [Move 1 · Base]
+  hyper-voice.mp4   →  Hyper Voice (Lv 5)   [Move 1 · Final]
+  roar.mp4   →  Roar   [Move 2 · Base]
+  snarl.mp4   →  Snarl (Lv 7)   [Move 2 · Final]
+  rousing-symphony.mp4   →  Rousing Symphony   [Unite · Unite]

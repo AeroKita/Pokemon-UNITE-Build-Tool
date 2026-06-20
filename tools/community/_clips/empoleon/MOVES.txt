@@ -1,0 +1,10 @@
+Empoleon  —  drop each file here as <move-id>.mp4
+Scope: Base + Final + Unite moves (no passive).
+
+  water-gun.mp4   →  Water Gun   [Move 1 · Base]
+  hydro-cannon.mp4   →  Hydro Cannon (Lv 7)   [Move 1 · Final]
+  whirlpool.mp4   →  Whirlpool (Lv 7)   [Move 1 · Final]
+  peck.mp4   →  Peck   [Move 2 · Base]
+  metal-claw.mp4   →  Metal Claw (Lv 5)   [Move 2 · Final]
+  aqua-jet.mp4   →  Aqua Jet (Lv 5)   [Move 2 · Final]
+  sovereign-slide.mp4   →  Sovereign Slide   [Unite · Unite]

@@ -1,0 +1,10 @@
+Dhelmise  —  drop each file here as <move-id>.mp4
+Scope: Base + Final + Unite moves (no passive).
+
+  payback.mp4   →  Payback   [Move 1 · Base]
+  power-whip.mp4   →  Power Whip (Lv 5)   [Move 1 · Final]
+  whirlpool.mp4   →  Whirlpool (Lv 5)   [Move 1 · Final]
+  bulldoze.mp4   →  Bulldoze   [Move 2 · Base]
+  anchor-shot.mp4   →  Anchor Shot (Lv 7)   [Move 2 · Final]
+  heavy-slam.mp4   →  Heavy Slam (Lv 7)   [Move 2 · Final]
+  seaweed-snare.mp4   →  Seaweed Snare   [Unite · Unite]

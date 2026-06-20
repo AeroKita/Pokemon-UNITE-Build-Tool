@@ -1,0 +1,10 @@
+Snorlax  —  drop each file here as <move-id>.mp4
+Scope: Base + Final + Unite moves (no passive).
+
+  tackle.mp4   →  Tackle   [Move 1 · Base]
+  heavy-slam.mp4   →  Heavy Slam (Lv 5)   [Move 1 · Final]
+  flail.mp4   →  Flail (Lv 5)   [Move 1 · Final]
+  rest.mp4   →  Rest   [Move 2 · Base]
+  block.mp4   →  Block (Lv 7)   [Move 2 · Final]
+  yawn.mp4   →  Yawn (Lv 7)   [Move 2 · Final]
+  power-nap.mp4   →  Power Nap   [Unite · Unite]

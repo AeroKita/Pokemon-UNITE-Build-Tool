@@ -138,6 +138,8 @@ export interface Move {
   descriptionAdvanced?: string;
   /** Self-hosted animated WebP of the move (Tooltip visual). Absent → fall back to the icon. */
   gifAsset?: string;
+  /** Self-recorded looping gameplay clip of the move (Tooltip visual; wins over gifAsset/icon). */
+  videoAsset?: string;
   cooldownSeconds: number;
   damageInstances: DamageInstance[]; // a move may deal damage multiple times
   effects: MoveEffect[]; // CC, shields, heals, buffs
@@ -155,6 +157,8 @@ export interface Ability {
   descriptionAdvanced?: string;
   /** Self-hosted animated WebP of the move (Tooltip visual). Absent → fall back to the icon. */
   gifAsset?: string;
+  /** Self-recorded looping gameplay clip of the move (Tooltip visual; wins over gifAsset/icon). */
+  videoAsset?: string;
   effects: MoveEffect[];
   iconAsset?: string; // skills/<Pokemon>/<Passive>.png
 }

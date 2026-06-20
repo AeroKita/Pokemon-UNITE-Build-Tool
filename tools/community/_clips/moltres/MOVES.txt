@@ -1,0 +1,8 @@
+Moltres  —  drop each file here as <move-id>.mp4
+Scope: Base + Final + Unite moves (no passive).
+
+  wing-attack.mp4   →  Wing Attack   [Move 1 · Base]
+  sky-attack.mp4   →  Sky Attack (Lv 7)   [Move 1 · Final]
+  incinerate.mp4   →  Incinerate   [Move 2 · Base]
+  heat-wave.mp4   →  Heat Wave (Lv 5)   [Move 2 · Final]
+  firebird-inferno.mp4   →  Firebird Inferno   [Unite · Unite]

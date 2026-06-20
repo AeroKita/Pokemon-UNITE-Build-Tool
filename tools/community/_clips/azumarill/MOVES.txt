@@ -1,0 +1,10 @@
+Azumarill  —  drop each file here as <move-id>.mp4
+Scope: Base + Final + Unite moves (no passive).
+
+  tackle.mp4   →  Tackle   [Move 1 · Base]
+  play-rough.mp4   →  Play Rough (Lv 6)   [Move 1 · Final]
+  water-pulse.mp4   →  Water Pulse (Lv 6)   [Move 1 · Final]
+  bubble.mp4   →  Bubble   [Move 2 · Base]
+  whirlpool.mp4   →  Whirlpool (Lv 4)   [Move 2 · Final]
+  aqua-tail.mp4   →  Aqua Tail (Lv 4)   [Move 2 · Final]
+  belly-bash.mp4   →  Belly Bash   [Unite · Unite]

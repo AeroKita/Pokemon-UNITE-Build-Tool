@@ -22,6 +22,8 @@ def main() -> None:
     bad: list[str] = []
     total = 0
     for fp in sorted(PUBLIC.rglob("*")):
+        if fp.suffix.lower() in {".mp4", ".webm"}:
+            continue
         if fp.is_file():
             total += 1
             if not is_valid_image(fp):

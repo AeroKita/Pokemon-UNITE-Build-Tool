@@ -1,0 +1,10 @@
+Rapidash  —  drop each file here as <move-id>.mp4
+Scope: Base + Final + Unite moves (no passive).
+
+  confusion.mp4   →  Confusion   [Move 1 · Base]
+  dazzling-gleam.mp4   →  Dazzling Gleam (Lv 5)   [Move 1 · Final]
+  fairy-wind.mp4   →  Fairy Wind (Lv 5)   [Move 1 · Final]
+  tackle.mp4   →  Tackle   [Move 2 · Base]
+  smart-strike.mp4   →  Smart Strike (Lv 7)   [Move 2 · Final]
+  agility.mp4   →  Agility (Lv 7)   [Move 2 · Final]
+  triad-blitz.mp4   →  Triad Blitz   [Unite · Unite]

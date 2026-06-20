@@ -1,0 +1,10 @@
+Greninja  —  drop each file here as <move-id>.mp4
+Scope: Base + Final + Unite moves (no passive).
+
+  bubble.mp4   →  Bubble   [Move 1 · Base]
+  water-shuriken.mp4   →  Water Shuriken (Lv 7)   [Move 1 · Final]
+  surf.mp4   →  Surf (Lv 7)   [Move 1 · Final]
+  substitute.mp4   →  Substitute   [Move 2 · Base]
+  double-team.mp4   →  Double Team (Lv 5)   [Move 2 · Final]
+  smokescreen.mp4   →  Smokescreen (Lv 5)   [Move 2 · Final]
+  waterburst-shuriken.mp4   →  Waterburst Shuriken   [Unite · Unite]

@@ -1,0 +1,10 @@
+Dragonite  —  drop each file here as <move-id>.mp4
+Scope: Base + Final + Unite moves (no passive).
+
+  twister.mp4   →  Twister   [Move 1 · Base]
+  dragon-dance.mp4   →  Dragon Dance (Lv 5)   [Move 1 · Final]
+  extreme-speed.mp4   →  Extreme Speed (Lv 5)   [Move 1 · Final]
+  dragon-breath.mp4   →  Dragon Breath   [Move 2 · Base]
+  hyper-beam.mp4   →  Hyper Beam (Lv 8)   [Move 2 · Final]
+  outrage.mp4   →  Outrage (Lv 8)   [Move 2 · Final]
+  draco-impact.mp4   →  Draco Impact   [Unite · Unite]

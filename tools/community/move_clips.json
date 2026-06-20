@@ -1,0 +1,65 @@
+{
+  "_source": "self-recorded (Nintendo Switch 2)",
+  "_spec": "320x180 h264 crf28 30fps muted",
+  "clips": {
+    "absol": {
+      "feint": "/assets/skills/Absol/Feint.mp4",
+      "midnight-slash": "/assets/skills/Absol/Midnight+Slash.mp4",
+      "night-slash": "/assets/skills/Absol/Night+Slash.mp4",
+      "psycho-cut": "/assets/skills/Absol/Psycho+Cut.mp4",
+      "pursuit": "/assets/skills/Absol/Pursuit.mp4",
+      "slash": "/assets/skills/Absol/Slash.mp4",
+      "sucker-punch": "/assets/skills/Absol/Sucker+Punch.mp4"
+    },
+    "aegislash": {
+      "coup-de-grace": "/assets/skills/Aegislash/Coup+de+Grace.mp4",
+      "iron-defense": "/assets/skills/Aegislash/Iron+Defense.mp4",
+      "iron-head": "/assets/skills/Aegislash/Iron+Head.mp4",
+      "sacred-sword": "/assets/skills/Aegislash/Sacred+Sword.mp4",
+      "shadow-claw": "/assets/skills/Aegislash/Shadow+Claw.mp4",
+      "shadow-sneak": "/assets/skills/Aegislash/Shadow+Sneak.mp4",
+      "wide-guard": "/assets/skills/Aegislash/Wide+Guard.mp4"
+    },
+    "lucario": {
+      "aura-cannon": "/assets/skills/Lucario/Aura+Cannon.mp4",
+      "bone-rush": "/assets/skills/Lucario/Bone+Rush.mp4",
+      "close-combat": "/assets/skills/Lucario/Close+Combat.mp4",
+      "extreme-speed": "/assets/skills/Lucario/Extreme+Speed.mp4",
+      "meteor-mash": "/assets/skills/Lucario/Meteor+Mash.mp4",
+      "power-up-punch": "/assets/skills/Lucario/Power-Up+Punch.mp4",
+      "quick-attack": "/assets/skills/Lucario/Quick+Attack.mp4"
+    },
+    "mega-lucario": {
+      "aura-cannon": "/assets/skills/Mega-Lucario/Aura+Cannon.mp4",
+      "close-combat": "/assets/skills/Mega-Lucario/Close+Combat.mp4",
+      "meteor-mash": "/assets/skills/Mega-Lucario/Meteor+Mash.mp4",
+      "power-up-punch": "/assets/skills/Mega-Lucario/Power-Up+Punch.mp4",
+      "quick-attack": "/assets/skills/Mega-Lucario/Quick+Attack.mp4"
+    },
+    "meowth": {
+      "assurance": "/assets/skills/Meowth/Assurance.mp4",
+      "feint-attack": "/assets/skills/Meowth/Feint+Attack.mp4",
+      "feint": "/assets/skills/Meowth/Feint.mp4",
+      "fury-swipes": "/assets/skills/Meowth/Fury+Swipes.mp4",
+      "gold-coin-barrage": "/assets/skills/Meowth/Gold+Coin+Barrage.mp4",
+      "pay-day": "/assets/skills/Meowth/Pay+Day.mp4",
+      "scratch": "/assets/skills/Meowth/Scratch.mp4"
+    },
+    "skeledirge": {
+      "disarming-voice": "/assets/skills/Skeledirge/Disarming+Voice.mp4",
+      "hyper-voice": "/assets/skills/Skeledirge/Hyper+Voice.mp4",
+      "roar": "/assets/skills/Skeledirge/Roar.mp4",
+      "rousing-symphony": "/assets/skills/Skeledirge/Rousing+Symphony.mp4",
+      "snarl": "/assets/skills/Skeledirge/Snarl.mp4"
+    },
+    "talonflame": {
+      "acrobatics": "/assets/skills/Talonflame/Acrobatics.mp4",
+      "aerial-ace": "/assets/skills/Talonflame/Aerial+Ace.mp4",
+      "brave-bird": "/assets/skills/Talonflame/Brave+Bird.mp4",
+      "flame-charge": "/assets/skills/Talonflame/Flame+Charge.mp4",
+      "flame-sweep": "/assets/skills/Talonflame/Flame+Sweep.mp4",
+      "fly": "/assets/skills/Talonflame/Fly.mp4",
+      "peck": "/assets/skills/Talonflame/Peck.mp4"
+    }
+  }
+}

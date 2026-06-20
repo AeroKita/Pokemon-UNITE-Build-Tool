@@ -1,0 +1,10 @@
+Blastoise  —  drop each file here as <move-id>.mp4
+Scope: Base + Final + Unite moves (no passive).
+
+  water-gun.mp4   →  Water Gun   [Move 1 · Base]
+  hydro-pump.mp4   →  Hydro Pump (Lv 5)   [Move 1 · Final]
+  water-spout.mp4   →  Water Spout (Lv 5)   [Move 1 · Final]
+  skull-bash.mp4   →  Skull Bash   [Move 2 · Base]
+  surf.mp4   →  Surf (Lv 7)   [Move 2 · Final]
+  rapid-spin.mp4   →  Rapid Spin (Lv 7)   [Move 2 · Final]
+  hydro-typhoon.mp4   →  Hydro Typhoon   [Unite · Unite]

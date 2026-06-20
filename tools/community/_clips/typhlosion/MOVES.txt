@@ -1,0 +1,8 @@
+Typhlosion  —  drop each file here as <move-id>.mp4
+Scope: Base + Final + Unite moves (no passive).
+
+  ember.mp4   →  Ember   [Move 1 · Base]
+  eruption.mp4   →  Eruption (Lv 7)   [Move 1 · Final]
+  tackle.mp4   →  Tackle   [Move 2 · Base]
+  flame-wheel.mp4   →  Flame Wheel (Lv 5)   [Move 2 · Final]
+  explosive-heat-haze.mp4   →  Explosive Heat Haze   [Unite · Unite]

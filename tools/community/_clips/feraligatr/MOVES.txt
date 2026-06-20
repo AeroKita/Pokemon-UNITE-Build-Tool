@@ -1,0 +1,8 @@
+Feraligatr  —  drop each file here as <move-id>.mp4
+Scope: Base + Final + Unite moves (no passive).
+
+  bite.mp4   →  Bite   [Move 1 · Base]
+  crunch.mp4   →  Crunch (Lv 5)   [Move 1 · Final]
+  scratch.mp4   →  Scratch   [Move 2 · Base]
+  waterfall.mp4   →  Waterfall (Lv 7)   [Move 2 · Final]
+  big-jaw-bite.mp4   →  Big Jaw Bite   [Unite · Unite]

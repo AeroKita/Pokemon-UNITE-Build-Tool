@@ -1,0 +1,10 @@
+Talonflame  —  drop each file here as <move-id>.mp4
+Scope: Base + Final + Unite moves (no passive).
+
+  peck.mp4   →  Peck   [Move 1 · Base]
+  flame-charge.mp4   →  Flame Charge (Lv 5)   [Move 1 · Final]
+  aerial-ace.mp4   →  Aerial Ace (Lv 5)   [Move 1 · Final]
+  acrobatics.mp4   →  Acrobatics   [Move 2 · Base]
+  fly.mp4   →  Fly (Lv 7)   [Move 2 · Final]
+  brave-bird.mp4   →  Brave Bird (Lv 7)   [Move 2 · Final]
+  flame-sweep.mp4   →  Flame Sweep   [Unite · Unite]

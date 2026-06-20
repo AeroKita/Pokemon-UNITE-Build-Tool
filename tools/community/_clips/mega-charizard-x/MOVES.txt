@@ -1,0 +1,8 @@
+Mega Charizard X  —  drop each file here as <move-id>.mp4
+Scope: Base + Final + Unite moves (no passive).
+
+  flame-burst.mp4   →  Flame Burst   [Move 1 · Base]
+  fire-punch.mp4   →  Fire Punch (Lv 5)   [Move 1 · Final]
+  fire-spin.mp4   →  Fire Spin   [Move 2 · Base]
+  flare-blitz.mp4   →  Flare Blitz (Lv 7)   [Move 2 · Final]
+  seismic-slam.mp4   →  Seismic Slam   [Unite · Unite]

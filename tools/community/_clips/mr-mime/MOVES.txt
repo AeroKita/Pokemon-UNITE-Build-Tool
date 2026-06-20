@@ -1,0 +1,10 @@
+Mr. Mime  —  drop each file here as <move-id>.mp4
+Scope: Base + Final + Unite moves (no passive).
+
+  fake-out.mp4   →  Fake Out   [Move 1 · Base]
+  confusion.mp4   →  Confusion (Lv 4)   [Move 1 · Final]
+  psychic.mp4   →  Psychic (Lv 4)   [Move 1 · Final]
+  light-screen.mp4   →  Light Screen   [Move 2 · Base]
+  barrier.mp4   →  Barrier (Lv 6)   [Move 2 · Final]
+  power-swap.mp4   →  Power Swap (Lv 6)   [Move 2 · Final]
+  showtime.mp4   →  Showtime   [Unite · Unite]

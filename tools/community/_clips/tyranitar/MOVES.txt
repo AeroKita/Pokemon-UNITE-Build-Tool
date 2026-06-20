@@ -1,0 +1,10 @@
+Tyranitar  —  drop each file here as <move-id>.mp4
+Scope: Base + Final + Unite moves (no passive).
+
+  bite.mp4   →  Bite   [Move 1 · Base]
+  dark-pulse.mp4   →  Dark Pulse (Lv 5)   [Move 1 · Final]
+  stone-edge.mp4   →  Stone Edge (Lv 5)   [Move 1 · Final]
+  rock-polish.mp4   →  Rock Polish   [Move 2 · Base]
+  ancient-power.mp4   →  Ancient Power (Lv 9)   [Move 2 · Final]
+  sand-tomb.mp4   →  Sand Tomb (Lv 9)   [Move 2 · Final]
+  tyrannical-rampage.mp4   →  Tyrannical Rampage   [Unite · Unite]

@@ -1,0 +1,10 @@
+Sylveon  —  drop each file here as <move-id>.mp4
+Scope: Base + Final + Unite moves (no passive).
+
+  swift.mp4   →  Swift   [Move 1 · Base]
+  mystical-fire.mp4   →  Mystical Fire (Lv 4)   [Move 1 · Final]
+  hyper-voice.mp4   →  Hyper Voice (Lv 4)   [Move 1 · Final]
+  baby-doll-eyes.mp4   →  Baby-Doll Eyes   [Move 2 · Base]
+  draining-kiss.mp4   →  Draining Kiss (Lv 6)   [Move 2 · Final]
+  calm-mind.mp4   →  Calm Mind (Lv 6)   [Move 2 · Final]
+  fairy-frolic.mp4   →  Fairy Frolic   [Unite · Unite]

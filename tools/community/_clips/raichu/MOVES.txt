@@ -1,0 +1,10 @@
+Raichu  —  drop each file here as <move-id>.mp4
+Scope: Base + Final + Unite moves (no passive).
+
+  thunder-shock.mp4   →  Thunder Shock   [Move 1 · Base]
+  stored-power.mp4   →  Stored Power (Lv 5)   [Move 1 · Final]
+  electro-ball.mp4   →  Electro Ball (Lv 5)   [Move 1 · Final]
+  thunder-wave.mp4   →  Thunder Wave   [Move 2 · Base]
+  thunderbolt.mp4   →  Thunderbolt (Lv 7)   [Move 2 · Final]
+  psychic.mp4   →  Psychic (Lv 7)   [Move 2 · Final]
+  thunderstorm-aerial.mp4   →  Thunderstorm Aerial   [Unite · Unite]

@@ -1,0 +1,10 @@
+Machamp  —  drop each file here as <move-id>.mp4
+Scope: Base + Final + Unite moves (no passive).
+
+  karate-chop.mp4   →  Karate Chop   [Move 1 · Base]
+  close-combat.mp4   →  Close Combat (Lv 7)   [Move 1 · Final]
+  cross-chop.mp4   →  Cross Chop (Lv 7)   [Move 1 · Final]
+  bulk-up.mp4   →  Bulk Up   [Move 2 · Base]
+  dynamic-punch.mp4   →  Dynamic Punch (Lv 5)   [Move 2 · Final]
+  submission.mp4   →  Submission (Lv 5)   [Move 2 · Final]
+  barrage-blow.mp4   →  Barrage Blow   [Unite · Unite]

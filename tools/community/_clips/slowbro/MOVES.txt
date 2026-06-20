@@ -1,0 +1,10 @@
+Slowbro  —  drop each file here as <move-id>.mp4
+Scope: Base + Final + Unite moves (no passive).
+
+  water-gun.mp4   →  Water Gun   [Move 1 · Base]
+  scald.mp4   →  Scald (Lv 4)   [Move 1 · Final]
+  surf.mp4   →  Surf (Lv 4)   [Move 1 · Final]
+  slack-off.mp4   →  Slack Off   [Move 2 · Base]
+  amnesia.mp4   →  Amnesia (Lv 6)   [Move 2 · Final]
+  telekinesis.mp4   →  Telekinesis (Lv 6)   [Move 2 · Final]
+  slowbeam.mp4   →  Slowbeam   [Unite · Unite]

@@ -1,0 +1,9 @@
+Scizor  —  drop each file here as <move-id>.mp4
+Scope: Base + Final + Unite moves (no passive).
+
+  fury-cutter.mp4   →  Fury Cutter   [Move 1 · Base]
+  bullet-punch.mp4   →  Bullet Punch (Lv 5)   [Move 1 · Final]
+  quick-attack.mp4   →  Quick Attack   [Move 2 · Base]
+  double-hit.mp4   →  Double Hit (Lv 7)   [Move 2 · Final]
+  swords-dance.mp4   →  Swords Dance (Lv 7)   [Move 2 · Final]
+  red-illusion-dive.mp4   →  Red Illusion Dive   [Unite · Unite]

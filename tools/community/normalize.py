@@ -316,12 +316,14 @@ def _norm_move_name(name: str) -> str:
 
 
 def build_pokemon(pokemon_rows, stats_rows, pokedex_to_id: dict, descs: dict | None = None,
-                  gifs: dict | None = None) -> list:
+                  gifs: dict | None = None, clips: dict | None = None) -> list:
     stats_by_name = {p["name"]: p for p in stats_rows}
     if descs is None:
         descs = load_move_descriptions()
     if gifs is None:
         gifs = load_move_gifs()
+    if clips is None:
+        clips = load_move_clips()
     out = []
     for p in pokemon_rows:
         name = p["name"]
@@ -359,10 +361,14 @@ def build_pokemon(pokemon_rows, stats_rows, pokedex_to_id: dict, descs: dict | N
                 ((passive.get("rsb") or {}).get("true_desc") or "").strip())
         passive_adv = paragraphize_upgrade(advanced_desc((passive or {}).get("rsb"))) if passive else ""
         pokemon_gifs = gifs.get(pid, {})
+        pokemon_clips = clips.get(pid, {})
         for m in moves:
             gif_path = pokemon_gifs.get(_norm_gif_key(m["name"]))
             if gif_path:
                 m["gifAsset"] = gif_path
+            clip_path = pokemon_clips.get(m["id"])
+            if clip_path:
+                m["videoAsset"] = clip_path
         passive_ability = {
             "id": slugify(passive["name"]) if passive else f"{slugify(name)}-passive",
             "name": passive.get("name", "Passive") if passive else "Passive",
@@ -400,6 +406,7 @@ def build_pokemon(pokemon_rows, stats_rows, pokedex_to_id: dict, descs: dict | N
 CURATED = HERE / "curated_builds.json"
 MOVE_DESCRIPTIONS = HERE / "move_descriptions.json"
 MOVE_GIFS = HERE / "move_gifs.json"
+MOVE_CLIPS = HERE / "move_clips.json"
 VALID_GRADES = {"bronze", "silver", "gold", "platinum"}
 
 
@@ -408,6 +415,13 @@ def load_move_gifs() -> dict:
     if not MOVE_GIFS.exists():
         return {}
     return json.loads(MOVE_GIFS.read_text()).get("gifs", {})
+
+
+def load_move_clips() -> dict:
+    """pokemon id -> move id -> /assets/...mp4 (self-recorded clips). Empty if absent."""
+    if not MOVE_CLIPS.exists():
+        return {}
+    return json.loads(MOVE_CLIPS.read_text()).get("clips", {})
 
 
 def load_move_descriptions() -> dict:

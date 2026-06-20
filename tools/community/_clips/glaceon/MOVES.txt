@@ -1,0 +1,10 @@
+Glaceon  —  drop each file here as <move-id>.mp4
+Scope: Base + Final + Unite moves (no passive).
+
+  swift.mp4   →  Swift   [Move 1 · Base]
+  icicle-spear.mp4   →  Icicle Spear (Lv 4)   [Move 1 · Final]
+  icy-wind.mp4   →  Icy Wind (Lv 4)   [Move 1 · Final]
+  tail-whip.mp4   →  Tail Whip   [Move 2 · Base]
+  ice-shard.mp4   →  Ice Shard (Lv 6)   [Move 2 · Final]
+  freeze-dry.mp4   →  Freeze Dry (Lv 6)   [Move 2 · Final]
+  glacial-stage.mp4   →  Glacial Stage   [Unite · Unite]

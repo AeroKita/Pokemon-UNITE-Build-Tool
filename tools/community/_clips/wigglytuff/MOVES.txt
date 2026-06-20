@@ -1,0 +1,10 @@
+Wigglytuff  —  drop each file here as <move-id>.mp4
+Scope: Base + Final + Unite moves (no passive).
+
+  pound.mp4   →  Pound   [Move 1 · Base]
+  double-slap.mp4   →  Double Slap (Lv 6)   [Move 1 · Final]
+  dazzling-gleam.mp4   →  Dazzling Gleam (Lv 6)   [Move 1 · Final]
+  defense-curl.mp4   →  Defense Curl   [Move 2 · Base]
+  rollout.mp4   →  Rollout (Lv 4)   [Move 2 · Final]
+  sing.mp4   →  Sing (Lv 4)   [Move 2 · Final]
+  starlight-recital.mp4   →  Starlight Recital   [Unite · Unite]

@@ -1,0 +1,10 @@
+Decidueye  —  drop each file here as <move-id>.mp4
+Scope: Base + Final + Unite moves (no passive).
+
+  leafage.mp4   →  Leafage   [Move 1 · Base]
+  razor-leaf.mp4   →  Razor Leaf (Lv 7)   [Move 1 · Final]
+  spirit-shackle.mp4   →  Spirit Shackle (Lv 7)   [Move 1 · Final]
+  astonish.mp4   →  Astonish   [Move 2 · Base]
+  leaf-storm.mp4   →  Leaf Storm (Lv 8)   [Move 2 · Final]
+  shadow-sneak.mp4   →  Shadow Sneak (Lv 8)   [Move 2 · Final]
+  nock-nock.mp4   →  Nock Nock   [Unite · Unite]

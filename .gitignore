@@ -16,3 +16,10 @@ tools/extract/_work/
 tools/vendor/
 tools/extract/.venv/
 __pycache__/
+
+# raw move-clip recordings (large 720p source; only transcoded MP4s under
+# public/assets/skills are committed). Keep the per-Pokémon MOVES.txt checklists.
+tools/community/_clips/*/*.mp4
+tools/community/_clips/*/*.MP4
+tools/community/_clips/*/*.mov
+tools/community/_clips/*/*.MOV

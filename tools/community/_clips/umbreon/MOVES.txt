@@ -1,0 +1,10 @@
+Umbreon  —  drop each file here as <move-id>.mp4
+Scope: Base + Final + Unite moves (no passive).
+
+  swift.mp4   →  Swift   [Move 1 · Base]
+  mean-look.mp4   →  Mean Look (Lv 4)   [Move 1 · Final]
+  foul-play.mp4   →  Foul Play (Lv 4)   [Move 1 · Final]
+  fake-tears.mp4   →  Fake Tears   [Move 2 · Base]
+  wish.mp4   →  Wish (Lv 6)   [Move 2 · Final]
+  snarl.mp4   →  Snarl (Lv 6)   [Move 2 · Final]
+  moonlight-prance.mp4   →  Moonlight Prance   [Unite · Unite]

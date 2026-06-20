@@ -1,0 +1,10 @@
+Sirfetch'd  —  drop each file here as <move-id>.mp4
+Scope: Base + Final + Unite moves (no passive).
+
+  dual-wingbeat.mp4   →  Dual Wingbeat   [Move 1 · Base]
+  fury-cutter.mp4   →  Fury Cutter (Lv 5)   [Move 1 · Final]
+  leaf-blade.mp4   →  Leaf Blade (Lv 5)   [Move 1 · Final]
+  quick-attack.mp4   →  Quick Attack   [Move 2 · Base]
+  brutal-swing.mp4   →  Brutal Swing (Lv 7)   [Move 2 · Final]
+  detect.mp4   →  Detect (Lv 7)   [Move 2 · Final]
+  lunging-leek-nova-blast.mp4   →  Lunging Leek Nova Blast   [Unite · Unite]

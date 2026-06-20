@@ -1,0 +1,10 @@
+Chandelure  —  drop each file here as <move-id>.mp4
+Scope: Base + Final + Unite moves (no passive).
+
+  ember.mp4   →  Ember   [Move 1 · Base]
+  flamethrower.mp4   →  Flamethrower (Lv 5)   [Move 1 · Final]
+  overheat.mp4   →  Overheat (Lv 5)   [Move 1 · Final]
+  night-shade.mp4   →  Night Shade   [Move 2 · Base]
+  poltergeist.mp4   →  Poltergeist (Lv 7)   [Move 2 · Final]
+  imprison.mp4   →  Imprison (Lv 7)   [Move 2 · Final]
+  ignite-midnight.mp4   →  Ignite Midnight   [Unite · Unite]

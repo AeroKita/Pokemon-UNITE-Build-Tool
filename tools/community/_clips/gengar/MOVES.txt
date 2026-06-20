@@ -1,0 +1,10 @@
+Gengar  —  drop each file here as <move-id>.mp4
+Scope: Base + Final + Unite moves (no passive).
+
+  will-o-wisp.mp4   →  Will-o-Wisp   [Move 1 · Base]
+  shadow-ball.mp4   →  Shadow Ball (Lv 7)   [Move 1 · Final]
+  sludge-bomb.mp4   →  Sludge Bomb (Lv 7)   [Move 1 · Final]
+  lick.mp4   →  Lick   [Move 2 · Base]
+  dream-eater.mp4   →  Dream Eater (Lv 5)   [Move 2 · Final]
+  hex.mp4   →  Hex (Lv 5)   [Move 2 · Final]
+  phantom-ambush.mp4   →  Phantom Ambush   [Unite · Unite]

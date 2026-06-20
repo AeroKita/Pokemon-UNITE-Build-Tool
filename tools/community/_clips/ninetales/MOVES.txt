@@ -1,0 +1,10 @@
+Ninetales  —  drop each file here as <move-id>.mp4
+Scope: Base + Final + Unite moves (no passive).
+
+  powder-snow.mp4   →  Powder Snow   [Move 1 · Base]
+  avalanche.mp4   →  Avalanche (Lv 4)   [Move 1 · Final]
+  dazzling-gleam.mp4   →  Dazzling Gleam (Lv 4)   [Move 1 · Final]
+  icy-wind.mp4   →  Icy Wind   [Move 2 · Base]
+  blizzard.mp4   →  Blizzard (Lv 6)   [Move 2 · Final]
+  aurora-veil.mp4   →  Aurora Veil (Lv 6)   [Move 2 · Final]
+  snow-globe.mp4   →  Snow Globe   [Unite · Unite]

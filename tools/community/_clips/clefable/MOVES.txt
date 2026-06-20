@@ -1,0 +1,10 @@
+Clefable  —  drop each file here as <move-id>.mp4
+Scope: Base + Final + Unite moves (no passive).
+
+  heal-pulse.mp4   →  Heal Pulse   [Move 1 · Base]
+  moonlight.mp4   →  Moonlight (Lv 4)   [Move 1 · Final]
+  draining-kiss.mp4   →  Draining Kiss (Lv 4)   [Move 1 · Final]
+  disarming-voice.mp4   →  Disarming Voice   [Move 2 · Base]
+  gravity.mp4   →  Gravity (Lv 6)   [Move 2 · Final]
+  follow-me.mp4   →  Follow Me (Lv 6)   [Move 2 · Final]
+  wonder-wish.mp4   →  Wonder Wish   [Unite · Unite]

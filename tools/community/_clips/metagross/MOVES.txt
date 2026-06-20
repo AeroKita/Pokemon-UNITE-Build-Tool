@@ -1,0 +1,10 @@
+Metagross  —  drop each file here as <move-id>.mp4
+Scope: Base + Final + Unite moves (no passive).
+
+  iron-defense.mp4   →  Iron Defense   [Move 1 · Base]
+  meteor-mash.mp4   →  Meteor Mash (Lv 5)   [Move 1 · Final]
+  gyro-ball.mp4   →  Gyro Ball (Lv 5)   [Move 1 · Final]
+  tackle.mp4   →  Tackle   [Move 2 · Base]
+  zen-headbutt.mp4   →  Zen Headbutt (Lv 7)   [Move 2 · Final]
+  magnet-rise.mp4   →  Magnet Rise (Lv 7)   [Move 2 · Final]
+  compute-and-crush.mp4   →  Compute and Crush   [Unite · Unite]

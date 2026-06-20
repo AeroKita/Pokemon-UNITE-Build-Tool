@@ -1,0 +1,10 @@
+Ho-Oh  —  drop each file here as <move-id>.mp4
+Scope: Base + Final + Unite moves (no passive).
+
+  safeguard.mp4   →  Safeguard   [Move 1 · Base]
+  sacred-fire.mp4   →  Sacred Fire (Lv 7)   [Move 1 · Final]
+  fire-spin.mp4   →  Fire Spin (Lv 7)   [Move 1 · Final]
+  tailwind.mp4   →  Tailwind   [Move 2 · Base]
+  flamethrower.mp4   →  Flamethrower (Lv 5)   [Move 2 · Final]
+  sky-attack.mp4   →  Sky Attack (Lv 5)   [Move 2 · Final]
+  rekindling-flame.mp4   →  Rekindling Flame   [Unite · Unite]

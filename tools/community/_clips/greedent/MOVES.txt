@@ -1,0 +1,10 @@
+Greedent  —  drop each file here as <move-id>.mp4
+Scope: Base + Final + Unite moves (no passive).
+
+  tackle.mp4   →  Tackle   [Move 1 · Base]
+  bullet-seed.mp4   →  Bullet Seed (Lv 7)   [Move 1 · Final]
+  belch.mp4   →  Belch (Lv 7)   [Move 1 · Final]
+  defense-curl.mp4   →  Defense Curl   [Move 2 · Base]
+  stuff-cheeks.mp4   →  Stuff Cheeks (Lv 5)   [Move 2 · Final]
+  covet.mp4   →  Covet (Lv 5)   [Move 2 · Final]
+  berry-belly-flop.mp4   →  Berry Belly Flop   [Unite · Unite]

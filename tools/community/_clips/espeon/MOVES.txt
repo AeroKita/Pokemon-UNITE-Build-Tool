@@ -1,0 +1,10 @@
+Espeon  —  drop each file here as <move-id>.mp4
+Scope: Base + Final + Unite moves (no passive).
+
+  swift.mp4   →  Swift   [Move 1 · Base]
+  psyshock.mp4   →  Psyshock (Lv 4)   [Move 1 · Final]
+  stored-power.mp4   →  Stored Power (Lv 4)   [Move 1 · Final]
+  growl.mp4   →  Growl   [Move 2 · Base]
+  psybeam.mp4   →  Psybeam (Lv 6)   [Move 2 · Final]
+  future-sight.mp4   →  Future Sight (Lv 6)   [Move 2 · Final]
+  psychic-solare.mp4   →  Psychic Solare   [Unite · Unite]

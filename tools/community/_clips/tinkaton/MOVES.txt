@@ -1,0 +1,10 @@
+Tinkaton  —  drop each file here as <move-id>.mp4
+Scope: Base + Final + Unite moves (no passive).
+
+  rock-smash.mp4   →  Rock Smash   [Move 1 · Base]
+  gigaton-hammer.mp4   →  Gigaton Hammer (Lv 7)   [Move 1 · Final]
+  smack-down.mp4   →  Smack Down (Lv 7)   [Move 1 · Final]
+  fairy-wind.mp4   →  Fairy Wind   [Move 2 · Base]
+  ice-hammer.mp4   →  Ice Hammer (Lv 5)   [Move 2 · Final]
+  thief.mp4   →  Thief (Lv 5)   [Move 2 · Final]
+  kiss-bliss-kaboom.mp4   →  Kiss Bliss Kaboom   [Unite · Unite]

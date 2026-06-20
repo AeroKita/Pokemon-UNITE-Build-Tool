@@ -1,0 +1,10 @@
+Crustle  —  drop each file here as <move-id>.mp4
+Scope: Base + Final + Unite moves (no passive).
+
+  rock-slide.mp4   →  Rock Slide   [Move 1 · Base]
+  rock-tomb.mp4   →  Rock Tomb (Lv 4)   [Move 1 · Final]
+  shell-smash.mp4   →  Shell Smash (Lv 4)   [Move 1 · Final]
+  fury-cutter.mp4   →  Fury Cutter   [Move 2 · Base]
+  stealth-rock.mp4   →  Stealth Rock (Lv 6)   [Move 2 · Final]
+  x-scissor.mp4   →  X-Scissor (Lv 6)   [Move 2 · Final]
+  rubble-rouser.mp4   →  Rubble Rouser   [Unite · Unite]

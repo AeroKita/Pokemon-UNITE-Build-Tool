@@ -1,0 +1,8 @@
+Meganium  —  drop each file here as <move-id>.mp4
+Scope: Base + Final + Unite moves (no passive).
+
+  magical-leaf.mp4   →  Magical Leaf   [Move 1 · Base]
+  grass-knot.mp4   →  Grass Knot (Lv 5)   [Move 1 · Final]
+  synthesis.mp4   →  Synthesis   [Move 2 · Base]
+  petal-blizzard.mp4   →  Petal Blizzard (Lv 7)   [Move 2 · Final]
+  full-bloom-aroma.mp4   →  Full Bloom Aroma   [Unite · Unite]

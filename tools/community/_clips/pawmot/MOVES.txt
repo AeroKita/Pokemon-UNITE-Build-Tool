@@ -1,0 +1,10 @@
+Pawmot  —  drop each file here as <move-id>.mp4
+Scope: Base + Final + Unite moves (no passive).
+
+  nuzzle.mp4   →  Nuzzle   [Move 1 · Base]
+  thunder-punch.mp4   →  Thunder Punch (Lv 5)   [Move 1 · Final]
+  supercell-slam.mp4   →  Supercell Slam (Lv 5)   [Move 1 · Final]
+  scratch.mp4   →  Scratch   [Move 2 · Base]
+  volt-switch.mp4   →  Volt Switch (Lv 7)   [Move 2 · Final]
+  mach-punch.mp4   →  Mach Punch (Lv 7)   [Move 2 · Final]
+  zip-zap-full-charge-spark.mp4   →  Zip Zap Full-Charge Spark   [Unite · Unite]

@@ -1,0 +1,10 @@
+Buzzwole  —  drop each file here as <move-id>.mp4
+Scope: Base + Final + Unite moves (no passive).
+
+  mega-punch.mp4   →  Mega Punch   [Move 1 · Base]
+  lunge.mp4   →  Lunge (Lv 7)   [Move 1 · Final]
+  smack-down.mp4   →  Smack Down (Lv 7)   [Move 1 · Final]
+  fell-stinger.mp4   →  Fell Stinger   [Move 2 · Base]
+  leech-life.mp4   →  Leech Life (Lv 5)   [Move 2 · Final]
+  superpower.mp4   →  Superpower (Lv 5)   [Move 2 · Final]
+  ultra-swole-slam.mp4   →  Ultra Swole Slam   [Unite · Unite]

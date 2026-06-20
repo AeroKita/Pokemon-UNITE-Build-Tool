@@ -140,6 +140,8 @@ def validate_all() -> list[str]:
     if not PUBLIC.exists():
         return bad
     for fp in PUBLIC.rglob("*"):
+        if fp.suffix.lower() in {".mp4", ".webm"}:
+            continue
         if fp.is_file() and not is_valid_image(fp):
             bad.append(str(fp.relative_to(PUBLIC)))
     return bad

@@ -56,6 +56,7 @@ const move = z.object({
   description: z.string(),
   descriptionAdvanced: z.string().optional(),
   gifAsset: z.string().optional(),
+  videoAsset: z.string().optional(),
   cooldownSeconds: z.number(),
   damageInstances: z.array(damageInstance),
   effects: z.array(moveEffect),
@@ -71,6 +72,7 @@ const ability = z.object({
   description: z.string(),
   descriptionAdvanced: z.string().optional(),
   gifAsset: z.string().optional(),
+  videoAsset: z.string().optional(),
   effects: z.array(moveEffect),
   iconAsset: z.string().optional(),
 });

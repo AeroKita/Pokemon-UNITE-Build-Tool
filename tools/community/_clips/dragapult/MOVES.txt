@@ -1,0 +1,10 @@
+Dragapult  —  drop each file here as <move-id>.mp4
+Scope: Base + Final + Unite moves (no passive).
+
+  astonish.mp4   →  Astonish   [Move 1 · Base]
+  dragon-breath.mp4   →  Dragon Breath (Lv 7)   [Move 1 · Final]
+  shadow-ball.mp4   →  Shadow Ball (Lv 7)   [Move 1 · Final]
+  quick-attack.mp4   →  Quick Attack   [Move 2 · Base]
+  dragon-dance.mp4   →  Dragon Dance (Lv 5)   [Move 2 · Final]
+  phantom-force.mp4   →  Phantom Force (Lv 5)   [Move 2 · Final]
+  dreep-and-destroy.mp4   →  Dreep and Destroy   [Unite · Unite]

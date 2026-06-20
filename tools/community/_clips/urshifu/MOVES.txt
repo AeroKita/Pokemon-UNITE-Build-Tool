@@ -1,0 +1,11 @@
+Urshifu  —  drop each file here as <move-id>.mp4
+Scope: Base + Final + Unite moves (no passive).
+
+  rock-smash.mp4   →  Rock Smash   [Move 1 · Base]
+  wicked-blow.mp4   →  Wicked Blow (Lv 5)   [Move 1 · Final]
+  surging-strikes.mp4   →  Surging Strikes (Lv 5)   [Move 1 · Final]
+  headbutt.mp4   →  Headbutt   [Move 2 · Base]
+  throat-chop.mp4   →  Throat Chop (Lv 7)   [Move 2 · Final]
+  liquidation.mp4   →  Liquidation (Lv 7)   [Move 2 · Final]
+  ebon-fist.mp4   →  Ebon Fist   [Unite · Unite]
+  flowing-fists.mp4   →  Flowing Fists   [Unite · Unite]

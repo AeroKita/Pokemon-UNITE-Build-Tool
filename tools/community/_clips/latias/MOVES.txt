@@ -1,0 +1,10 @@
+Latias  —  drop each file here as <move-id>.mp4
+Scope: Base + Final + Unite moves (no passive).
+
+  confusion.mp4   →  Confusion   [Move 1 · Base]
+  mist-ball.mp4   →  Mist Ball (Lv 6)   [Move 1 · Final]
+  dragon-cheer.mp4   →  Dragon Cheer (Lv 6)   [Move 1 · Final]
+  swift.mp4   →  Swift   [Move 2 · Base]
+  dragon-pulse.mp4   →  Dragon Pulse (Lv 4)   [Move 2 · Final]
+  dragon-breath.mp4   →  Dragon Breath (Lv 4)   [Move 2 · Final]
+  mist-blast.mp4   →  Mist Blast   [Unite · Unite]

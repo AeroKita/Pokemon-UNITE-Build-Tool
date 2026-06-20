@@ -1,0 +1,10 @@
+Meowscarada  —  drop each file here as <move-id>.mp4
+Scope: Base + Final + Unite moves (no passive).
+
+  leafage.mp4   →  Leafage   [Move 1 · Base]
+  flower-trick.mp4   →  Flower Trick (Lv 6)   [Move 1 · Final]
+  night-slash.mp4   →  Night Slash (Lv 6)   [Move 1 · Final]
+  hone-claws.mp4   →  Hone Claws   [Move 2 · Base]
+  double-team.mp4   →  Double Team (Lv 7)   [Move 2 · Final]
+  trailblaze.mp4   →  Trailblaze (Lv 7)   [Move 2 · Final]
+  floral-flourish.mp4   →  Floral Flourish   [Unite · Unite]

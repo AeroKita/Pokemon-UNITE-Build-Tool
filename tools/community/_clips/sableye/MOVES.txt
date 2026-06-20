@@ -1,0 +1,10 @@
+Sableye  —  drop each file here as <move-id>.mp4
+Scope: Base + Final + Unite moves (no passive).
+
+  thief.mp4   →  Thief   [Move 1 · Base]
+  knock-off.mp4   →  Knock Off (Lv 4)   [Move 1 · Final]
+  shadow-sneak.mp4   →  Shadow Sneak (Lv 4)   [Move 1 · Final]
+  astonish.mp4   →  Astonish   [Move 2 · Base]
+  feint-attack.mp4   →  Feint Attack (Lv 6)   [Move 2 · Final]
+  confuse-ray.mp4   →  Confuse Ray (Lv 6)   [Move 2 · Final]
+  chaos-glower.mp4   →  Chaos Glower   [Unite · Unite]

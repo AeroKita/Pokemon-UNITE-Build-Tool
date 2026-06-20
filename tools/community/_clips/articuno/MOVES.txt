@@ -1,0 +1,8 @@
+Articuno  —  drop each file here as <move-id>.mp4
+Scope: Base + Final + Unite moves (no passive).
+
+  icy-wind.mp4   →  Icy Wind   [Move 1 · Base]
+  blizzard.mp4   →  Blizzard (Lv 5)   [Move 1 · Final]
+  ice-shard.mp4   →  Ice Shard   [Move 2 · Base]
+  ice-beam.mp4   →  Ice Beam (Lv 7)   [Move 2 · Final]
+  ice-wing-whiteout.mp4   →  Ice Wing Whiteout   [Unite · Unite]

@@ -1,0 +1,10 @@
+Gardevoir  —  drop each file here as <move-id>.mp4
+Scope: Base + Final + Unite moves (no passive).
+
+  confusion.mp4   →  Confusion   [Move 1 · Base]
+  psychic.mp4   →  Psychic (Lv 7)   [Move 1 · Final]
+  moonblast.mp4   →  Moonblast (Lv 7)   [Move 1 · Final]
+  teleport.mp4   →  Teleport   [Move 2 · Base]
+  psyshock.mp4   →  Psyshock (Lv 5)   [Move 2 · Final]
+  future-sight.mp4   →  Future Sight (Lv 5)   [Move 2 · Final]
+  fairy-singularity.mp4   →  Fairy Singularity   [Unite · Unite]

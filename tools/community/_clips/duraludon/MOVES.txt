@@ -1,0 +1,10 @@
+Duraludon  —  drop each file here as <move-id>.mp4
+Scope: Base + Final + Unite moves (no passive).
+
+  laser-focus.mp4   →  Laser Focus   [Move 1 · Base]
+  flash-cannon.mp4   →  Flash Cannon (Lv 5)   [Move 1 · Final]
+  dragon-pulse.mp4   →  Dragon Pulse (Lv 5)   [Move 1 · Final]
+  metal-claw.mp4   →  Metal Claw   [Move 2 · Base]
+  dragon-tail.mp4   →  Dragon Tail (Lv 7)   [Move 2 · Final]
+  stealth-rock.mp4   →  Stealth Rock (Lv 7)   [Move 2 · Final]
+  revolving-ruin.mp4   →  Revolving Ruin   [Unite · Unite]

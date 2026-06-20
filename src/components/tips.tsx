@@ -30,7 +30,12 @@ export function moveTip(move: Move, advanced: boolean) {
         <span className="ml-1 text-faint">· {move.cooldownSeconds}s CD</span>
       )}
       {desc && <span className="mt-0.5 block text-faint">{desc}</span>}
-      <MoveMedia gifAsset={move.gifAsset} iconAsset={move.iconAsset} name={move.name} />
+      <MoveMedia
+        videoAsset={move.videoAsset}
+        gifAsset={move.gifAsset}
+        iconAsset={move.iconAsset}
+        name={move.name}
+      />
     </span>
   );
 }

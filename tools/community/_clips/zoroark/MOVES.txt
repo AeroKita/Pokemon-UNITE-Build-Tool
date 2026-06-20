@@ -1,0 +1,10 @@
+Zoroark  —  drop each file here as <move-id>.mp4
+Scope: Base + Final + Unite moves (no passive).
+
+  slash.mp4   →  Slash   [Move 1 · Base]
+  shadow-claw.mp4   →  Shadow Claw (Lv 7)   [Move 1 · Final]
+  cut.mp4   →  Cut (Lv 7)   [Move 1 · Final]
+  fury-swipes.mp4   →  Fury Swipes   [Move 2 · Base]
+  night-slash.mp4   →  Night Slash (Lv 5)   [Move 2 · Final]
+  feint-attack.mp4   →  Feint Attack (Lv 5)   [Move 2 · Final]
+  nightfall-daze.mp4   →  Nightfall Daze   [Unite · Unite]

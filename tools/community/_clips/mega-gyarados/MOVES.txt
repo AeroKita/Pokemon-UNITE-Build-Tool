@@ -1,0 +1,8 @@
+Mega Gyarados  —  drop each file here as <move-id>.mp4
+Scope: Base + Final + Unite moves (no passive).
+
+  flail.mp4   →  Flail   [Move 1 · Base]
+  dragon-breath.mp4   →  Dragon Breath (Lv 7)   [Move 1 · Final]
+  splash.mp4   →  Splash   [Move 2 · Base]
+  waterfall.mp4   →  Waterfall (Lv 7)   [Move 2 · Final]
+  dragon-current.mp4   →  Dragon Current   [Unite · Unite]

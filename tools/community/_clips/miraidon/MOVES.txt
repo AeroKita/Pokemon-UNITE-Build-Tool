@@ -1,0 +1,10 @@
+Miraidon  —  drop each file here as <move-id>.mp4
+Scope: Base + Final + Unite moves (no passive).
+
+  thunder-shock.mp4   →  Thunder Shock   [Move 1 · Base]
+  charge-beam.mp4   →  Charge Beam (Lv 5)   [Move 1 · Final]
+  electro-drift.mp4   →  Electro Drift (Lv 5)   [Move 1 · Final]
+  thunder-wave.mp4   →  Thunder Wave   [Move 2 · Base]
+  thunder.mp4   →  Thunder (Lv 7)   [Move 2 · Final]
+  parabolic-charge.mp4   →  Parabolic Charge (Lv 7)   [Move 2 · Final]
+  bright-future-meteor-storm.mp4   →  Bright Future Meteor Storm   [Unite · Unite]

@@ -1,0 +1,10 @@
+Suicune  —  drop each file here as <move-id>.mp4
+Scope: Base + Final + Unite moves (no passive).
+
+  water-pulse.mp4   →  Water Pulse   [Move 1 · Base]
+  whirlpool.mp4   →  Whirlpool (Lv 5)   [Move 1 · Final]
+  surf.mp4   →  Surf (Lv 5)   [Move 1 · Final]
+  avalanche.mp4   →  Avalanche   [Move 2 · Base]
+  ice-beam.mp4   →  Ice Beam (Lv 7)   [Move 2 · Final]
+  icy-wind.mp4   →  Icy Wind (Lv 7)   [Move 2 · Final]
+  endless-ice-spikes.mp4   →  Endless Ice Spikes   [Unite · Unite]

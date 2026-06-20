@@ -1,0 +1,10 @@
+Comfey  —  drop each file here as <move-id>.mp4
+Scope: Base + Final + Unite moves (no passive).
+
+  synthesis.mp4   →  Synthesis   [Move 1 · Base]
+  floral-healing.mp4   →  Floral Healing (Lv 4)   [Move 1 · Final]
+  sweet-kiss.mp4   →  Sweet Kiss (Lv 4)   [Move 1 · Final]
+  vine-whip.mp4   →  Vine Whip   [Move 2 · Base]
+  magical-leaf.mp4   →  Magical Leaf (Lv 6)   [Move 2 · Final]
+  grass-knot.mp4   →  Grass Knot (Lv 6)   [Move 2 · Final]
+  flowery-fields-forever.mp4   →  Flowery Fields Forever   [Unite · Unite]

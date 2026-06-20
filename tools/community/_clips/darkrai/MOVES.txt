@@ -1,0 +1,10 @@
+Darkrai  —  drop each file here as <move-id>.mp4
+Scope: Base + Final + Unite moves (no passive).
+
+  hypnosis.mp4   →  Hypnosis   [Move 1 · Base]
+  dark-void.mp4   →  Dark Void (Lv 5)   [Move 1 · Final]
+  shadow-claw.mp4   →  Shadow Claw (Lv 5)   [Move 1 · Final]
+  calm-mind.mp4   →  Calm Mind   [Move 2 · Base]
+  nasty-plot.mp4   →  Nasty Plot (Lv 7)   [Move 2 · Final]
+  dark-pulse.mp4   →  Dark Pulse (Lv 7)   [Move 2 · Final]
+  worst-nightmare.mp4   →  Worst Nightmare   [Unite · Unite]

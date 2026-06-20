@@ -1,0 +1,10 @@
+Alcremie  —  drop each file here as <move-id>.mp4
+Scope: Base + Final + Unite moves (no passive).
+
+  helping-hand.mp4   →  Helping Hand   [Move 1 · Base]
+  decorate.mp4   →  Decorate (Lv 4)   [Move 1 · Final]
+  recover.mp4   →  Recover (Lv 4)   [Move 1 · Final]
+  charm.mp4   →  Charm   [Move 2 · Base]
+  dazzling-gleam.mp4   →  Dazzling Gleam (Lv 6)   [Move 2 · Final]
+  sweet-scent.mp4   →  Sweet Scent (Lv 6)   [Move 2 · Final]
+  fluffy-cream-supreme.mp4   →  Fluffy Cream Supreme   [Unite · Unite]

@@ -1,0 +1,10 @@
+Vaporeon  —  drop each file here as <move-id>.mp4
+Scope: Base + Final + Unite moves (no passive).
+
+  swift.mp4   →  Swift   [Move 1 · Base]
+  hydro-pump.mp4   →  Hydro Pump (Lv 4)   [Move 1 · Final]
+  muddy-water.mp4   →  Muddy Water (Lv 4)   [Move 1 · Final]
+  tackle.mp4   →  Tackle   [Move 2 · Base]
+  aqua-ring.mp4   →  Aqua Ring (Lv 6)   [Move 2 · Final]
+  flip-turn.mp4   →  Flip Turn (Lv 6)   [Move 2 · Final]
+  aquamarine-splash.mp4   →  Aquamarine Splash   [Unite · Unite]

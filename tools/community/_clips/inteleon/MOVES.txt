@@ -1,0 +1,10 @@
+Inteleon  —  drop each file here as <move-id>.mp4
+Scope: Base + Final + Unite moves (no passive).
+
+  tearful-look.mp4   →  Tearful Look   [Move 1 · Base]
+  fell-stinger.mp4   →  Fell Stinger (Lv 5)   [Move 1 · Final]
+  acrobatics.mp4   →  Acrobatics (Lv 5)   [Move 1 · Final]
+  water-gun.mp4   →  Water Gun   [Move 2 · Base]
+  snipe-shot.mp4   →  Snipe Shot (Lv 7)   [Move 2 · Final]
+  liquidation.mp4   →  Liquidation (Lv 7)   [Move 2 · Final]
+  azure-spy-vision.mp4   →  Azure Spy Vision   [Unite · Unite]

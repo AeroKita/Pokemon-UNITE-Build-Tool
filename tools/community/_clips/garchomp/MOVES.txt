@@ -1,0 +1,10 @@
+Garchomp  —  drop each file here as <move-id>.mp4
+Scope: Base + Final + Unite moves (no passive).
+
+  sand-attack.mp4   →  Sand Attack   [Move 1 · Base]
+  dig.mp4   →  Dig (Lv 5)   [Move 1 · Final]
+  dragon-rush.mp4   →  Dragon Rush (Lv 5)   [Move 1 · Final]
+  bulldoze.mp4   →  Bulldoze   [Move 2 · Base]
+  earthquake.mp4   →  Earthquake (Lv 7)   [Move 2 · Final]
+  dragon-claw.mp4   →  Dragon Claw (Lv 7)   [Move 2 · Final]
+  livid-outrage.mp4   →  Livid Outrage   [Unite · Unite]

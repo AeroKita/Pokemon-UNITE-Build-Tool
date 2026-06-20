@@ -1,11 +1,11 @@
 {
   "patchVersion": "1.23.2.5",
-  "lastUpdated": "2026-06-19",
+  "lastUpdated": "2026-06-20",
   "dataSource": {
     "provider": "UNITE-DB",
     "url": "https://unite-db.com",
     "note": "Community-sourced (APK bundles encrypted; see tools/extract/ENCRYPTION-FINDINGS.md). Held-item values span grades 1–40 (in-game max 40). Percentages stored as decimals.",
-    "fetched": "2026-06-19"
+    "fetched": "2026-06-20"
   },
   "pokemon": [
     {
@@ -260,7 +260,8 @@
           ],
           "moveType": "Dash",
           "iconAsset": "/assets/skills/Absol/Feint.png",
-          "descriptionAdvanced": "The user dashes in an arc forward, damaging Pokémon in the path and increasing the user's basic attack speed by 60% for 0.5s when this move hits. This move ignores the Defense and shield effects of Pokémon hit.\n\nEach use alternates between a rightward and leftward arc."
+          "descriptionAdvanced": "The user dashes in an arc forward, damaging Pokémon in the path and increasing the user's basic attack speed by 60% for 0.5s when this move hits. This move ignores the Defense and shield effects of Pokémon hit.\n\nEach use alternates between a rightward and leftward arc.",
+          "videoAsset": "/assets/skills/Absol/Feint.mp4"
         },
         {
           "id": "night-slash",
@@ -293,7 +294,8 @@
           "moveType": "Dash",
           "upgradeLevel": 5,
           "descriptionAdvanced": "The user dashes in a leftward arc forward, damaging non-allied Pokémon in its path and increasing the user's basic attack speed by 60% for 0.5s when this dash hits. If this dash hits, the move can be used again within 6s. This second use has the user dash straight ahead, repeating the effects of the first dash when it hits. The critical-hit rate of this move is increased by 0.8% for every 1% missing HP of opposing Pokémon hit, up to 30% increased critical-hit rate at 38% missing HP or more.\n\nThe first use is a rightward arc forward from the perspective of the orange team (right-side team, which has the map flipped horizontally when in battle).\n\nUpgrade (Level 11): Restores the user's HP for 50% of damage dealt with the second dash hit.",
-          "gifAsset": "/assets/skills/Absol/Night+Slash.webp"
+          "gifAsset": "/assets/skills/Absol/Night+Slash.webp",
+          "videoAsset": "/assets/skills/Absol/Night+Slash.mp4"
         },
         {
           "id": "pursuit",
@@ -325,7 +327,8 @@
           "isUpgrade": true,
           "moveType": "Dash",
           "upgradeLevel": 5,
-          "descriptionAdvanced": "The user dashes forward, empowering the next auto attack for 3s. With this empowered attack, the user leaps to a non-allied Pokémon and attacks. This damage is increased against targets hit in the back. If this empowered attack hits any target in the back, this move's cooldown is reduced by 70%.\n\nWhen the user has an empowered attack readied, nearby non-allied Pokémon have their backs highlighted.\n\nUpgrade (Level 11): Increases the user's movement speed by 35% for 2s after using this move and before using the empowered attack."
+          "descriptionAdvanced": "The user dashes forward, empowering the next auto attack for 3s. With this empowered attack, the user leaps to a non-allied Pokémon and attacks. This damage is increased against targets hit in the back. If this empowered attack hits any target in the back, this move's cooldown is reduced by 70%.\n\nWhen the user has an empowered attack readied, nearby non-allied Pokémon have their backs highlighted.\n\nUpgrade (Level 11): Increases the user's movement speed by 35% for 2s after using this move and before using the empowered attack.",
+          "videoAsset": "/assets/skills/Absol/Pursuit.mp4"
         },
         {
           "id": "slash",
@@ -348,7 +351,8 @@
           ],
           "moveType": "Melee",
           "iconAsset": "/assets/skills/Absol/Slash.png",
-          "descriptionAdvanced": "The user slashes in the designated direction, damaging opposing Pokémon hit.\n\nThis move's critical-hit rate is increased by 15%."
+          "descriptionAdvanced": "The user slashes in the designated direction, damaging opposing Pokémon hit.\n\nThis move's critical-hit rate is increased by 15%.",
+          "videoAsset": "/assets/skills/Absol/Slash.mp4"
         },
         {
           "id": "psycho-cut",
@@ -388,7 +392,8 @@
           "moveType": "Ranged",
           "upgradeLevel": 7,
           "descriptionAdvanced": "The user throws a psychic slash in the designated direction, damaging opposing Pokémon hit and decreasing their movement speed by 90% for 2s (decaying by 25% every 0.5s). 3 marks are applied to opposing Pokémon hit by the psychic slash for 5s. When the user deals damage to a marked target, 1 mark is consumed, dealing additional damage. The third mark deals increased damage when consumed.\n\nThe critical-hit rate of the psychic slash and consumed marks is increased by 15%. The marks can be cleansed.\n\nUpgrade (Level 13): Increases the user's movement speed by 20% when an opposing Pokémon is marked by this move.",
-          "gifAsset": "/assets/skills/Absol/Psycho+Cut.webp"
+          "gifAsset": "/assets/skills/Absol/Psycho+Cut.webp",
+          "videoAsset": "/assets/skills/Absol/Psycho+Cut.mp4"
         },
         {
           "id": "sucker-punch",
@@ -421,7 +426,8 @@
           "moveType": "Sure Hit",
           "upgradeLevel": 7,
           "descriptionAdvanced": "The user becomes unstoppable and targets an opposing Pokémon and enters a counter stance for 1s, decreasing the movement speed of the user and the target by 50% for the duration. After 1s, the user leaves the counter stance to counterattack, charging behind the target and damaging the target and other opposing Pokémon. If the user is attacked or the target attacks during the counter stance, however, the user dodges the damage and effects of the first hit and immediately counterattacks, shoving the target and dealing increased damage to the target and other opposing Pokémon.\n\nUpgrade (Level 13): Increases the user's basic attack speed by 40% for 3s after using this move.",
-          "gifAsset": "/assets/skills/Absol/Sucker+Punch.webp"
+          "gifAsset": "/assets/skills/Absol/Sucker+Punch.webp",
+          "videoAsset": "/assets/skills/Absol/Sucker+Punch.mp4"
         },
         {
           "id": "midnight-slash",
@@ -444,7 +450,8 @@
           ],
           "moveType": "Area",
           "iconAsset": "/assets/skills/Absol/Midnight+Slash.png",
-          "descriptionAdvanced": "The user briefly becomes unstoppable before becoming untargetable and invulnerable for 1.15s while unleashing a flurry of 5 slashes in front of themself in the designated area, damaging opposing Pokémon in the area of effect. The user then becomes unstoppable again and unleashes a final slash in front of them with 3 blades of energy, shoving opposing Pokémon and dealing damage, up to 4 times at close range and down to 1 time at maximum range.\n\n30% of the full damage.\n\nThe damage of the flurry of 5 slashes is divided by the number of targets hit. The first hit from the final slash deals full damage to each target hit; subsequent hits deal 30% of the full damage to the same target."
+          "descriptionAdvanced": "The user briefly becomes unstoppable before becoming untargetable and invulnerable for 1.15s while unleashing a flurry of 5 slashes in front of themself in the designated area, damaging opposing Pokémon in the area of effect. The user then becomes unstoppable again and unleashes a final slash in front of them with 3 blades of energy, shoving opposing Pokémon and dealing damage, up to 4 times at close range and down to 1 time at maximum range.\n\n30% of the full damage.\n\nThe damage of the flurry of 5 slashes is divided by the number of targets hit. The first hit from the final slash deals full damage to each target hit; subsequent hits deal 30% of the full damage to the same target.",
+          "videoAsset": "/assets/skills/Absol/Midnight+Slash.mp4"
         }
       ],
       "passiveAbility": {
@@ -960,7 +967,8 @@
           ],
           "moveType": "Dash",
           "iconAsset": "/assets/skills/Aegislash/Shadow+Sneak.png",
-          "descriptionAdvanced": "Casts a shadow toward the designated location, damaging opposing Pokémon hit. After hitting an opposing Pokémon or traveling maximum distance; warps to the shadow’s location, damaging opposing Pokémon at the location.\n\nIncreases the boost count by 1 if the warp hits an opposing Pokémon."
+          "descriptionAdvanced": "Casts a shadow toward the designated location, damaging opposing Pokémon hit. After hitting an opposing Pokémon or traveling maximum distance; warps to the shadow’s location, damaging opposing Pokémon at the location.\n\nIncreases the boost count by 1 if the warp hits an opposing Pokémon.",
+          "videoAsset": "/assets/skills/Aegislash/Shadow+Sneak.mp4"
         },
         {
           "id": "sacred-sword",
@@ -992,7 +1000,8 @@
           "isUpgrade": true,
           "moveType": "Area",
           "upgradeLevel": 5,
-          "descriptionAdvanced": "Thrusts their blade into the ground and creates a triangular zone that erupts with a hidden power, damaging opposing Pokémon in the area of effect and throwing them for 0.6s. At the same time as the eruption, slashes forward, dealing more damage to opposing Pokémon hit; and increasing Defense penetration by 25% for 3s if the slash hits.\n\nIncreases the boost count by 1 for each target hit by the triangular zone erupting (up to 2 from hitting wild Pokémon).\n\nUpgrade (Level 11): Increases Attack by 50 for 3s after the triangular zone hits."
+          "descriptionAdvanced": "Thrusts their blade into the ground and creates a triangular zone that erupts with a hidden power, damaging opposing Pokémon in the area of effect and throwing them for 0.6s. At the same time as the eruption, slashes forward, dealing more damage to opposing Pokémon hit; and increasing Defense penetration by 25% for 3s if the slash hits.\n\nIncreases the boost count by 1 for each target hit by the triangular zone erupting (up to 2 from hitting wild Pokémon).\n\nUpgrade (Level 11): Increases Attack by 50 for 3s after the triangular zone hits.",
+          "videoAsset": "/assets/skills/Aegislash/Sacred+Sword.mp4"
         },
         {
           "id": "shadow-claw",
@@ -1024,7 +1033,8 @@
           "isUpgrade": true,
           "moveType": "Dash",
           "upgradeLevel": 5,
-          "descriptionAdvanced": "Slashes forward with their blade twice, damaging opposing Pokémon with each attack, then follows up with a final rising slash, damaging opposing Pokémon and throwing them for 0.75s when the rising slash hits.\n\nIncreases the boost count by 1 if this move hits.\n\nUpgrade (Level 11): Increases critical-hit rate by 20% for 1s after the final slash."
+          "descriptionAdvanced": "Slashes forward with their blade twice, damaging opposing Pokémon with each attack, then follows up with a final rising slash, damaging opposing Pokémon and throwing them for 0.75s when the rising slash hits.\n\nIncreases the boost count by 1 if this move hits.\n\nUpgrade (Level 11): Increases critical-hit rate by 20% for 1s after the final slash.",
+          "videoAsset": "/assets/skills/Aegislash/Shadow+Claw.mp4"
         },
         {
           "id": "iron-defense",
@@ -1039,7 +1049,8 @@
           ],
           "moveType": "Buff",
           "iconAsset": "/assets/skills/Aegislash/Iron+Defense.png",
-          "descriptionAdvanced": "Envelops the user in a powerful protective force for up to 3s, blocking the next attack.\n\nIncreases the boost count by 1 when this move blocks an attack."
+          "descriptionAdvanced": "Envelops the user in a powerful protective force for up to 3s, blocking the next attack.\n\nIncreases the boost count by 1 when this move blocks an attack.",
+          "videoAsset": "/assets/skills/Aegislash/Iron+Defense.mp4"
         },
         {
           "id": "wide-guard",
@@ -1064,7 +1075,8 @@
           "isUpgrade": true,
           "moveType": "Buff",
           "upgradeLevel": 7,
-          "descriptionAdvanced": "Focuses in place, becomes unstoppable and grants a shield effect for up to 1.2s; and shoves opposing Pokémon in front for 0.6s. This move can be used again to end the move early. When the shield effect is depleted or the move ends; shoves opposing Pokémon in front for 0.6s and decreases their movement speed by 45% for 2s.\n\n8.5% max HP\n\nIncreases the boost count by 1 unconditionally when granting the shield effect. Increases the boost count by 1 more for each instance of damage received by the shield effect (up to 2 times). Increases boost count by 1 more if an opposing Pokémon is shoved at the end or unconditionally when the shield effect is depleted before it can end normally.\n\nUpgrade (Level 13): Reduces this move's cooldown by 1s."
+          "descriptionAdvanced": "Focuses in place, becomes unstoppable and grants a shield effect for up to 1.2s; and shoves opposing Pokémon in front for 0.6s. This move can be used again to end the move early. When the shield effect is depleted or the move ends; shoves opposing Pokémon in front for 0.6s and decreases their movement speed by 45% for 2s.\n\n8.5% max HP\n\nIncreases the boost count by 1 unconditionally when granting the shield effect. Increases the boost count by 1 more for each instance of damage received by the shield effect (up to 2 times). Increases boost count by 1 more if an opposing Pokémon is shoved at the end or unconditionally when the shield effect is depleted before it can end normally.\n\nUpgrade (Level 13): Reduces this move's cooldown by 1s.",
+          "videoAsset": "/assets/skills/Aegislash/Wide+Guard.mp4"
         },
         {
           "id": "iron-head",
@@ -1089,7 +1101,8 @@
           "isUpgrade": true,
           "moveType": "Buff",
           "upgradeLevel": 7,
-          "descriptionAdvanced": "Dashes barreling forward, damaging opposing Pokémon hit. Protects the user with a special shield for 1s afterward; this shield blocks the damage of the next attack then disappears; reducing this move's cooldown by 3s after a successful block.\n\nIncreases the boost count by 1 unconditionally after barreling forward. Increases the boost count by 1 more if the shield blocks an attack.\n\nUpgrade (Level 13): Increases Attack by 10% for 3s when the special shield blocks an attack."
+          "descriptionAdvanced": "Dashes barreling forward, damaging opposing Pokémon hit. Protects the user with a special shield for 1s afterward; this shield blocks the damage of the next attack then disappears; reducing this move's cooldown by 3s after a successful block.\n\nIncreases the boost count by 1 unconditionally after barreling forward. Increases the boost count by 1 more if the shield blocks an attack.\n\nUpgrade (Level 13): Increases Attack by 10% for 3s when the special shield blocks an attack.",
+          "videoAsset": "/assets/skills/Aegislash/Iron+Head.mp4"
         },
         {
           "id": "coup-de-grace",
@@ -1112,7 +1125,8 @@
           ],
           "moveType": "Area",
           "iconAsset": "/assets/skills/Aegislash/Coup+de+Grace.png",
-          "descriptionAdvanced": "Becomes unstoppable and unleashes a ground-splitting slash in the designated direction, damaging opposing Pokémon in the line area of effect, dealing additional missing HP damage to those hit.\n\n12% missing HP as damage.\n\nIncreases the boost count by 2 if this Unite Move knocks out an opposing Pokémon."
+          "descriptionAdvanced": "Becomes unstoppable and unleashes a ground-splitting slash in the designated direction, damaging opposing Pokémon in the line area of effect, dealing additional missing HP damage to those hit.\n\n12% missing HP as damage.\n\nIncreases the boost count by 2 if this Unite Move knocks out an opposing Pokémon.",
+          "videoAsset": "/assets/skills/Aegislash/Coup+de+Grace.mp4"
         }
       ],
       "passiveAbility": {
@@ -30575,7 +30589,8 @@
           ],
           "moveType": "Dash",
           "iconAsset": "/assets/skills/Lucario/Quick+Attack.png",
-          "descriptionAdvanced": "Dashes forward, damaging opposing Pokémon hit."
+          "descriptionAdvanced": "Dashes forward, damaging opposing Pokémon hit.",
+          "videoAsset": "/assets/skills/Lucario/Quick+Attack.mp4"
         },
         {
           "id": "extreme-speed",
@@ -30614,7 +30629,8 @@
           "isUpgrade": true,
           "moveType": "Dash",
           "upgradeLevel": 5,
-          "descriptionAdvanced": "Dashes forward, damaging opposing Pokémon hit; restoring HP for each opposing Pokémon hit. If an auto attack is used at the end of the dash (0.2s after the move is used): attacks in a circle around them, dealing damage to opposing Pokémon in the area of effect with a unique auto attack.\n\nAfter learning this move: nearby opposing Pokémon have an Extreme Speed marker automatically applied to them. If this move's dash hits an opposing Pokémon: resets this move's cooldown; and removes the marker from the first target hit for 10s (or until applied by other moves).\n\nUpgrade (Level 11): Increases the user's Attack by 7.5% for 2s when this move is used."
+          "descriptionAdvanced": "Dashes forward, damaging opposing Pokémon hit; restoring HP for each opposing Pokémon hit. If an auto attack is used at the end of the dash (0.2s after the move is used): attacks in a circle around them, dealing damage to opposing Pokémon in the area of effect with a unique auto attack.\n\nAfter learning this move: nearby opposing Pokémon have an Extreme Speed marker automatically applied to them. If this move's dash hits an opposing Pokémon: resets this move's cooldown; and removes the marker from the first target hit for 10s (or until applied by other moves).\n\nUpgrade (Level 11): Increases the user's Attack by 7.5% for 2s when this move is used.",
+          "videoAsset": "/assets/skills/Lucario/Extreme+Speed.mp4"
         },
         {
           "id": "power-up-punch",
@@ -30646,7 +30662,8 @@
           "isUpgrade": true,
           "moveType": "Melee",
           "upgradeLevel": 5,
-          "descriptionAdvanced": "While held down: charges up power for up to 4s, reducing damage received by 30% and decreasing movement speed by 15%; reaches maximum charge after 1s. When released: dashes forward with a devastating punch, damaging the first opposing Pokémon hit, dealing additional missing HP damage to the target, and shoving them for 0.5s. Readies a boosted attack if this move hits. Reduces this move's cooldown by 1s each time one of their moves lands a hit. If not released after 4s or canceled, this move goes on a 1.4s cooldown.\n\n12% of Enemy Missing HP (caps at 1000 dmg).\n\nAgainst wild Pokémon: additional missing HP damage is capped at 1000.\n\nUpgrade (Level 11): Becomes unstoppable while charging this move."
+          "descriptionAdvanced": "While held down: charges up power for up to 4s, reducing damage received by 30% and decreasing movement speed by 15%; reaches maximum charge after 1s. When released: dashes forward with a devastating punch, damaging the first opposing Pokémon hit, dealing additional missing HP damage to the target, and shoving them for 0.5s. Readies a boosted attack if this move hits. Reduces this move's cooldown by 1s each time one of their moves lands a hit. If not released after 4s or canceled, this move goes on a 1.4s cooldown.\n\n12% of Enemy Missing HP (caps at 1000 dmg).\n\nAgainst wild Pokémon: additional missing HP damage is capped at 1000.\n\nUpgrade (Level 11): Becomes unstoppable while charging this move.",
+          "videoAsset": "/assets/skills/Lucario/Power-Up+Punch.mp4"
         },
         {
           "id": "meteor-mash",
@@ -30670,7 +30687,8 @@
           "moveType": "Melee",
           "iconAsset": "/assets/skills/Lucario/Meteor+Mash.png",
           "descriptionAdvanced": "Punches with the force of a meteor in the designated direction after 0.4s, damaging opposing Pokémon hit and shoving them in the designated direction, stunning those hit for 0.4s.",
-          "gifAsset": "/assets/skills/Lucario/Meteor+Mash.webp"
+          "gifAsset": "/assets/skills/Lucario/Meteor+Mash.webp",
+          "videoAsset": "/assets/skills/Lucario/Meteor+Mash.mp4"
         },
         {
           "id": "bone-rush",
@@ -30696,7 +30714,8 @@
           "moveType": "Dash",
           "upgradeLevel": 7,
           "descriptionAdvanced": "Rapidly strikes with a bone in the designated direction 3 times over 0.33s, damaging opposing Pokémon within melee range around Lucario, and in the area of the bone strikes in front; opposing Pokémon can be damaged twice per hit by being in the area where the bone strikes overlap with the attacks within melee range. Immediately after, throws the bone flying to land a short distance away, shoving opposing Pokémon in the way and stunning them for 0.4s. Cooldown starts upon first use. If used again within 3s of throwing the bone: dashes to the bone, then catches it, damaging nearby opposing Pokémon if the bone is grabbed.\n\nLanding one of the three initial strikes on opposing Pokémon applies an Extreme Speed marker to them.\n\nUpgrade (Level 13): Catching the bone with the second use resets the cooldown of Extreme Speed or Power-Up Punch.",
-          "gifAsset": "/assets/skills/Lucario/Bone+Rush.webp"
+          "gifAsset": "/assets/skills/Lucario/Bone+Rush.webp",
+          "videoAsset": "/assets/skills/Lucario/Bone+Rush.mp4"
         },
         {
           "id": "close-combat",
@@ -30729,7 +30748,8 @@
           "moveType": "Melee",
           "upgradeLevel": 7,
           "descriptionAdvanced": "Becomes unstoppable for 1.4s, and rapidly punches in the designated direction 11 times, damaging opposing Pokémon in the area in front of them with each hit; restoring HP each time this move hits. The rapid punches start 0.4s after the move is used, with the last punch hitting 1.2s after the start of the move.\n\nChanges the next basic attack used within 5s after using this move. This auto attack gains increased range and lunges at an opposing Pokémon with a kick, dealing damage.\n\nUpgrade (Level 13): Increases the damage of this move.",
-          "gifAsset": "/assets/skills/Lucario/Close+Combat.webp"
+          "gifAsset": "/assets/skills/Lucario/Close+Combat.webp",
+          "videoAsset": "/assets/skills/Lucario/Close+Combat.mp4"
         },
         {
           "id": "aura-cannon",
@@ -30752,7 +30772,8 @@
           ],
           "moveType": "Ranged",
           "iconAsset": "/assets/skills/Lucario/Aura+Cannon.png",
-          "descriptionAdvanced": "Becomes unstoppable for 0.6s and channels aura into a huge sphere, then launches the sphere in the designated direction, dealing damage to opposing Pokémon in its path. The aura sphere picks up speed as it travels; at close range, a target can be hit up to 4 times, while at max speed a target will only be hit once.\n\nIf the user learned Extreme Speed: applies an Extreme Speed marker to targets hit by this Unite Move. If the user learned Power-Up Punch: strengthens the damage of the next attack of Power-Up Punch by roughly 20% and the shove duration to 1s when Power-Up Punch is released."
+          "descriptionAdvanced": "Becomes unstoppable for 0.6s and channels aura into a huge sphere, then launches the sphere in the designated direction, dealing damage to opposing Pokémon in its path. The aura sphere picks up speed as it travels; at close range, a target can be hit up to 4 times, while at max speed a target will only be hit once.\n\nIf the user learned Extreme Speed: applies an Extreme Speed marker to targets hit by this Unite Move. If the user learned Power-Up Punch: strengthens the damage of the next attack of Power-Up Punch by roughly 20% and the shove duration to 1s when Power-Up Punch is released.",
+          "videoAsset": "/assets/skills/Lucario/Aura+Cannon.mp4"
         }
       ],
       "passiveAbility": {
@@ -31508,7 +31529,8 @@
           ],
           "moveType": "Dash",
           "iconAsset": "/assets/skills/Mega-Lucario/Quick+Attack.png",
-          "descriptionAdvanced": "Dashes forward, damaging opposing Pokémon hit."
+          "descriptionAdvanced": "Dashes forward, damaging opposing Pokémon hit.",
+          "videoAsset": "/assets/skills/Mega-Lucario/Quick+Attack.mp4"
         },
         {
           "id": "power-up-punch",
@@ -31540,7 +31562,8 @@
           "isUpgrade": true,
           "moveType": "Melee",
           "upgradeLevel": 5,
-          "descriptionAdvanced": "The user receives 30% reduced damage and decreases their movement speed by 15% as they charge up power for up to 4s, reaching maximum charge after 1s; then dashes forward with a devastating punch when released, damaging the first opposing Pokémon hit, dealing additional missing HP damage to the target and shoving them for 0.5s. If this move hits, the user readies a boosted attack. This move's cooldown is reduced by 1s each time one of the user's moves lands a hit. If this move is canceled or not released after 4s, it goes on a 1.4s cooldown.\n\n12% of Enemy Missing HP (caps at 1000 dmg).\n\nWhen the user is mega evolved; the move can hit multiple opposing Pokémon and can be overcharged for an additional 0.4s to throw all opposing Pokémon it hits for 1s.\n\nUpgrade (Level 11): Becomes unstoppable while charging this move."
+          "descriptionAdvanced": "The user receives 30% reduced damage and decreases their movement speed by 15% as they charge up power for up to 4s, reaching maximum charge after 1s; then dashes forward with a devastating punch when released, damaging the first opposing Pokémon hit, dealing additional missing HP damage to the target and shoving them for 0.5s. If this move hits, the user readies a boosted attack. This move's cooldown is reduced by 1s each time one of the user's moves lands a hit. If this move is canceled or not released after 4s, it goes on a 1.4s cooldown.\n\n12% of Enemy Missing HP (caps at 1000 dmg).\n\nWhen the user is mega evolved; the move can hit multiple opposing Pokémon and can be overcharged for an additional 0.4s to throw all opposing Pokémon it hits for 1s.\n\nUpgrade (Level 11): Becomes unstoppable while charging this move.",
+          "videoAsset": "/assets/skills/Mega-Lucario/Power-Up+Punch.mp4"
         },
         {
           "id": "meteor-mash",
@@ -31564,7 +31587,8 @@
           "moveType": "Melee",
           "iconAsset": "/assets/skills/Mega-Lucario/Meteor+Mash.png",
           "descriptionAdvanced": "Punches with the force of a meteor in the designated direction after 0.4s, damaging opposing Pokémon hit and shoving them in the designated direction, stunning those hit for 0.4s.",
-          "gifAsset": "/assets/skills/Mega-Lucario/Meteor+Mash.webp"
+          "gifAsset": "/assets/skills/Mega-Lucario/Meteor+Mash.webp",
+          "videoAsset": "/assets/skills/Mega-Lucario/Meteor+Mash.mp4"
         },
         {
           "id": "close-combat",
@@ -31604,7 +31628,8 @@
           "moveType": "Melee",
           "upgradeLevel": 7,
           "descriptionAdvanced": "The user becomes unstoppable and rapidly punches in the designated direction, damaging opposing Pokémon in the area in front of them (up to 11 times), and restoring the user's HP each time this move hits. The next auto attack within 5s after using this move gains increased range and causes the user to lunge at an opposing Pokémon with a kick.\n\nWhen the user is mega evolved; the move lasts longer dealing damage up to 16 times reducing this move's cooldown by 0.4s for each hit on Pokémon from the opposing team, can be slowly rotated, the last hit can be targeted in any direction, and this move can be ended early, after channeling for at least 1s, by activating the move again or by using Power-Up Punch. The first hit of this move has 12x the normal healing. Hitting an enemy with Power-Up punch reduces the cooldown of this move by 1s.\n\nUpgrade (Level 13): Increases the damage of this move.",
-          "gifAsset": "/assets/skills/Mega-Lucario/Close+Combat.webp"
+          "gifAsset": "/assets/skills/Mega-Lucario/Close+Combat.webp",
+          "videoAsset": "/assets/skills/Mega-Lucario/Close+Combat.mp4"
         },
         {
           "id": "aura-cannon",
@@ -31627,7 +31652,8 @@
           ],
           "moveType": "Ranged",
           "iconAsset": "/assets/skills/Mega-Lucario/Aura+Cannon.png",
-          "descriptionAdvanced": "The user becomes unstoppable and channels aura into a huge sphere, then launches the sphere in the designated direction, dealing damage to opposing Pokémon in its path. The aura sphere picks up speed as it travels; at close range, a target can be hit up to 4 times, while at max speed a target will only be hit once.\n\nAfter unleashing this move the user mega evolves for 25s adding additional effects to Close Combat and Power-Up Punch and changing the passive ability to Adaptability."
+          "descriptionAdvanced": "The user becomes unstoppable and channels aura into a huge sphere, then launches the sphere in the designated direction, dealing damage to opposing Pokémon in its path. The aura sphere picks up speed as it travels; at close range, a target can be hit up to 4 times, while at max speed a target will only be hit once.\n\nAfter unleashing this move the user mega evolves for 25s adding additional effects to Close Combat and Power-Up Punch and changing the passive ability to Adaptability.",
+          "videoAsset": "/assets/skills/Mega-Lucario/Aura+Cannon.mp4"
         }
       ],
       "passiveAbility": {
@@ -34385,7 +34411,8 @@
           ],
           "moveType": "Melee",
           "iconAsset": "/assets/skills/Meowth/Scratch.png",
-          "descriptionAdvanced": "The user scratches a designated Pokémon with its sharp claws, dealing damage."
+          "descriptionAdvanced": "The user scratches a designated Pokémon with its sharp claws, dealing damage.",
+          "videoAsset": "/assets/skills/Meowth/Scratch.mp4"
         },
         {
           "id": "pay-day",
@@ -34410,7 +34437,8 @@
           "isUpgrade": true,
           "moveType": "Sure Hit",
           "upgradeLevel": 5,
-          "descriptionAdvanced": "The user hurls a gold coin at the designated Pokémon, dealing damage, slowing down the target by 30% for 1.5s, and dropping a gold coin.\n\n2 uses can be kept in reserve, picking up a gold coin reduces the cooldown of a use by 4s.\n\nUpgrade (Level 11): Increases the damage dealt by this move."
+          "descriptionAdvanced": "The user hurls a gold coin at the designated Pokémon, dealing damage, slowing down the target by 30% for 1.5s, and dropping a gold coin.\n\n2 uses can be kept in reserve, picking up a gold coin reduces the cooldown of a use by 4s.\n\nUpgrade (Level 11): Increases the damage dealt by this move.",
+          "videoAsset": "/assets/skills/Meowth/Pay+Day.mp4"
         },
         {
           "id": "fury-swipes",
@@ -34456,7 +34484,8 @@
           "isUpgrade": true,
           "moveType": "Melee",
           "upgradeLevel": 5,
-          "descriptionAdvanced": "The user applies a coin mark on opposing Pokémon they hit, the coin mark has up to 5 stacks and lasts for 5s. The user swipes twice with its sharp claws at the designated Pokémon, dealing damage, and granting the user a shield for 5s, and an additional shield per hit (up to 5x) for 5s. The number of swipes can be increased up to 5 if the coin mark is at 3 stacks or higher. Subsequent swipes deal half of the damage of the first hit. This attack will stun opposing Pokémon that have 1/2/3+ coin mark stacks for 0.3/0.5/0.8s respectively.\n\nIf the maximum number of swipes hit, the cooldowns for Feint, Feint Attack, and Assurance are reduced by 7.5% of the max cooldown per hit, the 5th hit will fully reset the cooldown. If the coin mark is filled up, this move will consume and reset the mark.\n\nUpgrade (Level 11): Increases the damage dealt by this move."
+          "descriptionAdvanced": "The user applies a coin mark on opposing Pokémon they hit, the coin mark has up to 5 stacks and lasts for 5s. The user swipes twice with its sharp claws at the designated Pokémon, dealing damage, and granting the user a shield for 5s, and an additional shield per hit (up to 5x) for 5s. The number of swipes can be increased up to 5 if the coin mark is at 3 stacks or higher. Subsequent swipes deal half of the damage of the first hit. This attack will stun opposing Pokémon that have 1/2/3+ coin mark stacks for 0.3/0.5/0.8s respectively.\n\nIf the maximum number of swipes hit, the cooldowns for Feint, Feint Attack, and Assurance are reduced by 7.5% of the max cooldown per hit, the 5th hit will fully reset the cooldown. If the coin mark is filled up, this move will consume and reset the mark.\n\nUpgrade (Level 11): Increases the damage dealt by this move.",
+          "videoAsset": "/assets/skills/Meowth/Fury+Swipes.mp4"
         },
         {
           "id": "feint",
@@ -34479,7 +34508,8 @@
           ],
           "moveType": "Dash",
           "iconAsset": "/assets/skills/Meowth/Feint.png",
-          "descriptionAdvanced": "The user dashes at the designated Pokémon, dealing damage to opponents hit."
+          "descriptionAdvanced": "The user dashes at the designated Pokémon, dealing damage to opponents hit.",
+          "videoAsset": "/assets/skills/Meowth/Feint.mp4"
         },
         {
           "id": "feint-attack",
@@ -34511,7 +34541,8 @@
           "isUpgrade": true,
           "moveType": "Sure Hit",
           "upgradeLevel": 7,
-          "descriptionAdvanced": "The user pounces at the designated Pokémon and scratches them with their claws, dealing damage and stunning the target for 0.6s. When this move hits the user is granted a shield for 3s and can quickly move in a chosen direction.\n\nThe user's next basic attack becomes a boosted attack. If the coin mark is filled up, this move will consume and reset the mark (although this move does not benefit from the coin mark in any fashion).\n\nUpgrade (Level 13): Improves the strength of the shield."
+          "descriptionAdvanced": "The user pounces at the designated Pokémon and scratches them with their claws, dealing damage and stunning the target for 0.6s. When this move hits the user is granted a shield for 3s and can quickly move in a chosen direction.\n\nThe user's next basic attack becomes a boosted attack. If the coin mark is filled up, this move will consume and reset the mark (although this move does not benefit from the coin mark in any fashion).\n\nUpgrade (Level 13): Improves the strength of the shield.",
+          "videoAsset": "/assets/skills/Meowth/Feint+Attack.mp4"
         },
         {
           "id": "assurance",
@@ -34557,7 +34588,8 @@
           "isUpgrade": true,
           "moveType": "Dash",
           "upgradeLevel": 7,
-          "descriptionAdvanced": "The user applies a coin mark on opposing Pokémon they hit, the coin mark has up to 5 stacks and lasts for 5s. The user charges in the designated direction, dealing damage to opposing Pokémon hit and restoring the user's HP, furthermore the move will restore additional HP if the targets have a coin mark. The more stacks the coin mark has the more potent the heal.\n\nWhen this move is used on a Pokémon with a coin mark that has 5 stacks, the damage is doubled. If the coin mark is filled up, this move will consume and reset the mark.\n\nUpgrade (Level 13): Reduces this moves cooldown by 1s."
+          "descriptionAdvanced": "The user applies a coin mark on opposing Pokémon they hit, the coin mark has up to 5 stacks and lasts for 5s. The user charges in the designated direction, dealing damage to opposing Pokémon hit and restoring the user's HP, furthermore the move will restore additional HP if the targets have a coin mark. The more stacks the coin mark has the more potent the heal.\n\nWhen this move is used on a Pokémon with a coin mark that has 5 stacks, the damage is doubled. If the coin mark is filled up, this move will consume and reset the mark.\n\nUpgrade (Level 13): Reduces this moves cooldown by 1s.",
+          "videoAsset": "/assets/skills/Meowth/Assurance.mp4"
         },
         {
           "id": "gold-coin-barrage",
@@ -34580,7 +34612,8 @@
           ],
           "moveType": "Area",
           "iconAsset": "/assets/skills/Meowth/Gold+Coin+Barrage.png",
-          "descriptionAdvanced": "The user becomes unstoppable and unleashes a barrage of gold coins toward the designated Pokémon from the opposing team, dealing damage in a small area up to 10 times. If another Pokémon on the opposing team stands in the way, they will be hit instead. During the attack, up to 4 coins will periodically drop near Pokémon hit by this move. This move can be cancelled early.\n\nMeowth can move while using this move, but is slowed by 110%."
+          "descriptionAdvanced": "The user becomes unstoppable and unleashes a barrage of gold coins toward the designated Pokémon from the opposing team, dealing damage in a small area up to 10 times. If another Pokémon on the opposing team stands in the way, they will be hit instead. During the attack, up to 4 coins will periodically drop near Pokémon hit by this move. This move can be cancelled early.\n\nMeowth can move while using this move, but is slowed by 110%.",
+          "videoAsset": "/assets/skills/Meowth/Gold+Coin+Barrage.mp4"
         }
       ],
       "passiveAbility": {
@@ -45785,7 +45818,8 @@
           ],
           "moveType": "Ranged",
           "iconAsset": "/assets/skills/Skeledirge/Disarming+Voice.png",
-          "descriptionAdvanced": "The user lets out a charming cry in the designated direction, dealing damage.\n\nWhen the move hits, an additional sound wave occurs in a small cone behind the initial target dealing slightly increased damage to opposing Pokémon."
+          "descriptionAdvanced": "The user lets out a charming cry in the designated direction, dealing damage.\n\nWhen the move hits, an additional sound wave occurs in a small cone behind the initial target dealing slightly increased damage to opposing Pokémon.",
+          "videoAsset": "/assets/skills/Skeledirge/Disarming+Voice.mp4"
         },
         {
           "id": "hyper-voice",
@@ -45817,7 +45851,8 @@
           "isUpgrade": true,
           "moveType": "Ranged",
           "upgradeLevel": 5,
-          "descriptionAdvanced": "The user unleashes horribly loud vibrations in the designated direction, dealing damage.\n\nWhen the move hits, the vibrations travel further, become slightly wider, and deal slightly increased damage.\n\nUpgrade (Level 11): Increases the damage of this move."
+          "descriptionAdvanced": "The user unleashes horribly loud vibrations in the designated direction, dealing damage.\n\nWhen the move hits, the vibrations travel further, become slightly wider, and deal slightly increased damage.\n\nUpgrade (Level 11): Increases the damage of this move.",
+          "videoAsset": "/assets/skills/Skeledirge/Hyper+Voice.mp4"
         },
         {
           "id": "roar",
@@ -45840,7 +45875,8 @@
           ],
           "moveType": "Area",
           "iconAsset": "/assets/skills/Skeledirge/Roar.png",
-          "descriptionAdvanced": "The user lets out a mighty roar in the designated direction dealing damage and applying a fear effect for 1s. Pokémon under the fear effect walk towards the center edge of the cone.\n\nWhen this move hits, the range is extended."
+          "descriptionAdvanced": "The user lets out a mighty roar in the designated direction dealing damage and applying a fear effect for 1s. Pokémon under the fear effect walk towards the center edge of the cone.\n\nWhen this move hits, the range is extended.",
+          "videoAsset": "/assets/skills/Skeledirge/Roar.mp4"
         },
         {
           "id": "snarl",
@@ -45865,7 +45901,8 @@
           "isUpgrade": true,
           "moveType": "Area",
           "upgradeLevel": 7,
-          "descriptionAdvanced": "The user snarls incessantly, dealing damage and applying a fear effect for 0.5s. Pokémon under the fear effect walk in the direction the user snarled toward. For 2.5s opposing Pokémon hit by this move deal 20% less damage to the user.\n\nWhen this move hits, the range is extended.\n\nUpgrade (Level 13): Increases the damage debuff to 30%."
+          "descriptionAdvanced": "The user snarls incessantly, dealing damage and applying a fear effect for 0.5s. Pokémon under the fear effect walk in the direction the user snarled toward. For 2.5s opposing Pokémon hit by this move deal 20% less damage to the user.\n\nWhen this move hits, the range is extended.\n\nUpgrade (Level 13): Increases the damage debuff to 30%.",
+          "videoAsset": "/assets/skills/Skeledirge/Snarl.mp4"
         },
         {
           "id": "rousing-symphony",
@@ -45888,7 +45925,8 @@
           ],
           "moveType": "Ranged",
           "iconAsset": "/assets/skills/Skeledirge/Rousing+Symphony.png",
-          "descriptionAdvanced": "The user vitalizes nearby allies and themself, increasing their damage by 15% for 6s. Afterward, the user unleashes a fiery bird in the designated direction, the range of which stretches across the whole arena.\n\nThis move can be aimed for up to 10s before it needs to be reselected. While aiming the field of view is increased greatly."
+          "descriptionAdvanced": "The user vitalizes nearby allies and themself, increasing their damage by 15% for 6s. Afterward, the user unleashes a fiery bird in the designated direction, the range of which stretches across the whole arena.\n\nThis move can be aimed for up to 10s before it needs to be reselected. While aiming the field of view is increased greatly.",
+          "videoAsset": "/assets/skills/Skeledirge/Rousing+Symphony.mp4"
         }
       ],
       "passiveAbility": {
@@ -48870,7 +48908,8 @@
           ],
           "moveType": "Melee",
           "iconAsset": "/assets/skills/Talonflame/Peck.png",
-          "descriptionAdvanced": "The user dashes at the designated opposing Pokémon then pecks three times, damaging opposing Pokémon hit."
+          "descriptionAdvanced": "The user dashes at the designated opposing Pokémon then pecks three times, damaging opposing Pokémon hit.",
+          "videoAsset": "/assets/skills/Talonflame/Peck.mp4"
         },
         {
           "id": "flame-charge",
@@ -48896,7 +48935,8 @@
           "moveType": "Dash",
           "upgradeLevel": 5,
           "descriptionAdvanced": "The user dashes forward cloaked in flame, damaging opposing Pokémon in their path and increasing the user's movement speed by 30% for 2.5s if it hits.\n\nUpgrade (Level 11): Increases the user's Defense penetration for 3s and reduces the movement speed of opposing Pokémon in the user's path by 30% for 5s if this move hits.",
-          "gifAsset": "/assets/skills/Talonflame/Flame+Charge.webp"
+          "gifAsset": "/assets/skills/Talonflame/Flame+Charge.webp",
+          "videoAsset": "/assets/skills/Talonflame/Flame+Charge.mp4"
         },
         {
           "id": "aerial-ace",
@@ -48929,7 +48969,8 @@
           "moveType": "Dash",
           "upgradeLevel": 5,
           "descriptionAdvanced": "The user readies a boosted attack and dashes through the designated opposing Pokémon with a swift attack, damaging opposing Pokémon in the area of effect around the user and restoring the user's HP when it hits.\n\nUpgrade (Level 11): Increases the damage of this move.",
-          "gifAsset": "/assets/skills/Talonflame/Aerial+Ace.webp"
+          "gifAsset": "/assets/skills/Talonflame/Aerial+Ace.webp",
+          "videoAsset": "/assets/skills/Talonflame/Aerial+Ace.mp4"
         },
         {
           "id": "acrobatics",
@@ -48953,7 +48994,8 @@
           "moveType": "Dash",
           "iconAsset": "/assets/skills/Talonflame/Acrobatics.png",
           "descriptionAdvanced": "The user dashes toward the designated location then attacks the area around them three times, damaging nearby opposing Pokémon.\n\nThe user can choose to dash in the direction of movement afterward.",
-          "gifAsset": "/assets/skills/Talonflame/Acrobatics.webp"
+          "gifAsset": "/assets/skills/Talonflame/Acrobatics.webp",
+          "videoAsset": "/assets/skills/Talonflame/Acrobatics.mp4"
         },
         {
           "id": "fly",
@@ -48979,7 +49021,8 @@
           "moveType": "Dash",
           "upgradeLevel": 7,
           "descriptionAdvanced": "The user readies a boosted attack and flies up into the sky for up to 3s, becoming untargetable and increasing their movement speed by 65%. When this move is used again, or after 3s, the user dives at the designated location, damaging opposing Pokémon in the area of effect.\n\nIf this move hits a Pokémon from the opposing team, the current cooldown of this move is reduced by 40%.\n\nUpgrade (Level 13): Throws opposing Pokémon hit for 0.4s.",
-          "gifAsset": "/assets/skills/Talonflame/Fly.webp"
+          "gifAsset": "/assets/skills/Talonflame/Fly.webp",
+          "videoAsset": "/assets/skills/Talonflame/Fly.mp4"
         },
         {
           "id": "brave-bird",
@@ -49005,7 +49048,8 @@
           "moveType": "Dash",
           "upgradeLevel": 7,
           "descriptionAdvanced": "The user becomes unstoppable and dives at the designated location, damaging opposing Pokémon in the area of effect when they land and receiving 5% remaining HP recoil damage if it hits.\n\nOpposing Pokémon hit by this move are marked for 4s. If the user hits a marked target with a boosted attack, the cooldown of Flame Charge or Aerial Ace is reset and the mark on the first target hit is removed.\n\nUpgrade (Level 13): Reduces damage received by 25% per opposing Pokémon hit for 5s (up to 3 times; maximum 75%).",
-          "gifAsset": "/assets/skills/Talonflame/Brave+Bird.webp"
+          "gifAsset": "/assets/skills/Talonflame/Brave+Bird.webp",
+          "videoAsset": "/assets/skills/Talonflame/Brave+Bird.mp4"
         },
         {
           "id": "flame-sweep",
@@ -49028,7 +49072,8 @@
           ],
           "moveType": "Dash",
           "iconAsset": "/assets/skills/Talonflame/Flame+Sweep.png",
-          "descriptionAdvanced": "The user performs an aerial somersault and sweeps forward, becoming unstoppable, receiving 50% reduced damage, damaging opposing Pokémon in their path and shoving them toward the end of the sweep, then damaging opposing Pokémon again. This Unite Move cannot go through walls."
+          "descriptionAdvanced": "The user performs an aerial somersault and sweeps forward, becoming unstoppable, receiving 50% reduced damage, damaging opposing Pokémon in their path and shoving them toward the end of the sweep, then damaging opposing Pokémon again. This Unite Move cannot go through walls.",
+          "videoAsset": "/assets/skills/Talonflame/Flame+Sweep.mp4"
         }
       ],
       "passiveAbility": {

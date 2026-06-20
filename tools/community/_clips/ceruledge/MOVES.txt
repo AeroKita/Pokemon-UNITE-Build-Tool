@@ -1,0 +1,10 @@
+Ceruledge  —  drop each file here as <move-id>.mp4
+Scope: Base + Final + Unite moves (no passive).
+
+  lava-plume.mp4   →  Lava Plume   [Move 1 · Base]
+  bitter-blade.mp4   →  Bitter Blade (Lv 5)   [Move 1 · Final]
+  psycho-cut.mp4   →  Psycho Cut (Lv 5)   [Move 1 · Final]
+  take-down.mp4   →  Take Down   [Move 2 · Base]
+  phantom-force.mp4   →  Phantom Force (Lv 7)   [Move 2 · Final]
+  flame-charge.mp4   →  Flame Charge (Lv 7)   [Move 2 · Final]
+  revenant-rend.mp4   →  Revenant Rend   [Unite · Unite]

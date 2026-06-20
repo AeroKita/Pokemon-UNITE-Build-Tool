@@ -1,0 +1,10 @@
+Trevenant  —  drop each file here as <move-id>.mp4
+Scope: Base + Final + Unite moves (no passive).
+
+  will-o-wisp.mp4   →  Will-o-Wisp   [Move 1 · Base]
+  wood-hammer.mp4   →  Wood Hammer (Lv 5)   [Move 1 · Final]
+  curse.mp4   →  Curse (Lv 5)   [Move 1 · Final]
+  branch-poke.mp4   →  Branch Poke   [Move 2 · Base]
+  horn-leech.mp4   →  Horn Leech (Lv 7)   [Move 2 · Final]
+  pain-split.mp4   →  Pain Split (Lv 7)   [Move 2 · Final]
+  phantom-forest.mp4   →  Phantom Forest   [Unite · Unite]

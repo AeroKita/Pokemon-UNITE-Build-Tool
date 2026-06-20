@@ -1,0 +1,10 @@
+Meowth  —  drop each file here as <move-id>.mp4
+Scope: Base + Final + Unite moves (no passive).
+
+  scratch.mp4   →  Scratch   [Move 1 · Base]
+  pay-day.mp4   →  Pay Day (Lv 5)   [Move 1 · Final]
+  fury-swipes.mp4   →  Fury Swipes (Lv 5)   [Move 1 · Final]
+  feint.mp4   →  Feint   [Move 2 · Base]
+  feint-attack.mp4   →  Feint Attack (Lv 7)   [Move 2 · Final]
+  assurance.mp4   →  Assurance (Lv 7)   [Move 2 · Final]
+  gold-coin-barrage.mp4   →  Gold Coin Barrage   [Unite · Unite]

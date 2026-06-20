@@ -1,0 +1,10 @@
+Falinks  —  drop each file here as <move-id>.mp4
+Scope: Base + Final + Unite moves (no passive).
+
+  tackle.mp4   →  Tackle   [Move 1 · Base]
+  megahorn.mp4   →  Megahorn (Lv 4)   [Move 1 · Final]
+  iron-head.mp4   →  Iron Head (Lv 4)   [Move 1 · Final]
+  bulk-up.mp4   →  Bulk Up   [Move 2 · Base]
+  no-retreat.mp4   →  No Retreat (Lv 6)   [Move 2 · Final]
+  beat-up.mp4   →  Beat Up (Lv 6)   [Move 2 · Final]
+  dust-devil-formation.mp4   →  Dust Devil Formation   [Unite · Unite]

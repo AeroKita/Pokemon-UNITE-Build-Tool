@@ -1,0 +1,10 @@
+Leafeon  —  drop each file here as <move-id>.mp4
+Scope: Base + Final + Unite moves (no passive).
+
+  swift.mp4   →  Swift   [Move 1 · Base]
+  razor-leaf.mp4   →  Razor Leaf (Lv 4)   [Move 1 · Final]
+  solar-blade.mp4   →  Solar Blade (Lv 4)   [Move 1 · Final]
+  quick-attack.mp4   →  Quick Attack   [Move 2 · Base]
+  aerial-ace.mp4   →  Aerial Ace (Lv 6)   [Move 2 · Final]
+  leaf-blade.mp4   →  Leaf Blade (Lv 6)   [Move 2 · Final]
+  emerald-two-step.mp4   →  Emerald Two-Step   [Unite · Unite]

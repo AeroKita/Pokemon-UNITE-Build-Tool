@@ -1,0 +1,10 @@
+Mew  —  drop each file here as <move-id>.mp4
+Scope: Base + Final + Unite moves (no passive).
+
+  electro-ball.mp4   →  Electro Ball   [Move 1 · Base]
+  solar-beam.mp4   →  Solar Beam (Lv 1)   [Move 1 · Final]
+  surf.mp4   →  Surf (Lv 1)   [Move 1 · Final]
+  coaching.mp4   →  Coaching   [Move 2 · Base]
+  light-screen.mp4   →  Light Screen (Lv 3)   [Move 2 · Final]
+  agility.mp4   →  Agility (Lv 3)   [Move 2 · Final]
+  mystical-mirage.mp4   →  Mystical Mirage   [Unite · Unite]

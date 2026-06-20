@@ -1,0 +1,11 @@
+Blaziken  —  drop each file here as <move-id>.mp4
+Scope: Base + Final + Unite moves (no passive).
+
+  aerial-ace.mp4   →  Aerial Ace   [Move 1 · Base]
+  fire-punch.mp4   →  Fire Punch (Lv 7)   [Move 1 · Final]
+  overheat.mp4   →  Overheat (Lv 7)   [Move 1 · Final]
+  ember.mp4   →  Ember   [Move 2 · Base]
+  focus-blast.mp4   →  Focus Blast (Lv 5)   [Move 2 · Final]
+  blaze-kick.mp4   →  Blaze Kick (Lv 5)   [Move 2 · Final]
+  spinning-flame-fist.mp4   →  Spinning Flame Fist   [Unite · Unite]
+  spinning-flame-kick.mp4   →  Spinning Flame Kick   [Unite · Unite]

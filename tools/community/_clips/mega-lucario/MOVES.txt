@@ -1,0 +1,8 @@
+Mega Lucario  —  drop each file here as <move-id>.mp4
+Scope: Base + Final + Unite moves (no passive).
+
+  quick-attack.mp4   →  Quick Attack   [Move 1 · Base]
+  power-up-punch.mp4   →  Power-Up Punch (Lv 5)   [Move 1 · Final]
+  meteor-mash.mp4   →  Meteor Mash   [Move 2 · Base]
+  close-combat.mp4   →  Close Combat (Lv 7)   [Move 2 · Final]
+  aura-cannon.mp4   →  Aura Cannon   [Unite · Unite]

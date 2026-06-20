@@ -1,0 +1,10 @@
+Mega Mewtwo Y  —  drop each file here as <move-id>.mp4
+Scope: Base + Final + Unite moves (no passive).
+
+  confusion.mp4   →  Confusion   [Move 1 · Base]
+  future-sight.mp4   →  Future Sight (Lv 5)   [Move 1 · Final]
+  psystrike.mp4   →  Psystrike (Lv 5)   [Move 1 · Final]
+  barrier.mp4   →  Barrier   [Move 2 · Base]
+  recover.mp4   →  Recover (Lv 7)   [Move 2 · Final]
+  teleport.mp4   →  Teleport (Lv 7)   [Move 2 · Final]
+  infinite-psyburn.mp4   →  Infinite Psyburn   [Unite · Unite]

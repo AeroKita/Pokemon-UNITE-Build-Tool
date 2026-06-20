@@ -1,0 +1,10 @@
+Mimikyu  —  drop each file here as <move-id>.mp4
+Scope: Base + Final + Unite moves (no passive).
+
+  astonish.mp4   →  Astonish   [Move 1 · Base]
+  play-rough.mp4   →  Play Rough (Lv 5)   [Move 1 · Final]
+  shadow-claw.mp4   →  Shadow Claw (Lv 5)   [Move 1 · Final]
+  scratch.mp4   →  Scratch   [Move 2 · Base]
+  shadow-sneak.mp4   →  Shadow Sneak (Lv 7)   [Move 2 · Final]
+  trick-room.mp4   →  Trick Room (Lv 7)   [Move 2 · Final]
+  play-with-me.mp4   →  Play With Me...   [Unite · Unite]
