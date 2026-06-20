@@ -1,6 +1,6 @@
 {
   "_source": "self-recorded (Nintendo Switch 2)",
-  "_spec": "320x180 h264 crf28 30fps muted",
+  "_spec": "crop 125/125/100/100 -> 320w h264 crf28 30fps muted",
   "clips": {
     "absol": {
       "feint": "/assets/skills/Absol/Feint.mp4",

@@ -28,10 +28,19 @@ CLIPS = HERE / "_clips"
 PUBLIC = PROJECT / "public" / "assets"
 OUT = HERE / "move_clips.json"
 
-# Proven spec (validated on Talonflame Fly): 16:9 to match the media box, muted,
-# 30fps, CRF 28 -> ~90 KB for a ~5s clip. Looping is a <video> attribute, not baked in.
-WIDTH, HEIGHT, FPS, CRF = 320, 180, 30, 28
-VF = f"scale={WIDTH}:{HEIGHT}:flags=lanczos,fps={FPS}"
+# Crop past the HUD to zoom onto the Pokémon (technique + values from
+# crop_videos.py, tuned for 1280x720 Switch captures): drop CROP_LEFT/RIGHT px
+# from the sides and CROP_TOP/BOTTOM px from top/bottom -> a 1030x520 centered
+# region. That's ~1.98:1 (not 16:9), so we fix the WIDTH and let height follow
+# (scale=WIDTH:-2). Output stays muted H.264 MP4 at CRF 28 / 30 fps; looping is a
+# <video> attribute, not baked in.
+CROP_LEFT = CROP_RIGHT = 125
+CROP_TOP = CROP_BOTTOM = 100
+WIDTH, FPS, CRF = 320, 30, 28
+VF = (
+    f"crop=iw-{CROP_LEFT + CROP_RIGHT}:ih-{CROP_TOP + CROP_BOTTOM}:{CROP_LEFT}:{CROP_TOP},"
+    f"scale={WIDTH}:-2:flags=lanczos,setsar=1,fps={FPS}"
+)
 
 
 def move_index(bundle: dict) -> dict:
@@ -97,7 +106,7 @@ def main() -> None:
 
     OUT.write_text(json.dumps(
         {"_source": "self-recorded (Nintendo Switch 2)",
-         "_spec": f"{WIDTH}x{HEIGHT} h264 crf{CRF} {FPS}fps muted",
+         "_spec": f"crop {CROP_LEFT}/{CROP_RIGHT}/{CROP_TOP}/{CROP_BOTTOM} -> {WIDTH}w h264 crf{CRF} {FPS}fps muted",
          "clips": manifest}, indent=2, ensure_ascii=False) + "\n")
     total = sum(len(v) for v in manifest.values())
     print(f"transcoded {done}, skipped {skipped} (up-to-date), failed {failed}")

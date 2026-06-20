@@ -4,8 +4,8 @@ import { asset } from "../ui/asset";
 type Stage = "video" | "gif" | "icon" | "none";
 
 /** Tooltip visual below the text: self-recorded clip if present, else the animated
- *  WebP, else the static icon, else nothing. Clips are 16:9 and the icon is square —
- *  both contained in one fixed media box so layout stays stable. */
+ *  WebP, else the static icon, else nothing. Clips are cropped landscape (~2:1) and
+ *  the icon is square — both contained in one fixed media box so layout stays stable. */
 export function MoveMedia({
   videoAsset,
   gifAsset,
