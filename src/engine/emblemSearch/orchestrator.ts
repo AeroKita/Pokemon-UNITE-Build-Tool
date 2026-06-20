@@ -16,7 +16,7 @@ import { searchColorExactParallel } from "./exactParallel";
 import { runHeuristic } from "./heuristic";
 import { runHeuristicParallel } from "./heuristicParallel";
 import { candidatesToEmblemSlots } from "./pokemonScore";
-import { countConstrainedBuilds, formatBuildCount } from "./pool";
+import { countExactEnumerationSpace, formatBuildCount } from "./pool";
 
 export const DEFAULT_EXACT_CAP = 1_000_000_000;
 
@@ -121,7 +121,13 @@ export async function runSearch(
   let willRunExact = false;
 
   if (hasColorConstraints) {
-    constrainedCount = countConstrainedBuilds(pool, options.colorConstraints!, slots);
+    const enumerateGrades = options.enumerateGradeVariants ?? false;
+    constrainedCount = countExactEnumerationSpace(
+      pool,
+      options.colorConstraints!,
+      slots,
+      enumerateGrades,
+    );
     willRunExact = shouldRunExact(constrainedCount, capValue);
   }
 

@@ -3,7 +3,7 @@ import {
   concreteBonusDelta,
   type ColorBonusPreviewItem,
 } from "../../../engine/emblemSearch/colorBonusPreview";
-import { formatBuildCount } from "../../../engine/emblemSearch/pool";
+import { formatBuildCount, matchingBuildDisplayCount } from "../../../engine/emblemSearch/pool";
 import type { ResolvedEmblemPreset } from "../../../engine/emblemSearch/optimizerPresets";
 import type { EmblemColor } from "../../../types";
 import { CollapsibleCard } from "../../CollapsibleCard";
@@ -33,6 +33,7 @@ export interface ColorCardProps {
   colorConstraintValid: boolean;
   totalColorConstrained: number;
   constrainedBuildCount: bigint | null;
+  exactEnumerationCount: bigint | null;
   willRunExact: boolean;
   buildCount: bigint;
   colorBonusPreviews: ColorBonusPreviewItem[];
@@ -52,6 +53,7 @@ export function ColorCard({
   colorConstraintValid,
   totalColorConstrained,
   constrainedBuildCount,
+  exactEnumerationCount,
   willRunExact,
   buildCount,
   colorBonusPreviews,
@@ -192,29 +194,37 @@ export function ColorCard({
               <p className="text-xs text-faint">No set-bonus tier reached at these counts.</p>
             )}
 
-            {colorMode === "exact" && colorConstraintValid && (
-              <div className="text-xs text-muted">
-                {constrainedBuildCount === null ? (
-                  "Matching builds: too many to count."
-                ) : constrainedBuildCount === 0n ? (
-                  <span className="text-neg">
-                    Matching builds: 0 — no combination hits these exact counts.
-                  </span>
-                ) : (
-                  <>
-                    Matching builds:{" "}
-                    <span className="font-medium text-ink">
-                      {formatBuildCount(constrainedBuildCount)}
-                    </span>{" "}
-                    {willRunExact ? (
-                      <span className="text-pos">· Exact search</span>
+            {colorMode === "exact" &&
+              colorConstraintValid &&
+              (() => {
+                const matchingBuildCount = matchingBuildDisplayCount(
+                  exactEnumerationCount,
+                  constrainedBuildCount,
+                );
+                return (
+                  <div className="text-xs text-muted">
+                    {matchingBuildCount === null ? (
+                      "Matching builds: too many to count."
+                    ) : matchingBuildCount === 0n ? (
+                      <span className="text-neg">
+                        Matching builds: 0 — no combination hits these exact counts.
+                      </span>
                     ) : (
-                      <span className="text-muted">· Smart search (above cap)</span>
+                      <>
+                        Matching builds:{" "}
+                        <span className="font-medium text-ink">
+                          {formatBuildCount(matchingBuildCount)}
+                        </span>{" "}
+                        {willRunExact ? (
+                          <span className="text-pos">· Exact search</span>
+                        ) : (
+                          <span className="text-muted">· Smart search (above cap)</span>
+                        )}
+                      </>
                     )}
-                  </>
-                )}
-              </div>
-            )}
+                  </div>
+                );
+              })()}
             {colorMode === "weighted" && activeColors.size > 0 && (
               <div className="text-xs text-muted">
                 Pool size:{" "}

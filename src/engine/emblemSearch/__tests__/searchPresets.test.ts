@@ -532,6 +532,28 @@ describe("deriveAdvancedColorUiDefaults", () => {
     expect(defaults.activeColors).toHaveLength(0);
     expect(defaults.colorCounts.size).toBe(0);
   });
+
+  it("[PRE-UI-5] full dataset → exact; sparse owned pool → weighted for same Pokémon", () => {
+    const pokemon = pokemonById.get("pikachu")!;
+    const resolved = resolveEmblemPreset(pokemon);
+    const targets = resolved
+      ? presetColorTargets(resolved.preset)
+      : colorTargetsFor(pokemon, emblemById);
+    expect(targets.size).toBeGreaterThan(0);
+
+    const fullDefaults = deriveAdvancedColorUiDefaults(pokemon, fullPool, emblems);
+    expect(fullDefaults.colorMode).toBe("exact");
+
+    // Simulate a sparse owned collection: only a handful of emblems marked owned.
+    const sparseOwned = new Set(emblems.slice(0, 8).map((e) => e.id));
+    const ownedPool = buildPool(
+      emblems,
+      { useOwned: true, mixedGrades: true, allowedGrades: new Set(DEFAULT_ALLOWED_GRADES) },
+      sparseOwned,
+    );
+    const ownedDefaults = deriveAdvancedColorUiDefaults(pokemon, ownedPool, emblems);
+    expect(ownedDefaults.colorMode).toBe("weighted");
+  });
 });
 
 describe("resolveBasicSearchParams", () => {

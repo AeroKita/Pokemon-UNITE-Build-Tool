@@ -18,7 +18,7 @@
 import type { Emblem, EmblemColor, Pokemon } from "../../types";
 import { colorTargetsFor } from "../recommend";
 import { colorGroupSizes } from "./exactColor";
-import { countConstrainedBuilds } from "./pool";
+import { countConstrainedBuilds, countExactEnumerationSpace } from "./pool";
 import { DEFAULT_EXACT_CAP, shouldRunExact } from "./orchestrator";
 import { deriveBasicObjective, type BasicObjective } from "./basicObjective";
 import { presetColorTargets, resolveEmblemPreset } from "./optimizerPresets";
@@ -124,16 +124,21 @@ export interface ColorSearchResolution {
   /** Hard color constraints when mode==="exact"; null when mode==="weighted". */
   colorConstraints: Map<EmblemColor, number> | null;
   /**
-   * Result of countConstrainedBuilds on the pool for these targets:
+   * Grade-aware loadout count from countConstrainedBuilds (UI display).
    *  • bigint > 0n → that many color-feasible builds exist.
    *  • 0n → infeasible on this pool.
    *  • null → DP overflow (too many to count) OR targets not enforceable.
    */
   constrainedBuildCount: bigint | null;
   /**
+   * Pokémon-name enumeration space from countExactEnumerationSpace — what
+   * exactColor actually iterates (aligned with kPrefix / parallel shards).
+   */
+  exactEnumerationCount: bigint | null;
+  /**
    * Whether the orchestrator will actually run exact enumeration for this
-   * resolution under DEFAULT_EXACT_CAP. False when weighted, when the count
-   * overflowed (null), or when the count exceeds the cap → heuristic fallback.
+   * resolution under DEFAULT_EXACT_CAP. False when weighted, when the enum
+   * count overflowed (null), or when it exceeds the cap → heuristic fallback.
    */
   willRunExact: boolean;
 }
@@ -157,11 +162,13 @@ export function resolveColorSearchMode(
   pool: EmblemCandidate[],
   targets: Map<EmblemColor, number>,
   slots: number = SLOTS,
+  enumerateGradeVariants = false,
 ): ColorSearchResolution {
   const weighted = (constrainedBuildCount: bigint | null): ColorSearchResolution => ({
     mode: "weighted",
     colorConstraints: null,
     constrainedBuildCount,
+    exactEnumerationCount: null,
     willRunExact: false,
   });
 
@@ -176,19 +183,26 @@ export function resolveColorSearchMode(
   if (sum > 2 * slots || !capacityOk) return weighted(null);
 
   const constrainedBuildCount = countConstrainedBuilds(pool, targets, slots);
+  const exactEnumerationCount = countExactEnumerationSpace(
+    pool,
+    targets,
+    slots,
+    enumerateGradeVariants,
+  );
 
   // 0n → no build can satisfy the exact counts → soft steering only.
   if (constrainedBuildCount === 0n) return weighted(0n);
 
   // Feasible (count > 0n) OR DP overflow (null). Both set the constraints as
   // hard targets — exactly as Expert did. The orchestrator then decides exact
-  // vs heuristic via shouldRunExact: a null count (overflow) or a count above
-  // the cap falls back to the heuristic automatically.
+  // vs heuristic via shouldRunExact on the name-only enum space (not the
+  // grade-inflated display count).
   return {
     mode: "exact",
     colorConstraints: new Map(targets),
     constrainedBuildCount,
-    willRunExact: shouldRunExact(constrainedBuildCount, DEFAULT_EXACT_CAP),
+    exactEnumerationCount,
+    willRunExact: shouldRunExact(exactEnumerationCount, DEFAULT_EXACT_CAP),
   };
 }
 
@@ -259,6 +273,8 @@ export interface BuildPresetParams {
    * to {@link DEFAULT_EXACT_CAP}.
    */
   exactCap?: number;
+  /** When true, exact search enumerates all grade combos per name set. */
+  enumerateGradeVariants?: boolean;
 }
 
 export interface PresetSearchBuild {
@@ -287,6 +303,7 @@ export function buildPresetSearchOptions(params: BuildPresetParams): PresetSearc
     pokemonList = [],
     forceHeuristic = false,
     exactCap = DEFAULT_EXACT_CAP,
+    enumerateGradeVariants = false,
   } = params;
   const resolved = resolveEmblemPreset(pokemon);
   const objective = deriveBasicObjective(
@@ -297,7 +314,7 @@ export function buildPresetSearchOptions(params: BuildPresetParams): PresetSearc
     resolved?.preset ?? null,
   );
   const targets = objective.colorTargets as Map<EmblemColor, number>;
-  const resolution = resolveColorSearchMode(pool, targets, SLOTS);
+  const resolution = resolveColorSearchMode(pool, targets, SLOTS, enumerateGradeVariants);
 
   // forceHeuristic drops hard constraints only when the caller signals the user
   // deliberately skipped exact while enumeration was feasible; colorBonuses
@@ -316,6 +333,7 @@ export function buildPresetSearchOptions(params: BuildPresetParams): PresetSearc
     pokemonContext: objective.pokemonContext,
     slots: SLOTS,
     exactCap,
+    enumerateGradeVariants,
   };
 
   return { options, resolution, objective };

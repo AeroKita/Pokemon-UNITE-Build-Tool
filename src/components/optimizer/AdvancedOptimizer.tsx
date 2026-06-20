@@ -50,6 +50,7 @@ export function AdvancedOptimizer({
     setUseOwned,
     mixedGrades,
     setMixedGrades,
+    enumerateGradeVariants,
     mode,
     setMode,
     effort,
@@ -82,6 +83,7 @@ export function AdvancedOptimizer({
     colorConstraints,
     colorConstraintValid,
     constrainedBuildCount,
+    exactEnumerationCount,
     willRunExact,
     colorCapacities,
     totalColorConstrained,
@@ -142,6 +144,7 @@ export function AdvancedOptimizer({
         setUseOwned={setUseOwned}
         mixedGrades={mixedGrades}
         setMixedGrades={setMixedGrades}
+        enumerateGradeVariants={enumerateGradeVariants}
         allowedGrades={allowedGrades}
         setAllowedGrades={setAllowedGrades}
         buildCount={buildCount}
@@ -151,6 +154,7 @@ export function AdvancedOptimizer({
         colorConstraints={colorConstraints}
         colorConstraintValid={colorConstraintValid}
         constrainedBuildCount={constrainedBuildCount}
+        exactEnumerationCount={exactEnumerationCount}
         willRunExact={willRunExact}
       />
 
@@ -186,6 +190,7 @@ export function AdvancedOptimizer({
         colorConstraintValid={colorConstraintValid}
         totalColorConstrained={totalColorConstrained}
         constrainedBuildCount={constrainedBuildCount}
+        exactEnumerationCount={exactEnumerationCount}
         willRunExact={willRunExact}
         buildCount={buildCount}
         colorBonusPreviews={colorBonusPreviews}

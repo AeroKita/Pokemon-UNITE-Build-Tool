@@ -111,11 +111,20 @@ export interface SearchOptions {
   /**
    * Maximum number of color-feasible builds to enumerate in the exact
    * color-constrained search before falling back to the heuristic.
-   * Measured against countConstrainedBuilds (same metric as uniteemblemfinder's
-   * COLOR_EXACT_CAP). Defaults to 1_000_000_000 when omitted.
-   * Only relevant when colorConstraints is non-null.
+   * Measured against the exact enumeration space (Pokémon-name combos when
+   * enumerateGradeVariants is false; grade-aware loadouts when true).
+   * Defaults to 1_000_000_000 when omitted. Only relevant when
+   * colorConstraints is non-null.
    */
   exactCap?: number;
+
+  /**
+   * When true, exact search enumerates every grade assignment for each valid
+   * 10-name combo (product of variant counts). When false, one grade per name
+   * is chosen via bestVariantForMode (fast path). Full-dataset searches should
+   * default to true (mixed grades UI toggle, on by default for owned and full pools).
+   */
+  enumerateGradeVariants?: boolean;
 }
 
 // ---------------------------------------------------------------------------

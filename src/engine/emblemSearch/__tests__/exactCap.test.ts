@@ -3,8 +3,8 @@
  *
  * Invariants:
  *  [CAP-1] DEFAULT_EXACT_CAP is 1_000_000_000 (mirrors uniteemblemfinder's COLOR_EXACT_CAP).
- *  [CAP-2] constrainedBuildCount ≤ exactCap → exact.
- *  [CAP-3] constrainedBuildCount > exactCap → heuristic.
+ *  [CAP-2] exactEnumerationCount ≤ exactCap → exact.
+ *  [CAP-3] exactEnumerationCount > exactCap → heuristic.
  *  [CAP-4] constrainedBuildCount is null (DP overflow) → heuristic.
  *  [CAP-5] constrainedBuildCount is 0n (infeasible) → heuristic.
  *  [CAP-7] Custom exactCap respected — lowering can flip exact→heuristic.
@@ -16,7 +16,7 @@
 
 import { describe, it, expect } from "vitest";
 import { DEFAULT_EXACT_CAP, shouldRunExact, runSearch } from "../orchestrator";
-import { countConstrainedBuilds } from "../pool";
+import { countExactEnumerationSpace } from "../pool";
 import { makeEmblem } from "../../__tests__/fixtures";
 import { buildCandidatePool } from "../adapt";
 import type { EmblemCandidate, SearchOptions } from "../types";
@@ -70,7 +70,7 @@ describe("exactCap gating — shouldRunExact", () => {
     // 15 brown + 10 green = 25 Pokémon; target 3 brown → C(15,3)*C(10,7)=54,600 builds.
     const pool = [...singles(15, "brown", "B"), ...singles(10, "green", "G")];
     const targets = new Map<string, number>([["brown", 3]]);
-    const count = countConstrainedBuilds(pool, targets as never);
+    const count = countExactEnumerationSpace(pool, targets as never);
     expect(count).not.toBeNull();
     expect(count! > 0n).toBe(true);
     expect(shouldRunExact(count, DEFAULT_EXACT_CAP)).toBe(true);
@@ -79,7 +79,7 @@ describe("exactCap gating — shouldRunExact", () => {
   it("[CAP-3] count > cap → heuristic (custom low cap)", () => {
     const pool = [...singles(15, "brown", "B"), ...singles(10, "green", "G")];
     const targets = new Map<string, number>([["brown", 3]]);
-    const count = countConstrainedBuilds(pool, targets as never);
+    const count = countExactEnumerationSpace(pool, targets as never);
     expect(count).not.toBeNull();
     expect(count! > 1n).toBe(true);
     // cap=1 → 54,600 > 1 → heuristic
@@ -89,7 +89,7 @@ describe("exactCap gating — shouldRunExact", () => {
   it("[CAP-3] same pool, higher custom cap → exact", () => {
     const pool = [...singles(15, "brown", "B"), ...singles(10, "green", "G")];
     const targets = new Map<string, number>([["brown", 3]]);
-    const count = countConstrainedBuilds(pool, targets as never);
+    const count = countExactEnumerationSpace(pool, targets as never);
     expect(count).not.toBeNull();
     expect(shouldRunExact(count, 1_000_000)).toBe(true);
   });
@@ -118,7 +118,7 @@ describe("custom exactCap", () => {
   it("[CAP-7] lowering cap to 1 prevents exact for any non-trivial pool", () => {
     const pool = [...singles(15, "brown", "B"), ...singles(10, "green", "G")];
     const targets = new Map<string, number>([["brown", 3]]);
-    const count = countConstrainedBuilds(pool, targets as never)!;
+    const count = countExactEnumerationSpace(pool, targets as never)!;
     expect(count > 1n).toBe(true);
     expect(shouldRunExact(count, 1)).toBe(false);
   });
@@ -138,7 +138,7 @@ describe("custom exactCap", () => {
 });
 
 // ---------------------------------------------------------------------------
-// countConstrainedBuilds + cap — decision helper end-to-end
+// countExactEnumerationSpace + cap — decision helper end-to-end
 // ---------------------------------------------------------------------------
 
 describe("end-to-end: constrained count drives cap decision", () => {
@@ -148,7 +148,7 @@ describe("end-to-end: constrained count drives cap decision", () => {
       ["brown", 5],
       ["green", 5],
     ]);
-    const count = countConstrainedBuilds(pool, targets as never);
+    const count = countExactEnumerationSpace(pool, targets as never);
     expect(count).toBe(1n);
     expect(shouldRunExact(count, DEFAULT_EXACT_CAP)).toBe(true);
     expect(shouldRunExact(count, 1)).toBe(true); // count=1 ≤ cap=1
@@ -227,7 +227,7 @@ describe("[CAP-11] exact runs on pool with >40 distinct Pokémon", () => {
       ["brown", 2],
       ["green", 8],
     ]);
-    const count = countConstrainedBuilds(pool, targets as never);
+    const count = countExactEnumerationSpace(pool, targets as never);
     // Count = C(30,2)*C(11,8) = 435*165 = 71,775
     expect(count).not.toBeNull();
     expect(count!).toBe(71_775n);

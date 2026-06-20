@@ -14,7 +14,9 @@
  *  4. searchColorExact — thin wrapper: builds groups + k-vectors, calls
  *     searchColorExactSlice over the full range.
  *
- * Total enumerated = sum_kVec prod_g C(n_g, k[g]) = countConstrainedBuilds.
+ * Total enumerated = sum_kVec prod_g C(n_g, k[g]) when enumerateGradeVariants
+ * is false; multiplied by grade-variant products per name combo when true.
+ * Grade fast path resolves one variant via bestVariantForMode per name combo.
  * No pool-size gate — bounded by constrained count vs exactCap.
  *
  * Provenance: clean-room TypeScript port of uniteemblemfinder.github.io (AGPL).
@@ -265,6 +267,182 @@ function nextCombo(idx: number[], k: number, n: number): boolean {
   return true;
 }
 
+function assembleNames(groups: ColorGroup[], k: number[], idxs: number[][]): string[] {
+  const names: string[] = [];
+  for (let gi = 0; gi < groups.length; gi++) {
+    if (k[gi] === 0) continue;
+    const gnames = groups[gi].names;
+    for (const t of idxs[gi]) names.push(gnames[t]);
+  }
+  return names;
+}
+
+function variantProductForNames(
+  names: string[],
+  variantsByName: Map<string, EmblemCandidate[]>,
+): number {
+  let product = 1;
+  for (const name of names) product *= variantsByName.get(name)!.length;
+  return product;
+}
+
+function unrankGradeIndices(
+  names: string[],
+  variantsByName: Map<string, EmblemCandidate[]>,
+  rank: number,
+): number[] {
+  const counts = names.map((name) => variantsByName.get(name)!.length);
+  const indices = Array.from({ length: names.length }, () => 0);
+  let r = rank;
+  for (let i = names.length - 1; i >= 0; i--) {
+    indices[i] = r % counts[i];
+    r = Math.floor(r / counts[i]);
+  }
+  return indices;
+}
+
+function nextGradeIndices(
+  indices: number[],
+  names: string[],
+  variantsByName: Map<string, EmblemCandidate[]>,
+): boolean {
+  for (let i = indices.length - 1; i >= 0; i--) {
+    const max = variantsByName.get(names[i])!.length;
+    indices[i]++;
+    if (indices[i] < max) return true;
+    indices[i] = 0;
+  }
+  return false;
+}
+
+/**
+ * Prefix sums of evaluation counts per k-vector when grade variants are
+ * enumerated. evalPrefix[j] = global start index of k-vector j;
+ * evalPrefix[kVectors.length] = total evaluations.
+ */
+export function computeGradeAwareKPrefix(
+  groups: ColorGroup[],
+  sizes: number[],
+  kVectors: number[][],
+  variantsByName: Map<string, EmblemCandidate[]>,
+): number[] {
+  const G = groups.length;
+  const prefix = [0];
+
+  for (const k of kVectors) {
+    let kTotal = 0;
+    const idxs = k.map((kg) => Array.from({ length: kg }, (_, i) => i));
+    const comboCount = k.reduce((acc, kg, gi) => acc * (binomNum(sizes[gi], kg) || 1), 1);
+
+    for (let c = 0; c < comboCount; c++) {
+      const names = assembleNames(groups, k, idxs);
+      kTotal += variantProductForNames(names, variantsByName);
+
+      if (c + 1 >= comboCount) break;
+      let carry = true;
+      for (let gi = G - 1; gi >= 0 && carry; gi--) {
+        if (nextCombo(idxs[gi], k[gi], sizes[gi])) carry = false;
+        else resetCombo(idxs[gi], k[gi]);
+      }
+    }
+    prefix.push(prefix[prefix.length - 1] + kTotal);
+  }
+  return prefix;
+}
+
+interface EvalSliceState {
+  j: number;
+  k: number[];
+  idxs: number[][];
+  gradeIndices: number[];
+}
+
+function decodeEvalPosition(
+  evalPrefix: number[],
+  kVectors: number[][],
+  groups: ColorGroup[],
+  sizes: number[],
+  variantsByName: Map<string, EmblemCandidate[]>,
+  pos: number,
+  enumerateGrades: boolean,
+): EvalSliceState {
+  let lo = 0;
+  let hi = kVectors.length - 1;
+  let j = 0;
+  while (lo <= hi) {
+    const mid = (lo + hi) >> 1;
+    if (evalPrefix[mid] <= pos) {
+      j = mid;
+      lo = mid + 1;
+    } else hi = mid - 1;
+  }
+
+  const k = kVectors[j];
+  const localInK = pos - evalPrefix[j];
+
+  if (!enumerateGrades) {
+    return {
+      j,
+      k,
+      idxs: unrankLocalState(sizes, k, localInK),
+      gradeIndices: [],
+    };
+  }
+
+  const G = groups.length;
+  const idxs = k.map((kg) => Array.from({ length: kg }, (_, i) => i));
+  const comboCount = k.reduce((acc, kg, gi) => acc * (binomNum(sizes[gi], kg) || 1), 1);
+  let acc = 0;
+
+  for (let c = 0; c < comboCount; c++) {
+    const names = assembleNames(groups, k, idxs);
+    const gradeCount = variantProductForNames(names, variantsByName);
+    if (acc + gradeCount > localInK) {
+      return {
+        j,
+        k,
+        idxs: idxs.map((idx) => idx.slice()),
+        gradeIndices: unrankGradeIndices(names, variantsByName, localInK - acc),
+      };
+    }
+    acc += gradeCount;
+
+    if (c + 1 >= comboCount) break;
+    let carry = true;
+    for (let gi = G - 1; gi >= 0 && carry; gi--) {
+      if (nextCombo(idxs[gi], k[gi], sizes[gi])) carry = false;
+      else resetCombo(idxs[gi], k[gi]);
+    }
+  }
+
+  return {
+    j,
+    k,
+    idxs: k.map((kg) => Array.from({ length: kg }, (_, i) => i)),
+    gradeIndices: [],
+  };
+}
+
+function advanceNameOdometer(
+  state: EvalSliceState,
+  kVectors: number[][],
+  sizes: number[],
+): boolean {
+  const G = sizes.length;
+  let carry = true;
+  for (let gi = G - 1; gi >= 0 && carry; gi--) {
+    if (nextCombo(state.idxs[gi], state.k[gi], sizes[gi])) carry = false;
+    else resetCombo(state.idxs[gi], state.k[gi]);
+  }
+  if (!carry) return true;
+
+  state.j++;
+  if (state.j >= kVectors.length) return false;
+  state.k = kVectors[state.j];
+  state.idxs = state.k.map((kg) => Array.from({ length: kg }, (_, i) => i));
+  return true;
+}
+
 // ---------------------------------------------------------------------------
 // Core: range-based enumeration (single-thread full range OR parallel shard)
 // ---------------------------------------------------------------------------
@@ -298,32 +476,29 @@ export async function searchColorExactSlice(
 ): Promise<ExactColorResult | null> {
   if (sliceSize <= 0 || kVectors.length === 0) return null;
 
-  const G = groups.length;
   const sizes = groups.map((g) => g.names.length);
   const endGlobal = startGlobal + sliceSize;
+  const enumerateGrades = opts.enumerateGradeVariants ?? false;
 
-  // Grade variants per Pokémon name
   const variantsByName = new Map<string, EmblemCandidate[]>();
   for (const c of pool) {
     if (!variantsByName.has(c.pokemonName)) variantsByName.set(c.pokemonName, []);
     variantsByName.get(c.pokemonName)!.push(c);
   }
 
-  // Binary-search kPrefix for the k-vector owning startGlobal
-  let lo = 0,
-    hi = kVectors.length - 1,
-    j = 0;
-  while (lo <= hi) {
-    const mid = (lo + hi) >> 1;
-    if (kPrefix[mid] <= startGlobal) {
-      j = mid;
-      lo = mid + 1;
-    } else hi = mid - 1;
-  }
+  const evalPrefix = enumerateGrades
+    ? computeGradeAwareKPrefix(groups, sizes, kVectors, variantsByName)
+    : kPrefix;
 
-  // Decode the within-kVector starting position
-  let k = kVectors[j];
-  let idxs = unrankLocalState(sizes, k, startGlobal - kPrefix[j]);
+  let state = decodeEvalPosition(
+    evalPrefix,
+    kVectors,
+    groups,
+    sizes,
+    variantsByName,
+    startGlobal,
+    enumerateGrades,
+  );
 
   let evaluated = 0;
   let best: { loadout: EmblemCandidate[]; ev: EvalResult } | null = null;
@@ -331,51 +506,36 @@ export async function searchColorExactSlice(
   const reportEvery = Math.max(1, Math.floor(sliceSize / 100));
   let nextReport = reportEvery;
 
-  for (let g = startGlobal; g < endGlobal; g++) {
+  for (let evalGlobal = startGlobal; evalGlobal < endGlobal; ) {
     if (shouldAbort?.()) return null;
 
-    // Assemble the name set from current odometer state
-    const names: string[] = [];
-    for (let gi = 0; gi < G; gi++) {
-      if (k[gi] === 0) continue;
-      const gnames = groups[gi].names;
-      for (const t of idxs[gi]) names.push(gnames[t]);
-    }
-
-    // Pick best grade variant per name, evaluate
-    const loadout = names.map((name) => bestVariantForMode(variantsByName.get(name)!, opts));
+    const names = assembleNames(groups, state.k, state.idxs);
+    const loadout = enumerateGrades
+      ? names.map((name, i) => variantsByName.get(name)![state.gradeIndices[i]])
+      : names.map((name) => bestVariantForMode(variantsByName.get(name)!, opts));
     const ev = evaluateLoadout(loadout, opts, setBonuses);
     evaluated++;
+    evalGlobal++;
 
     if (ev.valid && isBetter(ev, best?.ev ?? null, opts)) {
       best = { loadout: loadout.slice(), ev };
     }
 
-    // Cooperative yield + progress
     if (evaluated >= nextReport || Date.now() >= sliceEnd) {
       if (onProgress) await onProgress(evaluated);
       sliceEnd = Date.now() + 40;
       nextReport = evaluated + reportEvery;
     }
 
-    if (g + 1 >= endGlobal) break;
+    if (evalGlobal >= endGlobal) break;
 
-    // Advance odometer: last group is innermost; on full exhaustion step to next k-vector
-    let carry = true;
-    for (let gi = G - 1; gi >= 0 && carry; gi--) {
-      if (nextCombo(idxs[gi], k[gi], sizes[gi])) carry = false;
-      else resetCombo(idxs[gi], k[gi]);
+    if (enumerateGrades && nextGradeIndices(state.gradeIndices, names, variantsByName)) {
+      continue;
     }
-    if (carry) {
-      j++;
-      if (j >= kVectors.length) break;
-      k = kVectors[j];
-      // Start of a new k-vector: local index 0 → initial combination per group
-      idxs = k.map((kg) => {
-        const a = Array.from({ length: kg }, (_, i) => i);
-        return a;
-      });
+    if (enumerateGrades) {
+      state.gradeIndices = names.map(() => 0);
     }
+    if (!advanceNameOdometer(state, kVectors, sizes)) break;
   }
 
   if (!best) return null;
@@ -414,7 +574,18 @@ export async function searchColorExact(
   if (kVectors === null || kVectors.length === 0) return null;
 
   const kPrefix = computeKPrefix(sizes, kVectors);
-  const totalCombos = kPrefix[kPrefix.length - 1];
+  const enumerateGrades = opts.enumerateGradeVariants ?? false;
+
+  const variantsByName = new Map<string, EmblemCandidate[]>();
+  for (const c of pool) {
+    if (!variantsByName.has(c.pokemonName)) variantsByName.set(c.pokemonName, []);
+    variantsByName.get(c.pokemonName)!.push(c);
+  }
+
+  const evalPrefix = enumerateGrades
+    ? computeGradeAwareKPrefix(groups, sizes, kVectors, variantsByName)
+    : kPrefix;
+  const totalCombos = evalPrefix[evalPrefix.length - 1];
 
   const result = await searchColorExactSlice(
     pool,

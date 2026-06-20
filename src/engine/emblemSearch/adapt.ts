@@ -75,10 +75,19 @@ export function buildCandidatePool(
   }
 
   const grades = opts.grades ?? (["gold"] as EmblemGrade[]);
+  const gradeSet = new Set(grades);
+  const mixed = opts.mixedGrades ?? true;
   for (const emblem of emblems) {
-    for (const grade of grades) {
-      if ((grade === "bronze" || grade === "silver") && emblem.goldOnly) continue;
-      candidates.push(emblemToCandidate(emblem, grade));
+    if (mixed) {
+      for (const grade of grades) {
+        if ((grade === "bronze" || grade === "silver") && emblem.goldOnly) continue;
+        candidates.push(emblemToCandidate(emblem, grade));
+      }
+    } else {
+      const bestGrade = GRADE_ORDER.find((g) => gradeSet.has(g));
+      if (!bestGrade) continue;
+      if ((bestGrade === "bronze" || bestGrade === "silver") && emblem.goldOnly) continue;
+      candidates.push(emblemToCandidate(emblem, bestGrade));
     }
   }
   return candidates;

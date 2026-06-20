@@ -12,6 +12,7 @@ import {
   buildPool,
   approximateBuildCount,
   countConstrainedBuilds,
+  countExactEnumerationSpace,
   distinctPokemonCount,
 } from "../engine/emblemSearch/pool";
 import { colorGroupSizes } from "../engine/emblemSearch/exactColor";
@@ -74,7 +75,7 @@ export function useEmblemOptimizer(): {
 
   const [basicUseOwned, setBasicUseOwned] = useState(BASIC_POOL_DEFAULTS.useOwned);
   const [useOwned, setUseOwned] = useState(BASIC_POOL_DEFAULTS.useOwned);
-  const [mixedGrades, setMixedGrades] = useState(true);
+  const [mixedGrades, setMixedGrades] = useState(BASIC_POOL_DEFAULTS.mixedGrades);
   const [allowedGrades, setAllowedGrades] = useState<Set<EmblemGrade>>(
     () => new Set(DEFAULT_ALLOWED_GRADES),
   );
@@ -97,6 +98,8 @@ export function useEmblemOptimizer(): {
   const [exactCap, setExactCap] = useState<number>(DEFAULT_EXACT_CAP);
   const [resultCount, setResultCount] = useState(DEFAULT_RESULT_COUNT);
 
+  const enumerateGradeVariants = mixedGrades;
+
   const poolConfig = useMemo<PoolConfig>(
     () => ({ useOwned, mixedGrades, allowedGrades }),
     [useOwned, mixedGrades, allowedGrades],
@@ -107,7 +110,11 @@ export function useEmblemOptimizer(): {
   const poolDistinctNames = useMemo(() => distinctPokemonCount(pool), [pool]);
 
   const basicPoolConfig = useMemo<PoolConfig>(
-    () => ({ useOwned: basicUseOwned, mixedGrades: true, allowedGrades }),
+    () => ({
+      useOwned: basicUseOwned,
+      mixedGrades: BASIC_POOL_DEFAULTS.mixedGrades,
+      allowedGrades,
+    }),
     [basicUseOwned, allowedGrades],
   );
   const basicPool = useMemo(
@@ -135,6 +142,7 @@ export function useEmblemOptimizer(): {
       basicPool,
       basicObjective.colorTargets as Map<EmblemColor, number>,
       SLOTS,
+      BASIC_POOL_DEFAULTS.mixedGrades,
     );
   }, [basicObjective, basicPool]);
 
@@ -222,10 +230,15 @@ export function useEmblemOptimizer(): {
     return countConstrainedBuilds(pool, colorConstraints, SLOTS);
   }, [pool, colorConstraints, colorConstraintValid]);
 
+  const exactEnumerationCount = useMemo(() => {
+    if (!colorConstraints || !colorConstraintValid) return null;
+    return countExactEnumerationSpace(pool, colorConstraints, SLOTS, enumerateGradeVariants);
+  }, [pool, colorConstraints, colorConstraintValid, enumerateGradeVariants]);
+
   const willRunExact = useMemo(() => {
     if (colorMode !== "exact" || !colorConstraints || !colorConstraintValid) return false;
-    return shouldRunExact(constrainedBuildCount, exactCap);
-  }, [colorMode, colorConstraints, colorConstraintValid, constrainedBuildCount, exactCap]);
+    return shouldRunExact(exactEnumerationCount, exactCap);
+  }, [colorMode, colorConstraints, colorConstraintValid, exactEnumerationCount, exactCap]);
 
   const searchWillRunExact = expert ? willRunExact : basicWillRunExactSearch;
   const effectiveResultCount = searchWillRunExact ? 1 : resultCount;
@@ -261,6 +274,7 @@ export function useEmblemOptimizer(): {
       pokemonContext,
       slots: SLOTS,
       exactCap,
+      enumerateGradeVariants,
     }),
     [
       mode,
@@ -276,6 +290,7 @@ export function useEmblemOptimizer(): {
       pokemon,
       pokemonContext,
       exactCap,
+      enumerateGradeVariants,
     ],
   );
 
@@ -398,6 +413,22 @@ export function useEmblemOptimizer(): {
     [pokemon],
   );
 
+  /** Switch owned/full pool; on full dataset, re-derive color UI (exact when feasible). */
+  const handleSetUseOwned = useCallback(
+    (nextUseOwned: boolean) => {
+      setUseOwned(nextUseOwned);
+      if (!nextUseOwned) {
+        const fullPool = buildPool(
+          allEmblems,
+          { useOwned: false, mixedGrades, allowedGrades },
+          owned,
+        );
+        applyAdvancedColorDefaults(fullPool);
+      }
+    },
+    [mixedGrades, allowedGrades, owned, applyAdvancedColorDefaults],
+  );
+
   const applyAdvancedProtectDefaults = useCallback(
     (level: number) => {
       if (pokemon) {
@@ -430,7 +461,7 @@ export function useEmblemOptimizer(): {
   const syncAdvancedFromBasic = useCallback(() => {
     const grades = new Set(DEFAULT_ALLOWED_GRADES);
     setUseOwned(BASIC_POOL_DEFAULTS.useOwned);
-    setMixedGrades(true);
+    setMixedGrades(BASIC_POOL_DEFAULTS.mixedGrades);
     setAllowedGrades(grades);
     setMode("maximize");
     setColorBonuses(true);
@@ -442,7 +473,11 @@ export function useEmblemOptimizer(): {
 
     const defaultPool = buildPool(
       allEmblems,
-      { useOwned: BASIC_POOL_DEFAULTS.useOwned, mixedGrades: true, allowedGrades: grades },
+      {
+        useOwned: BASIC_POOL_DEFAULTS.useOwned,
+        mixedGrades: BASIC_POOL_DEFAULTS.mixedGrades,
+        allowedGrades: grades,
+      },
       owned,
     );
     applyAdvancedColorDefaults(defaultPool);
@@ -485,6 +520,7 @@ export function useEmblemOptimizer(): {
       pokemonList,
       forceHeuristic,
       exactCap: basicExactCap,
+      enumerateGradeVariants: BASIC_POOL_DEFAULTS.mixedGrades,
     });
     await run(
       basicPool,
@@ -620,9 +656,10 @@ export function useEmblemOptimizer(): {
   const advanced: OptimizerAdvancedProps = {
     pool,
     useOwned,
-    setUseOwned,
+    setUseOwned: handleSetUseOwned,
     mixedGrades,
     setMixedGrades,
+    enumerateGradeVariants,
     mode,
     setMode,
     effort,
@@ -656,6 +693,7 @@ export function useEmblemOptimizer(): {
     colorConstraints,
     colorConstraintValid,
     constrainedBuildCount,
+    exactEnumerationCount,
     willRunExact,
     colorCapacities,
     totalColorConstrained,

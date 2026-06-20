@@ -1,4 +1,4 @@
-import { formatBuildCount } from "../../../engine/emblemSearch/pool";
+import { formatBuildCount, matchingBuildDisplayCount } from "../../../engine/emblemSearch/pool";
 import type { EmblemCandidate } from "../../../engine/emblemSearch/types";
 import type { EmblemColor, EmblemGrade } from "../../../types";
 import { CollapsibleCard } from "../../CollapsibleCard";
@@ -11,6 +11,7 @@ export interface SearchPoolCardProps {
   setUseOwned: (owned: boolean) => void;
   mixedGrades: boolean;
   setMixedGrades: (mixed: boolean) => void;
+  enumerateGradeVariants: boolean;
   allowedGrades: Set<EmblemGrade>;
   setAllowedGrades: (grades: Set<EmblemGrade>) => void;
   buildCount: bigint;
@@ -20,6 +21,7 @@ export interface SearchPoolCardProps {
   colorConstraints: Map<EmblemColor, number> | null;
   colorConstraintValid: boolean;
   constrainedBuildCount: bigint | null;
+  exactEnumerationCount: bigint | null;
   willRunExact: boolean;
 }
 
@@ -29,6 +31,7 @@ export function SearchPoolCard({
   setUseOwned,
   mixedGrades,
   setMixedGrades,
+  enumerateGradeVariants,
   allowedGrades,
   setAllowedGrades,
   buildCount,
@@ -38,6 +41,7 @@ export function SearchPoolCard({
   colorConstraints,
   colorConstraintValid,
   constrainedBuildCount,
+  exactEnumerationCount,
   willRunExact,
 }: SearchPoolCardProps) {
   return (
@@ -58,22 +62,21 @@ export function SearchPoolCard({
           labels={{ owned: "Owned only", all: "Full dataset" }}
           onChange={(v) => setUseOwned(v === "owned")}
         />
-        {useOwned && (
-          <label className="flex cursor-pointer items-center gap-2 text-sm">
-            <input
-              type="checkbox"
-              checked={mixedGrades}
-              onChange={(e) => setMixedGrades(e.target.checked)}
-              className="accent-accent"
-            />
-            <span>
-              Mixed grades{" "}
-              <span className="text-xs text-faint">
-                — Bronze, Silver, and Gold can differ across the 10 slots (recommended)
-              </span>
+        <label className="flex cursor-pointer items-center gap-2 text-sm">
+          <input
+            type="checkbox"
+            checked={mixedGrades}
+            onChange={(e) => setMixedGrades(e.target.checked)}
+            className="accent-accent"
+          />
+          <span>
+            Mixed grades{" "}
+            <span className="text-xs text-faint">
+              — Bronze, Silver, and Gold can differ across the 10 slots (recommended). Otherwise,
+              use the highest grade for all emblems.
             </span>
-          </label>
-        )}
+          </span>
+        </label>
         {!useOwned && (
           <div className="flex flex-wrap items-center gap-2 text-xs">
             <span className="text-muted">Grades:</span>
@@ -101,7 +104,14 @@ export function SearchPoolCard({
         )}
         {(() => {
           const colorExact = colorMode === "exact" && colorConstraints && colorConstraintValid;
-          const matchesZero = colorExact && constrainedBuildCount === 0n;
+          const matchingBuildCount = colorExact
+            ? matchingBuildDisplayCount(
+                exactEnumerationCount,
+                constrainedBuildCount,
+                enumerateGradeVariants,
+              )
+            : constrainedBuildCount;
+          const matchesZero = colorExact && matchingBuildCount === 0n;
           return (
             <div className="flex flex-col gap-2 rounded-lg bg-white/10 px-3 py-2.5 text-xs">
               <div className="flex items-baseline justify-between gap-3">
@@ -112,13 +122,13 @@ export function SearchPoolCard({
                   className={`min-w-0 text-right font-mono font-semibold ${matchesZero ? "text-neg" : "text-ink"}`}
                 >
                   {colorExact ? (
-                    constrainedBuildCount === null ? (
+                    matchingBuildCount === null ? (
                       "Many"
-                    ) : constrainedBuildCount === 0n ? (
+                    ) : matchingBuildCount === 0n ? (
                       "None match"
                     ) : (
                       <>
-                        {formatBuildCount(constrainedBuildCount)}{" "}
+                        {formatBuildCount(matchingBuildCount)}{" "}
                         <span className="font-sans font-normal text-faint">
                           of {formatBuildCount(buildCount)}
                         </span>
@@ -137,7 +147,7 @@ export function SearchPoolCard({
                 </span>
               </div>
 
-              {colorExact && constrainedBuildCount !== null && constrainedBuildCount > 0n && (
+              {colorExact && matchingBuildCount !== null && matchingBuildCount > 0n && (
                 <div className="flex items-center justify-between gap-3">
                   <span className="shrink-0 text-muted">Method</span>
                   <span
@@ -146,8 +156,10 @@ export function SearchPoolCard({
                     }`}
                     title={
                       willRunExact
-                        ? `Checks all ${formatBuildCount(constrainedBuildCount)} matching builds — guaranteed best`
-                        : `${formatBuildCount(constrainedBuildCount)} builds exceeds the cap — Smart search finds a strong result`
+                        ? enumerateGradeVariants
+                          ? `Checks all ${formatBuildCount(matchingBuildCount)} grade-aware builds — guaranteed best`
+                          : `Checks all ${formatBuildCount(matchingBuildCount)} Pokémon combinations — guaranteed best`
+                        : `${formatBuildCount(matchingBuildCount)} combinations exceeds the cap — Smart search finds a strong result`
                     }
                   >
                     {willRunExact ? "⚡ Exact" : "Smart search"}
