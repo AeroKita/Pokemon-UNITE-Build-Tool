@@ -4852,7 +4852,8 @@
           ],
           "moveType": "Area",
           "iconAsset": "/assets/skills/Blaziken/Spinning+Flame+Kick.png",
-          "descriptionAdvanced": "Perform a flaming kick around itself, dealing damage to nearby enemies hit and increase the user's Attack stat by 30% for a 4s. After using this move, the user switches to Kick Style and all Kick Style cooldowns are reset."
+          "descriptionAdvanced": "Perform a flaming kick around itself, dealing damage to nearby enemies hit and increase the user's Attack stat by 30% for a 4s. After using this move, the user switches to Kick Style and all Kick Style cooldowns are reset.",
+          "videoAsset": "/assets/skills/Blaziken/Spinning+Flame+Kick.mp4"
         }
       ],
       "passiveAbility": {
