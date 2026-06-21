@@ -382,7 +382,7 @@ export function leastDominantColorTarget(
         colorSetBonusKeepValue(a, targets[a]!, priorities, bonusByColor) -
         colorSetBonusKeepValue(b, targets[b]!, priorities, bonusByColor);
       if (keepDiff !== 0) return keepDiff;
-      return COLOR_DOMINANCE_RANK.indexOf(b[0]) - COLOR_DOMINANCE_RANK.indexOf(a[0]);
+      return COLOR_DOMINANCE_RANK.indexOf(b) - COLOR_DOMINANCE_RANK.indexOf(a);
     })[0] ?? null
   );
 }
