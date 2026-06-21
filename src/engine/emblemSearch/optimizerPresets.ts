@@ -3,7 +3,8 @@
  *
  * Presets are the community-derived (or hand-curated) search objective for a
  * Pokémon — stat priorities, protect floors and a color shell mined from its
- * UNITE-DB builds (see tools/meta-defaults/generate-presets.ts). They replace
+ * UNITE-DB builds, with tier snapping applied at generation time (see
+ * tools/meta-defaults/generate-presets.ts). They replace the role-generic
  * the role-generic priorityWeights / deriveProtectFloors / colorTargetsFor
  * derivation when one exists and is confident enough.
  *

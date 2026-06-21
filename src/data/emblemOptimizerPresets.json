@@ -3,7 +3,7 @@
     "generatedFrom": "UNITE-DB community builds (patch-current.json builds[] + creativeBuilds[], 10-emblem sets)",
     "patchVersion": "1.23.2.5",
     "generatedAt": "2026-06-21",
-    "algorithm": "v1: priorities = normalized median positive flat magnitudes (0–1); protectedFloors = clamp(min(0, round(p10))) with moveSpeed 0 when builds keep it ≥ 0; colorTargets = vote-weighted (Recommended 1.0, Creative 0.5) counts ≥ 2; confidence = min(1, builds/2) × (1 − avg coefficient of variation)",
+    "algorithm": "v1: priorities = normalized median positive flat magnitudes (0–1); protectedFloors = clamp(min(0, round(p10))) with moveSpeed 0 when builds keep it ≥ 0; colorTargets = vote-weighted (Recommended 1.0, Creative 0.5) counts ≥ 2, then priority-weighted one-off tier snap up (full-pool feasible), else relax lowest-value least-dominant color + retry; confidence = min(1, builds/2) × (1 − avg coefficient of variation)",
     "confidenceThreshold": 0.4,
     "pokemonWithPresets": 95,
     "pokemonFallback": 0
@@ -168,7 +168,7 @@
         "blue": 3,
         "white": 4,
         "green": 4,
-        "black": 4
+        "black": 5
       },
       "confidence": 0.47,
       "buildCount": 4,
@@ -441,7 +441,7 @@
     },
     "decidueye": {
       "priorities": {
-        "hp": 0.61,
+        "hp": 0.88,
         "attack": 1,
         "moveSpeed": 0.06
       },
@@ -455,7 +455,7 @@
       },
       "colorTargets": {
         "brown": 6,
-        "white": 5
+        "white": 6
       },
       "confidence": 1,
       "buildCount": 4,
@@ -592,8 +592,8 @@
     "eldegoss": {
       "priorities": {
         "hp": 1,
-        "spAttack": 0.88,
-        "moveSpeed": 0.09
+        "spAttack": 0.67,
+        "moveSpeed": 0.07
       },
       "protectedFloors": {
         "hp": 0,
@@ -604,7 +604,7 @@
       },
       "colorTargets": {
         "green": 6,
-        "white": 5,
+        "white": 6,
         "black": 4
       },
       "confidence": 1,
@@ -628,7 +628,7 @@
       "colorTargets": {
         "green": 6,
         "white": 4,
-        "black": 4
+        "black": 5
       },
       "confidence": 0.51,
       "buildCount": 2,
@@ -746,7 +746,8 @@
       "priorities": {
         "hp": 1,
         "defense": 0.17,
-        "spAttack": 0.52
+        "spAttack": 0.52,
+        "cdr": 0.06
       },
       "protectedFloors": {
         "hp": 0,
@@ -758,7 +759,7 @@
       },
       "colorTargets": {
         "green": 5,
-        "black": 6,
+        "black": 7,
         "white": 2
       },
       "confidence": 1,
@@ -767,7 +768,7 @@
     },
     "glaceon": {
       "priorities": {
-        "hp": 0.77,
+        "hp": 0.9,
         "spAttack": 1
       },
       "protectedFloors": {
@@ -780,7 +781,7 @@
       },
       "colorTargets": {
         "green": 6,
-        "white": 3,
+        "white": 4,
         "black": 5
       },
       "confidence": 1,
@@ -898,8 +899,8 @@
     "hoopa": {
       "priorities": {
         "hp": 1,
-        "spAttack": 0.82,
-        "moveSpeed": 0.09
+        "spAttack": 0.63,
+        "moveSpeed": 0.07
       },
       "protectedFloors": {
         "hp": 0,
@@ -909,7 +910,7 @@
       },
       "colorTargets": {
         "green": 6,
-        "white": 5,
+        "white": 6,
         "black": 4
       },
       "confidence": 1,
@@ -979,7 +980,7 @@
       },
       "colorTargets": {
         "green": 6,
-        "black": 6,
+        "black": 7,
         "white": 2
       },
       "confidence": 1,
@@ -990,7 +991,8 @@
       "priorities": {
         "hp": 0.77,
         "defense": 0.13,
-        "spAttack": 1
+        "spAttack": 1,
+        "cdr": 0.05
       },
       "protectedFloors": {
         "hp": 0,
@@ -1002,7 +1004,7 @@
       },
       "colorTargets": {
         "green": 6,
-        "black": 6,
+        "black": 7,
         "white": 2
       },
       "confidence": 1,
@@ -1226,8 +1228,8 @@
     },
     "meowth": {
       "priorities": {
-        "hp": 1,
-        "attack": 0.63,
+        "hp": 0.94,
+        "attack": 1,
         "moveSpeed": 0.12
       },
       "protectedFloors": {
@@ -1240,8 +1242,8 @@
       },
       "colorTargets": {
         "white": 4,
-        "brown": 5,
-        "black": 4
+        "brown": 6,
+        "black": 2
       },
       "confidence": 0.59,
       "buildCount": 4,
@@ -1510,9 +1512,9 @@
     },
     "quaquaval": {
       "priorities": {
-        "hp": 1,
-        "attack": 0.86,
-        "moveSpeed": 0.15
+        "hp": 0.77,
+        "attack": 1,
+        "moveSpeed": 0.12
       },
       "protectedFloors": {
         "hp": 0,
@@ -1523,9 +1525,9 @@
         "moveSpeed": 0
       },
       "colorTargets": {
-        "brown": 5,
+        "brown": 6,
         "white": 4,
-        "black": 4
+        "black": 2
       },
       "confidence": 0.55,
       "buildCount": 2,
@@ -1918,8 +1920,8 @@
     },
     "urshifu": {
       "priorities": {
-        "hp": 0.67,
-        "attack": 1,
+        "hp": 1,
+        "attack": 0.99,
         "moveSpeed": 0.06
       },
       "protectedFloors": {
@@ -1932,7 +1934,7 @@
       },
       "colorTargets": {
         "brown": 6,
-        "white": 5
+        "white": 6
       },
       "confidence": 1,
       "buildCount": 3,
@@ -2053,7 +2055,7 @@
     },
     "zeraora": {
       "priorities": {
-        "hp": 0.5,
+        "hp": 0.72,
         "attack": 1,
         "moveSpeed": 0.05
       },
@@ -2066,7 +2068,7 @@
       },
       "colorTargets": {
         "brown": 6,
-        "white": 5
+        "white": 6
       },
       "confidence": 1,
       "buildCount": 5,

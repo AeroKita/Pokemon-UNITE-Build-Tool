@@ -17,7 +17,10 @@
  *                       (floor 0) or the community-tolerated negative tax. Move
  *                       speed gets a 0 floor when every build keeps it ≥ 0.
  *  - colorTargets     : vote-weighted color counts (Recommended 1.0, Creative
- *                       0.5), rounded, keeping colors with count ≥ MIN_COLOR_COUNT.
+ *                       0.5), rounded, keeping colors with count ≥ MIN_COLOR_COUNT;
+ *                       then priority-weighted one-off tier snap up when feasible
+ *                       on the full emblem pool, else relax the lowest-value
+ *                       least-dominant color one tier and retry once.
  *  - confidence       : min(1, buildCount / CONFIDENCE_TARGET_BUILDS) × (1 −
  *                       average coefficient of variation of the key flat stats).
  *
@@ -33,7 +36,10 @@ import { fileURLToPath } from "node:url";
 import { loadBundle } from "../../src/data/loadBundle";
 import rawPatch from "../../src/data/patch-current.json";
 import { STAT_NORM, sumStats } from "../../src/engine/emblemSearch/evaluate";
-import { emblemToCandidate } from "../../src/engine/emblemSearch/adapt";
+import { buildCandidatePool, emblemToCandidate } from "../../src/engine/emblemSearch/adapt";
+import { colorGroupSizes } from "../../src/engine/emblemSearch/exactColor";
+import { countConstrainedBuilds } from "../../src/engine/emblemSearch/pool";
+import type { EmblemCandidate } from "../../src/engine/emblemSearch/types";
 import { colorCountsOf } from "../../src/engine/recommend";
 import type {
   Emblem,
@@ -90,6 +96,24 @@ export const MIN_PRIORITY = 0.05;
 
 /** Minimum vote-weighted color count to keep a color in the shell. */
 export const MIN_COLOR_COUNT = 2;
+
+/** Emblem slots used for preset color-target feasibility checks. */
+export const EMBLEM_SLOTS = 10;
+
+/** Tie-break when color counts tie (offense-first = most dominant). */
+export const COLOR_DOMINANCE_RANK: EmblemColor[] = [
+  "brown",
+  "green",
+  "blue",
+  "purple",
+  "white",
+  "black",
+  "red",
+  "yellow",
+  "pink",
+  "navy",
+  "gray",
+];
 
 /** Auto presets below this confidence are omitted → Pokémon falls back to generic. */
 export const MIN_CONFIDENCE = 0.4;
@@ -256,6 +280,182 @@ export function deriveProtectedFloors(
  * emblems carrying it across all builds (Recommended 1.0, Creative 0.5), rounded
  * and kept only when ≥ MIN_COLOR_COUNT (the set-bonus-reaching threshold).
  */
+/** One emblem below the next higher positive set-bonus tier. */
+export function snapColorTargetUp(count: number, def: EmblemSetBonus | undefined): number {
+  if (!def) return count;
+  const currentPct = bonusPctFor(def, count);
+  const next = Object.entries(def.thresholds)
+    .map(([t, pct]) => [Number(t), pct] as const)
+    .filter(([t, pct]) => t > count && pct > currentPct)
+    .sort((a, b) => a[0] - b[0])[0];
+  if (!next) return count;
+  const [nextCount, nextPct] = next;
+  if (nextCount - count !== 1 || nextPct <= currentPct) return count;
+  return nextCount;
+}
+
+/** Drop one positive set-bonus tier (e.g. black 4 → 2, brown 5 → 3). */
+export function snapColorTargetDownOneTier(count: number, def: EmblemSetBonus | undefined): number {
+  if (!def) return count;
+  const currentPct = bonusPctFor(def, count);
+  if (currentPct <= 0) return count;
+
+  for (let c = count - 1; c >= 0; c--) {
+    const pct = bonusPctFor(def, c);
+    if (pct < currentPct) return Math.max(c, MIN_COLOR_COUNT);
+  }
+  return count;
+}
+
+export function colorTargetDominanceOrder(
+  targets: Partial<Record<EmblemColor, number>>,
+): EmblemColor[] {
+  return (Object.entries(targets) as [EmblemColor, number][])
+    .filter(([, n]) => n > 0)
+    .sort((a, b) => {
+      if (b[1] !== a[1]) return b[1] - a[1];
+      return COLOR_DOMINANCE_RANK.indexOf(a[0]) - COLOR_DOMINANCE_RANK.indexOf(b[0]);
+    })
+    .map(([c]) => c);
+}
+
+/** priority(stat) × current set-bonus % — how much the preset values keeping this color tier. */
+export function colorSetBonusKeepValue(
+  color: EmblemColor,
+  count: number,
+  priorities: Partial<Record<keyof StatBlock, number>>,
+  bonusByColor: Map<EmblemColor, EmblemSetBonus>,
+): number {
+  const def = bonusByColor.get(color);
+  if (!def) return 0;
+  const priority = priorities[def.stat as keyof StatBlock] ?? 0;
+  return priority * bonusPctFor(def, count);
+}
+
+/** priority(stat) × tier gain from a one-off snap up (0 when no valid snap). */
+export function colorSnapUpGainScore(
+  color: EmblemColor,
+  count: number,
+  priorities: Partial<Record<keyof StatBlock, number>>,
+  bonusByColor: Map<EmblemColor, EmblemSetBonus>,
+): number {
+  const def = bonusByColor.get(color);
+  if (!def) return 0;
+  const to = snapColorTargetUp(count, def);
+  if (to === count) return 0;
+  const priority = priorities[def.stat as keyof StatBlock] ?? 0;
+  return priority * (bonusPctFor(def, to) - bonusPctFor(def, count));
+}
+
+/** Snap-up attempt order: emblem count, then priority-weighted tier gain, then static rank. */
+export function colorTargetSnapUpOrder(
+  targets: Partial<Record<EmblemColor, number>>,
+  priorities: Partial<Record<keyof StatBlock, number>>,
+  bonusByColor: Map<EmblemColor, EmblemSetBonus>,
+): EmblemColor[] {
+  return (Object.entries(targets) as [EmblemColor, number][])
+    .filter(([, n]) => n > 0)
+    .sort((a, b) => {
+      if (b[1] !== a[1]) return b[1] - a[1];
+      const gainDiff =
+        colorSnapUpGainScore(b[0], b[1], priorities, bonusByColor) -
+        colorSnapUpGainScore(a[0], a[1], priorities, bonusByColor);
+      if (gainDiff !== 0) return gainDiff;
+      return COLOR_DOMINANCE_RANK.indexOf(a[0]) - COLOR_DOMINANCE_RANK.indexOf(b[0]);
+    })
+    .map(([c]) => c);
+}
+
+/** Least dominant: lowest count; ties → lowest priority-weighted set-bonus keep value. */
+export function leastDominantColorTarget(
+  targets: Partial<Record<EmblemColor, number>>,
+  priorities: Partial<Record<keyof StatBlock, number>>,
+  bonusByColor: Map<EmblemColor, EmblemSetBonus>,
+): EmblemColor | null {
+  const order = colorTargetDominanceOrder(targets);
+  if (order.length === 0) return null;
+  const minCount = Math.min(...order.map((c) => targets[c]!));
+  const tied = order.filter((c) => targets[c] === minCount);
+  return (
+    [...tied].sort((a, b) => {
+      const keepDiff =
+        colorSetBonusKeepValue(a, targets[a]!, priorities, bonusByColor) -
+        colorSetBonusKeepValue(b, targets[b]!, priorities, bonusByColor);
+      if (keepDiff !== 0) return keepDiff;
+      return COLOR_DOMINANCE_RANK.indexOf(b[0]) - COLOR_DOMINANCE_RANK.indexOf(a[0]);
+    })[0] ?? null
+  );
+}
+
+function colorTargetsToMap(
+  targets: Partial<Record<EmblemColor, number>>,
+): Map<EmblemColor, number> {
+  return new Map(
+    Object.entries(targets).filter(([, n]) => (n ?? 0) > 0) as [EmblemColor, number][],
+  );
+}
+
+function isColorTargetsFeasible(
+  targets: Partial<Record<EmblemColor, number>>,
+  pool: EmblemCandidate[],
+): boolean {
+  const map = colorTargetsToMap(targets);
+  if (map.size === 0) return false;
+  const sum = [...map.values()].reduce((a, b) => a + b, 0);
+  if (sum > 2 * EMBLEM_SLOTS) return false;
+  const caps = colorGroupSizes(pool);
+  if (![...map.entries()].every(([c, n]) => n <= (caps.get(c) ?? 0))) return false;
+  const builds = countConstrainedBuilds(pool, map, EMBLEM_SLOTS);
+  return builds !== 0n && builds !== null;
+}
+
+function tryDominantColorSnapUp(
+  targets: Partial<Record<EmblemColor, number>>,
+  bonusByColor: Map<EmblemColor, EmblemSetBonus>,
+  pool: EmblemCandidate[],
+  priorities: Partial<Record<keyof StatBlock, number>>,
+): Partial<Record<EmblemColor, number>> | null {
+  for (const color of colorTargetSnapUpOrder(targets, priorities, bonusByColor)) {
+    const from = targets[color]!;
+    const to = snapColorTargetUp(from, bonusByColor.get(color));
+    if (to === from) continue;
+    const trial = { ...targets, [color]: to };
+    if (isColorTargetsFeasible(trial, pool)) return trial;
+  }
+  return null;
+}
+
+/**
+ * After vote-weighted rounding, try a one-off tier snap UP (priority-weighted among
+ * tied counts). If none succeed, drop the least-valued least-dominant color one tier
+ * and retry the snap once.
+ */
+export function snapColorTargetsWithRelaxation(
+  targets: Partial<Record<EmblemColor, number>>,
+  setBonuses: EmblemSetBonus[],
+  pool: EmblemCandidate[],
+  priorities: Partial<Record<keyof StatBlock, number>>,
+): Partial<Record<EmblemColor, number>> {
+  const bonusByColor = new Map(setBonuses.map((d) => [d.color, d]));
+
+  const upFirst = tryDominantColorSnapUp(targets, bonusByColor, pool, priorities);
+  if (upFirst) return upFirst;
+
+  const least = leastDominantColorTarget(targets, priorities, bonusByColor);
+  if (!least) return targets;
+
+  const def = bonusByColor.get(least);
+  const fromDown = targets[least]!;
+  const toDown = snapColorTargetDownOneTier(fromDown, def);
+  if (toDown === fromDown || toDown < MIN_COLOR_COUNT) return targets;
+
+  const relaxed = { ...targets, [least]: toDown };
+  if (!isColorTargetsFeasible(relaxed, pool)) return targets;
+
+  const upRetry = tryDominantColorSnapUp(relaxed, bonusByColor, pool, priorities);
+  return upRetry ?? targets;
+}
+
 export function deriveColorTargets(
   weightedBuilds: { build: PokemonBuild; weight: number }[],
   byId: Map<string, Emblem>,
@@ -284,9 +484,7 @@ export function deriveColorTargets(
  * speed while sharing the same offense role — penalizing that divergence would
  * drop otherwise-valid presets below the confidence threshold.
  */
-export const CONFIDENCE_STATS: (keyof StatBlock)[] = FLOOR_STATS.filter(
-  (s) => s !== "moveSpeed",
-);
+export const CONFIDENCE_STATS: (keyof StatBlock)[] = FLOOR_STATS.filter((s) => s !== "moveSpeed");
 
 /**
  * Each build's normalized stat distance from the median build, across
@@ -316,10 +514,7 @@ export function buildDistances(totalsList: Partial<StatBlock>[]): number[] {
  * move. A single clean build scores ~0.5; tightly-clustered builds approach 1.0;
  * builds that genuinely disagree across the board score lower.
  */
-export function computeConfidence(
-  buildCount: number,
-  totalsList: Partial<StatBlock>[],
-): number {
+export function computeConfidence(buildCount: number, totalsList: Partial<StatBlock>[]): number {
   if (buildCount === 0) return 0;
   const buildFactor = Math.min(1, buildCount / CONFIDENCE_TARGET_BUILDS);
   const typicalDistance = median(buildDistances(totalsList));
@@ -336,6 +531,7 @@ export function generatePresetForPokemon(
   pokemon: Pokemon,
   byId: Map<string, Emblem>,
   setBonuses: EmblemSetBonus[],
+  emblems: Emblem[],
 ): EmblemOptimizerPreset | null {
   const recommended = (pokemon.builds ?? []).filter((b) => isUsableBuild(b, byId));
   const creative = (pokemon.creativeBuilds ?? []).filter((b) => isUsableBuild(b, byId));
@@ -343,7 +539,7 @@ export function generatePresetForPokemon(
   if (all.length === 0) return null;
 
   const totalsList = all.map((b) => buildStatTotals(b, byId));
-  const colorTargets = deriveColorTargets(
+  const rawColorTargets = deriveColorTargets(
     [
       ...recommended.map((build) => ({ build, weight: RECOMMENDED_WEIGHT })),
       ...creative.map((build) => ({ build, weight: CREATIVE_WEIGHT })),
@@ -352,6 +548,17 @@ export function generatePresetForPokemon(
   );
   const baseStats =
     pokemon.baseStatsByLevel[pokemon.baseStatsByLevel.length - 1] ?? pokemon.baseStatsByLevel[0];
+  const snapPriorities = derivePriorities(totalsList, rawColorTargets, baseStats, setBonuses);
+  const candidatePool = buildCandidatePool(emblems, {
+    grades: ["bronze", "silver", "gold"],
+    mixedGrades: true,
+  });
+  const colorTargets = snapColorTargetsWithRelaxation(
+    rawColorTargets,
+    setBonuses,
+    candidatePool,
+    snapPriorities,
+  );
   const priorities = derivePriorities(totalsList, colorTargets, baseStats, setBonuses);
   if (Object.keys(priorities).length === 0) return null;
 
@@ -398,7 +605,7 @@ export function buildPresetsFile(
   const presets: Record<string, EmblemOptimizerPreset> = {};
   let fallback = 0;
   for (const pokemon of [...pokemonList].sort((a, b) => a.id.localeCompare(b.id))) {
-    const preset = generatePresetForPokemon(pokemon, byId, setBonuses);
+    const preset = generatePresetForPokemon(pokemon, byId, setBonuses, emblems);
     if (preset) presets[pokemon.id] = preset;
     else fallback++;
   }
@@ -411,7 +618,8 @@ export function buildPresetsFile(
       algorithm:
         "v1: priorities = normalized median positive flat magnitudes (0–1); " +
         "protectedFloors = clamp(min(0, round(p10))) with moveSpeed 0 when builds keep it ≥ 0; " +
-        "colorTargets = vote-weighted (Recommended 1.0, Creative 0.5) counts ≥ 2; " +
+        "colorTargets = vote-weighted (Recommended 1.0, Creative 0.5) counts ≥ 2, " +
+        "then priority-weighted one-off tier snap up (full-pool feasible), else relax lowest-value least-dominant color + retry; " +
         "confidence = min(1, builds/2) × (1 − avg coefficient of variation)",
       confidenceThreshold: MIN_CONFIDENCE,
       pokemonWithPresets: Object.keys(presets).length,

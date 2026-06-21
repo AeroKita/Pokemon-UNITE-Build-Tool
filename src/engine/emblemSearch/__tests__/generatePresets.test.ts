@@ -9,6 +9,8 @@
  */
 
 import { describe, it, expect } from "vitest";
+import { loadBundle } from "../../../data/loadBundle";
+import rawPatch from "../../../data/patch-current.json";
 import {
   bonusPctFor,
   buildDistances,
@@ -22,6 +24,10 @@ import {
   median,
   percentile,
   round2,
+  snapColorTargetDownOneTier,
+  snapColorTargetUp,
+  colorTargetSnapUpOrder,
+  leastDominantColorTarget,
 } from "../../../../tools/meta-defaults/generate-presets";
 import { makeEmblem } from "../../__tests__/fixtures";
 import type { Emblem, EmblemSetBonus, Pokemon, PokemonBuild, StatBlock } from "../../../types";
@@ -61,6 +67,11 @@ const BROWN_SB: EmblemSetBonus = {
   color: "brown",
   stat: "attack",
   thresholds: { 2: 0.01, 4: 0.02, 6: 0.04 },
+};
+const BLACK_SB: EmblemSetBonus = {
+  color: "black",
+  stat: "cdr",
+  thresholds: { 3: 0.01, 5: 0.02, 7: 0.04 },
 };
 const SET_BONUSES = [GREEN_SB, WHITE_SB, BROWN_SB];
 
@@ -262,6 +273,46 @@ describe("deriveColorTargets", () => {
 });
 
 // ---------------------------------------------------------------------------
+// Color target tier snaps
+// ---------------------------------------------------------------------------
+
+describe("color target tier snaps", () => {
+  it("[GEN-16b] snapColorTargetUp only when one emblem below the next tier", () => {
+    expect(snapColorTargetUp(5, BROWN_SB)).toBe(6);
+    expect(snapColorTargetUp(4, BROWN_SB)).toBe(4);
+    expect(snapColorTargetUp(3, BROWN_SB)).toBe(4);
+  });
+
+  it("[GEN-16c] snapColorTargetDownOneTier drops to the top of the lower band", () => {
+    expect(snapColorTargetDownOneTier(4, BLACK_SB)).toBe(2);
+    expect(snapColorTargetDownOneTier(5, BROWN_SB)).toBe(3);
+  });
+
+  it("[GEN-16d] leastDominantColorTarget drops lowest priority-weighted keep value", () => {
+    const bonusByColor = new Map([
+      [BROWN_SB.color, BROWN_SB],
+      [WHITE_SB.color, WHITE_SB],
+      [BLACK_SB.color, BLACK_SB],
+    ]);
+    const targets = { brown: 5, white: 4, black: 4 };
+    const priorities = { attack: 1, hp: 0.77, cdr: 0.05 };
+    expect(leastDominantColorTarget(targets, priorities, bonusByColor)).toBe("black");
+  });
+
+  it("[GEN-16e] colorTargetSnapUpOrder prefers higher priority-weighted tier gain at same count", () => {
+    const bonusByColor = new Map([
+      [BROWN_SB.color, BROWN_SB],
+      [WHITE_SB.color, WHITE_SB],
+    ]);
+    const targets = { brown: 5, white: 5 };
+    const attackFirst = { attack: 1, hp: 0.2 };
+    expect(colorTargetSnapUpOrder(targets, attackFirst, bonusByColor)[0]).toBe("brown");
+    const hpFirst = { attack: 0.2, hp: 1 };
+    expect(colorTargetSnapUpOrder(targets, hpFirst, bonusByColor)[0]).toBe("white");
+  });
+});
+
+// ---------------------------------------------------------------------------
 // Confidence — robust to a single outlier build
 // ---------------------------------------------------------------------------
 
@@ -352,7 +403,10 @@ describe("generatePresetForPokemon", () => {
     const byId = new Map([...b1.emblems, ...b2.emblems].map((e) => [e.id, e]));
     const pokemon = makePokemon([b1.build, b2.build]);
 
-    const preset = generatePresetForPokemon(pokemon, byId, SET_BONUSES);
+    const preset = generatePresetForPokemon(pokemon, byId, SET_BONUSES, [
+      ...b1.emblems,
+      ...b2.emblems,
+    ]);
     expect(preset).not.toBeNull();
     expect(preset!.source).toBe("auto");
     expect(preset!.buildCount).toBe(2);
@@ -365,7 +419,7 @@ describe("generatePresetForPokemon", () => {
 
   it("[GEN-22] no usable builds → null (falls back to generic)", () => {
     const pokemon = makePokemon([]);
-    expect(generatePresetForPokemon(pokemon, new Map(), SET_BONUSES)).toBeNull();
+    expect(generatePresetForPokemon(pokemon, new Map(), SET_BONUSES, [])).toBeNull();
   });
 
   it("[GEN-23] low confidence (one divergent pair) → null", () => {
@@ -381,6 +435,20 @@ describe("generatePresetForPokemon", () => {
     };
     const byId = new Map([...a.emblems, ...bEmblems].map((e) => [e.id, e]));
     const pokemon = makePokemon([a.build, bBuild]);
-    expect(generatePresetForPokemon(pokemon, byId, SET_BONUSES)).toBeNull();
+    expect(
+      generatePresetForPokemon(pokemon, byId, SET_BONUSES, [...a.emblems, ...bEmblems]),
+    ).toBeNull();
+  });
+
+  it("[GEN-24] snaps averaged shell onto feasible bonus tiers (quaquaval)", () => {
+    const bundle = loadBundle(rawPatch);
+    const byId = new Map(bundle.emblems.map((e) => [e.id, e]));
+    const pokemon = bundle.pokemon.find((p) => p.id === "quaquaval");
+    expect(pokemon).toBeDefined();
+
+    const preset = generatePresetForPokemon(pokemon!, byId, bundle.setBonuses, bundle.emblems);
+    expect(preset).not.toBeNull();
+    expect(preset!.colorTargets).toEqual({ brown: 6, white: 4, black: 2 });
+    expect(preset!.priorities.attack).toBe(1);
   });
 });
