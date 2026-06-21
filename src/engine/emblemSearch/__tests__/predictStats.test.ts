@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { emblems } from "../../../data/gameData";
 import { buildCandidatePool } from "../adapt";
-import { predictFlatStatRanges } from "../predictStats";
+import { predictFlatStatRanges, poolHasFlatCdrEmblems } from "../predictStats";
 
 const pool = buildCandidatePool(emblems, { grades: ["gold"] });
 
@@ -60,5 +60,24 @@ describe("predictFlatStatRanges", () => {
     expect(move).toBeDefined();
     expect(move!.weight).toBe(0);
     expect(Number.isFinite(move!.predicted)).toBe(true);
+  });
+
+  it("poolHasFlatCdrEmblems detects Mew, Mewtwo, and Celebi", () => {
+    expect(poolHasFlatCdrEmblems(pool)).toBe(true);
+    const noCdr = pool.filter((c) => (c.stats.cdr ?? 0) <= 0);
+    expect(poolHasFlatCdrEmblems(noCdr)).toBe(false);
+  });
+
+  it("reports flat CDR via alsoReport when pool includes flat CDR emblems", () => {
+    const out = predictFlatStatRanges(pool, { attack: 5 }, 5, undefined, ["cdr"]);
+    const cdr = out.find((p) => p.stat === "cdr");
+    expect(cdr).toBeDefined();
+    expect(Number.isFinite(cdr!.predicted)).toBe(true);
+  });
+
+  it("predicts positive flat CDR when CDR is prioritized and pool includes flat CDR emblems", () => {
+    const out = predictFlatStatRanges(pool, { cdr: 5, attack: 0.1 }, 5);
+    const cdr = out.find((p) => p.stat === "cdr");
+    expect(cdr?.predicted).toBeGreaterThan(0);
   });
 });

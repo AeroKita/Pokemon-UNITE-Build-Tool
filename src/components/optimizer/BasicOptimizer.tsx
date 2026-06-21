@@ -21,7 +21,6 @@ export function BasicOptimizer({
     pokemon,
     searchState,
     resultPicks,
-    effectiveDelta,
     hasResult,
     historyCount,
     historyIndex,
@@ -215,11 +214,9 @@ export function BasicOptimizer({
       {hasResult && resultPicks && (
         <ResultCards
           picks={resultPicks}
-          effectiveDelta={effectiveDelta}
           searchResult={searchState.result}
           pokemon={pokemon}
-          optimizeLevel={optimizeLevel}
-          pokemonAwareScoring
+          searchLevel={optimizeLevel}
           applied={applied}
           historyCount={historyCount}
           historyIndex={historyIndex}

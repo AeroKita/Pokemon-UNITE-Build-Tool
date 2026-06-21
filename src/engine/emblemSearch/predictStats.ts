@@ -20,6 +20,11 @@ import { STAT_NORM } from "./evaluate";
 
 const SLOTS = 10;
 
+/** True when the pool includes emblems with flat CDR stats (Mew, Mewtwo, Celebi). */
+export function poolHasFlatCdrEmblems(pool: EmblemCandidate[]): boolean {
+  return pool.some((c) => (c.stats.cdr ?? 0) > 0);
+}
+
 export interface FlatStatPrediction {
   stat: keyof StatBlock;
   weight: number;

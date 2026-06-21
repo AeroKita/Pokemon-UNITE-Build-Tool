@@ -5,7 +5,7 @@ import type { ColorBonusPreviewItem } from "../../engine/emblemSearch/colorBonus
 import type { FlatStatPrediction } from "../../engine/emblemSearch/predictStats";
 import type { ResolvedEmblemPreset } from "../../engine/emblemSearch/optimizerPresets";
 import type { EmblemCandidate, SearchMode } from "../../engine/emblemSearch/types";
-import type { EmblemColor, EmblemGrade, StatBlock } from "../../types";
+import type { EmblemColor, EmblemGrade, EmblemLoadout, StatBlock } from "../../types";
 import type { pokemonById } from "../../data/gameData";
 import { EMBLEM_COLOR_HEX } from "../../ui/colors";
 import type { SearchResult } from "../../engine/emblemSearch/types";
@@ -78,14 +78,16 @@ export interface AppliedState {
 }
 
 export interface EffectiveDelta {
+  effective: StatBlock;
   delta: Partial<Record<keyof StatBlock, number>>;
+  emblemLoadout: EmblemLoadout;
+  oocMoveSpeed: number | null;
 }
 
 export interface OptimizerSharedProps {
   pokemon: OptimizerPokemon;
   searchState: EmblemSearchState;
   resultPicks: EmblemPick[] | undefined;
-  effectiveDelta: EffectiveDelta | null;
   hasResult: boolean;
   historyCount: number;
   historyIndex: number;

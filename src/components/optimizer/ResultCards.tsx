@@ -1,5 +1,9 @@
-import { emblemById } from "../../data/gameData";
-import type { EmblemGrade, StatBlock } from "../../types";
+import { useEffect, useMemo, useState } from "react";
+import { emblemById, heldItemById, setBonuses } from "../../data/gameData";
+import { deriveEmblemLoadoutImpact } from "../../engine/emblemSearch/pokemonScore";
+import type { EmblemGrade, HeldItem } from "../../types";
+import { useStore } from "../../state/store";
+import { STAT_ROWS, formatExactDelta, formatStat } from "../../ui/format";
 import { CollapsibleCard } from "../CollapsibleCard";
 import { EmblemSetSummary } from "../EmblemSetSummary";
 import { Tooltip } from "../Tooltip";
@@ -7,21 +11,14 @@ import { emblemTip } from "../tips";
 import { EMBLEM_COLOR_HEX, GRADE_LETTER } from "../../ui/colors";
 import { emblemIconForGrade } from "../../ui/emblemIcon";
 import { asset } from "../../ui/asset";
-import {
-  fmtDelta,
-  STAT_LABELS,
-  type AppliedState,
-  type EffectiveDelta,
-  type OptimizerPokemon,
-} from "./shared";
+import { type AppliedState, type EffectiveDelta, type OptimizerPokemon } from "./shared";
 
 export interface ResultPanelProps {
   picks: { emblemId: string; grade: EmblemGrade }[];
-  effectiveDelta: EffectiveDelta | null;
   searchResult: { phase: string; candidates: number; totalMs: number; error?: number } | null;
   pokemon: OptimizerPokemon;
-  optimizeLevel: number;
-  pokemonAwareScoring: boolean;
+  /** Level the search was run at — preview slider defaults here. */
+  searchLevel: number;
   applied: AppliedState;
   historyCount: number;
   historyIndex: number;
@@ -30,13 +27,32 @@ export interface ResultPanelProps {
   onApplyEmblems: () => void;
 }
 
+function picksKey(picks: { emblemId: string; grade: EmblemGrade }[]): string {
+  return picks.map((p) => `${p.emblemId}:${p.grade}`).join(",");
+}
+
+function resolveHeldItems(
+  heldItemIds: (string | null)[],
+  heldSlotGrades: [number, number, number],
+): { items: HeldItem[]; itemGrades: number[] } {
+  const items: HeldItem[] = [];
+  const itemGrades: number[] = [];
+  for (let i = 0; i < 3; i++) {
+    const id = heldItemIds[i];
+    if (!id) continue;
+    const item = heldItemById.get(id);
+    if (!item) continue;
+    items.push(item);
+    itemGrades.push(heldSlotGrades[i] ?? 40);
+  }
+  return { items, itemGrades };
+}
+
 export function ResultCards({
   picks,
-  effectiveDelta,
   searchResult,
   pokemon,
-  optimizeLevel,
-  pokemonAwareScoring,
+  searchLevel,
   applied,
   historyCount,
   historyIndex,
@@ -44,6 +60,40 @@ export function ResultCards({
   onClearResults,
   onApplyEmblems,
 }: ResultPanelProps) {
+  const { loadout, heldSlotGrades } = useStore();
+  const [previewLevel, setPreviewLevel] = useState(searchLevel);
+  const buildKey = useMemo(() => picksKey(picks), [picks]);
+
+  useEffect(() => {
+    setPreviewLevel(searchLevel);
+  }, [searchLevel, buildKey]);
+
+  const effectiveDelta = useMemo((): EffectiveDelta | null => {
+    if (!picks.length || !pokemon) return null;
+    const { items, itemGrades } = resolveHeldItems(loadout.heldItemIds, heldSlotGrades);
+    try {
+      const impact = deriveEmblemLoadoutImpact(
+        pokemon,
+        previewLevel,
+        picks,
+        items,
+        itemGrades,
+        setBonuses,
+      );
+      if (!impact || Object.keys(impact.emblemDelta).length === 0) return null;
+      return {
+        effective: impact.effective,
+        delta: impact.emblemDelta,
+        emblemLoadout: impact.emblemLoadout,
+        oocMoveSpeed: impact.oocMoveSpeed,
+      };
+    } catch {
+      return null;
+    }
+  }, [picks, pokemon, previewLevel, loadout.heldItemIds, heldSlotGrades]);
+
+  const previewingOtherLevel = previewLevel !== searchLevel;
+
   return (
     <CollapsibleCard
       title="Results"
@@ -127,29 +177,106 @@ export function ResultCards({
 
         <EmblemSetSummary picks={picks} />
 
-        {effectiveDelta && Object.keys(effectiveDelta.delta).length > 0 && pokemon && (
-          <div>
-            <p className="mb-2 text-xs font-medium text-faint">
-              Stat gains at {pokemon.displayName} Lv.{optimizeLevel}
-              {pokemonAwareScoring && <span className="ml-1 text-accent-ink">· Pokémon-aware</span>}
-            </p>
+        {effectiveDelta && pokemon && (
+          <div className="rounded-xl border border-line-soft bg-surface/60 p-3 ring-1 ring-line/40">
+            <div className="mb-2 flex items-start justify-between gap-3">
+              <div className="min-w-0">
+                <p className="text-xs font-semibold uppercase tracking-wide text-faint">
+                  Effective stats
+                </p>
+                <p className="mt-0.5 truncate text-sm text-muted">{pokemon.displayName}</p>
+              </div>
+              <span className="shrink-0 rounded-md bg-grade-badge px-2.5 py-0.5 font-mono text-sm font-bold text-white tabular-nums">
+                Lv {previewLevel}
+              </span>
+            </div>
+
+            <div className="py-2">
+              <input
+                type="range"
+                min={1}
+                max={15}
+                step={1}
+                value={previewLevel}
+                onChange={(e) => setPreviewLevel(Number(e.target.value))}
+                aria-label="Preview level"
+                className="block w-full accent-accent"
+              />
+            </div>
+
+            <div className="mb-3 flex flex-wrap items-center gap-x-2 gap-y-1 text-[11px] text-faint">
+              {previewingOtherLevel ? (
+                <>
+                  <span>
+                    Previewing Lv {previewLevel} · search used Lv {searchLevel}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => setPreviewLevel(searchLevel)}
+                    className="font-medium text-accent-ink underline decoration-accent-ink/40 underline-offset-2 hover:decoration-accent-ink"
+                  >
+                    Reset
+                  </button>
+                </>
+              ) : (
+                <span>Search level — slide to compare other levels</span>
+              )}
+            </div>
+
             <dl className="grid grid-cols-2 gap-x-6 gap-y-0 sm:grid-cols-3">
-              {(Object.entries(effectiveDelta.delta) as [keyof StatBlock, number][])
-                .filter(([k]) => STAT_LABELS[k])
-                .map(([stat, delta]) => (
+              {STAT_ROWS.map((row) => {
+                const eff = effectiveDelta.effective[row.key];
+                const delta = effectiveDelta.delta[row.key];
+                return (
                   <div
-                    key={stat}
+                    key={row.key}
                     className="flex items-baseline justify-between border-b border-line-soft py-1"
                   >
-                    <dt className="text-sm text-muted">{STAT_LABELS[stat]}</dt>
-                    <dd
-                      className={`font-mono text-sm font-semibold ${delta >= 0 ? "text-pos" : "text-neg"}`}
-                    >
-                      {fmtDelta(stat, delta)}
+                    <dt className="text-sm text-muted">{row.label}</dt>
+                    <dd className="text-right font-mono text-sm font-semibold text-ink">
+                      {formatStat(eff, row.kind)}
+                      {delta !== undefined && (
+                        <span
+                          className={`ml-1 text-xs font-normal ${delta >= 0 ? "text-pos" : "text-neg"}`}
+                        >
+                          ({formatExactDelta(delta, row.kind)})
+                        </span>
+                      )}
                     </dd>
                   </div>
-                ))}
+                );
+              })}
             </dl>
+
+            <p className="mt-2 text-xs text-faint">
+              Out-of-combat move speed:{" "}
+              <span className="font-mono">{effectiveDelta.oocMoveSpeed?.toLocaleString()}</span>
+              {effectiveDelta.oocMoveSpeed != null &&
+                effectiveDelta.oocMoveSpeed > effectiveDelta.effective.moveSpeed && (
+                  <span className="ml-1 text-pos">
+                    (
+                    {formatExactDelta(
+                      effectiveDelta.oocMoveSpeed - effectiveDelta.effective.moveSpeed,
+                      "int",
+                    )}
+                    )
+                  </span>
+                )}
+              {effectiveDelta.emblemLoadout.activeSetBonuses.length > 0 && (
+                <>
+                  {" "}
+                  · Set bonuses:{" "}
+                  {effectiveDelta.emblemLoadout.activeSetBonuses
+                    .map((b) => `${b.color} +${(b.bonusPercent * 100).toFixed(0)}%`)
+                    .join(", ")}
+                </>
+              )}
+            </p>
+            {effectiveDelta.emblemLoadout.activeSetBonuses.some((b) => b.color === "yellow") && (
+              <p className="mt-1 text-xs text-faint">
+                Yellow set bonus applies only out of combat.
+              </p>
+            )}
           </div>
         )}
 

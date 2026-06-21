@@ -18,9 +18,6 @@ export function PriorityFlatEstimate({
   poolCandidateCount?: number;
   useOwned?: boolean;
 }) {
-  if (stat === "cdr") {
-    return <span className="text-faint">From black set bonus, not flat emblems</span>;
-  }
   if (!pred) {
     if (poolTooSmall && weight > 0) {
       return (

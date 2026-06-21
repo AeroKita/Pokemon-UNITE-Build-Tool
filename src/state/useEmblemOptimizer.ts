@@ -1,13 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useStore } from "./store";
 import type { EmblemPick } from "./loadout";
-import {
-  emblems as allEmblems,
-  heldItemById,
-  setBonuses,
-  pokemonById,
-  pokemonList,
-} from "../data/gameData";
+import { emblems as allEmblems, setBonuses, pokemonById, pokemonList } from "../data/gameData";
 import {
   buildPool,
   approximateBuildCount,
@@ -49,9 +43,7 @@ import type {
   SearchMode,
   PoolConfig,
 } from "../engine/emblemSearch/types";
-import type { EmblemColor, EmblemGrade, HeldItem, StatBlock } from "../types";
-import { computeEmblemLoadout } from "../engine/emblems";
-import { computeEffectiveStats } from "../engine/formulas";
+import type { EmblemColor, EmblemGrade, StatBlock } from "../types";
 import {
   emblemPicksFromResult,
   POSITIVE_COLORS,
@@ -59,7 +51,6 @@ import {
   type AppliedState,
   type ColorMode,
   type Effort,
-  type EffectiveDelta,
   type OptimizerAdvancedProps,
   type OptimizerBasicProps,
   type OptimizerSharedProps,
@@ -70,7 +61,7 @@ export function useEmblemOptimizer(): {
   basic: OptimizerBasicProps;
   advanced: OptimizerAdvancedProps;
 } {
-  const { loadout, dispatch, owned, heldSlotGrades, expert } = useStore();
+  const { loadout, dispatch, owned, expert } = useStore();
   const pokemon = loadout.pokemonId ? (pokemonById.get(loadout.pokemonId) ?? null) : null;
 
   const [basicUseOwned, setBasicUseOwned] = useState(BASIC_POOL_DEFAULTS.useOwned);
@@ -568,59 +559,10 @@ export function useEmblemOptimizer(): {
   const historyCount = searchState.history.length;
   const historyIndex = searchState.historyIndex >= 0 ? searchState.historyIndex : 0;
 
-  const effectiveDelta = useMemo((): EffectiveDelta | null => {
-    const result = searchState.result;
-    if (!result || !pokemon) return null;
-
-    const items: HeldItem[] = [];
-    const itemGrades: number[] = [];
-    for (let i = 0; i < 3; i++) {
-      const id = loadout.heldItemIds[i];
-      if (!id) continue;
-      const item = heldItemById.get(id);
-      if (!item) continue;
-      items.push(item);
-      itemGrades.push(heldSlotGrades[i] ?? 40);
-    }
-
-    try {
-      const ctx = { inCombat: true, goalsScored: 0 };
-      const emptyLoadout = computeEmblemLoadout([], setBonuses);
-      const emblemLoadout = computeEmblemLoadout(result.picks, setBonuses);
-      const baseline = computeEffectiveStats(
-        pokemon,
-        optimizeLevel,
-        emptyLoadout,
-        items,
-        itemGrades,
-        ctx,
-      );
-      const withEmblems = computeEffectiveStats(
-        pokemon,
-        optimizeLevel,
-        emblemLoadout,
-        items,
-        itemGrades,
-        ctx,
-      );
-
-      const delta: Partial<Record<keyof StatBlock, number>> = {};
-      for (const key of Object.keys(baseline) as (keyof StatBlock)[]) {
-        const d = (withEmblems[key] ?? 0) - (baseline[key] ?? 0);
-        if (Math.abs(d) > 0.005) delta[key] = d;
-      }
-
-      return { delta };
-    } catch {
-      return null;
-    }
-  }, [searchState.result, pokemon, optimizeLevel, loadout.heldItemIds, heldSlotGrades]);
-
   const shared: OptimizerSharedProps = {
     pokemon,
     searchState,
     resultPicks,
-    effectiveDelta,
     hasResult,
     historyCount,
     historyIndex,
