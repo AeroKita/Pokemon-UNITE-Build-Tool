@@ -20,6 +20,112 @@
       "shadow-sneak": "/assets/skills/Aegislash/Shadow+Sneak.mp4",
       "wide-guard": "/assets/skills/Aegislash/Wide+Guard.mp4"
     },
+    "alcremie": {
+      "charm": "/assets/skills/Alcremie/Charm.mp4",
+      "dazzling-gleam": "/assets/skills/Alcremie/Dazzling+Gleam.mp4",
+      "decorate": "/assets/skills/Alcremie/Decorate.mp4",
+      "fluffy-cream-supreme": "/assets/skills/Alcremie/Fluffy+Cream+Supreme.mp4",
+      "helping-hand": "/assets/skills/Alcremie/Helping+Hand.mp4",
+      "recover": "/assets/skills/Alcremie/Recover.mp4",
+      "sweet-scent": "/assets/skills/Alcremie/Sweet+Scent.mp4"
+    },
+    "armarouge": {
+      "armor-cannon": "/assets/skills/Armarouge/Armor+Cannon.mp4",
+      "fire-spin": "/assets/skills/Armarouge/Fire+Spin.mp4",
+      "flame-charge": "/assets/skills/Armarouge/Flame+Charge.mp4",
+      "incinerate": "/assets/skills/Armarouge/Incinerate.mp4",
+      "psykaboom": "/assets/skills/Armarouge/Psykaboom.mp4",
+      "psyshock": "/assets/skills/Armarouge/Psyshock.mp4",
+      "will-o-wisp": "/assets/skills/Armarouge/Will-o-Wisp.mp4"
+    },
+    "articuno": {
+      "blizzard": "/assets/skills/Articuno/Blizzard.mp4",
+      "ice-beam": "/assets/skills/Articuno/Ice+Beam.mp4",
+      "ice-shard": "/assets/skills/Articuno/Ice+Shard.mp4",
+      "ice-wing-whiteout": "/assets/skills/Articuno/Ice+Wing+Whiteout.mp4",
+      "icy-wind": "/assets/skills/Articuno/Icy+Wind.mp4"
+    },
+    "azumarill": {
+      "aqua-tail": "/assets/skills/Azumarill/Aqua+Tail.mp4",
+      "belly-bash": "/assets/skills/Azumarill/Belly+Bash.mp4",
+      "bubble": "/assets/skills/Azumarill/Bubble.mp4",
+      "play-rough": "/assets/skills/Azumarill/Play+Rough.mp4",
+      "tackle": "/assets/skills/Azumarill/Tackle.mp4",
+      "water-pulse": "/assets/skills/Azumarill/Water+Pulse.mp4",
+      "whirlpool": "/assets/skills/Azumarill/Whirlpool.mp4"
+    },
+    "blastoise": {
+      "hydro-pump": "/assets/skills/Blastoise/Hydro+Pump.mp4",
+      "hydro-typhoon": "/assets/skills/Blastoise/Hydro+Typhoon.mp4",
+      "rapid-spin": "/assets/skills/Blastoise/Rapid+Spin.mp4",
+      "skull-bash": "/assets/skills/Blastoise/Skull+Bash.mp4",
+      "surf": "/assets/skills/Blastoise/Surf.mp4",
+      "water-gun": "/assets/skills/Blastoise/Water+Gun.mp4",
+      "water-spout": "/assets/skills/Blastoise/Water+Spout.mp4"
+    },
+    "blaziken": {
+      "aerial-ace": "/assets/skills/Blaziken/Aerial+Ace.mp4",
+      "blaze-kick": "/assets/skills/Blaziken/Blaze+Kick.mp4",
+      "ember": "/assets/skills/Blaziken/Ember.mp4",
+      "fire-punch": "/assets/skills/Blaziken/Fire+Punch.mp4",
+      "focus-blast": "/assets/skills/Blaziken/Focus+Blast.mp4",
+      "overheat": "/assets/skills/Blaziken/Overheat.mp4",
+      "spinning-flame-fist": "/assets/skills/Blaziken/Spinning+Flame+Fist.mp4"
+    },
+    "blissey": {
+      "bliss-assistance": "/assets/skills/Blissey/Bliss+Assistance.mp4",
+      "egg-bomb": "/assets/skills/Blissey/Egg+Bomb.mp4",
+      "heal-pulse": "/assets/skills/Blissey/Heal+Pulse.mp4",
+      "helping-hand": "/assets/skills/Blissey/Helping+Hand.mp4",
+      "pound": "/assets/skills/Blissey/Pound.mp4",
+      "safeguard": "/assets/skills/Blissey/Safeguard.mp4",
+      "soft-boiled": "/assets/skills/Blissey/Soft-Boiled.mp4"
+    },
+    "buzzwole": {
+      "fell-stinger": "/assets/skills/Buzzwole/Fell+Stinger.mp4",
+      "leech-life": "/assets/skills/Buzzwole/Leech+Life.mp4",
+      "lunge": "/assets/skills/Buzzwole/Lunge.mp4",
+      "mega-punch": "/assets/skills/Buzzwole/Mega+Punch.mp4",
+      "smack-down": "/assets/skills/Buzzwole/Smack+Down.mp4",
+      "superpower": "/assets/skills/Buzzwole/Superpower.mp4",
+      "ultra-swole-slam": "/assets/skills/Buzzwole/Ultra+Swole+Slam.mp4"
+    },
+    "ceruledge": {
+      "bitter-blade": "/assets/skills/Ceruledge/Bitter+Blade.mp4",
+      "flame-charge": "/assets/skills/Ceruledge/Flame+Charge.mp4",
+      "lava-plume": "/assets/skills/Ceruledge/Lava+Plume.mp4",
+      "phantom-force": "/assets/skills/Ceruledge/Phantom+Force.mp4",
+      "psycho-cut": "/assets/skills/Ceruledge/Psycho+Cut.mp4",
+      "revenant-rend": "/assets/skills/Ceruledge/Revenant+Rend.mp4",
+      "take-down": "/assets/skills/Ceruledge/Take+Down.mp4"
+    },
+    "chandelure": {
+      "ember": "/assets/skills/Chandelure/Ember.mp4",
+      "flamethrower": "/assets/skills/Chandelure/Flamethrower.mp4",
+      "ignite-midnight": "/assets/skills/Chandelure/Ignite+Midnight.mp4",
+      "imprison": "/assets/skills/Chandelure/Imprison.mp4",
+      "night-shade": "/assets/skills/Chandelure/Night+Shade.mp4",
+      "overheat": "/assets/skills/Chandelure/Overheat.mp4",
+      "poltergeist": "/assets/skills/Chandelure/Poltergeist.mp4"
+    },
+    "charizard": {
+      "fire-blast": "/assets/skills/Charizard/Fire+Blast.mp4",
+      "fire-punch": "/assets/skills/Charizard/Fire+Punch.mp4",
+      "fire-spin": "/assets/skills/Charizard/Fire+Spin.mp4",
+      "flame-burst": "/assets/skills/Charizard/Flame+Burst.mp4",
+      "flamethrower": "/assets/skills/Charizard/Flamethrower.mp4",
+      "flare-blitz": "/assets/skills/Charizard/Flare+Blitz.mp4",
+      "seismic-slam": "/assets/skills/Charizard/Seismic+Slam.mp4"
+    },
+    "cinderace": {
+      "blaze-kick": "/assets/skills/Cinderace/Blaze+Kick.mp4",
+      "blazing-bicycle-kick": "/assets/skills/Cinderace/Blazing+Bicycle+Kick.mp4",
+      "ember": "/assets/skills/Cinderace/Ember.mp4",
+      "feint": "/assets/skills/Cinderace/Feint.mp4",
+      "flame-charge": "/assets/skills/Cinderace/Flame+Charge.mp4",
+      "low-sweep": "/assets/skills/Cinderace/Low+Sweep.mp4",
+      "pyro-ball": "/assets/skills/Cinderace/Pyro+Ball.mp4"
+    },
     "lucario": {
       "aura-cannon": "/assets/skills/Lucario/Aura+Cannon.mp4",
       "bone-rush": "/assets/skills/Lucario/Bone+Rush.mp4",
@@ -28,6 +134,20 @@
       "meteor-mash": "/assets/skills/Lucario/Meteor+Mash.mp4",
       "power-up-punch": "/assets/skills/Lucario/Power-Up+Punch.mp4",
       "quick-attack": "/assets/skills/Lucario/Quick+Attack.mp4"
+    },
+    "mega-charizard-x": {
+      "fire-punch": "/assets/skills/Mega-Charizard-X/Fire+Punch.mp4",
+      "fire-spin": "/assets/skills/Mega-Charizard-X/Fire+Spin.mp4",
+      "flame-burst": "/assets/skills/Mega-Charizard-X/Flame+Burst.mp4",
+      "flare-blitz": "/assets/skills/Mega-Charizard-X/Flare+Blitz.mp4",
+      "seismic-slam": "/assets/skills/Mega-Charizard-X/Seismic+Slam.mp4"
+    },
+    "mega-charizard-y": {
+      "fire-blast": "/assets/skills/Mega-Charizard-Y/Fire+Blast.mp4",
+      "fire-spin": "/assets/skills/Mega-Charizard-Y/Fire+Spin.mp4",
+      "flame-burst": "/assets/skills/Mega-Charizard-Y/Flame+Burst.mp4",
+      "flamethrower": "/assets/skills/Mega-Charizard-Y/Flamethrower.mp4",
+      "seismic-slam": "/assets/skills/Mega-Charizard-Y/Seismic+Slam.mp4"
     },
     "mega-lucario": {
       "aura-cannon": "/assets/skills/Mega-Lucario/Aura+Cannon.mp4",
@@ -45,6 +165,15 @@
       "pay-day": "/assets/skills/Meowth/Pay+Day.mp4",
       "scratch": "/assets/skills/Meowth/Scratch.mp4"
     },
+    "pikachu": {
+      "electro-ball": "/assets/skills/Pikachu/Electro+Ball.mp4",
+      "electroweb": "/assets/skills/Pikachu/Electroweb.mp4",
+      "thunder-shock": "/assets/skills/Pikachu/Thunder+Shock.mp4",
+      "thunder": "/assets/skills/Pikachu/Thunder.mp4",
+      "thunderbolt": "/assets/skills/Pikachu/Thunderbolt.mp4",
+      "thunderstorm": "/assets/skills/Pikachu/Thunderstorm.mp4",
+      "volt-tackle": "/assets/skills/Pikachu/Volt+Tackle.mp4"
+    },
     "skeledirge": {
       "disarming-voice": "/assets/skills/Skeledirge/Disarming+Voice.mp4",
       "hyper-voice": "/assets/skills/Skeledirge/Hyper+Voice.mp4",
@@ -60,6 +189,25 @@
       "flame-sweep": "/assets/skills/Talonflame/Flame+Sweep.mp4",
       "fly": "/assets/skills/Talonflame/Fly.mp4",
       "peck": "/assets/skills/Talonflame/Peck.mp4"
+    },
+    "urshifu": {
+      "ebon-fist": "/assets/skills/Urshifu/Ebon+Fist.mp4",
+      "flowing-fists": "/assets/skills/Urshifu/Flowing+Fists.mp4",
+      "headbutt": "/assets/skills/Urshifu/Headbutt.mp4",
+      "liquidation": "/assets/skills/Urshifu/Liquidation.mp4",
+      "rock-smash": "/assets/skills/Urshifu/Rock+Smash.mp4",
+      "surging-strikes": "/assets/skills/Urshifu/Surging+Strikes.mp4",
+      "throat-chop": "/assets/skills/Urshifu/Throat+Chop.mp4",
+      "wicked-blow": "/assets/skills/Urshifu/Wicked+Blow.mp4"
+    },
+    "venusaur": {
+      "giga-drain": "/assets/skills/Venusaur/Giga+Drain.mp4",
+      "petal-dance": "/assets/skills/Venusaur/Petal+Dance.mp4",
+      "razor-leaf": "/assets/skills/Venusaur/Razor+Leaf.mp4",
+      "seed-bomb": "/assets/skills/Venusaur/Seed+Bomb.mp4",
+      "sludge-bomb": "/assets/skills/Venusaur/Sludge+Bomb.mp4",
+      "solar-beam": "/assets/skills/Venusaur/Solar+Beam.mp4",
+      "verdant-anger": "/assets/skills/Venusaur/Verdant+Anger.mp4"
     }
   }
 }

@@ -1623,7 +1623,8 @@
           ],
           "moveType": "Buff",
           "iconAsset": "/assets/skills/Alcremie/Helping+Hand.png",
-          "descriptionAdvanced": "Grant a designated ally Pokémon or yourself a shield for 3s, in addition to increasing the recipients Attack by 40 and Special Attack by 25 for 3s"
+          "descriptionAdvanced": "Grant a designated ally Pokémon or yourself a shield for 3s, in addition to increasing the recipients Attack by 40 and Special Attack by 25 for 3s",
+          "videoAsset": "/assets/skills/Alcremie/Helping+Hand.mp4"
         },
         {
           "id": "decorate",
@@ -1662,7 +1663,8 @@
           "isUpgrade": true,
           "moveType": "Buff",
           "upgradeLevel": 4,
-          "descriptionAdvanced": "Grant a designated ally Pokémon or yourself a shield for 4s. If the shield is granted to an ally Pokémon, Alcremie receives an extra shield of the same value. Basic and boosted attacks by the shielded Pokémon will deal additional damage and increase Alcremie's Sweet Gauge by 1 for 6s. The extra shield Alcremie receives when using Decorate on an ally does not apply additional damage to Alcremie's attacks. Alcremie's basic attacks will also increase the Sweet Gauge by 1. When empowered by a full Sweet Gauge, the attacks deal even more additional damage.\n\nThe additional damage depends on the shielded Pokémon's level. Only one main Decorate shield can be active at a time.\n\nUpgrade (Level 10): Increases the strength of the shield."
+          "descriptionAdvanced": "Grant a designated ally Pokémon or yourself a shield for 4s. If the shield is granted to an ally Pokémon, Alcremie receives an extra shield of the same value. Basic and boosted attacks by the shielded Pokémon will deal additional damage and increase Alcremie's Sweet Gauge by 1 for 6s. The extra shield Alcremie receives when using Decorate on an ally does not apply additional damage to Alcremie's attacks. Alcremie's basic attacks will also increase the Sweet Gauge by 1. When empowered by a full Sweet Gauge, the attacks deal even more additional damage.\n\nThe additional damage depends on the shielded Pokémon's level. Only one main Decorate shield can be active at a time.\n\nUpgrade (Level 10): Increases the strength of the shield.",
+          "videoAsset": "/assets/skills/Alcremie/Decorate.mp4"
         },
         {
           "id": "recover",
@@ -1708,7 +1710,8 @@
           "isUpgrade": true,
           "moveType": "Recovery",
           "upgradeLevel": 4,
-          "descriptionAdvanced": "Place a dollop of whipped cream at a designated location for up to 20s. When an ally Pokémon picks up the whipped cream, their HP is restored and their movement speed is increased by 15% for 2s. When whipped cream is consumed by ally Pokémon, the Sweet Gauge is also increased by 3. When the Sweet Gauge is full, the next dollop becomes sweeter, restoring more HP and increasing their movement speed by 40% for 2s instead and increases the Sweet Gauge by 5. Two dollops may be kept in reserve.\n\nAn ally Snorlax will heal additional HP from the dollops.\n\nUpgrade (Level 10): The maximum number of uses that can be kept in reserve is increased to 3."
+          "descriptionAdvanced": "Place a dollop of whipped cream at a designated location for up to 20s. When an ally Pokémon picks up the whipped cream, their HP is restored and their movement speed is increased by 15% for 2s. When whipped cream is consumed by ally Pokémon, the Sweet Gauge is also increased by 3. When the Sweet Gauge is full, the next dollop becomes sweeter, restoring more HP and increasing their movement speed by 40% for 2s instead and increases the Sweet Gauge by 5. Two dollops may be kept in reserve.\n\nAn ally Snorlax will heal additional HP from the dollops.\n\nUpgrade (Level 10): The maximum number of uses that can be kept in reserve is increased to 3.",
+          "videoAsset": "/assets/skills/Alcremie/Recover.mp4"
         },
         {
           "id": "charm",
@@ -1731,7 +1734,8 @@
           ],
           "moveType": "Debuff",
           "iconAsset": "/assets/skills/Alcremie/Charm.png",
-          "descriptionAdvanced": "Charm a target Pokémon with your cute voice, dealing damage to the first Pokémon hit. Pokémon hit by the charm have their Attack reduced by 30 and Special Attack reduced by 20 and movement speed reduced by 30% for 2s. Additionally, increases the sweet gauge by 2."
+          "descriptionAdvanced": "Charm a target Pokémon with your cute voice, dealing damage to the first Pokémon hit. Pokémon hit by the charm have their Attack reduced by 30 and Special Attack reduced by 20 and movement speed reduced by 30% for 2s. Additionally, increases the sweet gauge by 2.",
+          "videoAsset": "/assets/skills/Alcremie/Charm.mp4"
         },
         {
           "id": "dazzling-gleam",
@@ -1756,7 +1760,8 @@
           "isUpgrade": true,
           "moveType": "Hindrance",
           "upgradeLevel": 6,
-          "descriptionAdvanced": "Release a conal ray of light in a designated direction, dealing damage to opposing Pokémon, stunning them for 0.4s and increasing the Sweet Gauge by 4 for every opposing Pokémon hit. If an ally Pokémon has been affected by Decorate, the decorated Pokémon will also release a conal ray of light.\n\nAlcremie can move around while casting this move, but is slowed by 20%.\n\nUpgrade (Level 12): Increases the damage of this move."
+          "descriptionAdvanced": "Release a conal ray of light in a designated direction, dealing damage to opposing Pokémon, stunning them for 0.4s and increasing the Sweet Gauge by 4 for every opposing Pokémon hit. If an ally Pokémon has been affected by Decorate, the decorated Pokémon will also release a conal ray of light.\n\nAlcremie can move around while casting this move, but is slowed by 20%.\n\nUpgrade (Level 12): Increases the damage of this move.",
+          "videoAsset": "/assets/skills/Alcremie/Dazzling+Gleam.mp4"
         },
         {
           "id": "sweet-scent",
@@ -1788,7 +1793,8 @@
           "isUpgrade": true,
           "moveType": "Debuff",
           "upgradeLevel": 6,
-          "descriptionAdvanced": "Launch a sweet scent at a designated location, dealing damage to opposing Pokémon in the area and lowering their movement speed by 30%, decaying by 10% every 0.5s. The outer ring of the scent remains for 3s, dealing damage, applying a 100% slow lasting 0.5s to oppposing Pokémon who touch the ring. Both the intial area and outer ring can hit at the same time. Increases the Sweet Gauge by 2 for every hit.\n\nUpgrade (Level 12): Increases the duration of the outer ring slow to 1.5s."
+          "descriptionAdvanced": "Launch a sweet scent at a designated location, dealing damage to opposing Pokémon in the area and lowering their movement speed by 30%, decaying by 10% every 0.5s. The outer ring of the scent remains for 3s, dealing damage, applying a 100% slow lasting 0.5s to oppposing Pokémon who touch the ring. Both the intial area and outer ring can hit at the same time. Increases the Sweet Gauge by 2 for every hit.\n\nUpgrade (Level 12): Increases the duration of the outer ring slow to 1.5s.",
+          "videoAsset": "/assets/skills/Alcremie/Sweet+Scent.mp4"
         },
         {
           "id": "fluffy-cream-supreme",
@@ -1818,7 +1824,8 @@
           ],
           "moveType": "Recovery",
           "iconAsset": "/assets/skills/Alcremie/Fluffy+Cream+Supreme.png",
-          "descriptionAdvanced": "Create a giant cake and stand atop it becoming unstoppable and gaining a shield for 6s. Then throw whipped cream at allies. Allies who receive whipped cream are healed and have their maximum HP buffed for 8s. This move ends early if this move's shield is lost, Alcremie becomes bound, or if the move is manually cancelled.\n\nThe shield is 60% of Alcremie's max HP"
+          "descriptionAdvanced": "Create a giant cake and stand atop it becoming unstoppable and gaining a shield for 6s. Then throw whipped cream at allies. Allies who receive whipped cream are healed and have their maximum HP buffed for 8s. This move ends early if this move's shield is lost, Alcremie becomes bound, or if the move is manually cancelled.\n\nThe shield is 60% of Alcremie's max HP",
+          "videoAsset": "/assets/skills/Alcremie/Fluffy+Cream+Supreme.mp4"
         }
       ],
       "passiveAbility": {
@@ -2264,7 +2271,8 @@
           ],
           "moveType": "Sure Hit",
           "iconAsset": "/assets/skills/Armarouge/Incinerate.png",
-          "descriptionAdvanced": "Has the user attack the designated opposing Pokémon with a flame, setting them ablaze and dealing damage over time for 4s. When a Pokémon on the opposing team that's ablaze picks up a Berry, the Berry's effects are halved."
+          "descriptionAdvanced": "Has the user attack the designated opposing Pokémon with a flame, setting them ablaze and dealing damage over time for 4s. When a Pokémon on the opposing team that's ablaze picks up a Berry, the Berry's effects are halved.",
+          "videoAsset": "/assets/skills/Armarouge/Incinerate.mp4"
         },
         {
           "id": "fire-spin",
@@ -2296,7 +2304,8 @@
           "isUpgrade": true,
           "moveType": "Area",
           "upgradeLevel": 5,
-          "descriptionAdvanced": "Has the user generate a fierce vortex of fire around themself, dealing damage to opposing Pokémon hit every 0.5s. Each time Armarouge deals damage while Fire Spin is active, gain a shield. This shield can stack up to six times.\n\nGain 20% movement speed while the vortex is active. The vortex lasts 3s, and its duration is increased by 1s if the user hits opposing Pokémon with an auto attack. This extended duration can stack up to 3 times, to a total vortex duration of 6s. Moving towards an enemy will additionally increase movement speed by 10%.\n\nUpgrade (Level 11): Upon using Fire Spin+, gain 3 stacks of shields."
+          "descriptionAdvanced": "Has the user generate a fierce vortex of fire around themself, dealing damage to opposing Pokémon hit every 0.5s. Each time Armarouge deals damage while Fire Spin is active, gain a shield. This shield can stack up to six times.\n\nGain 20% movement speed while the vortex is active. The vortex lasts 3s, and its duration is increased by 1s if the user hits opposing Pokémon with an auto attack. This extended duration can stack up to 3 times, to a total vortex duration of 6s. Moving towards an enemy will additionally increase movement speed by 10%.\n\nUpgrade (Level 11): Upon using Fire Spin+, gain 3 stacks of shields.",
+          "videoAsset": "/assets/skills/Armarouge/Fire+Spin.mp4"
         },
         {
           "id": "armor-cannon",
@@ -2328,7 +2337,8 @@
           "isUpgrade": true,
           "moveType": "Ranged",
           "upgradeLevel": 5,
-          "descriptionAdvanced": "Has the user combine their shoulder armor and start charging power. When charged past a minimum duration, the user then fires a blazing ball of flame. The user releases a shock wave in front of themself when firing, dealing damage to opposing Pokémon in close range.\n\nThe fired ball of flame explodes when it hits an opposing Pokémon or after it travels a set distance, dealing damage to opposing Pokémon and leaving them unable to act for 0.45s. The user's Defense and Sp. Def are decreased by 5% while this move is on cooldown.\n\nUpgrade (Level 11): Increases the range of this move and auto attacks."
+          "descriptionAdvanced": "Has the user combine their shoulder armor and start charging power. When charged past a minimum duration, the user then fires a blazing ball of flame. The user releases a shock wave in front of themself when firing, dealing damage to opposing Pokémon in close range.\n\nThe fired ball of flame explodes when it hits an opposing Pokémon or after it travels a set distance, dealing damage to opposing Pokémon and leaving them unable to act for 0.45s. The user's Defense and Sp. Def are decreased by 5% while this move is on cooldown.\n\nUpgrade (Level 11): Increases the range of this move and auto attacks.",
+          "videoAsset": "/assets/skills/Armarouge/Armor+Cannon.mp4"
         },
         {
           "id": "will-o-wisp",
@@ -2358,7 +2368,8 @@
           ],
           "moveType": "Ranged",
           "iconAsset": "/assets/skills/Armarouge/Will-o-Wisp.png",
-          "descriptionAdvanced": "Has the user shoot a flame in the designated direction, dealing damage to opposing Pokémon hit, leaving them burned and decreasing their movement speed by 20% for 2s. After using this move, the user's next auto attack becomes a boosted attack."
+          "descriptionAdvanced": "Has the user shoot a flame in the designated direction, dealing damage to opposing Pokémon hit, leaving them burned and decreasing their movement speed by 20% for 2s. After using this move, the user's next auto attack becomes a boosted attack.",
+          "videoAsset": "/assets/skills/Armarouge/Will-o-Wisp.mp4"
         },
         {
           "id": "flame-charge",
@@ -2390,7 +2401,8 @@
           "isUpgrade": true,
           "moveType": "Dash",
           "upgradeLevel": 7,
-          "descriptionAdvanced": "Has the user cloak themself in flame and charge in the designated direction, dealing damage to opposing Pokémon the user hits and shoving them for 0.45s. When this move hits an opposing Pokémon, the user is granted a shield for 3s and this move's cooldown is reduced by 20%.\n\nFor 3s after using this move, the cannon gauge becomes full and will not decrease after boosted attacks are used.\n\nUpgrade (Level 13): Reduces the damage the user receives by 20% for 3s after this move hits an opposing Pokémon."
+          "descriptionAdvanced": "Has the user cloak themself in flame and charge in the designated direction, dealing damage to opposing Pokémon the user hits and shoving them for 0.45s. When this move hits an opposing Pokémon, the user is granted a shield for 3s and this move's cooldown is reduced by 20%.\n\nFor 3s after using this move, the cannon gauge becomes full and will not decrease after boosted attacks are used.\n\nUpgrade (Level 13): Reduces the damage the user receives by 20% for 3s after this move hits an opposing Pokémon.",
+          "videoAsset": "/assets/skills/Armarouge/Flame+Charge.mp4"
         },
         {
           "id": "psyshock",
@@ -2415,7 +2427,8 @@
           "isUpgrade": true,
           "moveType": "Area",
           "upgradeLevel": 7,
-          "descriptionAdvanced": "Has the user materialize odd psychic waves to attack in three areas of effect in front of themself, dealing damage to opposing Pokémon hit while ignoring 35% of their Sp. Def. The third attack throws opposing Pokémon hit for 0.7s. Multiple of the areas of effect can hit the same opposing Pokémon but the second damage instance will be reduced by 25% and the third by 50%.\n\nFor 3s after using this move, the cannon gauge becomes full and will not decrease after boosted attacks are used.\n\nUpgrade (Level 13): Increases this move's area of effect for the third area blast."
+          "descriptionAdvanced": "Has the user materialize odd psychic waves to attack in three areas of effect in front of themself, dealing damage to opposing Pokémon hit while ignoring 35% of their Sp. Def. The third attack throws opposing Pokémon hit for 0.7s. Multiple of the areas of effect can hit the same opposing Pokémon but the second damage instance will be reduced by 25% and the third by 50%.\n\nFor 3s after using this move, the cannon gauge becomes full and will not decrease after boosted attacks are used.\n\nUpgrade (Level 13): Increases this move's area of effect for the third area blast.",
+          "videoAsset": "/assets/skills/Armarouge/Psyshock.mp4"
         },
         {
           "id": "psykaboom",
@@ -2438,7 +2451,8 @@
           ],
           "moveType": "Hindrance",
           "iconAsset": "/assets/skills/Armarouge/Psykaboom.png",
-          "descriptionAdvanced": "Has the user jump up, becoming unstoppable for 1.85s, and charge psychic power for 1s, then create an area that leaves opposing Pokémon unable to act. While the user is charging psychic power, the Unite Move can be used again to adjust the position of the area. The user then fires a ball of flame towards the center of the area, dealing damage to opposing Pokémon and throwing them away from the center of the area."
+          "descriptionAdvanced": "Has the user jump up, becoming unstoppable for 1.85s, and charge psychic power for 1s, then create an area that leaves opposing Pokémon unable to act. While the user is charging psychic power, the Unite Move can be used again to adjust the position of the area. The user then fires a ball of flame towards the center of the area, dealing damage to opposing Pokémon and throwing them away from the center of the area.",
+          "videoAsset": "/assets/skills/Armarouge/Psykaboom.mp4"
         }
       ],
       "passiveAbility": {
@@ -2877,7 +2891,8 @@
           ],
           "moveType": "Area",
           "iconAsset": "/assets/skills/Articuno/Icy+Wind.png",
-          "descriptionAdvanced": "The user blasts a gust of chilled air in a cone, in the designated direction dealing damage and freezing the ground for a short while.\n\nOpposing Pokémon standing on the frozen ground will have their freeze counter increased over time."
+          "descriptionAdvanced": "The user blasts a gust of chilled air in a cone, in the designated direction dealing damage and freezing the ground for a short while.\n\nOpposing Pokémon standing on the frozen ground will have their freeze counter increased over time.",
+          "videoAsset": "/assets/skills/Articuno/Icy+Wind.mp4"
         },
         {
           "id": "blizzard",
@@ -2902,7 +2917,8 @@
           "isUpgrade": true,
           "moveType": "Area",
           "upgradeLevel": 5,
-          "descriptionAdvanced": "The user summons a howling blizzard dealing damage and increasing the freeze counter on enemies hit.\n\nUpgrade (Level 11): Increases the amount of hits to 8."
+          "descriptionAdvanced": "The user summons a howling blizzard dealing damage and increasing the freeze counter on enemies hit.\n\nUpgrade (Level 11): Increases the amount of hits to 8.",
+          "videoAsset": "/assets/skills/Articuno/Blizzard.mp4"
         },
         {
           "id": "ice-shard",
@@ -2932,7 +2948,8 @@
           ],
           "moveType": "Ranged",
           "iconAsset": "/assets/skills/Articuno/Ice+Shard.png",
-          "descriptionAdvanced": "The user hurls a chunk of ice in the designated direction, dealing damage to opposing Pokémon hit and slowing them by 40% for 2.5s.\n\nIf the target has at least 1 stack of the freeze counter, they will become frozen consuming the counter. If the target is already frozen the move instead deals increased damage."
+          "descriptionAdvanced": "The user hurls a chunk of ice in the designated direction, dealing damage to opposing Pokémon hit and slowing them by 40% for 2.5s.\n\nIf the target has at least 1 stack of the freeze counter, they will become frozen consuming the counter. If the target is already frozen the move instead deals increased damage.",
+          "videoAsset": "/assets/skills/Articuno/Ice+Shard.mp4"
         },
         {
           "id": "ice-beam",
@@ -2964,7 +2981,8 @@
           "isUpgrade": true,
           "moveType": "Area",
           "upgradeLevel": 7,
-          "descriptionAdvanced": "The user fires a slow traveling beam of icy cold energy in the designated direction, dealing damage to opposing Pokémon and slowing them by 30% for 2.5s.\n\nIf the target has at least 1 stack of the freeze counter, they will become frozen consuming the counter. If the target is already frozen the move instead deals increased damage.\n\nUpgrade (Level 13): Increases the freeze duration to 2s when opponents are frozen by the move."
+          "descriptionAdvanced": "The user fires a slow traveling beam of icy cold energy in the designated direction, dealing damage to opposing Pokémon and slowing them by 30% for 2.5s.\n\nIf the target has at least 1 stack of the freeze counter, they will become frozen consuming the counter. If the target is already frozen the move instead deals increased damage.\n\nUpgrade (Level 13): Increases the freeze duration to 2s when opponents are frozen by the move.",
+          "videoAsset": "/assets/skills/Articuno/Ice+Beam.mp4"
         },
         {
           "id": "ice-wing-whiteout",
@@ -2987,7 +3005,8 @@
           ],
           "moveType": "Area",
           "iconAsset": "/assets/skills/Articuno/Ice+Wing+Whiteout.png",
-          "descriptionAdvanced": "The user becomes Unstoppable and immobile, summoning a raging blizzard centered on themself, dealing damage in 5 waves. The second wave deals 5% more damage, third 10%, fourth 15%, and the fifth deals 100% more damage.\n\n9000 HP, 0 Def and SpDef. Unaffected by some status effects and damage over time.\n\nIf the move hits an ally goal zone, a chunk of ice forms on the zone, blocking movement and scoring. The goal zone still provides healing and shielding by standing at the edge of it. This chunk of ice will remain until it is destroyed."
+          "descriptionAdvanced": "The user becomes Unstoppable and immobile, summoning a raging blizzard centered on themself, dealing damage in 5 waves. The second wave deals 5% more damage, third 10%, fourth 15%, and the fifth deals 100% more damage.\n\n9000 HP, 0 Def and SpDef. Unaffected by some status effects and damage over time.\n\nIf the move hits an ally goal zone, a chunk of ice forms on the zone, blocking movement and scoring. The goal zone still provides healing and shielding by standing at the edge of it. This chunk of ice will remain until it is destroyed.",
+          "videoAsset": "/assets/skills/Articuno/Ice+Wing+Whiteout.mp4"
         }
       ],
       "passiveAbility": {
@@ -3310,7 +3329,8 @@
           ],
           "moveType": "Dash",
           "iconAsset": "/assets/skills/Azumarill/Tackle.png",
-          "descriptionAdvanced": "Charge forward; dealing damage to any enemy hit and leave them unable to act for 0.5s."
+          "descriptionAdvanced": "Charge forward; dealing damage to any enemy hit and leave them unable to act for 0.5s.",
+          "videoAsset": "/assets/skills/Azumarill/Tackle.mp4"
         },
         {
           "id": "play-rough",
@@ -3335,7 +3355,8 @@
           "isUpgrade": true,
           "moveType": "Buff",
           "upgradeLevel": 6,
-          "descriptionAdvanced": "Increase movement speed by 30% for 4s and change the next auto attack. When performing the next auto attack, lunge at one enemy in range and deliver repeated blows dealing damage to that target and leave it unable to act for .75s.\n\nUsing Play Rough will overwrite any active Aqua Tail attack change. Play Rough attacks count as auto attacks for the purpose of items, lifesteal and other benefits.\n\nUpgrade (Level 12): Further increases movement speed to 35% when this move is used, and also reduces this move’s cooldown by 1s."
+          "descriptionAdvanced": "Increase movement speed by 30% for 4s and change the next auto attack. When performing the next auto attack, lunge at one enemy in range and deliver repeated blows dealing damage to that target and leave it unable to act for .75s.\n\nUsing Play Rough will overwrite any active Aqua Tail attack change. Play Rough attacks count as auto attacks for the purpose of items, lifesteal and other benefits.\n\nUpgrade (Level 12): Further increases movement speed to 35% when this move is used, and also reduces this move’s cooldown by 1s.",
+          "videoAsset": "/assets/skills/Azumarill/Play+Rough.mp4"
         },
         {
           "id": "water-pulse",
@@ -3360,7 +3381,8 @@
           "isUpgrade": true,
           "moveType": "Ranged",
           "upgradeLevel": 6,
-          "descriptionAdvanced": "Shoot a pulsing blast of water in front of Azumarill. When shooting the blast, Azumarill may perform a short rolling dash in a designated direction. When the blast of water hits an enemy, decrease their movement speed by 40% for 2s and deal damage to all enemies in an area of effect around the initial target. The blast of water then automatically bounces to another target if one is available. Including the first target, the blast of water can bounce between up to three targets consecutively, and each hit behaves in the same way as the first."
+          "descriptionAdvanced": "Shoot a pulsing blast of water in front of Azumarill. When shooting the blast, Azumarill may perform a short rolling dash in a designated direction. When the blast of water hits an enemy, decrease their movement speed by 40% for 2s and deal damage to all enemies in an area of effect around the initial target. The blast of water then automatically bounces to another target if one is available. Including the first target, the blast of water can bounce between up to three targets consecutively, and each hit behaves in the same way as the first.",
+          "videoAsset": "/assets/skills/Azumarill/Water+Pulse.mp4"
         },
         {
           "id": "bubble",
@@ -3383,7 +3405,8 @@
           ],
           "moveType": "Area",
           "iconAsset": "/assets/skills/Azumarill/Bubble.png",
-          "descriptionAdvanced": "Spray bubbles in a cone dealing damage to enemies in the area of effect and decreasing their movement speed by 30% for 2s. This move can be used while moving.\n\nSubsequent hits on the same target deal 25% damage."
+          "descriptionAdvanced": "Spray bubbles in a cone dealing damage to enemies in the area of effect and decreasing their movement speed by 30% for 2s. This move can be used while moving.\n\nSubsequent hits on the same target deal 25% damage.",
+          "videoAsset": "/assets/skills/Azumarill/Bubble.mp4"
         },
         {
           "id": "whirlpool",
@@ -3422,7 +3445,8 @@
           "isUpgrade": true,
           "moveType": "Area",
           "upgradeLevel": 4,
-          "descriptionAdvanced": "For 5s, four small whirlpools appear that swirl around Azumarill as it moves. If a whirlpool hits a wild Pokémon, the whirlpool deals damage to them and restores Azumarill's HP. If a whirlpool hits an enemy player, an increased amount of HP is restored.\n\nMoving clockwise against your target will grant more hits against that target, and counter-clockwise will reduce the number of hits.\n\nUpgrade (Level 10): Reduces this move’s cooldown by 2s and increases the amount of HP restored."
+          "descriptionAdvanced": "For 5s, four small whirlpools appear that swirl around Azumarill as it moves. If a whirlpool hits a wild Pokémon, the whirlpool deals damage to them and restores Azumarill's HP. If a whirlpool hits an enemy player, an increased amount of HP is restored.\n\nMoving clockwise against your target will grant more hits against that target, and counter-clockwise will reduce the number of hits.\n\nUpgrade (Level 10): Reduces this move’s cooldown by 2s and increases the amount of HP restored.",
+          "videoAsset": "/assets/skills/Azumarill/Whirlpool.mp4"
         },
         {
           "id": "aqua-tail",
@@ -3475,7 +3499,8 @@
           "isUpgrade": true,
           "moveType": "Buff",
           "upgradeLevel": 4,
-          "descriptionAdvanced": "Increase area-of-effect and attack speed for the next three auto attacks by 20% for 6s. If these auto attacks hit from a distance, they also deal increased damage and restore HP. Using Aqua Tail will overwrite any active Play Rough attack change.\n\nAqua Tail attacks count as auto attacks for the purpose of items, lifesteal and other benefits.\n\nUpgrade (Level 10): Aqua Tail attacks that hit from a distance reduce the cooldown of all moves by 0.8s."
+          "descriptionAdvanced": "Increase area-of-effect and attack speed for the next three auto attacks by 20% for 6s. If these auto attacks hit from a distance, they also deal increased damage and restore HP. Using Aqua Tail will overwrite any active Play Rough attack change.\n\nAqua Tail attacks count as auto attacks for the purpose of items, lifesteal and other benefits.\n\nUpgrade (Level 10): Aqua Tail attacks that hit from a distance reduce the cooldown of all moves by 0.8s.",
+          "videoAsset": "/assets/skills/Azumarill/Aqua+Tail.mp4"
         },
         {
           "id": "belly-bash",
@@ -3505,7 +3530,8 @@
           ],
           "moveType": "Sure Hit",
           "iconAsset": "/assets/skills/Azumarill/Belly+Bash.png",
-          "descriptionAdvanced": "Azumarill targets an enemy player and then pounds their belly three times; losing 5% remaining HP with each pound in exchange for a 6.5% max HP shield that stacks with each pound and lasts 6s. Azumarill gains increased attack for 8s and can move while pounding their belly. Azumarill then charges at the target damaging and throwing all Pokémon hit while charging and Pokémon within the area effect around the target. Azumarill is unstoppable during this move."
+          "descriptionAdvanced": "Azumarill targets an enemy player and then pounds their belly three times; losing 5% remaining HP with each pound in exchange for a 6.5% max HP shield that stacks with each pound and lasts 6s. Azumarill gains increased attack for 8s and can move while pounding their belly. Azumarill then charges at the target damaging and throwing all Pokémon hit while charging and Pokémon within the area effect around the target. Azumarill is unstoppable during this move.",
+          "videoAsset": "/assets/skills/Azumarill/Belly+Bash.mp4"
         }
       ],
       "passiveAbility": {
@@ -3952,7 +3978,8 @@
           ],
           "moveType": "Ranged",
           "iconAsset": "/assets/skills/Blastoise/Water+Gun.png",
-          "descriptionAdvanced": "Shoots a jet of water in the designated direction after 0.2s, damaging opposing Pokémon hit, shoving them for 0.6s and decreasing their movement speed by 30% for 1s when hit. Opposing Pokémon hit before the jet of water reaches halfway are shoved the full distance; those hit beyond halfway are shoved a short distance instead."
+          "descriptionAdvanced": "Shoots a jet of water in the designated direction after 0.2s, damaging opposing Pokémon hit, shoving them for 0.6s and decreasing their movement speed by 30% for 1s when hit. Opposing Pokémon hit before the jet of water reaches halfway are shoved the full distance; those hit beyond halfway are shoved a short distance instead.",
+          "videoAsset": "/assets/skills/Blastoise/Water+Gun.mp4"
         },
         {
           "id": "hydro-pump",
@@ -3984,7 +4011,8 @@
           "isUpgrade": true,
           "moveType": "Ranged",
           "upgradeLevel": 5,
-          "descriptionAdvanced": "Blasts out a huge amount of water in the designated direction, damaging opposing Pokémon hit 3 times in 0.1s, shoving them and stunning them for 0.6s when hit. Opposing Pokémon hit before the blast of water reaches halfway are shoved the full distance; those hit beyond halfway are shoved a short distance instead.\n\nWhen used during Rapid Spin: Blastoise unleashes a large burst of water in a radius around themself, damaging enemies, knocking them back and stunning those hit for 0.75s. Blastoise also gains a 30% movement speed bonus for the duration of this move.\n\nUpgrade (Level 11): Increased move damage."
+          "descriptionAdvanced": "Blasts out a huge amount of water in the designated direction, damaging opposing Pokémon hit 3 times in 0.1s, shoving them and stunning them for 0.6s when hit. Opposing Pokémon hit before the blast of water reaches halfway are shoved the full distance; those hit beyond halfway are shoved a short distance instead.\n\nWhen used during Rapid Spin: Blastoise unleashes a large burst of water in a radius around themself, damaging enemies, knocking them back and stunning those hit for 0.75s. Blastoise also gains a 30% movement speed bonus for the duration of this move.\n\nUpgrade (Level 11): Increased move damage.",
+          "videoAsset": "/assets/skills/Blastoise/Hydro+Pump.mp4"
         },
         {
           "id": "water-spout",
@@ -4016,7 +4044,8 @@
           "isUpgrade": true,
           "moveType": "Area",
           "upgradeLevel": 5,
-          "descriptionAdvanced": "Casts down a barrage of water at the designated area, damaging opposing Pokémon in the area of effect every 0.5s over 3s (up to 6 times) and decreasing their movement speed by 20% for 2s when hit.\n\nWhen used during Rapid Spin: increases movement speed by 30%, and rapidly spouts bursts of water in different directions around themself, damaging opposing over time when held for the duration of Rapid Spin (up to a possible 17 times). The first hit of Water Spout during Rapid Spin on an opposing Pokémon decreases the target's movement speed; subsequent hits will not.\n\nUpgrade (Level 11): Increased move damage."
+          "descriptionAdvanced": "Casts down a barrage of water at the designated area, damaging opposing Pokémon in the area of effect every 0.5s over 3s (up to 6 times) and decreasing their movement speed by 20% for 2s when hit.\n\nWhen used during Rapid Spin: increases movement speed by 30%, and rapidly spouts bursts of water in different directions around themself, damaging opposing over time when held for the duration of Rapid Spin (up to a possible 17 times). The first hit of Water Spout during Rapid Spin on an opposing Pokémon decreases the target's movement speed; subsequent hits will not.\n\nUpgrade (Level 11): Increased move damage.",
+          "videoAsset": "/assets/skills/Blastoise/Water+Spout.mp4"
         },
         {
           "id": "skull-bash",
@@ -4039,7 +4068,8 @@
           ],
           "moveType": "Dash",
           "iconAsset": "/assets/skills/Blastoise/Skull+Bash.png",
-          "descriptionAdvanced": "Tucks in their head then dashes forward after 0.5s, damaging opposing Pokémon in the path and stunning them for 0.5s when it hits."
+          "descriptionAdvanced": "Tucks in their head then dashes forward after 0.5s, damaging opposing Pokémon in the path and stunning them for 0.5s when it hits.",
+          "videoAsset": "/assets/skills/Blastoise/Skull+Bash.mp4"
         },
         {
           "id": "surf",
@@ -4071,7 +4101,8 @@
           "isUpgrade": true,
           "moveType": "Dash",
           "upgradeLevel": 7,
-          "descriptionAdvanced": "Blastoise rides a wave of water, becoming Unstoppable for 1.6s. Blastoise can then jump off the wave in the designated direction, while the wave continues to travel. Blastoise gains a shield if the wave damages a Pokemon. Enemy Pokemon that make contact with the wave take damage and are stunned and shoved for 1.6s. The wave can be stopped by walls, and will deal no damage once Blastoise has jumped off.\n\nUpgrade (Level 13): Increases the strength of the shield."
+          "descriptionAdvanced": "Blastoise rides a wave of water, becoming Unstoppable for 1.6s. Blastoise can then jump off the wave in the designated direction, while the wave continues to travel. Blastoise gains a shield if the wave damages a Pokemon. Enemy Pokemon that make contact with the wave take damage and are stunned and shoved for 1.6s. The wave can be stopped by walls, and will deal no damage once Blastoise has jumped off.\n\nUpgrade (Level 13): Increases the strength of the shield.",
+          "videoAsset": "/assets/skills/Blastoise/Surf.mp4"
         },
         {
           "id": "rapid-spin",
@@ -4096,7 +4127,8 @@
           "isUpgrade": true,
           "moveType": "Area",
           "upgradeLevel": 7,
-          "descriptionAdvanced": "Withdraws into their shell, resetting the cooldown of Hydro Pump or Water Spout and gaining hindrance resistance for the duration of this move; then starts rapidly spinning while moving freely for up to 5s or when used again to stop spinning and end this move. Damages opposing Pokémon in contact with the user every 0.5s while spinning (up to 10 times).\n\nWhile spinning: changes the mechanics of auto attacks and Hydro Pump or Water Spout. When this move ends: comes out of their shell and readies a boosted attack. The user cannot perform any actions for 0.45s while withdrawing or coming out of their shell.\n\nUpgrade (Level 13): Increases Defense and Sp. Def while using this move."
+          "descriptionAdvanced": "Withdraws into their shell, resetting the cooldown of Hydro Pump or Water Spout and gaining hindrance resistance for the duration of this move; then starts rapidly spinning while moving freely for up to 5s or when used again to stop spinning and end this move. Damages opposing Pokémon in contact with the user every 0.5s while spinning (up to 10 times).\n\nWhile spinning: changes the mechanics of auto attacks and Hydro Pump or Water Spout. When this move ends: comes out of their shell and readies a boosted attack. The user cannot perform any actions for 0.45s while withdrawing or coming out of their shell.\n\nUpgrade (Level 13): Increases Defense and Sp. Def while using this move.",
+          "videoAsset": "/assets/skills/Blastoise/Rapid+Spin.mp4"
         },
         {
           "id": "hydro-typhoon",
@@ -4126,7 +4158,8 @@
           ],
           "moveType": "Hindrance",
           "iconAsset": "/assets/skills/Blastoise/Hydro+Typhoon.png",
-          "descriptionAdvanced": "Becomes unstoppable for 2s and gains a shield for 4s; shoots immense jets of water in a large circle around themself after 1.1s, damaging opposing Pokémon in the area of effect and throwing them for 1.5s when it hits."
+          "descriptionAdvanced": "Becomes unstoppable for 2s and gains a shield for 4s; shoots immense jets of water in a large circle around themself after 1.1s, damaging opposing Pokémon in the area of effect and throwing them for 1.5s when it hits.",
+          "videoAsset": "/assets/skills/Blastoise/Hydro+Typhoon.mp4"
         }
       ],
       "passiveAbility": {
@@ -4629,7 +4662,8 @@
           ],
           "moveType": "Dash",
           "iconAsset": "/assets/skills/Blaziken/Aerial+Ace.png",
-          "descriptionAdvanced": "Dash in a designated direction, dealing damage to enemies that come in contact with the dash. If this move hits an enemy, this move may be used again once within 4 seconds before being put on cooldown."
+          "descriptionAdvanced": "Dash in a designated direction, dealing damage to enemies that come in contact with the dash. If this move hits an enemy, this move may be used again once within 4 seconds before being put on cooldown.",
+          "videoAsset": "/assets/skills/Blaziken/Aerial+Ace.mp4"
         },
         {
           "id": "fire-punch",
@@ -4654,7 +4688,8 @@
           "isUpgrade": true,
           "moveType": "Dash",
           "upgradeLevel": 7,
-          "descriptionAdvanced": "Unleash 2 flaming punches in the designated direction, dealing damage to enemies hit. The designated direction can be changed during this move. When the user hits an enemy with this move, for a short time, this move can be used once more.\n\nUpgrade (Level 11): Increases damage dealt."
+          "descriptionAdvanced": "Unleash 2 flaming punches in the designated direction, dealing damage to enemies hit. The designated direction can be changed during this move. When the user hits an enemy with this move, for a short time, this move can be used once more.\n\nUpgrade (Level 11): Increases damage dealt.",
+          "videoAsset": "/assets/skills/Blaziken/Fire+Punch.mp4"
         },
         {
           "id": "overheat",
@@ -4693,7 +4728,8 @@
           "isUpgrade": true,
           "moveType": "Melee",
           "upgradeLevel": 7,
-          "descriptionAdvanced": "Become Hindrance Resistant, reduce incoming damage by 25%, and charge power in place in a designated direction. If used again, unleash a flaming kick in the designed direction, dealing damage to enemies hit. The longer the duration the charge is held for, the more damage this move deals. If the user charges a certain amount of power (when the gauge reaches the line indicator), this move also shoves enemies hit.\n\nUpgrade (Level 11): Increases damage dealt."
+          "descriptionAdvanced": "Become Hindrance Resistant, reduce incoming damage by 25%, and charge power in place in a designated direction. If used again, unleash a flaming kick in the designed direction, dealing damage to enemies hit. The longer the duration the charge is held for, the more damage this move deals. If the user charges a certain amount of power (when the gauge reaches the line indicator), this move also shoves enemies hit.\n\nUpgrade (Level 11): Increases damage dealt.",
+          "videoAsset": "/assets/skills/Blaziken/Overheat.mp4"
         },
         {
           "id": "ember",
@@ -4716,7 +4752,8 @@
           ],
           "moveType": "Ranged",
           "iconAsset": "/assets/skills/Blaziken/Ember.png",
-          "descriptionAdvanced": "Release a small ball of fire in the designated direction, dealing damage in a small area around the first enemy hit and decreases their movement speed by 50% for 1s."
+          "descriptionAdvanced": "Release a small ball of fire in the designated direction, dealing damage in a small area around the first enemy hit and decreases their movement speed by 50% for 1s.",
+          "videoAsset": "/assets/skills/Blaziken/Ember.mp4"
         },
         {
           "id": "focus-blast",
@@ -4741,7 +4778,8 @@
           "isUpgrade": true,
           "moveType": "Ranged",
           "upgradeLevel": 5,
-          "descriptionAdvanced": "Fire a ball of focused energy in the designated direction. The ball of focused energy explodes upon hitting an enemy or after traveling a set distance, dealing damage to enemies  in the explosion's area-of-effect and decreasing their movement speed by 35% for 2s.\n\nUpgrade (Level 13): Increases the movement speed decrease to 60%."
+          "descriptionAdvanced": "Fire a ball of focused energy in the designated direction. The ball of focused energy explodes upon hitting an enemy or after traveling a set distance, dealing damage to enemies  in the explosion's area-of-effect and decreasing their movement speed by 35% for 2s.\n\nUpgrade (Level 13): Increases the movement speed decrease to 60%.",
+          "videoAsset": "/assets/skills/Blaziken/Focus+Blast.mp4"
         },
         {
           "id": "blaze-kick",
@@ -4766,7 +4804,8 @@
           "isUpgrade": true,
           "moveType": "Hindrance",
           "upgradeLevel": 5,
-          "descriptionAdvanced": "Jump backwards then kick while leaping towards a designated location, becoming Unstoppable during the jump and kick animation. Deal damage to enemies hit by the kick and shove them. The shoved enemies will have their movement speed decreased by 30% for 2s. If the shoved enemies come in contact with a wall, they will be stunned instead for 1s. Blaze Kick cannot go over walls.\n\nUpgrade (Level 13): Increases the movement speed decrease to 50%. Increases the stun duration to 1.5s if hitting a wall."
+          "descriptionAdvanced": "Jump backwards then kick while leaping towards a designated location, becoming Unstoppable during the jump and kick animation. Deal damage to enemies hit by the kick and shove them. The shoved enemies will have their movement speed decreased by 30% for 2s. If the shoved enemies come in contact with a wall, they will be stunned instead for 1s. Blaze Kick cannot go over walls.\n\nUpgrade (Level 13): Increases the movement speed decrease to 50%. Increases the stun duration to 1.5s if hitting a wall.",
+          "videoAsset": "/assets/skills/Blaziken/Blaze+Kick.mp4"
         },
         {
           "id": "spinning-flame-fist",
@@ -4789,7 +4828,8 @@
           ],
           "moveType": "Area",
           "iconAsset": "/assets/skills/Blaziken/Spinning+Flame+Fist.png",
-          "descriptionAdvanced": "Perform a flaming punch around itself, dealing damage to nearby enemies hit and increase the user's movement speed by 20% for 4s. After using this move, the user switches to Punch Style and all Punch Style cooldowns are reset."
+          "descriptionAdvanced": "Perform a flaming punch around itself, dealing damage to nearby enemies hit and increase the user's movement speed by 20% for 4s. After using this move, the user switches to Punch Style and all Punch Style cooldowns are reset.",
+          "videoAsset": "/assets/skills/Blaziken/Spinning+Flame+Fist.mp4"
         },
         {
           "id": "spinning-flame-kick",
@@ -5188,7 +5228,8 @@
           ],
           "moveType": "Melee",
           "iconAsset": "/assets/skills/Blissey/Pound.png",
-          "descriptionAdvanced": "The user pounds in the designated direction, damaging opposing Pokémon in the area of effect and decreasing their movement speed by 40% for 2s."
+          "descriptionAdvanced": "The user pounds in the designated direction, damaging opposing Pokémon in the area of effect and decreasing their movement speed by 40% for 2s.",
+          "videoAsset": "/assets/skills/Blissey/Pound.mp4"
         },
         {
           "id": "egg-bomb",
@@ -5213,7 +5254,8 @@
           "isUpgrade": true,
           "moveType": "Ranged",
           "upgradeLevel": 6,
-          "descriptionAdvanced": "The user hurls an egg at the designated location that explodes, damaging opposing Pokémon in the area of effect and throwing them away from the center of impact for 0.8s. A maximum of 2 uses can be kept in reserve for this move, and there is a 2s cooldown between uses.\n\nIf the user learns both Soft-Boiled and Egg Bomb, the uses kept in reserve for Egg Bomb is added to Soft-Boiled's reserve pool; this reserve pool is shared between both moves. The base cooldown for both moves becomes 5s. The cooldown between using the same move remains at 2s.\n\nUpgrade (Level 12): Decreases the movement speed of opposing Pokémon hit by 40% for 2s."
+          "descriptionAdvanced": "The user hurls an egg at the designated location that explodes, damaging opposing Pokémon in the area of effect and throwing them away from the center of impact for 0.8s. A maximum of 2 uses can be kept in reserve for this move, and there is a 2s cooldown between uses.\n\nIf the user learns both Soft-Boiled and Egg Bomb, the uses kept in reserve for Egg Bomb is added to Soft-Boiled's reserve pool; this reserve pool is shared between both moves. The base cooldown for both moves becomes 5s. The cooldown between using the same move remains at 2s.\n\nUpgrade (Level 12): Decreases the movement speed of opposing Pokémon hit by 40% for 2s.",
+          "videoAsset": "/assets/skills/Blissey/Egg+Bomb.mp4"
         },
         {
           "id": "helping-hand",
@@ -5230,7 +5272,8 @@
           "isUpgrade": true,
           "moveType": "Buff",
           "upgradeLevel": 6,
-          "descriptionAdvanced": "The user increases the movement speed and basic attack speed of themself and nearby teammates by 30% for 4s. When buffed, the user's auto attacks also become boosted attacks.\n\nUpgrade (Level 12): Increases the auto attack damage of all teammates buffed by this move by 15% for 4s."
+          "descriptionAdvanced": "The user increases the movement speed and basic attack speed of themself and nearby teammates by 30% for 4s. When buffed, the user's auto attacks also become boosted attacks.\n\nUpgrade (Level 12): Increases the auto attack damage of all teammates buffed by this move by 15% for 4s.",
+          "videoAsset": "/assets/skills/Blissey/Helping+Hand.mp4"
         },
         {
           "id": "heal-pulse",
@@ -5253,7 +5296,8 @@
           ],
           "moveType": "Recovery",
           "iconAsset": "/assets/skills/Blissey/Heal+Pulse.png",
-          "descriptionAdvanced": "The user restores the HP of themself and a designated teammate every 0.5s over 2s."
+          "descriptionAdvanced": "The user restores the HP of themself and a designated teammate every 0.5s over 2s.",
+          "videoAsset": "/assets/skills/Blissey/Heal+Pulse.mp4"
         },
         {
           "id": "soft-boiled",
@@ -5285,7 +5329,8 @@
           "isUpgrade": true,
           "moveType": "Recovery",
           "upgradeLevel": 4,
-          "descriptionAdvanced": "The user throws an egg to a designated teammate, restoring the HP of themself and the designated teammate. The user and the designated teammate restore HP over time every 1s over 2s afterward. Subsequent uses of this move overwrites any HP over time the user and the designated teammate is yet to restore from previous uses. A maximum of 2 uses can be kept in reserve for this move, and there is a 2s cooldown between uses.\n\nUpgrade (Level 10): Gains 1 additional use kept in reserve."
+          "descriptionAdvanced": "The user throws an egg to a designated teammate, restoring the HP of themself and the designated teammate. The user and the designated teammate restore HP over time every 1s over 2s afterward. Subsequent uses of this move overwrites any HP over time the user and the designated teammate is yet to restore from previous uses. A maximum of 2 uses can be kept in reserve for this move, and there is a 2s cooldown between uses.\n\nUpgrade (Level 10): Gains 1 additional use kept in reserve.",
+          "videoAsset": "/assets/skills/Blissey/Soft-Boiled.mp4"
         },
         {
           "id": "safeguard",
@@ -5310,7 +5355,8 @@
           "isUpgrade": true,
           "moveType": "Buff",
           "upgradeLevel": 4,
-          "descriptionAdvanced": "The user cleanses themself and a designated teammate, and grants the user and the teammate a shield that makes them unstoppable for 4s.\n\nUpgrade (Level 10): Strengthens the value of the shield effect."
+          "descriptionAdvanced": "The user cleanses themself and a designated teammate, and grants the user and the teammate a shield that makes them unstoppable for 4s.\n\nUpgrade (Level 10): Strengthens the value of the shield effect.",
+          "videoAsset": "/assets/skills/Blissey/Safeguard.mp4"
         },
         {
           "id": "bliss-assistance",
@@ -5340,7 +5386,8 @@
           ],
           "moveType": "Buff",
           "iconAsset": "/assets/skills/Blissey/Bliss+Assistance.png",
-          "descriptionAdvanced": "The user becomes unstoppable and dashes to the designated ally Pokémon to give it an egg, granting that ally a shield and increasing their Attack and Sp. Atk by 20% for 6s. The user also intercepts 50% of the post-mitigation damage received by that ally as unmitigated damage for 6s. While dashing, opposing Pokémon hit are damaged and thrown into the air for 0.8s. When reaching the target ally, nearby opposing Pokémon are damaged again."
+          "descriptionAdvanced": "The user becomes unstoppable and dashes to the designated ally Pokémon to give it an egg, granting that ally a shield and increasing their Attack and Sp. Atk by 20% for 6s. The user also intercepts 50% of the post-mitigation damage received by that ally as unmitigated damage for 6s. While dashing, opposing Pokémon hit are damaged and thrown into the air for 0.8s. When reaching the target ally, nearby opposing Pokémon are damaged again.",
+          "videoAsset": "/assets/skills/Blissey/Bliss+Assistance.mp4"
         }
       ],
       "passiveAbility": {
@@ -5778,7 +5825,8 @@
           ],
           "moveType": "Area",
           "iconAsset": "/assets/skills/Buzzwole/Mega+Punch.png",
-          "descriptionAdvanced": "Jump in the designated direction before slamming the ground with a powerful punch. The shock from the punch deals damage to enemies in the area. Muscle gauge increases by 1 increment for each target hit."
+          "descriptionAdvanced": "Jump in the designated direction before slamming the ground with a powerful punch. The shock from the punch deals damage to enemies in the area. Muscle gauge increases by 1 increment for each target hit.",
+          "videoAsset": "/assets/skills/Buzzwole/Mega+Punch.mp4"
         },
         {
           "id": "lunge",
@@ -5803,7 +5851,8 @@
           "isUpgrade": true,
           "moveType": "Area",
           "upgradeLevel": 7,
-          "descriptionAdvanced": "Lunge in the designated direction, dealing damage to enemies, decreasing their Attack by 30% for 2.5s and slowing them by 30% for 1s. If this move deals damage, muscle gauge increases by 1 increment for each enemy hit. After this move is used, Buzzwole's basic attack speed is increased by 30% for 2s. Holds 2 uses in reserve and cannot be used more than once every 1s.\n\nUpgrade (Level 13): Whenever this move hits enemy players, Buzzwole's Attack increases by 10% for 2s for each player hit (up to a max of 5 stacks)."
+          "descriptionAdvanced": "Lunge in the designated direction, dealing damage to enemies, decreasing their Attack by 30% for 2.5s and slowing them by 30% for 1s. If this move deals damage, muscle gauge increases by 1 increment for each enemy hit. After this move is used, Buzzwole's basic attack speed is increased by 30% for 2s. Holds 2 uses in reserve and cannot be used more than once every 1s.\n\nUpgrade (Level 13): Whenever this move hits enemy players, Buzzwole's Attack increases by 10% for 2s for each player hit (up to a max of 5 stacks).",
+          "videoAsset": "/assets/skills/Buzzwole/Lunge.mp4"
         },
         {
           "id": "smack-down",
@@ -5835,7 +5884,8 @@
           "isUpgrade": true,
           "moveType": "Hindrance",
           "upgradeLevel": 7,
-          "descriptionAdvanced": "Deliver an uppercut punch in the designated direction. The first Pokémon hit takes damage and is thrown into the air, ending with a slam on the ground that deals damage to all enemies in an area centered on the previously airborne enemy. Muscle gauge increases by 1 increment for each enemy damaged by the initial hit and slam.\n\nFor a time after the initial hit, buzzwole can activate this move again to teleport to the target and slam them into the ground at their current position, ending the airborne travel instantly.\n\nUpgrade (Level 13): Widens the area-of-effect in which damage is dealt when the grappled enemy slams the ground. Additionally, muscle gauge will now increase by 2 increments for each enemy player hit from the slam."
+          "descriptionAdvanced": "Deliver an uppercut punch in the designated direction. The first Pokémon hit takes damage and is thrown into the air, ending with a slam on the ground that deals damage to all enemies in an area centered on the previously airborne enemy. Muscle gauge increases by 1 increment for each enemy damaged by the initial hit and slam.\n\nFor a time after the initial hit, buzzwole can activate this move again to teleport to the target and slam them into the ground at their current position, ending the airborne travel instantly.\n\nUpgrade (Level 13): Widens the area-of-effect in which damage is dealt when the grappled enemy slams the ground. Additionally, muscle gauge will now increase by 2 increments for each enemy player hit from the slam.",
+          "videoAsset": "/assets/skills/Buzzwole/Smack+Down.mp4"
         },
         {
           "id": "fell-stinger",
@@ -5858,7 +5908,8 @@
           ],
           "moveType": "Melee",
           "iconAsset": "/assets/skills/Buzzwole/Fell+Stinger.png",
-          "descriptionAdvanced": "Consumes the entire muscle gauge and has the user deal damage to an enemy in the designated direction, briefly shoving and stunning them for .2s. The damage dealt by this move increases for each muscle gauge increment consumed at a rate of 12.5% per increment. If this move knocks out any Pokémon, the user recovers 10% of maximum HP.\n\n10% of Max HP"
+          "descriptionAdvanced": "Consumes the entire muscle gauge and has the user deal damage to an enemy in the designated direction, briefly shoving and stunning them for .2s. The damage dealt by this move increases for each muscle gauge increment consumed at a rate of 12.5% per increment. If this move knocks out any Pokémon, the user recovers 10% of maximum HP.\n\n10% of Max HP",
+          "videoAsset": "/assets/skills/Buzzwole/Fell+Stinger.mp4"
         },
         {
           "id": "leech-life",
@@ -5897,7 +5948,8 @@
           "isUpgrade": true,
           "moveType": "Melee",
           "upgradeLevel": 5,
-          "descriptionAdvanced": "Grab and restrain an enemy in the designated direction, becoming unstoppable and dealing damage-over-time while restoring Buzzwole's HP. When this move is used, consume the user's entire muscle gauge. The number of hits and the amount of damage dealt per hit increases for each muscle gauge increment consumed. Number of hits starts at 4 and increases by 1 per 2 increments of muscle gauge consumed. Initial damage increases by 1.5% per muscle gauge increment. This move ends if Buzzwole becomes unable to act for any reason or if the restrained enemy escapes by using an Eject Button or through some other means.\n\n1.5% x Muscle Gauge\n\nAgainst Unstoppable Targets: Only 1 instance of increased damage and healing will occur.\n\nUpgrade (Level 11): Also causes each instance of damage dealt by this move to be stronger than the last by 5% additively."
+          "descriptionAdvanced": "Grab and restrain an enemy in the designated direction, becoming unstoppable and dealing damage-over-time while restoring Buzzwole's HP. When this move is used, consume the user's entire muscle gauge. The number of hits and the amount of damage dealt per hit increases for each muscle gauge increment consumed. Number of hits starts at 4 and increases by 1 per 2 increments of muscle gauge consumed. Initial damage increases by 1.5% per muscle gauge increment. This move ends if Buzzwole becomes unable to act for any reason or if the restrained enemy escapes by using an Eject Button or through some other means.\n\n1.5% x Muscle Gauge\n\nAgainst Unstoppable Targets: Only 1 instance of increased damage and healing will occur.\n\nUpgrade (Level 11): Also causes each instance of damage dealt by this move to be stronger than the last by 5% additively.",
+          "videoAsset": "/assets/skills/Buzzwole/Leech+Life.mp4"
         },
         {
           "id": "superpower",
@@ -5929,7 +5981,8 @@
           "isUpgrade": true,
           "moveType": "Area",
           "upgradeLevel": 5,
-          "descriptionAdvanced": "Consumes the entire muscle gauge and has the user run in the designated direction and grab an enemy. The user then slams the target down on the ground at full strength, dealing damage to all enemies in the area. If Buzzwole is successful in grabbing a target, Buzzwole receives a shield that lasts for 2s. Buzzwole is unstoppable during this move.\n\n20% Max HP + 2% Max HP * Muscle Gauge\n\nThe damage dealt by this move is increased at a rate of 12.5% per muscle gauge increment.\n\nUpgrade (Level 11): Reduces the cooldown of this move by 3s when the user's muscle gauge reaches maximum."
+          "descriptionAdvanced": "Consumes the entire muscle gauge and has the user run in the designated direction and grab an enemy. The user then slams the target down on the ground at full strength, dealing damage to all enemies in the area. If Buzzwole is successful in grabbing a target, Buzzwole receives a shield that lasts for 2s. Buzzwole is unstoppable during this move.\n\n20% Max HP + 2% Max HP * Muscle Gauge\n\nThe damage dealt by this move is increased at a rate of 12.5% per muscle gauge increment.\n\nUpgrade (Level 11): Reduces the cooldown of this move by 3s when the user's muscle gauge reaches maximum.",
+          "videoAsset": "/assets/skills/Buzzwole/Superpower.mp4"
         },
         {
           "id": "ultra-swole-slam",
@@ -5959,7 +6012,8 @@
           ],
           "moveType": "Sure Hit",
           "iconAsset": "/assets/skills/Buzzwole/Ultra+Swole+Slam.png",
-          "descriptionAdvanced": "Buzzwole flies at high speed, dealing damage to enemies in the area-of-effect. Afterward, the user targets the enemy with the lowest percentage of HP remaining among those hit and charges down at them from the sky, dealing area damage once again and additional damage to the targeted enemy based on their missing HP. Buzzwole is Unstoppable during this move.\n\n50% of enemy missing HP\n\nAgainst Wild Pokemon: Missing HP damage is not dealt."
+          "descriptionAdvanced": "Buzzwole flies at high speed, dealing damage to enemies in the area-of-effect. Afterward, the user targets the enemy with the lowest percentage of HP remaining among those hit and charges down at them from the sky, dealing area damage once again and additional damage to the targeted enemy based on their missing HP. Buzzwole is Unstoppable during this move.\n\n50% of enemy missing HP\n\nAgainst Wild Pokemon: Missing HP damage is not dealt.",
+          "videoAsset": "/assets/skills/Buzzwole/Ultra+Swole+Slam.mp4"
         }
       ],
       "passiveAbility": {
@@ -6454,7 +6508,8 @@
           ],
           "moveType": "Area",
           "iconAsset": "/assets/skills/Ceruledge/Lava+Plume.png",
-          "descriptionAdvanced": "Torch the area around the user with an inferno of scarlet flames, dealing damage to enemies hit. The user's next basic attack deals 15% increased damage."
+          "descriptionAdvanced": "Torch the area around the user with an inferno of scarlet flames, dealing damage to enemies hit. The user's next basic attack deals 15% increased damage.",
+          "videoAsset": "/assets/skills/Ceruledge/Lava+Plume.mp4"
         },
         {
           "id": "bitter-blade",
@@ -6479,7 +6534,8 @@
           "isUpgrade": true,
           "moveType": "Area",
           "upgradeLevel": 5,
-          "descriptionAdvanced": "Ceruledge focuses bitter feelings towards the world of the living into a slashing attack. The user recovers HP equals to 50% of the damage dealt with this move. Damage dealt to wild Pokémon only heals for half of the normal amount. Any leftover healing from the move that exceeds the user's max HP is converted into a shield (effects that alter healing directly are ignored). The shield lasts 2s, the duration is refreshed with each application, and can stack up to 10x. The maximum capacity of the shield is determined by the life steal amount.\n\nUpgrade (Level 11): Increases the amount of HP recovered to 70% of damage dealt."
+          "descriptionAdvanced": "Ceruledge focuses bitter feelings towards the world of the living into a slashing attack. The user recovers HP equals to 50% of the damage dealt with this move. Damage dealt to wild Pokémon only heals for half of the normal amount. Any leftover healing from the move that exceeds the user's max HP is converted into a shield (effects that alter healing directly are ignored). The shield lasts 2s, the duration is refreshed with each application, and can stack up to 10x. The maximum capacity of the shield is determined by the life steal amount.\n\nUpgrade (Level 11): Increases the amount of HP recovered to 70% of damage dealt.",
+          "videoAsset": "/assets/skills/Ceruledge/Bitter+Blade.mp4"
         },
         {
           "id": "psycho-cut",
@@ -6511,7 +6567,8 @@
           "isUpgrade": true,
           "moveType": "Area",
           "upgradeLevel": 5,
-          "descriptionAdvanced": "Ceruledge launches a blade formed by psychic power in the designated direction, dealing damage and slowing enemies hit by 30% for 3s, and reducing their Defense for 4s. If Ceruledge hits enemies with a basic attack, this move's cooldown is reduced by 0.5s.\n\nUpgrade (Level 11): Increases the Defense reduction of enemies hit by this move."
+          "descriptionAdvanced": "Ceruledge launches a blade formed by psychic power in the designated direction, dealing damage and slowing enemies hit by 30% for 3s, and reducing their Defense for 4s. If Ceruledge hits enemies with a basic attack, this move's cooldown is reduced by 0.5s.\n\nUpgrade (Level 11): Increases the Defense reduction of enemies hit by this move.",
+          "videoAsset": "/assets/skills/Ceruledge/Psycho+Cut.mp4"
         },
         {
           "id": "take-down",
@@ -6534,7 +6591,8 @@
           ],
           "moveType": "Dash",
           "iconAsset": "/assets/skills/Ceruledge/Take+Down.png",
-          "descriptionAdvanced": "Has the user charge recklessly in the designated direction, dealing damage to enemies hit. The user's basic attack speed is increased by 20% for 3s."
+          "descriptionAdvanced": "Has the user charge recklessly in the designated direction, dealing damage to enemies hit. The user's basic attack speed is increased by 20% for 3s.",
+          "videoAsset": "/assets/skills/Ceruledge/Take+Down.mp4"
         },
         {
           "id": "phantom-force",
@@ -6559,7 +6617,8 @@
           "isUpgrade": true,
           "moveType": "Dash",
           "upgradeLevel": 7,
-          "descriptionAdvanced": "Dash and disappear into darkness, where Ceruledge hides for 1s. While hiding, Ceruledge cannot move. When this move is used again or after 1s has passed, the user appears in the designated direction while slashing around themself, dealing damage that ignores Defense and shields of enemies and applies a 60% slow for 1s to them. If this move hits an enemy, this move's cooldown is reduced by 40% of the max cooldown.\n\nUpgrade (Level 13): Reduces this move's cooldown by 1s."
+          "descriptionAdvanced": "Dash and disappear into darkness, where Ceruledge hides for 1s. While hiding, Ceruledge cannot move. When this move is used again or after 1s has passed, the user appears in the designated direction while slashing around themself, dealing damage that ignores Defense and shields of enemies and applies a 60% slow for 1s to them. If this move hits an enemy, this move's cooldown is reduced by 40% of the max cooldown.\n\nUpgrade (Level 13): Reduces this move's cooldown by 1s.",
+          "videoAsset": "/assets/skills/Ceruledge/Phantom+Force.mp4"
         },
         {
           "id": "flame-charge",
@@ -6584,7 +6643,8 @@
           "isUpgrade": true,
           "moveType": "Dash",
           "upgradeLevel": 7,
-          "descriptionAdvanced": "Ceruledge cloaks themself in flame and charges in the designated direction, dealing damage to enemies hit. Ceruledge's basic attack speed is increased by 30% for 3s after using this move. A maximum of 2 uses can be kept in reserve for this move.\n\nThere is a 1 second cooldown between each use, which is reduced with cooldown reduction.\n\nUpgrade (Level 13): Ceruledge's basic attack speed is instead increased for 5s after using this move."
+          "descriptionAdvanced": "Ceruledge cloaks themself in flame and charges in the designated direction, dealing damage to enemies hit. Ceruledge's basic attack speed is increased by 30% for 3s after using this move. A maximum of 2 uses can be kept in reserve for this move.\n\nThere is a 1 second cooldown between each use, which is reduced with cooldown reduction.\n\nUpgrade (Level 13): Ceruledge's basic attack speed is instead increased for 5s after using this move.",
+          "videoAsset": "/assets/skills/Ceruledge/Flame+Charge.mp4"
         },
         {
           "id": "revenant-rend",
@@ -6607,7 +6667,8 @@
           ],
           "moveType": "Dash",
           "iconAsset": "/assets/skills/Ceruledge/Revenant+Rend.png",
-          "descriptionAdvanced": "Ceruledge charges both of their arm blades gaining unstoppable and 70% Damage reduction for 0.5s before slashing through to the designated location, leaving Ceruledge unable to act for 0.7s. Ceruledge also leaves enemies hit unable to act for 0.7s and applies a mark to them. After 0.7s, marked enemies are dealt damage with three slashing blows.\n\nThe mark can be cleansed, preventing the damage."
+          "descriptionAdvanced": "Ceruledge charges both of their arm blades gaining unstoppable and 70% Damage reduction for 0.5s before slashing through to the designated location, leaving Ceruledge unable to act for 0.7s. Ceruledge also leaves enemies hit unable to act for 0.7s and applies a mark to them. After 0.7s, marked enemies are dealt damage with three slashing blows.\n\nThe mark can be cleansed, preventing the damage.",
+          "videoAsset": "/assets/skills/Ceruledge/Revenant+Rend.mp4"
         }
       ],
       "passiveAbility": {
@@ -7115,7 +7176,8 @@
           ],
           "moveType": "Ranged",
           "iconAsset": "/assets/skills/Chandelure/Ember.png",
-          "descriptionAdvanced": "Shoot out a small flame, dealing damage to Pokémon it hits, slowing them by 30% for 2s and leaving them burned for 2.5s. After the first cast, this move may be used again within 5s before going on full cooldown.\n\nBurns tick every 0.5s for 5 damage ticks."
+          "descriptionAdvanced": "Shoot out a small flame, dealing damage to Pokémon it hits, slowing them by 30% for 2s and leaving them burned for 2.5s. After the first cast, this move may be used again within 5s before going on full cooldown.\n\nBurns tick every 0.5s for 5 damage ticks.",
+          "videoAsset": "/assets/skills/Chandelure/Ember.mp4"
         },
         {
           "id": "flamethrower",
@@ -7154,7 +7216,8 @@
           "isUpgrade": true,
           "moveType": "Area",
           "upgradeLevel": 5,
-          "descriptionAdvanced": "Shoot an intense blast of fire in the designated direction, dealing damage to Pokémon and leaving them burned for 2.5s. The end of the blast explodes, dealing increased damage. If the explosion hits a Pokémon, this move's cooldown is reduced by 65% of its current cooldown.\n\nBurns tick every 0.5s for 5 damage ticks.\n\nUpgrade (Level 11): If the explosion hits a Pokémon, Chandelure deals 20% increased damage for 3s. This effect also applies to the triggering explosion itself."
+          "descriptionAdvanced": "Shoot an intense blast of fire in the designated direction, dealing damage to Pokémon and leaving them burned for 2.5s. The end of the blast explodes, dealing increased damage. If the explosion hits a Pokémon, this move's cooldown is reduced by 65% of its current cooldown.\n\nBurns tick every 0.5s for 5 damage ticks.\n\nUpgrade (Level 11): If the explosion hits a Pokémon, Chandelure deals 20% increased damage for 3s. This effect also applies to the triggering explosion itself.",
+          "videoAsset": "/assets/skills/Chandelure/Flamethrower.mp4"
         },
         {
           "id": "overheat",
@@ -7214,7 +7277,8 @@
           "isUpgrade": true,
           "moveType": "Ranged",
           "upgradeLevel": 5,
-          "descriptionAdvanced": "Throws consecutive flames in an arc into designated areas up to 3 times by holding the move input down. Pokémon in the area are hit and are left burned. The area may be aimed and changed during the use of this move. When one of the flames hits a Pokémon, the user gains one heat energy. If this move is used again, an exploding flame is shot out, dealing damage to Pokémon based on the heat energy and leaves them burned. The exploding flame hitting with 0, 1 or 2 heat energy reduces the cooldown of this move by 75%, 50% or 30% respectively. After the follow-up attack, the user cannot use basic attacks for a short time.\n\nBurns tick every 0.5s for 5 damage ticks.\n\nUpgrade (Level 11): This move's cooldown is reduced by 1s."
+          "descriptionAdvanced": "Throws consecutive flames in an arc into designated areas up to 3 times by holding the move input down. Pokémon in the area are hit and are left burned. The area may be aimed and changed during the use of this move. When one of the flames hits a Pokémon, the user gains one heat energy. If this move is used again, an exploding flame is shot out, dealing damage to Pokémon based on the heat energy and leaves them burned. The exploding flame hitting with 0, 1 or 2 heat energy reduces the cooldown of this move by 75%, 50% or 30% respectively. After the follow-up attack, the user cannot use basic attacks for a short time.\n\nBurns tick every 0.5s for 5 damage ticks.\n\nUpgrade (Level 11): This move's cooldown is reduced by 1s.",
+          "videoAsset": "/assets/skills/Chandelure/Overheat.mp4"
         },
         {
           "id": "night-shade",
@@ -7237,7 +7301,8 @@
           ],
           "moveType": "Area",
           "iconAsset": "/assets/skills/Chandelure/Night+Shade.png",
-          "descriptionAdvanced": "Makes Pokémon in the area of effect see a frightening mirage, dealing damage to them and marking them. When Chandelure deals damage again to the marked Pokémon, the marked Pokémon are stunned for 1s."
+          "descriptionAdvanced": "Makes Pokémon in the area of effect see a frightening mirage, dealing damage to them and marking them. When Chandelure deals damage again to the marked Pokémon, the marked Pokémon are stunned for 1s.",
+          "videoAsset": "/assets/skills/Chandelure/Night+Shade.mp4"
         },
         {
           "id": "poltergeist",
@@ -7262,7 +7327,8 @@
           "isUpgrade": true,
           "moveType": "Area",
           "upgradeLevel": 7,
-          "descriptionAdvanced": "Create a zone of mysterious power and mirages of floating furniture.  Pokémon that come in contact with a mirage take damage.  Pokémon that come in contact with a mirage or the edge of the zone are slowed by 65% decaying to a 40% slow over 1s. Then the 40% slow lingers for an additional second.\n\nUpgrade (Level 13): Increases the slow to 80% for 1s decaying to 50% for 1s."
+          "descriptionAdvanced": "Create a zone of mysterious power and mirages of floating furniture.  Pokémon that come in contact with a mirage take damage.  Pokémon that come in contact with a mirage or the edge of the zone are slowed by 65% decaying to a 40% slow over 1s. Then the 40% slow lingers for an additional second.\n\nUpgrade (Level 13): Increases the slow to 80% for 1s decaying to 50% for 1s.",
+          "videoAsset": "/assets/skills/Chandelure/Poltergeist.mp4"
         },
         {
           "id": "imprison",
@@ -7279,7 +7345,8 @@
           "isUpgrade": true,
           "moveType": "Hindrance",
           "upgradeLevel": 7,
-          "descriptionAdvanced": "Creates a zone in front of itself lasting 4s. The first enemy caught in the zone will be immobilized for 0.7s. Furthermore, all enemy Pokémon in the zone or enter the zone become imprisoned and cannot use Moves.\n\nUpgrade (Level 13): Changes the Imprison to briefly immobilize all Pokémon caught in the zone on creation."
+          "descriptionAdvanced": "Creates a zone in front of itself lasting 4s. The first enemy caught in the zone will be immobilized for 0.7s. Furthermore, all enemy Pokémon in the zone or enter the zone become imprisoned and cannot use Moves.\n\nUpgrade (Level 13): Changes the Imprison to briefly immobilize all Pokémon caught in the zone on creation.",
+          "videoAsset": "/assets/skills/Chandelure/Imprison.mp4"
         },
         {
           "id": "ignite-midnight",
@@ -7309,7 +7376,8 @@
           ],
           "moveType": "Area",
           "iconAsset": "/assets/skills/Chandelure/Ignite+Midnight.png",
-          "descriptionAdvanced": "Reduce the vision of enemies around itself by 30% for 3s. If this Unite Move is used again, Chandelure continuously fires a beam of fire in a designated direction, dealing damage to Pokémon it hits. The beam may be redirected while firing and its final blast deals increased damage. Ignite Midnight can be cancelled early."
+          "descriptionAdvanced": "Reduce the vision of enemies around itself by 30% for 3s. If this Unite Move is used again, Chandelure continuously fires a beam of fire in a designated direction, dealing damage to Pokémon it hits. The beam may be redirected while firing and its final blast deals increased damage. Ignite Midnight can be cancelled early.",
+          "videoAsset": "/assets/skills/Chandelure/Ignite+Midnight.mp4"
         }
       ],
       "passiveAbility": {
@@ -7811,7 +7879,8 @@
           ],
           "moveType": "Ranged",
           "iconAsset": "/assets/skills/Charizard/Flame+Burst.png",
-          "descriptionAdvanced": "The user attacks with a flame in the designated direction which bursts on the first opposing Pokémon hit or after traveling max distance, damaging opposing Pokémon in the area of effect and burning them for 4s (dealing damage 5 times). When this move hits, the user's movement speed is increased by 20% for 3s.\n\nThe Attack of opposing Pokémon burned by this move is decreased by 5%."
+          "descriptionAdvanced": "The user attacks with a flame in the designated direction which bursts on the first opposing Pokémon hit or after traveling max distance, damaging opposing Pokémon in the area of effect and burning them for 4s (dealing damage 5 times). When this move hits, the user's movement speed is increased by 20% for 3s.\n\nThe Attack of opposing Pokémon burned by this move is decreased by 5%.",
+          "videoAsset": "/assets/skills/Charizard/Flame+Burst.mp4"
         },
         {
           "id": "flamethrower",
@@ -7843,7 +7912,8 @@
           "isUpgrade": true,
           "moveType": "Ranged",
           "upgradeLevel": 5,
-          "descriptionAdvanced": "The user attacks with a blast of fire in the designated direction, damaging opposing Pokémon in a line and burning them for 4s (dealing damage 5 times). When this move hits, the user's movement speed is increased by 40% for 3s. The user is able to move freely when using this move.\n\nThe Attack of opposing Pokémon burned by this move is decreased by 5%.\n\nUpgrade (Level 11): Increases the damage of this move and its burns."
+          "descriptionAdvanced": "The user attacks with a blast of fire in the designated direction, damaging opposing Pokémon in a line and burning them for 4s (dealing damage 5 times). When this move hits, the user's movement speed is increased by 40% for 3s. The user is able to move freely when using this move.\n\nThe Attack of opposing Pokémon burned by this move is decreased by 5%.\n\nUpgrade (Level 11): Increases the damage of this move and its burns.",
+          "videoAsset": "/assets/skills/Charizard/Flamethrower.mp4"
         },
         {
           "id": "fire-punch",
@@ -7875,7 +7945,8 @@
           "isUpgrade": true,
           "moveType": "Melee",
           "upgradeLevel": 5,
-          "descriptionAdvanced": "The user dashes with a fiery fist forward, damaging opposing Pokémon hit and shoving them, and burning the first opposing Pokémon hit for 4s (dealing damage 5 times).\n\nThe Attack of the target burned by this move is decreased by 5%.\n\nUpgrade (Level 11): Reduces this move's cooldown by 0.4s per target hit every time the user's basic attack hits an opposing Pokémon. (1.6s total for an entire basic attack animation on a single target)."
+          "descriptionAdvanced": "The user dashes with a fiery fist forward, damaging opposing Pokémon hit and shoving them, and burning the first opposing Pokémon hit for 4s (dealing damage 5 times).\n\nThe Attack of the target burned by this move is decreased by 5%.\n\nUpgrade (Level 11): Reduces this move's cooldown by 0.4s per target hit every time the user's basic attack hits an opposing Pokémon. (1.6s total for an entire basic attack animation on a single target).",
+          "videoAsset": "/assets/skills/Charizard/Fire+Punch.mp4"
         },
         {
           "id": "fire-spin",
@@ -7905,7 +7976,8 @@
           ],
           "moveType": "Area",
           "iconAsset": "/assets/skills/Charizard/Fire+Spin.png",
-          "descriptionAdvanced": "The user shoots fire in the designated direction which bursts into a vortex of fire on the first opposing Pokémon hit or after traveling max distance, damaging opposing Pokémon in the area of effect. The vortex of fire remains for 5s, dealing damage over time to opposing Pokémon in the area of effect every 0.5s (up to 10 times) and decreasing their movement speed by 25% for 1s when hit."
+          "descriptionAdvanced": "The user shoots fire in the designated direction which bursts into a vortex of fire on the first opposing Pokémon hit or after traveling max distance, damaging opposing Pokémon in the area of effect. The vortex of fire remains for 5s, dealing damage over time to opposing Pokémon in the area of effect every 0.5s (up to 10 times) and decreasing their movement speed by 25% for 1s when hit.",
+          "videoAsset": "/assets/skills/Charizard/Fire+Spin.mp4"
         },
         {
           "id": "fire-blast",
@@ -7937,7 +8009,8 @@
           "isUpgrade": true,
           "moveType": "Area",
           "upgradeLevel": 7,
-          "descriptionAdvanced": "The user shoots an intense blast of fire in the designated direction which explodes on the first opposing Pokémon hit or after traveling max distance, damaging opposing Pokémon in the area of effect. The blast of all-consuming fire remains on the ground for 5s, dealing damage over time to opposing Pokémon in the area of effect every 0.5s (up to 10 times) and decreasing their movement speed by 30% for 1s when hit. The user is able to move freely when using this move.\n\nUpgrade (Level 13): Increases the damage of this move and the damage over time."
+          "descriptionAdvanced": "The user shoots an intense blast of fire in the designated direction which explodes on the first opposing Pokémon hit or after traveling max distance, damaging opposing Pokémon in the area of effect. The blast of all-consuming fire remains on the ground for 5s, dealing damage over time to opposing Pokémon in the area of effect every 0.5s (up to 10 times) and decreasing their movement speed by 30% for 1s when hit. The user is able to move freely when using this move.\n\nUpgrade (Level 13): Increases the damage of this move and the damage over time.",
+          "videoAsset": "/assets/skills/Charizard/Fire+Blast.mp4"
         },
         {
           "id": "flare-blitz",
@@ -7969,7 +8042,8 @@
           "isUpgrade": true,
           "moveType": "Sure Hit",
           "upgradeLevel": 7,
-          "descriptionAdvanced": "The user charges at the designated opposing Pokémon cloaked in fire, damaging opposing Pokémon, throwing the target, and granting the user a shield for 5s when this move hits.\n\nUpgrade (Level 13): Decreases the movement speed of the target by 40% for 3s when this move hits."
+          "descriptionAdvanced": "The user charges at the designated opposing Pokémon cloaked in fire, damaging opposing Pokémon, throwing the target, and granting the user a shield for 5s when this move hits.\n\nUpgrade (Level 13): Decreases the movement speed of the target by 40% for 3s when this move hits.",
+          "videoAsset": "/assets/skills/Charizard/Flare+Blitz.mp4"
         },
         {
           "id": "seismic-slam",
@@ -7999,7 +8073,8 @@
           ],
           "moveType": "Sure Hit",
           "iconAsset": "/assets/skills/Charizard/Seismic+Slam.png",
-          "descriptionAdvanced": "The user briefly becomes unstoppable and grabs the designated Pokémon from the opposing team. The target is bound, and the user and the target become invincible as the user flies up then slams them onto the ground, damaging the target and nearby opposing Pokémon, dealing an additional 8% max HP damage to each opposing Pokémon hit. The user gains hindrance resistance the moment they slam into the ground and fly up into the air for 10s. While flying in the air, the user is able to use basic attacks and move freely over obstacles. Unite Move basic attacks burn opposing Pokémon for 1s (dealing damage 2 times). The user restores HP for 60% of the damage dealt with Unite Move basic attacks (excluding burns or additional damage). Damage dealt by burns from Unite Move basic attacks also benefit from regular lifesteal.\n\nAdditional 8% of enemy max HP.\n\nThe Attack of opposing Pokémon burned by Unite Move basic attacks is decreased by 5%."
+          "descriptionAdvanced": "The user briefly becomes unstoppable and grabs the designated Pokémon from the opposing team. The target is bound, and the user and the target become invincible as the user flies up then slams them onto the ground, damaging the target and nearby opposing Pokémon, dealing an additional 8% max HP damage to each opposing Pokémon hit. The user gains hindrance resistance the moment they slam into the ground and fly up into the air for 10s. While flying in the air, the user is able to use basic attacks and move freely over obstacles. Unite Move basic attacks burn opposing Pokémon for 1s (dealing damage 2 times). The user restores HP for 60% of the damage dealt with Unite Move basic attacks (excluding burns or additional damage). Damage dealt by burns from Unite Move basic attacks also benefit from regular lifesteal.\n\nAdditional 8% of enemy max HP.\n\nThe Attack of opposing Pokémon burned by Unite Move basic attacks is decreased by 5%.",
+          "videoAsset": "/assets/skills/Charizard/Seismic+Slam.mp4"
         }
       ],
       "passiveAbility": {
@@ -8449,7 +8524,8 @@
           ],
           "moveType": "Ranged",
           "iconAsset": "/assets/skills/Mega-Charizard-X/Flame+Burst.png",
-          "descriptionAdvanced": "The user attacks with a flame in the designated direction which bursts on the first opposing Pokémon hit or after traveling max distance, damaging opposing Pokémon in the area of effect and burning them for 4s (dealing damage 5 times). When this move hits, the user's movement speed is increased by 20% for 3s.\n\nThe Attack of opposing Pokémon burned by this move is decreased by 5%."
+          "descriptionAdvanced": "The user attacks with a flame in the designated direction which bursts on the first opposing Pokémon hit or after traveling max distance, damaging opposing Pokémon in the area of effect and burning them for 4s (dealing damage 5 times). When this move hits, the user's movement speed is increased by 20% for 3s.\n\nThe Attack of opposing Pokémon burned by this move is decreased by 5%.",
+          "videoAsset": "/assets/skills/Mega-Charizard-X/Flame+Burst.mp4"
         },
         {
           "id": "fire-punch",
@@ -8481,7 +8557,8 @@
           "isUpgrade": true,
           "moveType": "Ranged",
           "upgradeLevel": 5,
-          "descriptionAdvanced": "The user dashes with a fiery fist forward, damaging opposing Pokémon hit and shoving them, and burning the first opposing Pokémon hit for 4s (dealing damage 5 times).\n\nThe Attack of the target burned by this move is decreased by 5%. When the user is mega evolved, instead burns all opposing Pokémon hit.\n\nUpgrade (Level 11): Reduces this move's cooldown by 0.4s per target hit every time the user's basic attack hits an opposing Pokémon. (1.6s total for an entire basic attack animation on a single target)."
+          "descriptionAdvanced": "The user dashes with a fiery fist forward, damaging opposing Pokémon hit and shoving them, and burning the first opposing Pokémon hit for 4s (dealing damage 5 times).\n\nThe Attack of the target burned by this move is decreased by 5%. When the user is mega evolved, instead burns all opposing Pokémon hit.\n\nUpgrade (Level 11): Reduces this move's cooldown by 0.4s per target hit every time the user's basic attack hits an opposing Pokémon. (1.6s total for an entire basic attack animation on a single target).",
+          "videoAsset": "/assets/skills/Mega-Charizard-X/Fire+Punch.mp4"
         },
         {
           "id": "fire-spin",
@@ -8511,7 +8588,8 @@
           ],
           "moveType": "Area",
           "iconAsset": "/assets/skills/Mega-Charizard-X/Fire+Spin.png",
-          "descriptionAdvanced": "The user shoots fire in the designated direction which bursts into a vortex of fire on the first opposing Pokémon hit or after traveling max distance, damaging opposing Pokémon in the area of effect. The vortex of fire remains for 5s, dealing damage over time to opposing Pokémon in the area of effect every 0.5s (up to 10 times) and decreasing their movement speed by 25% for 1s when hit."
+          "descriptionAdvanced": "The user shoots fire in the designated direction which bursts into a vortex of fire on the first opposing Pokémon hit or after traveling max distance, damaging opposing Pokémon in the area of effect. The vortex of fire remains for 5s, dealing damage over time to opposing Pokémon in the area of effect every 0.5s (up to 10 times) and decreasing their movement speed by 25% for 1s when hit.",
+          "videoAsset": "/assets/skills/Mega-Charizard-X/Fire+Spin.mp4"
         },
         {
           "id": "flare-blitz",
@@ -8543,7 +8621,8 @@
           "isUpgrade": true,
           "moveType": "Sure Hit",
           "upgradeLevel": 7,
-          "descriptionAdvanced": "The user charges at the designated opposing Pokémon cloaked in fire, damaging opposing Pokémon, throwing the target, and granting the user a shield for 5s when this move hits.\n\nWhen the user is mega evolved, reduces the cooldown by 40% of its current cooldown if it hits an enemy player and knocks up all opposing Pokémon hit by the explosion.\n\nUpgrade (Level 13): Decreases the movement speed of the target by 40% for 3s when this move hits."
+          "descriptionAdvanced": "The user charges at the designated opposing Pokémon cloaked in fire, damaging opposing Pokémon, throwing the target, and granting the user a shield for 5s when this move hits.\n\nWhen the user is mega evolved, reduces the cooldown by 40% of its current cooldown if it hits an enemy player and knocks up all opposing Pokémon hit by the explosion.\n\nUpgrade (Level 13): Decreases the movement speed of the target by 40% for 3s when this move hits.",
+          "videoAsset": "/assets/skills/Mega-Charizard-X/Flare+Blitz.mp4"
         },
         {
           "id": "seismic-slam",
@@ -8566,7 +8645,8 @@
           ],
           "moveType": "Sure Hit",
           "iconAsset": "/assets/skills/Mega-Charizard-X/Seismic+Slam.png",
-          "descriptionAdvanced": "The user briefly becomes unstoppable and grabs the designated Pokémon from the opposing team. The target is bound, and the user and the target become invincible as the user flies up then slams them onto the ground, damaging the target and nearby opposing Pokémon, dealing an additional 8% max HP damage to each opposing Pokémon hit. The user then mega evolves into Mega Charizard X for 20 seconds. During Mega evolution, Mega Charizard X receives 50% movement speed increase.\n\n8% of enemy max HP."
+          "descriptionAdvanced": "The user briefly becomes unstoppable and grabs the designated Pokémon from the opposing team. The target is bound, and the user and the target become invincible as the user flies up then slams them onto the ground, damaging the target and nearby opposing Pokémon, dealing an additional 8% max HP damage to each opposing Pokémon hit. The user then mega evolves into Mega Charizard X for 20 seconds. During Mega evolution, Mega Charizard X receives 50% movement speed increase.\n\n8% of enemy max HP.",
+          "videoAsset": "/assets/skills/Mega-Charizard-X/Seismic+Slam.mp4"
         }
       ],
       "passiveAbility": {
@@ -8897,7 +8977,8 @@
           ],
           "moveType": "Ranged",
           "iconAsset": "/assets/skills/Mega-Charizard-Y/Flame+Burst.png",
-          "descriptionAdvanced": "The user attacks with a flame in the designated direction which bursts on the first opposing Pokémon hit or after traveling max distance, damaging opposing Pokémon in the area of effect and burning them for 4s (dealing damage 5 times). When this move hits, the user's movement speed is increased by 20% for 3s.\n\nThe Attack of opposing Pokémon burned by this move is decreased by 5%."
+          "descriptionAdvanced": "The user attacks with a flame in the designated direction which bursts on the first opposing Pokémon hit or after traveling max distance, damaging opposing Pokémon in the area of effect and burning them for 4s (dealing damage 5 times). When this move hits, the user's movement speed is increased by 20% for 3s.\n\nThe Attack of opposing Pokémon burned by this move is decreased by 5%.",
+          "videoAsset": "/assets/skills/Mega-Charizard-Y/Flame+Burst.mp4"
         },
         {
           "id": "flamethrower",
@@ -8929,7 +9010,8 @@
           "isUpgrade": true,
           "moveType": "Ranged",
           "upgradeLevel": 5,
-          "descriptionAdvanced": "The user attacks with a blast of fire in the designated direction, damaging opposing Pokémon in a line and burning them for 4s (dealing damage 5 times). When this move hits, the user's movement speed is increased by 40% for 3s. The user is able to move freely when using this move. If the user is mega evolved, the user's movement speed is instead increased by 10% for 3s.\n\nThe Attack of opposing Pokémon burned by this move is decreased by 5%.\n\nUpgrade (Level 11): Increases the damage of this move and its burns."
+          "descriptionAdvanced": "The user attacks with a blast of fire in the designated direction, damaging opposing Pokémon in a line and burning them for 4s (dealing damage 5 times). When this move hits, the user's movement speed is increased by 40% for 3s. The user is able to move freely when using this move. If the user is mega evolved, the user's movement speed is instead increased by 10% for 3s.\n\nThe Attack of opposing Pokémon burned by this move is decreased by 5%.\n\nUpgrade (Level 11): Increases the damage of this move and its burns.",
+          "videoAsset": "/assets/skills/Mega-Charizard-Y/Flamethrower.mp4"
         },
         {
           "id": "fire-spin",
@@ -8959,7 +9041,8 @@
           ],
           "moveType": "Area",
           "iconAsset": "/assets/skills/Mega-Charizard-Y/Fire+Spin.png",
-          "descriptionAdvanced": "The user shoots fire in the designated direction which bursts into a vortex of fire on the first opposing Pokémon hit or after traveling max distance, damaging opposing Pokémon in the area of effect. The vortex of fire remains for 5s, dealing damage over time to opposing Pokémon in the area of effect every 0.5s (up to 10 times) and decreasing their movement speed by 25% for 1s when hit."
+          "descriptionAdvanced": "The user shoots fire in the designated direction which bursts into a vortex of fire on the first opposing Pokémon hit or after traveling max distance, damaging opposing Pokémon in the area of effect. The vortex of fire remains for 5s, dealing damage over time to opposing Pokémon in the area of effect every 0.5s (up to 10 times) and decreasing their movement speed by 25% for 1s when hit.",
+          "videoAsset": "/assets/skills/Mega-Charizard-Y/Fire+Spin.mp4"
         },
         {
           "id": "fire-blast",
@@ -8991,7 +9074,8 @@
           "isUpgrade": true,
           "moveType": "Area",
           "upgradeLevel": 7,
-          "descriptionAdvanced": "The user shoots an intense blast of fire in the designated direction which explodes on the first opposing Pokémon hit or after traveling max distance, damaging opposing Pokémon in the area of effect. The blast of all-consuming fire remains on the ground for 5s, dealing damage over time to opposing Pokémon in the area of effect every 0.5s (up to 10 times) and decreasing their movement speed by 30% for 1s when hit. The user is able to move freely when using this move. If the user is mega evolved, the area of effect of this move increases.\n\nUpgrade (Level 13): Increases the damage of this move and the damage over time."
+          "descriptionAdvanced": "The user shoots an intense blast of fire in the designated direction which explodes on the first opposing Pokémon hit or after traveling max distance, damaging opposing Pokémon in the area of effect. The blast of all-consuming fire remains on the ground for 5s, dealing damage over time to opposing Pokémon in the area of effect every 0.5s (up to 10 times) and decreasing their movement speed by 30% for 1s when hit. The user is able to move freely when using this move. If the user is mega evolved, the area of effect of this move increases.\n\nUpgrade (Level 13): Increases the damage of this move and the damage over time.",
+          "videoAsset": "/assets/skills/Mega-Charizard-Y/Fire+Blast.mp4"
         },
         {
           "id": "seismic-slam",
@@ -9021,7 +9105,8 @@
           ],
           "moveType": "Sure Hit",
           "iconAsset": "/assets/skills/Mega-Charizard-Y/Seismic+Slam.png",
-          "descriptionAdvanced": "The user briefly becomes unstoppable and grabs the designated Pokémon from the opposing team. The target is bound, and the user and the target become invincible as the user flies up then slams them onto the ground, damaging the target and nearby opposing Pokémon, dealing an additional 8% max HP damage to each opposing Pokémon hit. The user gains hindrance resistance and mega evolves into Mega Charizard Y the moment they slam into the ground and fly up into the air for 15s. While flying in the air, the user is able to use basic attacks as well as moves and is able to move freely over obstacles. Unite Move basic attacks burn opposing Pokémon for 1s (dealing damage 2 times). The user restores HP for 60% of the damage dealt with Unite Move basic attacks (excluding burns or additional damage). Damage dealt by burns from Unite Move basic attacks also benefit from regular lifesteal.\n\nAdditional 8% of enemy max HP.\n\nThe Attack of opposing Pokémon burned by this move is decreased by 5%."
+          "descriptionAdvanced": "The user briefly becomes unstoppable and grabs the designated Pokémon from the opposing team. The target is bound, and the user and the target become invincible as the user flies up then slams them onto the ground, damaging the target and nearby opposing Pokémon, dealing an additional 8% max HP damage to each opposing Pokémon hit. The user gains hindrance resistance and mega evolves into Mega Charizard Y the moment they slam into the ground and fly up into the air for 15s. While flying in the air, the user is able to use basic attacks as well as moves and is able to move freely over obstacles. Unite Move basic attacks burn opposing Pokémon for 1s (dealing damage 2 times). The user restores HP for 60% of the damage dealt with Unite Move basic attacks (excluding burns or additional damage). Damage dealt by burns from Unite Move basic attacks also benefit from regular lifesteal.\n\nAdditional 8% of enemy max HP.\n\nThe Attack of opposing Pokémon burned by this move is decreased by 5%.",
+          "videoAsset": "/assets/skills/Mega-Charizard-Y/Seismic+Slam.mp4"
         }
       ],
       "passiveAbility": {
@@ -9353,7 +9438,8 @@
           ],
           "moveType": "Sure Hit",
           "iconAsset": "/assets/skills/Cinderace/Ember.png",
-          "descriptionAdvanced": "Shoots a small flame at the designated opposing Pokémon, damaging the target and burning them for 3s (dealing damage 3 times).\n\nThe Attack and Sp. Atk of the burned target are decreased by 5% for 2s."
+          "descriptionAdvanced": "Shoots a small flame at the designated opposing Pokémon, damaging the target and burning them for 3s (dealing damage 3 times).\n\nThe Attack and Sp. Atk of the burned target are decreased by 5% for 2s.",
+          "videoAsset": "/assets/skills/Cinderace/Ember.mp4"
         },
         {
           "id": "pyro-ball",
@@ -9385,7 +9471,8 @@
           "isUpgrade": true,
           "moveType": "Ranged",
           "upgradeLevel": 7,
-          "descriptionAdvanced": "Kicks up a stone and ignites it, then kicks the ball of flame in the designated direction, damaging opposing Pokémon hit and burning them for 3s (dealing damage 3 times).\n\nThe Attack and Sp. Atk of burned opposing Pokémon are decreased by 5% for 2s.\n\nUpgrade (Level 11): Reduces the cooldown of Flame Charge or Feint by 4s when this move hits."
+          "descriptionAdvanced": "Kicks up a stone and ignites it, then kicks the ball of flame in the designated direction, damaging opposing Pokémon hit and burning them for 3s (dealing damage 3 times).\n\nThe Attack and Sp. Atk of burned opposing Pokémon are decreased by 5% for 2s.\n\nUpgrade (Level 11): Reduces the cooldown of Flame Charge or Feint by 4s when this move hits.",
+          "videoAsset": "/assets/skills/Cinderace/Pyro+Ball.mp4"
         },
         {
           "id": "blaze-kick",
@@ -9417,7 +9504,8 @@
           "isUpgrade": true,
           "moveType": "Sure Hit",
           "upgradeLevel": 7,
-          "descriptionAdvanced": "Becomes unstoppable and performs a fiery flying kick dashing toward the designated opposing Pokémon, damaging the target with a guaranteed critical hit, shoving them for 0.5s, and burning them for 3s (dealing damage 3 times); then jumps back a set distance from the target or in the direction of movement and becomes vulnerable to hindrances when they land.\n\nThe Attack and Sp. Atk of the burned target are decreased by 5% for 2s.\n\nUpgrade (Level 11): Increases basic attack speed by 45% for 3s when this move hits."
+          "descriptionAdvanced": "Becomes unstoppable and performs a fiery flying kick dashing toward the designated opposing Pokémon, damaging the target with a guaranteed critical hit, shoving them for 0.5s, and burning them for 3s (dealing damage 3 times); then jumps back a set distance from the target or in the direction of movement and becomes vulnerable to hindrances when they land.\n\nThe Attack and Sp. Atk of the burned target are decreased by 5% for 2s.\n\nUpgrade (Level 11): Increases basic attack speed by 45% for 3s when this move hits.",
+          "videoAsset": "/assets/skills/Cinderace/Blaze+Kick.mp4"
         },
         {
           "id": "low-sweep",
@@ -9440,7 +9528,8 @@
           ],
           "moveType": "Dash",
           "iconAsset": "/assets/skills/Cinderace/Low+Sweep.png",
-          "descriptionAdvanced": "Dashes forward with a low sweep, damaging opposing Pokémon in their path."
+          "descriptionAdvanced": "Dashes forward with a low sweep, damaging opposing Pokémon in their path.",
+          "videoAsset": "/assets/skills/Cinderace/Low+Sweep.mp4"
         },
         {
           "id": "flame-charge",
@@ -9465,7 +9554,8 @@
           "isUpgrade": true,
           "moveType": "Dash",
           "upgradeLevel": 8,
-          "descriptionAdvanced": "Dashes forward cloaked in flame, damaging opposing Pokémon in their path.\n\nUpgrade (Level 13): The next boosted attack after this move ends decreases the movement speed of the opposing Pokémon hit by 30% for 2s."
+          "descriptionAdvanced": "Dashes forward cloaked in flame, damaging opposing Pokémon in their path.\n\nUpgrade (Level 13): The next boosted attack after this move ends decreases the movement speed of the opposing Pokémon hit by 30% for 2s.",
+          "videoAsset": "/assets/skills/Cinderace/Flame+Charge.mp4"
         },
         {
           "id": "feint",
@@ -9482,7 +9572,8 @@
           "isUpgrade": true,
           "moveType": "Buff",
           "upgradeLevel": 8,
-          "descriptionAdvanced": "Becomes invincible for 0.73s while dodging, cleansing any slows, and increasing movement speed by 40% for 2s.\n\nUpgrade (Level 13): The next 3 auto attacks after dodging restore HP for 30% of damage dealt. These 3 auto attacks cannot critically hit."
+          "descriptionAdvanced": "Becomes invincible for 0.73s while dodging, cleansing any slows, and increasing movement speed by 40% for 2s.\n\nUpgrade (Level 13): The next 3 auto attacks after dodging restore HP for 30% of damage dealt. These 3 auto attacks cannot critically hit.",
+          "videoAsset": "/assets/skills/Cinderace/Feint.mp4"
         },
         {
           "id": "blazing-bicycle-kick",
@@ -9505,7 +9596,8 @@
           ],
           "moveType": "Sure Hit",
           "iconAsset": "/assets/skills/Cinderace/Blazing+Bicycle+Kick.png",
-          "descriptionAdvanced": "Becomes unstoppable and kicks up a giant ball of flame, then kicks it toward the location of the designated opposing Pokémon. The ball releases a fierce shock wave upon impact, damaging opposing Pokémon in the area of effect, dealing additional missing HP damage to those hit; and increasing movement speed by 10% for 5s when this Unite Move hits.\n\n14% of enemy missing HP."
+          "descriptionAdvanced": "Becomes unstoppable and kicks up a giant ball of flame, then kicks it toward the location of the designated opposing Pokémon. The ball releases a fierce shock wave upon impact, damaging opposing Pokémon in the area of effect, dealing additional missing HP damage to those hit; and increasing movement speed by 10% for 5s when this Unite Move hits.\n\n14% of enemy missing HP.",
+          "videoAsset": "/assets/skills/Cinderace/Blazing+Bicycle+Kick.mp4"
         }
       ],
       "passiveAbility": {
@@ -40807,7 +40899,8 @@
           "moveType": "Sure Hit",
           "iconAsset": "/assets/skills/Pikachu/Thunder+Shock.png",
           "descriptionAdvanced": "Releases electricity at the designated opposing Pokémon, damaging opposing Pokémon in the area of effect and paralyzing them when it hits.\n\nSlows enemies briefly.\n\nThe movement speed of opposing Pokémon paralyzed by this move is decreased by 30% and their basic attack speed is decreased by 10% for 2s.",
-          "gifAsset": "/assets/skills/Pikachu/Thunder+Shock.webp"
+          "gifAsset": "/assets/skills/Pikachu/Thunder+Shock.webp",
+          "videoAsset": "/assets/skills/Pikachu/Thunder+Shock.mp4"
         },
         {
           "id": "electro-ball",
@@ -40833,7 +40926,8 @@
           "moveType": "Sure Hit",
           "upgradeLevel": 4,
           "descriptionAdvanced": "Hurls an electric orb at the designated opposing Pokémon, damaging opposing Pokémon in the area of effect, dealing additional missing HP damage, and paralyzing them when it hits.\n\n6% of enemy missing HP.\n\nThe movement speed of opposing Pokémon paralyzed by this move is decreased by 50% and their basic attack speed is decreased by 10% for 2s. Against wild Pokémon: additional missing HP damage is capped at 1200.\n\nUpgrade (Level 11): Increases the damage of this move.",
-          "gifAsset": "/assets/skills/Pikachu/Electro+Ball.webp"
+          "gifAsset": "/assets/skills/Pikachu/Electro+Ball.webp",
+          "videoAsset": "/assets/skills/Pikachu/Electro+Ball.mp4"
         },
         {
           "id": "thunder",
@@ -40859,7 +40953,8 @@
           "moveType": "Area",
           "upgradeLevel": 4,
           "descriptionAdvanced": "Drops wicked thunderbolts at the designated area, dealing damage to opposing Pokémon in the area of effect every 0.5s over 2.5s (up to 5 times).\n\nUpgrade (Level 11): Deals damage over time more frequently, hitting opposing Pokémon in the area of effect up to 7 times over 2.5s.",
-          "gifAsset": "/assets/skills/Pikachu/Thunder.webp"
+          "gifAsset": "/assets/skills/Pikachu/Thunder.webp",
+          "videoAsset": "/assets/skills/Pikachu/Thunder.mp4"
         },
         {
           "id": "electroweb",
@@ -40883,7 +40978,8 @@
           "moveType": "Hindrance",
           "iconAsset": "/assets/skills/Pikachu/Electroweb.png",
           "descriptionAdvanced": "Launches an electric net at the designated opposing Pokémon, damaging the target and immobilizing them for 1.5s when the net captures them.",
-          "gifAsset": "/assets/skills/Pikachu/Electroweb.webp"
+          "gifAsset": "/assets/skills/Pikachu/Electroweb.webp",
+          "videoAsset": "/assets/skills/Pikachu/Electroweb.mp4"
         },
         {
           "id": "volt-tackle",
@@ -40909,7 +41005,8 @@
           "moveType": "Hindrance",
           "upgradeLevel": 6,
           "descriptionAdvanced": "Becomes unstoppable and dashes at the designated opposing Pokémon, damaging the target 5 times and throwing them in the air for 1.4s; then leaps a set distance back, becoming vulnerable to hindrances and increasing movement speed by 60% for 2s (decaying by 10% every 0.5s; minimum 30% for 0.5s) after the leap.\n\nUpgrade (Level 13): Reduces this move's cooldown by 2s.",
-          "gifAsset": "/assets/skills/Pikachu/Volt+Tackle.webp"
+          "gifAsset": "/assets/skills/Pikachu/Volt+Tackle.webp",
+          "videoAsset": "/assets/skills/Pikachu/Volt+Tackle.mp4"
         },
         {
           "id": "thunderbolt",
@@ -40935,7 +41032,8 @@
           "moveType": "Hindrance",
           "upgradeLevel": 6,
           "descriptionAdvanced": "Strikes with a strong electric blast at the designated area, damaging opposing Pokémon in the area of effect and stunning them for 1.25s when it hits.\n\nUpgrade (Level 13): Increases the damage of this move.",
-          "gifAsset": "/assets/skills/Pikachu/Thunderbolt.webp"
+          "gifAsset": "/assets/skills/Pikachu/Thunderbolt.webp",
+          "videoAsset": "/assets/skills/Pikachu/Thunderbolt.mp4"
         },
         {
           "id": "thunderstorm",
@@ -40959,7 +41057,8 @@
           "moveType": "Area",
           "iconAsset": "/assets/skills/Pikachu/Thunderstorm.png",
           "descriptionAdvanced": "Becomes unstoppable and jumps into the air, then casts down bolts of lightning 4 times over 3s in a radius around Pikachu. The first cast targets all Pokémon on the opposing team in range with 1 bolt each; these bolts damage up to 1 target each. The following 3 casts target up to 2 random Pokémon from the opposing team in range; these following bolts deal damage to opposing Pokémon in a small area around them, but targets can only be damaged once for each of the following 3 casts.\n\nPikachu can act freely once the first bolts of lightning are cast down.",
-          "gifAsset": "/assets/skills/Pikachu/Thunderstorm.webp"
+          "gifAsset": "/assets/skills/Pikachu/Thunderstorm.webp",
+          "videoAsset": "/assets/skills/Pikachu/Thunderstorm.mp4"
         }
       ],
       "passiveAbility": {
@@ -53182,7 +53281,8 @@
           ],
           "moveType": "Melee",
           "iconAsset": "/assets/skills/Urshifu/Rock+Smash.png",
-          "descriptionAdvanced": "The user receives 20% reduced damage as they charge power for up to 2s, increasing power levels until reaching maximum charge after 1s; then punches in the designated direction when released, damaging opposing Pokémon hit. If this move is canceled or not released after 2s, it goes on a 0.9s cooldown."
+          "descriptionAdvanced": "The user receives 20% reduced damage as they charge power for up to 2s, increasing power levels until reaching maximum charge after 1s; then punches in the designated direction when released, damaging opposing Pokémon hit. If this move is canceled or not released after 2s, it goes on a 0.9s cooldown.",
+          "videoAsset": "/assets/skills/Urshifu/Rock+Smash.mp4"
         },
         {
           "id": "wicked-blow",
@@ -53221,7 +53321,8 @@
           "isUpgrade": true,
           "moveType": "Melee",
           "upgradeLevel": 5,
-          "descriptionAdvanced": "The user becomes unstoppable, receives 20% reduced damage and decreases their movement speed by 30% as they charge power for up to 2.5s, becoming charged after 1s; then strikes in the designated direction with a fierce blow when released, readying a boosted attack if it hits. When uncharged, the cooldown of this move is reduced by 50%; and the user strikes in a small line area of effect, damaging opposing Pokémon and decreasing their movement speed when it hits.\n\nDamage is always a critical and deals additional damage equal to 14% of the enemies missing HP. Against Wild Pokemon: This additional damage is capped at 1200.\n\nDeals additional damage equal to 7% of the enemies' missing HP. Against Wild Pokemon: This additional damage is capped at 600.\n\nWhen charged, the user strikes in a larger cone area of effect, dealing increased damage to opposing Pokémon and dealing additional missing HP damage to those hit. Opposing Pokémon in the center line area of effect receive a critical hit and are shoved. If this move is canceled or not released after 2.5s, it goes on a 2.1s cooldown.\n\nUpgrade (Level 11): Strengthens damage reduction while charging this move to 40%. If this move is charged when released, opposing Pokémon in the center line area of effect are also stunned with the shove."
+          "descriptionAdvanced": "The user becomes unstoppable, receives 20% reduced damage and decreases their movement speed by 30% as they charge power for up to 2.5s, becoming charged after 1s; then strikes in the designated direction with a fierce blow when released, readying a boosted attack if it hits. When uncharged, the cooldown of this move is reduced by 50%; and the user strikes in a small line area of effect, damaging opposing Pokémon and decreasing their movement speed when it hits.\n\nDamage is always a critical and deals additional damage equal to 14% of the enemies missing HP. Against Wild Pokemon: This additional damage is capped at 1200.\n\nDeals additional damage equal to 7% of the enemies' missing HP. Against Wild Pokemon: This additional damage is capped at 600.\n\nWhen charged, the user strikes in a larger cone area of effect, dealing increased damage to opposing Pokémon and dealing additional missing HP damage to those hit. Opposing Pokémon in the center line area of effect receive a critical hit and are shoved. If this move is canceled or not released after 2.5s, it goes on a 2.1s cooldown.\n\nUpgrade (Level 11): Strengthens damage reduction while charging this move to 40%. If this move is charged when released, opposing Pokémon in the center line area of effect are also stunned with the shove.",
+          "videoAsset": "/assets/skills/Urshifu/Wicked+Blow.mp4"
         },
         {
           "id": "surging-strikes",
@@ -53246,7 +53347,8 @@
           "isUpgrade": true,
           "moveType": "Melee",
           "upgradeLevel": 5,
-          "descriptionAdvanced": "The user dashes forward and strikes with a flowing motion, damaging opposing Pokémon hit. This move can be used up to two more times within 4s of the previous use. Opposing Pokémon hit by the third use receive a critical hit and are thrown.\n\n2% max HP\n\nEach time this move is used, the user readies an enhanced boosted attack which restores the user's HP per hit.\n\nUpgrade (Level 11): Receives 30% reduced damage while using this move."
+          "descriptionAdvanced": "The user dashes forward and strikes with a flowing motion, damaging opposing Pokémon hit. This move can be used up to two more times within 4s of the previous use. Opposing Pokémon hit by the third use receive a critical hit and are thrown.\n\n2% max HP\n\nEach time this move is used, the user readies an enhanced boosted attack which restores the user's HP per hit.\n\nUpgrade (Level 11): Receives 30% reduced damage while using this move.",
+          "videoAsset": "/assets/skills/Urshifu/Surging+Strikes.mp4"
         },
         {
           "id": "headbutt",
@@ -53269,7 +53371,8 @@
           ],
           "moveType": "Dash",
           "iconAsset": "/assets/skills/Urshifu/Headbutt.png",
-          "descriptionAdvanced": "The user dashes forward with a headbutt, damaging opposing Pokémon and shoving them when it hits."
+          "descriptionAdvanced": "The user dashes forward with a headbutt, damaging opposing Pokémon and shoving them when it hits.",
+          "videoAsset": "/assets/skills/Urshifu/Headbutt.mp4"
         },
         {
           "id": "throat-chop",
@@ -53294,7 +53397,8 @@
           "isUpgrade": true,
           "moveType": "Dash",
           "upgradeLevel": 7,
-          "descriptionAdvanced": "The user readies a boosted attack and dashes forward, damaging opposing Pokémon in their path and stunning them for 0.7s when it hits.\n\nUpgrade (Level 13): Reduces this move's cooldown by 40% of its remaining cooldown when Wicked Blow hits."
+          "descriptionAdvanced": "The user readies a boosted attack and dashes forward, damaging opposing Pokémon in their path and stunning them for 0.7s when it hits.\n\nUpgrade (Level 13): Reduces this move's cooldown by 40% of its remaining cooldown when Wicked Blow hits.",
+          "videoAsset": "/assets/skills/Urshifu/Throat+Chop.mp4"
         },
         {
           "id": "liquidation",
@@ -53326,7 +53430,8 @@
           "isUpgrade": true,
           "moveType": "Melee",
           "upgradeLevel": 7,
-          "descriptionAdvanced": "The user stomps the ground, damaging nearby opposing Pokémon and decreasing their Defense by 30% for 3s; and granting the user a shield for 3s if it hits, strengthening per opposing Pokémon hit (up to 3 times).\n\nUpgrade (Level 13): Reduces this move's cooldown by 1s."
+          "descriptionAdvanced": "The user stomps the ground, damaging nearby opposing Pokémon and decreasing their Defense by 30% for 3s; and granting the user a shield for 3s if it hits, strengthening per opposing Pokémon hit (up to 3 times).\n\nUpgrade (Level 13): Reduces this move's cooldown by 1s.",
+          "videoAsset": "/assets/skills/Urshifu/Liquidation.mp4"
         },
         {
           "id": "ebon-fist",
@@ -53363,7 +53468,8 @@
           ],
           "moveType": "Sure Hit",
           "iconAsset": "/assets/skills/Urshifu/Ebon+Fist.png",
-          "descriptionAdvanced": "The user becomes unstoppable and the cooldown of Wicked Blow is reset when this Unite Move is used. The user dashes at the designated Pokémon from the opposing team, stunning them, then chooses whether to designate a direction to move or not. If no direction is chosen, the user pushes them slightly and delivers an uppercut, damaging the target, throwing them and stunning them when they land.\n\nIf the user chooses a direction, the user instead delivers a more powerful blow to the target, dealing increased damage and shoving them in the designated direction. The shoved target also deals reduced damage to opposing Pokémon they collide with and throws those hit."
+          "descriptionAdvanced": "The user becomes unstoppable and the cooldown of Wicked Blow is reset when this Unite Move is used. The user dashes at the designated Pokémon from the opposing team, stunning them, then chooses whether to designate a direction to move or not. If no direction is chosen, the user pushes them slightly and delivers an uppercut, damaging the target, throwing them and stunning them when they land.\n\nIf the user chooses a direction, the user instead delivers a more powerful blow to the target, dealing increased damage and shoving them in the designated direction. The shoved target also deals reduced damage to opposing Pokémon they collide with and throws those hit.",
+          "videoAsset": "/assets/skills/Urshifu/Ebon+Fist.mp4"
         },
         {
           "id": "flowing-fists",
@@ -53400,7 +53506,8 @@
           ],
           "moveType": "Melee",
           "iconAsset": "/assets/skills/Urshifu/Flowing+Fists.png",
-          "descriptionAdvanced": "The user activates the Flowing Fists buff for up to 10s, and briefly becomes unstoppable and damages nearby opposing Pokémon, shoving them away. If this Unite Move is used again, the user becomes unstoppable and receives 30% reduced damage as they unleash a minimum of 5 consecutive blows upon the designated Pokémon from the opposing team, dealing damage to the target and shoving them with each hit. After the consecutive blows have finished, the user delivers a final kick, damaging opposing Pokémon in front of themself and shoving them when it hits.\n\nWhen the Flowing Fists buff is active, until the follow-up attack is used, every 2 times the user hits a Pokémon from the opposing team, the number of consecutive blows for the follow-up attack increases by 1 (up to 10 hits for an additional 5 blows; maximum 10 consecutive blows)."
+          "descriptionAdvanced": "The user activates the Flowing Fists buff for up to 10s, and briefly becomes unstoppable and damages nearby opposing Pokémon, shoving them away. If this Unite Move is used again, the user becomes unstoppable and receives 30% reduced damage as they unleash a minimum of 5 consecutive blows upon the designated Pokémon from the opposing team, dealing damage to the target and shoving them with each hit. After the consecutive blows have finished, the user delivers a final kick, damaging opposing Pokémon in front of themself and shoving them when it hits.\n\nWhen the Flowing Fists buff is active, until the follow-up attack is used, every 2 times the user hits a Pokémon from the opposing team, the number of consecutive blows for the follow-up attack increases by 1 (up to 10 hits for an additional 5 blows; maximum 10 consecutive blows).",
+          "videoAsset": "/assets/skills/Urshifu/Flowing+Fists.mp4"
         }
       ],
       "passiveAbility": {
@@ -54571,7 +54678,8 @@
           "moveType": "Ranged",
           "iconAsset": "/assets/skills/Venusaur/Seed+Bomb.png",
           "descriptionAdvanced": "Venusaur hurls a large seed to the designated location, damaging all enemies in the radius.",
-          "gifAsset": "/assets/skills/Venusaur/Seed+Bomb.webp"
+          "gifAsset": "/assets/skills/Venusaur/Seed+Bomb.webp",
+          "videoAsset": "/assets/skills/Venusaur/Seed+Bomb.mp4"
         },
         {
           "id": "sludge-bomb",
@@ -54604,7 +54712,8 @@
           "moveType": "Debuff",
           "upgradeLevel": 5,
           "descriptionAdvanced": "Venusaur hurls toxic sludge to the designated location, damaging, slowing movement speed by 50% for 2s (stacking with the radius slow), and poisoning all enemies in the radius when it lands. The sludge lingers; damaging enemies every 0.5s for 5s in the radius, slowing them by 50%, and reducing their Sp. Defense by 50% for 2s (refreshes every tick).\n\nUpgrade (Level 11): Increased radius.",
-          "gifAsset": "/assets/skills/Venusaur/Sludge+Bomb.webp"
+          "gifAsset": "/assets/skills/Venusaur/Sludge+Bomb.webp",
+          "videoAsset": "/assets/skills/Venusaur/Sludge+Bomb.mp4"
         },
         {
           "id": "giga-drain",
@@ -54637,7 +54746,8 @@
           "moveType": "Recovery",
           "upgradeLevel": 5,
           "descriptionAdvanced": "Venusaur emits a cone-shaped blast in the designated direction, damaging enemies and restoring health when it hits. Venusaur also takes 40% reduced damage for 2.5s.\n\nThis move's healing is not increased by Venusaur's passive.\n\nUpgrade (Level 11): Increased healing.",
-          "gifAsset": "/assets/skills/Venusaur/Giga+Drain.webp"
+          "gifAsset": "/assets/skills/Venusaur/Giga+Drain.webp",
+          "videoAsset": "/assets/skills/Venusaur/Giga+Drain.mp4"
         },
         {
           "id": "razor-leaf",
@@ -54661,7 +54771,8 @@
           "moveType": "Area",
           "iconAsset": "/assets/skills/Venusaur/Razor+Leaf.png",
           "descriptionAdvanced": "Venusaur launches a barrage of sharp-edged leaves in the designated direction, damaging enemies 10 times over 0.75s.",
-          "gifAsset": "/assets/skills/Venusaur/Razor+Leaf.webp"
+          "gifAsset": "/assets/skills/Venusaur/Razor+Leaf.webp",
+          "videoAsset": "/assets/skills/Venusaur/Razor+Leaf.mp4"
         },
         {
           "id": "solar-beam",
@@ -54687,7 +54798,8 @@
           "moveType": "Area",
           "upgradeLevel": 7,
           "descriptionAdvanced": "Venusaur charges for 0.7s before firing a beam of light in the designated direction, damaging enemies five times over 0.3s.\n\n2.5% Enemy Max HP\n\nAgainst Wild Pokémon: Each tick is capped at 450 damage and the total damage is capped at 2250.\n\nUpgrade (Level 13): Reduced cast time to 0.6s and base cooldown is reduced by 2s.",
-          "gifAsset": "/assets/skills/Venusaur/Solar+Beam.webp"
+          "gifAsset": "/assets/skills/Venusaur/Solar+Beam.webp",
+          "videoAsset": "/assets/skills/Venusaur/Solar+Beam.mp4"
         },
         {
           "id": "petal-dance",
@@ -54713,7 +54825,8 @@
           "moveType": "Area",
           "upgradeLevel": 7,
           "descriptionAdvanced": "Venusaur scatters petals around themself for 4.8s, increasing movement speed by 80% and damaging enemies every 0.3s in the radius (for a total of 16 damage ticks). This movement speed increase slowly decays during the duration of this move by 9% every 0.5s to a minimum of 17%. Petal Dance reduces the cooldown of Sludge Bomb or Giga Drain by 30% of the current remaining cooldown, per tick of damage that hit an enemy player (hitting multiple enemies reduces the cooldown more).\n\nUpgrade (Level 13): Increased radius.",
-          "gifAsset": "/assets/skills/Venusaur/Petal+Dance.webp"
+          "gifAsset": "/assets/skills/Venusaur/Petal+Dance.webp",
+          "videoAsset": "/assets/skills/Venusaur/Petal+Dance.mp4"
         },
         {
           "id": "verdant-anger",
@@ -54744,7 +54857,8 @@
           "moveType": "Ranged",
           "iconAsset": "/assets/skills/Venusaur/Verdant+Anger.png",
           "descriptionAdvanced": "Venusaur becomes unstoppable to hurl a massive seed to the designated location, damaging all enemies in the radius and slowing them by 35% for 1s. The seed then splits apart into 4 smaller seeds, each damaging all enemies in their radius.",
-          "gifAsset": "/assets/skills/Venusaur/Verdant+Anger.webp"
+          "gifAsset": "/assets/skills/Venusaur/Verdant+Anger.webp",
+          "videoAsset": "/assets/skills/Venusaur/Verdant+Anger.mp4"
         }
       ],
       "passiveAbility": {
