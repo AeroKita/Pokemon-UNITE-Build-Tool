@@ -86,7 +86,9 @@ export function StatPanel() {
                 >
                   {formatStat(eff, row.kind)}
                   {Math.abs(delta) > 1e-9 && (
-                    <span className="ml-1 text-xs font-normal text-pos">
+                    <span
+                      className={`ml-1 text-xs font-normal ${delta >= 0 ? "text-pos" : "text-neg"}`}
+                    >
                       ({formatExactDelta(delta, row.kind)})
                     </span>
                   )}
