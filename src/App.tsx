@@ -78,17 +78,29 @@ function Workspace() {
           <button
             type="button"
             onClick={() => setPokePickerOpen(true)}
-            aria-label="Change Pokémon"
+            aria-label={p ? "Change Pokémon" : "Select Pokémon"}
             className="shrink-0 rounded-full"
           >
             {p ? (
               <img
                 src={asset(p.iconAsset)}
                 alt={p.displayName}
-                className="h-10 w-10 rounded-full bg-black/10 object-cover ring-2 ring-[var(--color-appbar-border)]"
+                className="poke-picker-selected h-10 w-10 rounded-full bg-black/10 object-cover"
               />
             ) : (
-              <div className="h-10 w-10 rounded-full bg-black/10" />
+              <div className="poke-picker-empty h-10 w-10 rounded-full" aria-hidden>
+                <svg
+                  className="h-5 w-5"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  aria-hidden
+                >
+                  <path d="M12 5v14M5 12h14" />
+                </svg>
+              </div>
             )}
           </button>
         ),

@@ -42,6 +42,7 @@
   --color-appbar-ink: #1a1d23;
   --color-appbar-sub: #6b7280;
   --color-appbar-border: #e6e8ec;
+  --color-poke-picker-ring: #6b7280;
 
   /* Tab bar */
   --color-tab-bg: #ffffff;
@@ -119,6 +120,7 @@
   --color-appbar-ink: #ffffff;
   --color-appbar-sub: #f4d4e6;
   --color-appbar-border: #382f57;
+  --color-poke-picker-ring: #382f57;
 
   --color-tab-bg: #1b1630;
   --color-tab-ink: #7d72a8;
@@ -219,4 +221,23 @@ textarea {
   .text-marquee-host {
     overflow-x: auto;
   }
+}
+
+/* Empty Pokémon picker — static accent glow (no animation). */
+.poke-picker-selected {
+  border: 2px solid var(--color-poke-picker-ring);
+}
+
+.poke-picker-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-mon-sel-bg);
+  color: var(--color-accent);
+  border: 2px solid var(--color-accent);
+  box-shadow: 0 0 5px 0 var(--color-accent);
+}
+
+[data-theme="dark"] .poke-picker-empty {
+  background: var(--color-accent-weak);
 }
