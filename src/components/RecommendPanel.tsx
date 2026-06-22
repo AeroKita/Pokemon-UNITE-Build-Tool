@@ -18,6 +18,7 @@ import { CollapsibleCard } from "./CollapsibleCard";
 import { Tooltip } from "./Tooltip";
 import { MoveIcon } from "./MoveIcon";
 import { itemTip, emblemTip, moveTip } from "./tips";
+import { MarqueeText } from "../ui/MarqueeText";
 import type { EmblemBuildPick, Pokemon, PokemonBuild } from "../types";
 
 type Tab = "recommended" | "creative" | "yours";
@@ -185,6 +186,16 @@ export function RecommendPanel() {
       .filter((m): m is NonNullable<typeof m> => m != null);
   })();
 
+  const buildTitle = build ? (
+    <>
+      <span className="font-semibold text-ink">{build.emblemName ?? build.name}</span>
+      {build.lane ? ` · ${build.lane}` : ""}
+      {builds.length > 1 ? ` · ${idx + 1}/${builds.length}` : ""}
+    </>
+  ) : (
+    "—"
+  );
+
   return (
     <CollapsibleCard title="Builds" persistKey="recommend" tone="indigo">
       {/* Source tabs — selecting a tab auto-applies that build variant */}
@@ -212,17 +223,7 @@ export function RecommendPanel() {
         >
           ‹
         </button>
-        <p className="min-w-0 flex-1 truncate text-center text-xs text-muted">
-          {build ? (
-            <>
-              <span className="font-semibold text-ink">{build.emblemName ?? build.name}</span>
-              {build.lane ? ` · ${build.lane}` : ""}
-              {builds.length > 1 ? ` · ${idx + 1}/${builds.length}` : ""}
-            </>
-          ) : (
-            "—"
-          )}
-        </p>
+        <MarqueeText className="flex-1 text-xs text-muted">{buildTitle}</MarqueeText>
         <button
           onClick={() => go(1)}
           disabled={builds.length < 2}

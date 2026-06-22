@@ -190,3 +190,33 @@ textarea {
 /* Safe-area padding helpers for the fixed app bar + tab bar (iOS notch/home bar). */
 @utility pt-safe { padding-top: env(safe-area-inset-top); }
 @utility pb-safe { padding-bottom: env(safe-area-inset-bottom); }
+
+/* Overflowing one-line labels (e.g. build titles) — duplicate + translate loop. */
+@keyframes text-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.text-marquee-track {
+  display: inline-flex;
+  width: max-content;
+  animation: text-marquee var(--text-marquee-duration, 12s) linear infinite;
+}
+
+.text-marquee-segment {
+  padding-right: 2rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .text-marquee-track {
+    animation: none;
+  }
+
+  .text-marquee-host {
+    overflow-x: auto;
+  }
+}
