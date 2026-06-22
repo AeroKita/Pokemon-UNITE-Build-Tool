@@ -13503,7 +13503,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Attack Damage Carry (ADC)",
+          "emblemName": "Phantom Ranger",
           "battleItemId": "eject-button",
           "moves": [
             "Spirit Shackle",
@@ -13618,7 +13618,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Attack Damage Carry (ADC)",
+          "emblemName": "Deadeye",
           "battleItemId": "eject-button",
           "moves": [
             "Spirit Shackle",
@@ -27751,7 +27751,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Standard Special Attacker",
+          "emblemName": "Sniper Elite",
           "heldItemOptional": "slick-spoon",
           "battleItemId": "eject-button",
           "moves": [
@@ -27813,7 +27813,8 @@
           "moves": [
             "Acrobatics",
             "Liquidation"
-          ]
+          ],
+          "emblemName": "Shaken, not stirred"
         },
         {
           "name": "Liquidation Stinger",
@@ -27869,7 +27870,8 @@
           "moves": [
             "Fell Stinger",
             "Liquidation"
-          ]
+          ],
+          "emblemName": "The name's leon. Inteleon."
         }
       ]
     },
@@ -34122,7 +34124,7 @@
             }
           ],
           "lane": "Center Damage",
-          "emblemName": "Standard Speedster",
+          "emblemName": "Wanna see a Trick?",
           "heldItemOptional": "attack-weight",
           "battleItemId": "eject-button",
           "moves": [
@@ -34180,7 +34182,7 @@
             }
           ],
           "lane": "Path Damage",
-          "emblemName": "Standard Speedster",
+          "emblemName": "Wanna see it again?",
           "heldItemOptional": "accel-bracer",
           "battleItemId": "eject-button",
           "moves": [
@@ -34238,7 +34240,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Standard Speedster",
+          "emblemName": "Critical Catnip",
           "heldItemOptional": "accel-bracer",
           "battleItemId": "eject-button",
           "battleItemOptional": "full-heal",
@@ -34297,7 +34299,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Standard Speedster",
+          "emblemName": "Double Stacker",
           "heldItemOptional": "razor-claw",
           "battleItemId": "eject-button",
           "battleItemOptional": "full-heal",
@@ -34825,7 +34827,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Standard Speedster",
+          "emblemName": "Prepare for trouble!",
           "heldItemOptional": "muscle-band",
           "battleItemId": "full-heal",
           "battleItemOptional": "eject-button",
@@ -34884,7 +34886,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Standard Speedster",
+          "emblemName": "Make it double!",
           "battleItemId": "full-heal",
           "battleItemOptional": "eject-button",
           "moves": [
@@ -34942,7 +34944,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Physical CDR",
+          "emblemName": "Prepare to fight!",
           "battleItemId": "full-heal",
           "battleItemOptional": "eject-button",
           "moves": [
@@ -35000,7 +35002,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Physical CDR",
+          "emblemName": "Meowth! That's right!",
           "battleItemId": "eject-button",
           "battleItemOptional": "x-speed",
           "moves": [
@@ -43130,7 +43132,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Special Attack Cooldown Reduction - Mobility for Survivability",
+          "emblemName": "Spirit",
           "heldItemOptional": "drive-lens",
           "battleItemId": "full-heal",
           "battleItemOptional": "x-speed",
@@ -43189,7 +43191,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Special Attack Cooldown Reduction - Mobility for Survivability",
+          "emblemName": "Fast Honse",
           "heldItemOptional": "drive-lens",
           "battleItemId": "full-heal",
           "battleItemOptional": "x-speed",
@@ -43248,7 +43250,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Special Attack Cooldown Reduction - Mobility for Survivability",
+          "emblemName": "Friendship is Magic",
           "battleItemId": "full-heal",
           "battleItemOptional": "x-speed",
           "moves": [

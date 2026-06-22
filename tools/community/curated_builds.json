@@ -1042,6 +1042,7 @@
     ]
   },
   "decidueye": {
+    "recommendedTitles": ["Phantom Ranger", "Attack Damage Carry (ADC)", "Deadeye"],
     "creativeBuilds": [
       {
         "name": "Heavy is the Crown",
@@ -1101,6 +1102,18 @@
         ]
       }
     ]
+  },
+  "inteleon": {
+    "recommendedTitles": ["Sniper Elite", "Shaken, not stirred", "The name's leon. Inteleon."]
+  },
+  "rapidash": {
+    "recommendedTitles": ["Spirit", "Fast Honse", "Friendship is Magic"]
+  },
+  "meowscarada": {
+    "recommendedTitles": ["Wanna see a Trick?", "Wanna see it again?", "Critical Catnip", "Double Stacker"]
+  },
+  "meowth": {
+    "recommendedTitles": ["Prepare for trouble!", "Make it double!", "Prepare to fight!", "Meowth! That's right!"]
   },
   "garchomp": {
     "creativeBuilds": [
