@@ -7,35 +7,12 @@
     "decidueye": {},
     "dragonite": {},
     "eldegoss": {},
-    "gengar": {
-      "will o wisp": "/assets/skills/Gengar/Will-o-Wisp.webp",
-      "shadow ball": "/assets/skills/Gengar/Shadow+Ball.webp",
-      "sludge bomb": "/assets/skills/Gengar/Sludge+Bomb.webp",
-      "lick": "/assets/skills/Gengar/Lick.webp",
-      "dream eater": "/assets/skills/Gengar/Dream+Eater.webp",
-      "hex": "/assets/skills/Gengar/Hex.webp",
-      "phantom ambush": "/assets/skills/Gengar/Phantom+Ambush.webp"
-    },
+    "gengar": {},
     "lucario": {},
     "mega-lucario": {},
-    "mr-mime": {
-      "fake out": "/assets/skills/Mr.Mime/Fake+Out.webp",
-      "confusion": "/assets/skills/Mr.Mime/Confusion.webp",
-      "psychic": "/assets/skills/Mr.Mime/Psychic.webp",
-      "light screen": "/assets/skills/Mr.Mime/Light+Screen.webp",
-      "barrier": "/assets/skills/Mr.Mime/Barrier.webp",
-      "power swap": "/assets/skills/Mr.Mime/Power+Swap.webp"
-    },
+    "mr-mime": {},
     "pikachu": {},
-    "slowbro": {
-      "water gun": "/assets/skills/Slowbro/Water+Gun.webp",
-      "scald": "/assets/skills/Slowbro/Scald.webp",
-      "surf": "/assets/skills/Slowbro/Surf.webp",
-      "slack off": "/assets/skills/Slowbro/Slack+Off.webp",
-      "amnesia": "/assets/skills/Slowbro/Amnesia.webp",
-      "telekinesis": "/assets/skills/Slowbro/Telekinesis.webp",
-      "slowbeam": "/assets/skills/Slowbro/Slowbeam.webp"
-    },
+    "slowbro": {},
     "talonflame": {},
     "venusaur": {}
   }
