@@ -156,12 +156,11 @@ export function PickerModal({
               stroke="currentColor"
               strokeWidth={2}
               strokeLinecap="round"
-              strokeDasharray="3 3"
               className="h-12 w-12"
               aria-hidden="true"
             >
-              <path d="M6 6 L18 18" />
-              <path d="M18 6 L6 18" />
+              <line x1="9" y1="9" x2="15" y2="15" />
+              <line x1="15" y1="9" x2="9" y2="15" />
             </svg>
             <span className="text-xs font-medium leading-tight">Empty slot</span>
           </button>

@@ -219,7 +219,7 @@ export function LoadoutEditor() {
           {loadout.emblems.length < MAX_EMBLEMS && (
             <button
               onClick={() => setPicker({ kind: "emblem" })}
-              className="flex h-24 w-16 items-center justify-center rounded-lg border-2 border-dashed border-line text-xl text-faint hover:border-accent hover:bg-accent-weak"
+              className="flex h-20 w-20 shrink-0 items-center justify-center rounded-xl border-2 border-dashed border-line text-2xl text-faint hover:border-accent hover:bg-accent-weak"
             >
               +
             </button>
