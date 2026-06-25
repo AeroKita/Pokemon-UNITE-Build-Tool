@@ -1,0 +1,83 @@
+name: Bug Report
+description: Something is broken, incorrect, or misleading
+title: "[Bug]: "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting. The more specific you are about **where** in the app and **what loadout** you used, the faster we can reproduce it.
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: One or two sentences — what's wrong?
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Which tab or screen? What did you tap or change? Include Pokémon, held items, emblems, moves, or level when stats are involved.
+      placeholder: |
+        1. Open Build tab, select Dragapult
+        2. Equip Float Stone at grade 20 and 4 yellow emblems
+        3. Open Effective Stats and compare Move Speed vs the out-of-combat line
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected
+      description: What should happen?
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual
+      description: What happens instead?
+    validations:
+      required: true
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots or recording
+      description: Drag images or a short screen recording into the box below. Almost always needed for UI or stat-display bugs.
+    validations:
+      required: false
+
+  - type: dropdown
+    id: environment
+    attributes:
+      label: Where are you running FoxForge GG?
+      options:
+        - Hosted app (aerokita.github.io/FoxForge-GG)
+        - Local dev (`npm run dev`)
+        - Installed PWA
+        - Not sure
+    validations:
+      required: true
+
+  - type: input
+    id: browser
+    attributes:
+      label: Browser / device
+      description: e.g. iPhone Safari, Chrome desktop, Android Chrome
+      placeholder: iPhone 15 / Safari 18
+    validations:
+      required: false
+
+  - type: input
+    id: version
+    attributes:
+      label: App version
+      description: Settings → Updates (optional)
+    validations:
+      required: false

@@ -1,0 +1,59 @@
+name: Feature Request
+description: Suggest a new capability or improvement
+title: "[Feature]: "
+labels:
+  - enhancement
+body:
+  - type: markdown
+    attributes:
+      value: |
+        A short, clear request is enough — you don't need a full design spec. If you plan to implement it yourself, see [CONTRIBUTING.md](CONTRIBUTING.md).
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: What would you like to see?
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or motivation
+      description: What pain does this solve? Optional but helpful.
+    validations:
+      required: false
+
+  - type: input
+    id: location
+    attributes:
+      label: Where in the app?
+      description: Tab, screen, or control — e.g. Build → Choose Held Item picker, Optimize tab, Emblems inventory
+      placeholder: Build → Choose Held Item picker
+    validations:
+      required: false
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed behavior
+      description: How should it work? A paragraph is fine — optional.
+    validations:
+      required: false
+
+  - type: textarea
+    id: mockups
+    attributes:
+      label: Mockups or examples
+      description: Screenshots, sketches, or links to similar UIs elsewhere. Optional.
+    validations:
+      required: false
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Done when...
+      description: Optional acceptance criteria — one or two bullets is enough.
+    validations:
+      required: false

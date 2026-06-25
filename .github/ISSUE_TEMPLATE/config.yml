@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Code contributions
+    url: https://github.com/AeroKita/FoxForge-GG/blob/main/CONTRIBUTING.md
+    about: Want to send a pull request instead? Start with the contributing guide.
